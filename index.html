@@ -15,17 +15,20 @@
         background-color: var(--color-main);
         display: flex;
         align-items: center;
+        position: fixed;
+        z-index: 999;
+        width: 100%;
     }
 
     #header-trang-chu .logo-trang-chu {
         margin-left: 50px;
-        margin-right: 100px;
+        margin-right: 50px;
         margin-top: 25px;
         margin-bottom: 25px;
     }
 
     #header-trang-chu .logo-trang-chu img {
-        background-color: #0B234D;
+        background-color: transparent;
         width: 200px;
         height: 100%;
 
@@ -138,7 +141,7 @@
 
     #header-trang-chu .header-giohang::after {
         display: inline-flex;
-        content: "1";
+        content: "0";
         width: 20px;
         height: 20px;
         left: 20px;
@@ -149,6 +152,16 @@
         background-color: red;
         position: absolute;
         border-radius: 50%;
+    }
+
+    nav {
+        padding-top: 100px;
+    }
+
+    .hehe {
+        height: 1200px;
+        background-color: #ddd;
+
     }
 </style>
 
@@ -182,7 +195,11 @@
             <i class="fa-solid fa-bag-shopping"></i>
         </div>
     </header>
-
+    <nav>
+        <div class="hehe">
+            gàdgfsdg
+        </div>
+    </nav>
 </body>
 
 </html>
