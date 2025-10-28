@@ -1,11 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+    #header-trang-chu {
+        background-color: var(--color-main);
+        display: flex;
+        align-items: center;
+    }
+
+    #header-trang-chu .logo-trang-chu {
+        margin-left: 50px;
+        margin-right: 100px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    #header-trang-chu .logo-trang-chu img {
+        background-color: #0B234D;
+        width: 200px;
+        height: 100%;
+
+    }
+
+    #header-trang-chu .tim-kiem-san-pham {
+        position: relative;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham input {
+        padding: 10px 15px;
+        width: 600px;
+        border-radius: 10px;
+        border: none;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham {
+        display: flex;
+
+    }
+
+    #header-trang-chu .tim-kiem-san-pham i {
+        position: absolute;
+        right: 0;
+        width: 50px;
+        height: 100%;
+        background-color: #0B234D;
+        line-height: 40px;
+        cursor: pointer;
+        color: white;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    #header-trang-chu .header-contact {
+        display: flex;
+        align-items: center;
+    }
+
+    #header-trang-chu .header-contact i {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #0B234D;
+        line-height: 30px;
+        color: white;
+    }
+
+    #header-trang-chu .header-contact {
+        margin-left: 100px;
+        margin-right: 50px;
+        cursor: pointer;
+    }
+
+    #header-trang-chu .header-contact .contact {
+        margin-left: 15px;
+    }
+
+    #header-trang-chu .header-contact .contact .contact-phone-number {
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #header-trang-chu .header-contact .contact .contact-phone-help {
+        color: white;
+        font-size: 16px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki i {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #0B234D;
+        line-height: 30px;
+        color: white;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki {
+        margin-right: 50px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
+        margin-left: 15px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
+        color: white;
+        font-size: 16px;
+    }
+
+    #header-trang-chu .header-giohang {
+        font-size: 25px;
+        color: white;
+        position: relative;
+        cursor: pointer;
+    }
+
+    #header-trang-chu .header-giohang::after {
+        display: inline-flex;
+        content: "1";
+        width: 20px;
+        height: 20px;
+        left: 20px;
+        bottom: 15px;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        background-color: red;
+        position: absolute;
+        border-radius: 50%;
+    }
+</style>
+
 <body>
-    Trang Chủ
+    <header id="header-trang-chu" class="trang-chu">
+        <div class="logo-trang-chu">
+            <a href="">
+                <img src="./assets/images/logo/logo.png" alt="">
+            </a>
+        </div>
+        <form action="" class="tim-kiem-san-pham">
+            <input type="text" name="" placeholder="Tìm kiếm sản phẩm...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </form>
+        <div class="header-contact">
+            <i class="fa-solid fa-phone"></i>
+            <div class="contact">
+                <div class="contact-phone-number">1900 866 819</div>
+                <div class="contact-phone-help">Hỗ trợ khách hàng</div>
+            </div>
+        </div>
+        <div class="header-dangnhap-dangki">
+            <i class="fa-solid fa-user"></i>
+            <div class="dangnhap-dangki">
+                <div class="dangnhap">Đăng nhập</div>
+                <div class="dangki">Đăng kí</div>
+            </div>
+
+        </div>
+        <div class="header-giohang">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+    </header>
+
 </body>
+
 </html>
