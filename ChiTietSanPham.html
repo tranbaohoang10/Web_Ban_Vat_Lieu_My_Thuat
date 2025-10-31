@@ -423,6 +423,44 @@
         font-weight: 600;
     }
 
+    /* Main Image Navigation Buttons */
+    .main-image-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+        color: #374151;
+        font-size: 1.125rem;
+        font-weight: 600;
+        transition: all 0.3s;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .main-image-nav:hover {
+        background: white;
+        color: #17479d;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 4px 12px rgba(23, 71, 157, 0.3);
+    }
+
+    .main-image-prev {
+        left: 15px;
+    }
+
+    .main-image-next {
+        right: 15px;
+    }
+
     /* Thumbnail Gallery */
     .thumbnail-gallery {
         display: flex;
@@ -473,43 +511,7 @@
         object-fit: contain;
     }
 
-    .thumbnail-nav-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 30px;
-        height: 30px;
-        background: rgba(255, 255, 255, 0.95);
-        border: 2px solid #d1d5db;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        text-decoration: none;
-        color: #374151;
-        font-size: 0.875rem;
-        font-weight: 700;
-        transition: all 0.3s;
-        z-index: 10;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
 
-    .thumbnail-nav-btn:hover {
-        background: #17479d;
-        border-color: #17479d;
-        color: white;
-        transform: translateY(-50%) scale(1.1);
-        box-shadow: 0 4px 12px rgba(23, 71, 157, 0.4);
-    }
-
-    .thumbnail-prev {
-        left: -15px;
-    }
-
-    .thumbnail-next {
-        right: -15px;
-    }
 
     /* Product Info */
     .product-info {
@@ -733,6 +735,175 @@
         box-shadow: 0 8px 20px rgba(23, 71, 157, 0.4);
     }
 
+
+
+    /* Policy Section */
+    .policy {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: #f8fafc;
+        border-radius: 12px;
+    }
+
+    .policy_title h2 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 1rem;
+    }
+
+    .policy_list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .policy_detail {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem;
+        background: white;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .policy_detail:hover {
+        transform: translateX(4px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .policy_detail img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .policy_detail p {
+        font-size: 0.875rem;
+        color: #475569;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Product Content - Thông số kỹ thuật */
+    .product_content {
+        margin-top: 1.5rem;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+
+    .content_name {
+        background: linear-gradient(135deg, #2659F3 0%, #1e40af 100%);
+        padding: 1rem 1.5rem;
+    }
+
+    .content_name h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: white;
+        margin: 0;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .content_blog {
+        padding: 0;
+    }
+
+    .content_blog-item {
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .content_blog-item:last-child {
+        border-bottom: none;
+    }
+
+    .item-main {
+        padding: 1.5rem;
+    }
+
+    .item-main ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .item-main li {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .item-main li:last-child {
+        border-bottom: none;
+    }
+
+    .item-main h3 {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #475569;
+        margin: 0;
+    }
+
+    .item-main p {
+        font-size: 0.9375rem;
+        color: #1e293b;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* Product Rate Buttons */
+    .product_rate {
+        margin-top: 1.5rem;
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+
+    .product_rate .buy_now {
+        flex: 1;
+        padding: 0.875rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: 2px solid #2659F3;
+    }
+
+    .btn_view {
+        background: white;
+        color: #2659F3;
+    }
+
+    .btn_view:hover {
+        background: #eff6ff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(38, 89, 243, 0.2);
+    }
+
+    .btn_rate {
+        background: linear-gradient(135deg, #2659F3 0%, #1e40af 100%);
+        color: white;
+        border-color: transparent;
+    }
+
+    .btn_rate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(38, 89, 243, 0.4);
+    }
+
+    .product_rate .buy_now p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
     /* Responsive Design */
     @media (max-width: 992px) {
         .product-detail {
@@ -774,19 +945,7 @@
             height: 90px;
         }
 
-        .thumbnail-nav-btn {
-            width: 28px;
-            height: 28px;
-            font-size: 0.875rem;
-        }
 
-        .thumbnail-prev {
-            left: -14px;
-        }
-
-        .thumbnail-next {
-            right: -14px;
-        }
     }
 
     @media (max-width: 480px) {
@@ -814,18 +973,30 @@
             height: 80px;
         }
 
-        .thumbnail-nav-btn {
-            width: 26px;
-            height: 26px;
-            font-size: 0.75rem;
+        .item-main li {
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
         }
 
-        .thumbnail-prev {
-            left: -13px;
+        .item-main h3 {
+            font-weight: 700;
         }
 
-        .thumbnail-next {
-            right: -13px;
+        .policy_list {
+            gap: 0.75rem;
+        }
+
+        .policy_detail {
+            padding: 0.5rem;
+        }
+
+        .policy_detail img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .product_rate {
+            flex-direction: column;
         }
     }
 </style>
@@ -885,11 +1056,13 @@
                         <div>Tiết kiệm</div>
                         <div style="font-size: 1.125rem;">15%</div>
                     </div>
+                  
+                    <a href="#thumb-1" class="main-image-nav main-image-prev">&lt;</a>
+                    <a href="#thumb-3" class="main-image-nav main-image-next">&gt;</a>
                 </div>
 
                 <!-- Thumbnail Gallery -->
                 <div class="thumbnail-gallery">
-                    <a href="#thumb-1" class="thumbnail-nav-btn thumbnail-prev">&lt;</a>
                     <div class="thumbnail-container" id="thumbnailContainer">
                         <div class="thumbnail-item" id="thumb-1">
                             <img src="./assets/images/product/sp1.jpg" alt="Ảnh 1">
@@ -901,7 +1074,6 @@
                             <img src="./assets/images/product/sp1.jpg" alt="Ảnh 3">
                         </div>
                     </div>
-                    <a href="#thumb-3" class="thumbnail-nav-btn thumbnail-next">&gt;</a>
                 </div>
             </div>
 
@@ -910,12 +1082,12 @@
                 <h1 class="product-title">Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable - Phiên bản Demon Slayer</h1>
 
                 <div class="product-meta">
-                    <div class="product-meta-item">
+                      <div class="product-meta-item">
                         <span class="product-meta-label">Thương hiệu:</span>
                         <span class="product-meta-value"><a href="#">Colokit</a></span>
                     </div>
                     <div class="product-meta-item">
-                        <span class="product-meta-label">Tình trạng:</span>
+                        <span class="product-meta-label">Tình trạng:</span> 
                         <span class="product-meta-value" style="color: #10b981;">Còn hàng</span>
                     </div>
                     <div class="product-meta-item">
@@ -948,6 +1120,9 @@
                     </div>
                 </div>
 
+
+
+
                 <div class="product-actions">
                     <button class="btn btn-add-cart">
                         <i class="fa-solid fa-cart-plus"></i>
@@ -958,6 +1133,83 @@
                     </button>
                 </div>
             </div>
+                            <div class="policy alpha bg-while">
+                            <div class="policy_title">
+                                <h2>Thiên Long xin cam kết</h2>
+                            </div>
+                            <div class="policy_list">
+                                <div class="policy_detail">
+                                    <img src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
+                                        alt="">
+                                    <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất liệu an toàn, bền đẹp.</p>
+                                </div>
+                                <div class="policy_detail">
+                                    <img src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/icon%20lap%20dat140848.png"
+                                        alt="">
+                                    <p>Giá niêm yết & minh bạch phí Không phụ phí ẩn</p>
+                                </div>
+                                <div class="policy_detail">
+                                    <img src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/Exchange150303.png" alt="">
+                                    <p>Quy trình đổi trả nhanh chóng, minh bạch.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="product_content alpha bg-while">
+
+                            <div class="content_name ">
+                                <h3 >Thông số kĩ thuật</h3>
+                            </div>
+                            <div class="content_blog " id="content_blog">
+
+                                <div class="content_blog-item">
+
+                                    <div class="item-main">
+                                        <ul>
+                                            <li>
+                                                <h3>Thương hiệu	: </h3>
+                                                <p>Colokit</p>
+                                            </li>
+                                            <li>
+                                                <h3>Kích thước bút: </h3>
+                                                <p>140.6 mm</p>
+                                            </li>
+                                            <li>
+                                                <h3>Tiêu chuẩn	: </h3>
+                                                <p>- TCCS 005: 2011/TL-BLM; châu Âu EN 71/3</p>
+                                            </li>
+                                            <li>
+                                                <h3>Sản xuất : </h3>
+                                                <p>Việt Nam</p>
+                                            </li>
+                                            <li>
+                                                <h3>Khuyến cáo	: </h3>
+                                                <p>Tránh nguồn nhiệt, hóa chất. Không thích hợp cho trẻ dưới 3 tuổi.</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                           
+
+                        </div>
+                        <div class="product_rate alpha bg-while  magin-bottom">
+                            <a class="btn_view buy_now" href="ChiTietSanPham.html">
+
+                                <p>Xem
+                                    đánh giá</p>
+                            </a>
+
+                            <a class="btn_rate buy_now" href="ChiTietSanPham.html">
+                                <p>Viết đánh giá</p>
+                            </a>
+                        </div>
+
+
+                    </div>
         </div>
     </div>
     </nav>
