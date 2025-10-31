@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #1E76EF;
+    
+    }
+    .container{
+        /* background-color: #13438F; */
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 45px 45px;
+        box-sizing: border-box;
+        overflow: hidden;
+        position:  relative;
+        transition: 0.5s ease;
+        /* display: flex; */
+        /* justify-content: space-between; */
+        flex-wrap: wrap;
+        border-radius: 10px;
+        width: 460px;
+        height: 480px;
+        
+    }
+    h4{
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        font-weight: 700;
+        
+    }
+    .form-1{
+        margin-bottom: 20px;
+        
+    }
+    .form-1 label{
+        display: block;
+        margin-bottom: 5px;
+        /* font-size: 0.9em; */
+        color: #6CA4B9;
+    }
+    .form-2{
+        margin-bottom: 20px;
+        
+    }
+    .form-2 label{
+        display: block;
+        margin-bottom: 5px;
+        /* font-size: 0.9em; */
+        color: #6CA4B9;
+    }
+    .form-1 input{
+        width: 100%;
+        padding: 10px 0;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #ffffff;
+        /* color: white;
+        outline: none; */
+        box-sizing: border-box;
+    }
+    .form-2 input{
+        width: 100%;
+        padding: 10px 0;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #ffffff;
+        /* color: white;
+        outline: none; */
+        box-sizing: border-box;
+    }
+    .form-1 input::placeholder{
+        color: #a0a0a0;
+    }
+    .forgot-password{
+        text-align: center;
+        margin-bottom: 20px;
+
+    }
+    .forgot-password a{
+        color: #ffc107;
+        text-decoration: none;
+
+    }
+    .forgot-password a:hover{
+        color: #6C785B;
+    }
+    .btn-login{
+        width: 100%;
+        background-color: #F5DF4D;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        color: #343A40;
+    }
+    .link-dki{
+        color: #FFC107;
+        text-decoration: none;
+    }
+    .link-dki:hover{
+       color: #6C785B;
+    }
+    .btn-login-gg{
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn-gg{
+        background-color: #DE3F32;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 10px;
+    }
+    .btn-fb{
+        background-color: #49669C;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 10px;
+
+    }
+    .btn-login-gg i{
+        margin-right: 8px;
+    }
+    p{
+        color: white;
+    }
+    .chuataikhoan{
+        color: white;
+        text-align: center;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <h4 >Đăng Nhập</h4>
+        <form action="" class="form-login">
+            <div class="form-1">
+                <label for="email" > Email*</label>
+                <input type="text" name="" placeholder="Nhập Email">
+
+            </div>
+            <div class="form-1">
+                <label for="password"> Mật Khẩu*</label>
+                <input type="text" name="" placeholder="Nhập mật khẩu">
+            </div>
+
+            <div class="forgot-password">
+                <p>Quên mật khẩu? Nhấn vào <a href="">đây</a></p> 
+            </div>
+            <button class="btn-login">Đăng Nhập</button>
+
+            <div class="chuataikhoan">
+              Bạn chưa có tài khoản <a href="" class="link-dki">Đăng ký tại đây</a>
+            </div>
+
+
+            <div class="btn-login-gg">
+                
+                <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
+                
+                <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button>
+            </div>
+
+
+
+        </form>
+    </div>
+
+</body>
+</html>
