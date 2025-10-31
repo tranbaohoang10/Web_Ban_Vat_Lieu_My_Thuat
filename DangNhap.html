@@ -156,8 +156,8 @@
     }
 
     /* login */
-    
-      .main{
+
+    .main {
         margin: 0;
         padding: 0;
         display: flex;
@@ -167,13 +167,14 @@
         min-height: 100vh;
         background-color: #1E76EF;
     }
-    .container{
+
+    .container {
         /* background-color: #13438F; */
         background-color: rgba(0, 0, 0, 0.4);
         padding: 45px 45px;
         box-sizing: border-box;
         overflow: hidden;
-        position:  relative;
+        position: relative;
         transition: 0.5s ease;
         /* display: flex; */
         /* justify-content: space-between; */
@@ -181,37 +182,43 @@
         border-radius: 10px;
         width: 460px;
         height: 480px;
-        
+
     }
-    h4{
+
+    h4 {
         color: white;
         text-align: center;
         text-transform: uppercase;
         margin-bottom: 30px;
         font-weight: 700;
-        
+
     }
-    .form-1{
+
+    .form-1 {
         margin-bottom: 20px;
-        
+
     }
-    .form-1 label{
+
+    .form-1 label {
         display: block;
         margin-bottom: 5px;
         /* font-size: 0.9em; */
         color: #6CA4B9;
     }
-    .form-2{
+
+    .form-2 {
         margin-bottom: 20px;
-        
+
     }
-    .form-2 label{
+
+    .form-2 label {
         display: block;
         margin-bottom: 5px;
         /* font-size: 0.9em; */
         color: #6CA4B9;
     }
-    .form-1 input{
+
+    .form-1 input {
         width: 100%;
         padding: 10px 0;
         background: transparent;
@@ -221,7 +228,8 @@
         outline: none; */
         box-sizing: border-box;
     }
-    .form-2 input{
+
+    .form-2 input {
         width: 100%;
         padding: 10px 0;
         background: transparent;
@@ -231,23 +239,28 @@
         outline: none; */
         box-sizing: border-box;
     }
-    .form-1 input::placeholder{
+
+    .form-1 input::placeholder {
         color: #a0a0a0;
     }
-    .forgot-password{
+
+    .forgot-password {
         text-align: center;
         margin-bottom: 20px;
 
     }
-    .forgot-password a{
+
+    .forgot-password a {
         color: #ffc107;
         text-decoration: none;
 
     }
-    .forgot-password a:hover{
+
+    .forgot-password a:hover {
         color: #6C785B;
     }
-    .btn-login{
+
+    .btn-login {
         width: 100%;
         background-color: #F5DF4D;
         padding: 10px;
@@ -257,18 +270,22 @@
         margin-bottom: 15px;
         color: #343A40;
     }
-    .link-dki{
+
+    .link-dki {
         color: #FFC107;
         text-decoration: none;
     }
-    .link-dki:hover{
-       color: #6C785B;
+
+    .link-dki:hover {
+        color: #6C785B;
     }
-    .btn-login-gg{
+
+    .btn-login-gg {
         display: flex;
         justify-content: space-between;
     }
-    .btn-gg{
+
+    .btn-gg {
         background-color: #DE3F32;
         color: white;
         border: none;
@@ -278,7 +295,8 @@
         padding-right: 50px;
         margin-top: 10px;
     }
-    .btn-fb{
+
+    .btn-fb {
         background-color: #49669C;
         color: white;
         border: none;
@@ -289,13 +307,16 @@
         margin-top: 10px;
 
     }
-    .btn-login-gg i{
+
+    .btn-login-gg i {
         margin-right: 8px;
     }
-    p{
+
+    p {
         color: white;
     }
-    .chuataikhoan{
+
+    .chuataikhoan {
         color: white;
         text-align: center;
     }
@@ -471,13 +492,13 @@
 
     /* End footer */
 </style>
-    
+
 
 
 <body>
     <header id="header-trang-chu" class="trang-chu">
         <div class="logo-trang-chu">
-            <a href="">
+            <a href="index.html">
                 <img src="./assets/images/logo/logo.png" alt="">
             </a>
         </div>
@@ -504,45 +525,45 @@
             <i class="fa-solid fa-bag-shopping"></i>
         </div>
     </header>
-    
+
     <div class="main">
         <div class="container">
-        <h4 >Đăng Nhập</h4>
-        <form action="" class="form-login">
-            <div class="form-1">
-                <label for="email" > Email*</label>
-                <input type="text" name="" placeholder="Nhập Email">
+            <h4>Đăng Nhập</h4>
+            <form action="" class="form-login">
+                <div class="form-1">
+                    <label for="email"> Email*</label>
+                    <input type="text" name="" placeholder="Nhập Email">
 
-            </div>
-            <div class="form-1">
-                <label for="password"> Mật Khẩu*</label>
-                <input type="text" name="" placeholder="Nhập mật khẩu">
-            </div>
+                </div>
+                <div class="form-1">
+                    <label for="password"> Mật Khẩu*</label>
+                    <input type="text" name="" placeholder="Nhập mật khẩu">
+                </div>
 
-            <div class="forgot-password">
-                <p>Quên mật khẩu? Nhấn vào <a href="">đây</a></p> 
-            </div>
-            <button class="btn-login">Đăng Nhập</button>
+                <div class="forgot-password">
+                    <p>Quên mật khẩu? Nhấn vào <a href="">đây</a></p>
+                </div>
+                <button class="btn-login">Đăng Nhập</button>
 
-            <div class="chuataikhoan">
-              Bạn chưa có tài khoản <a href="" class="link-dki">Đăng ký tại đây</a>
-            </div>
-
-
-            <div class="btn-login-gg">
-                
-                <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
-                
-                <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button>
-            </div>
+                <div class="chuataikhoan">
+                    Bạn chưa có tài khoản <a href="" class="link-dki">Đăng ký tại đây</a>
+                </div>
 
 
+                <div class="btn-login-gg">
 
-        </form>
+                    <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
+
+                    <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button>
+                </div>
+
+
+
+            </form>
+        </div>
     </div>
-    </div>
 
-     <footer id="footer-trang-chu">
+    <footer id="footer-trang-chu">
         <div class="footer-title">
             <img src="./assets/images/logo/logo.png" alt="" class="img-main">
             <p class="footer-title-header">Thienlong.vn - Website thương mại điện tử thuộc Tập đoàn Thiên Long</p>
