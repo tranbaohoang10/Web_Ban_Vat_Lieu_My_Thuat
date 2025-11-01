@@ -507,6 +507,12 @@
         box-shadow: 0 4px 12px rgba(23, 71, 157, 0.3);
     }
 
+    .thumbnail-item.active {
+        border-color: #2659F3;
+        border-width: 3px;
+        box-shadow: 0 4px 12px rgba(38, 89, 243, 0.5);
+    }
+
     .thumbnail-item img {
         width: 100%;
         height: 100%;
@@ -1060,9 +1066,9 @@
                                 <div style="font-size: 1.125rem;">15%</div>
                             </div>
 
-                            <a href="#thumb-1"
+                            <a href="javascript:void(0)" id="prevImageBtn"
                                 class="main-image-nav main-image-prev">&lt;</a>
-                            <a href="#thumb-3"
+                            <a href="javascript:void(0)" id="nextImageBtn"
                                 class="main-image-nav main-image-next">&gt;</a>
                         </div>
 
@@ -1070,16 +1076,20 @@
                         <div class="thumbnail-gallery">
                             <div class="thumbnail-container"
                                 id="thumbnailContainer">
-                                <div class="thumbnail-item" id="thumb-1">
+                                <div class="thumbnail-item active" id="thumb-1"
+                                    data-index="0">
                                     <img src="./assets/images/product/sp1.jpg"
                                         alt="Ảnh 1">
                                 </div>
-                                <div class="thumbnail-item" id="thumb-2">
+                                <div class="thumbnail-item" id="thumb-2"
+                                    data-index="1">
                                     <img src="./assets/images/product/sp1.jpg"
                                         alt="Ảnh 2">
                                 </div>
-                                <div class="thumbnail-item" id="thumb-3">
-                                    <img src="./assets/images/product/sp1.jpg"
+                                <div class="thumbnail-item" id="thumb-3"
+                                    data-index="2">
+                                    <img
+                                        src="./assets/images/product/sp1sđssdsd.jpg"
                                         alt="Ảnh 3">
                                 </div>
                             </div>
@@ -1355,8 +1365,53 @@
                         }
                     }
 
-                    // su kien nut them vao gio hang
+                    // su kien chuyen anh san pham
                     document.addEventListener('DOMContentLoaded', function() {
+                        const mainImage = document.getElementById('mainProductImage');
+                        const thumbnails = document.querySelectorAll('.thumbnail-item');
+                        const prevBtn = document.getElementById('prevImageBtn');
+                        const nextBtn = document.getElementById('nextImageBtn');
+                        let currentIndex = 0;
+
+                        // Ham cap nhat anh chinh va border thumbnail
+                        function updateImage(index) {
+
+                            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+
+                            thumbnails[index].classList.add('active');
+
+                            const imgSrc = thumbnails[index].querySelector('img').src;
+                            mainImage.src = imgSrc;
+
+                            currentIndex = index;
+                        }
+
+                        // Xu ly click vao thumbnail
+                        thumbnails.forEach((thumb, index) => {
+                            thumb.addEventListener('click', function() {
+                                updateImage(index);
+                            });
+                        });
+
+                        // Xu ly nut Previous
+                        if (prevBtn) {
+                            prevBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+                                updateImage(currentIndex);
+                            });
+                        }
+
+                        // Xu ly nut Next
+                        if (nextBtn) {
+                            nextBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                currentIndex = (currentIndex + 1) % thumbnails.length;
+                                updateImage(currentIndex);
+                            });
+                        }
+
+                        // su kien nut them vao gio hang
                         const addToCartBtn = document.getElementById('addToCartBtn');
                         const cartIcon = document.getElementById('cartIcon');
                         
