@@ -674,7 +674,7 @@
     }
 
     .quantity-input {
-        min-width: 110px;
+       
         height: 35px;
         border: 1px solid #d1d5db;
         border-radius: 6px;
@@ -1332,6 +1332,29 @@
                         </div>
                     </div>
                 </footer>
+                <!-- su kien nut tang giam so luong -->
+                <script>
+                    function increaseQuantity() {
+                        const input = document.getElementById("quantity");
+                        let value = parseInt(input.value);
+                        if (!isNaN(value)) {
+                            input.value = value + 1;
+                        } else {
+                            input.value = 1;
+                        }
+                    }
+
+                    function decreaseQuantity() {
+                        const input = document.getElementById("quantity");
+                        let value = parseInt(input.value);
+                        const min = parseInt(input.min) || 1; 
+                        if (!isNaN(value) && value > min) {
+                            input.value = value - 1;
+                        } else {
+                            input.value = min;
+                        }
+                    }
+                </script>
             </body>
 
         </html>
