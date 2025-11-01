@@ -13,6 +13,9 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <style>
+        :root{
+            font-family: 'Roboto', sans-serif;
+        }
     /* Begin header */
     #header-trang-chu {
         background-color: var(--color-main);
@@ -189,6 +192,141 @@
         color: #666;
         margin: 0 0.5rem;
     }
+    .review-container {
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: white; 
+}
+
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h2 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.filter-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.filter-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background-color: #2659F3;
+    color: #fff;
+}
+
+.reviews-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    height: fit-content;
+}
+
+.review h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.review p {
+    margin-top: 5px;
+}
+
+.rating {
+    color: #ff9800;
+    font-size: 20px;
+}
+
+.timestamp {
+    padding-top: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.star-rating [type="radio"] {
+    appearance: none;
+}
+
+.star-rating i {
+    color: #eee;
+    font-size: 30px;
+    transition: 0.3s;
+}
+
+
+.star-rating label:is(:hover, :has(~ :hover)) i {
+    transform: scale(1.35);
+    color: #fffdba;
+}
+
+.star-rating label:has(~ :checked) i {
+    color: #ff9f00;
+    text-shadow: 0 0 2px #ffffff, 0 0 10px #ffee58;
+}
+
+
+.area_submit {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn_writeReview {
+    margin-top: 25px;
+    font-size: 16px;
+    padding: 10px 10px;
+}
+
+.form_review {
+    justify-content: center;
+}
+
+.area_review {
+    padding: 10px;
+    width: 100%;
+    height: 100px;
+}
+
+/* Hiệu ứng nhảy nhẹ khi chọn sao */
+@keyframes jump {
+    0%, 50% {
+        transform: translateY(0) scale(1.35);
+    }
+    100% {
+        transform: translateY(-15%) scale(1.35);
+    }
+}
+
 
     /* Begin footer */
     #footer-trang-chu {
@@ -421,7 +559,7 @@
 
                     <div class="reviews-section">
                         <div class="review">
-                            <h3>Hải Dương</h3>
+                            <h3>Bảo Hoàng</h3>
                             <div class="rating">★★★★★</div>
                             <p>Màu đẹp lắm! Cho Shop 5 sao</p>
 
@@ -429,7 +567,7 @@
                         </div>
 
                         <div class="review">
-                            <h3>Vũ</h3>
+                            <h3>Đăng Hậu</h3>
                             <div class="rating">★★★★</div>
                             <p>Giao hàng nhanh chóng, giá cả hợp lý, OK!</p>
                             <p class="timestamp">Đã dùng khoảng 2 tuần</p>
