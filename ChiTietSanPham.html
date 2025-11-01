@@ -144,7 +144,7 @@
 
     #header-trang-chu .header-giohang::after {
         display: inline-flex;
-        content: "0";
+        content: attr(data-count);
         width: 20px;
         height: 20px;
         left: 20px;
@@ -1030,7 +1030,7 @@
                 </div>
 
             </div>
-            <div class="header-giohang">
+            <div class="header-giohang" id="cartIcon" data-count="0">
                 <i class="fa-solid fa-bag-shopping"></i>
             </div>
         </header>
@@ -1142,7 +1142,7 @@
                         </div>
 
                         <div class="product-actions">
-                            <button class="btn btn-add-cart">
+                            <button class="btn btn-add-cart" id="addToCartBtn">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 THÊM VÀO GIỎ
                             </button>
@@ -1354,7 +1354,46 @@
                             input.value = min;
                         }
                     }
+
+                    // su kien nut them vao gio hang
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const addToCartBtn = document.getElementById('addToCartBtn');
+                        const cartIcon = document.getElementById('cartIcon');
+                        
+                        if (addToCartBtn && cartIcon) {
+                            addToCartBtn.addEventListener('click', function() {
+                                const quantityInput = document.getElementById('quantity');
+                                const quantity = parseInt(quantityInput.value) || 1;    
+                                
+                                let currentCount = parseInt(cartIcon.getAttribute('data-count')) || 0;
+                                
+                                currentCount += quantity;
+                                cartIcon.setAttribute('data-count', currentCount);
+                                // them hieu ung
+                                  cartIcon.classList.add('cart-bounce');
+                                setTimeout(() => {
+                                    cartIcon.classList.remove('cart-bounce');
+                                }, 500);
+                                
+                                
+                            });
+                        }
+                    });
                 </script>
+
+                <!-- hieu ung khi them vao gio hang-->
+                <style>
+                    @keyframes cartBounce {
+                        0%, 100% { transform: scale(1); }
+                        25% { transform: scale(1.3); }
+                        50% { transform: scale(0.9); }
+                        75% { transform: scale(1.15); }
+                    }
+                    
+                    .cart-bounce {
+                        animation: cartBounce 0.5s ease !important;
+                    }
+                </style>
             </body>
 
         </html>
