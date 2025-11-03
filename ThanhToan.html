@@ -163,95 +163,102 @@
    }
 
   .breadcrumb {
-        background-color: #f0f4f8;
-        padding: 1rem 2.5rem;
-        font-size: 0.875rem;
-    }
+    background-color: #f0f4f8;
+    padding: 1rem 2.5rem;
+    font-size: 0.95rem;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    border-radius: 6px;
+    width: fit-content; 
+    margin-left: 2rem; 
+}
 
-    .breadcrumb a {
-        color: #17479d;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
+.breadcrumb a {
+    color: #17479d;
+    text-decoration: none;
+    transition: color 0.3s;
+}
 
-    .breadcrumb a:hover {
-        color: #0d2a5e;
-        text-decoration: underline;
-    }
+.breadcrumb a:hover {
+    color: #0d2a5e;
+    text-decoration: underline;
+}
 
-    .breadcrumb span {
-        color: #666;
-        margin: 0 0.5rem;
-    }
-
+.breadcrumb span {
+    color: #666;
+    margin: 0 0.5rem;
+}
 
     .checkout-container {
-        max-width: 1400px;
-        margin: 2rem auto;
-        padding: 0 2rem;
+        max-width: 1200px;
+        margin: 1.5rem auto;
+        padding: 0 1.5rem;
         display: grid;
-        grid-template-columns: 1fr 480px;
-        gap: 2rem;
+        grid-template-columns: 1fr 400px;
+        gap: 1.5rem;
+        align-items: start;
     }
 
     /* infor - Shipping Info Card */
     .form-infor-checkout {
         background: #ffffff;
-        border-radius: 12px;
-        padding: 32px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         border: 1px solid #e5e7eb;
     }
 
-.form-infor-checkout h4.infor-delivery-label {
-    font-size: 1.5rem;
-    margin: 0 0 24px 0;
-    font-weight: 700;
-    color: #1f2937;
-}
+    .form-infor-checkout h4.infor-delivery-label {
+        font-size: 1.25rem;
+        margin: 0 0 20px 0;
+        font-weight: 600;
+        color: #111827;
+    }
 
-.form-infor-checkout p {
-    color: #374151;
-}
+    .form-infor-checkout p {
+        color: #6b7280;
+        font-size: 0.9rem;
+    }
 
-.form-infor-checkout form {
-    margin-top: 0;
-}
+    .form-infor-checkout form {
+        margin-top: 0;
+    }
 
-/* Input groups */
-.input-group {
-    margin-bottom: 16px;
-}
+    /* Input groups */
+    .input-group {
+        margin-bottom: 14px;
+    }
 
-.input-group label {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #374151;
-    margin-bottom: 8px;
-}
+    .input-group label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 6px;
+    }
 
-.form-input-item {
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    background: #ffffff;
-    font-size: 0.95rem;
-    color: #1f2937;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
-}
+    .form-input-item {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        background: #ffffff;
+        font-size: 0.9rem;
+        color: #1f2937;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+    }
 
-.form-input-item:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
+    .form-input-item:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+    }
 
-.form-input-item::placeholder {
-    color: #9ca3af;
-}
+    .form-input-item::placeholder {
+        color: #9ca3af;
+        font-size: 0.875rem;
+    }
 
 /* Error/Success messages */
 #error_email,
@@ -337,7 +344,7 @@
 .btn-continue,
 button[type="submit"] {
     display: inline-block;
-    background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+    background: #2659F3;
     color: white;
     padding: 14px 28px;
     border-radius: 8px;
@@ -354,61 +361,54 @@ button[type="submit"] {
 .btn-continue:hover,
 button[type="submit"]:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(255, 107, 0, 0.3);
+    box-shadow: 0 8px 16px #17479d;
 }
-
-/* Order Summary - Right Column */
-.order-summary {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 32px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e5e7eb;
-    height: fit-content;
-    position: sticky;
-    top: 2rem;
-}
-
-.cart-title {
-    font-size: 20px;
-    color: #111827;
-    margin-bottom: 24px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.cart-title i {
+.total-amount {
     color: #ff6b35;
+    font-size: 25px;
+    font-weight: 700;
 }
 
-.cart-count {
-    background: #ff6b35;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-}
+    /* Order Summary - Right Column */
+    .order-summary {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e5e7eb;
+        height: fit-content;
+        position: sticky;
+        top: 1.5rem;
+    }
 
-/* Cart Items */
+    .cart-title {
+        font-size: 1.125rem;
+        color: #111827;
+        margin: 0 0 20px 0;
+        font-weight: 600;
+        display: block;
+    }
+
+    /* Cart Items */
+
 .cart-items {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 20px;
+    padding-bottom: 16px;
 }
 
 .cart-item {
     display: flex;
-    gap: 16px;
-    padding: 16px 0;
+    gap: 15px;
+    padding: 15px 0;
+    align-items: center;
     border-bottom: 1px solid #f3f4f6;
 }
 
 .cart-item:last-child {
     border-bottom: none;
 }
+
 
 .item-image {
     width: 80px;
@@ -417,6 +417,7 @@ button[type="submit"]:hover {
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
+    border: 1px solid #e5e7eb;
 }
 
 .item-image img {
@@ -425,127 +426,150 @@ button[type="submit"]:hover {
     object-fit: cover;
 }
 
+
 .item-quantity {
     position: absolute;
     top: -8px;
-    right: -8px;
-    background: #ff6b35;
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+    left: -8px;
+    background-color: #fdecec; 
+    color: #ef4444;             
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;         
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    font-weight: 600;
-    border: 2px solid white;
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid #fbcaca; 
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
+
 
 .item-details {
     flex: 1;
 }
 
-.item-name {
-    font-size: 15px;
-    color: #111827;
-    font-weight: 500;
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-.item-price {
-    font-size: 16px;
-    color: #ff6b35;
-    font-weight: 600;
-}
-
-/* Discount Section */
-.discount-section {
-    margin-bottom: 24px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.discount-section label {
-    display: block;
-    font-size: 14px;
-    color: #6b7280;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.discount-input-group {
-    display: flex;
-    gap: 8px;
-}
-
-.discount-input-group input {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.discount-input-group input:focus {
-    outline: none;
-    border-color: #ff6b35;
-    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
-}
-
-.btn-apply {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.btn-apply:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
-}
-
-/* Price Summary */
-.price-summary {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.price-row {
+.item-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 15px;
-    color: #6b7280;
 }
 
-.price-row.total {
-    padding-top: 12px;
-    border-top: 2px solid #e5e7eb;
-    margin-top: 8px;
-    font-size: 18px;
+.item-name {
+    font-size: 0.95rem;
+    font-weight: 500;
     color: #111827;
+    margin: 0;
+    line-height: 1.3;
+    max-width: 250px;
+    text-align: left;
+}
+
+.item-price {
+    font-size: 1rem;
     font-weight: 700;
+    color: #ef4444;
+    white-space: nowrap;
 }
 
-.price-row.total .price-value {
-    color: #ff6b35;
-    font-size: 20px;
-}
 
-.price-value {
-    font-weight: 600;
-    color: #111827;
-}
+    /* Discount Section */
+    .discount-section {
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .discount-section label {
+        display: block;
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+
+    .discount-input-group {
+        display: flex;
+        gap: 8px;
+    }
+
+    .discount-input-group input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+    }
+
+    .discount-input-group input:focus {
+        outline: none;
+        border-color: #2659F3;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+    }
+
+    .discount-input-group input::placeholder {
+        color: #9ca3af;
+    }
+
+    .btn-apply {
+        padding: 10px 20px;
+        background: #2659F3;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .btn-apply:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-apply:active {
+        transform: translateY(0);
+    }
+
+    /* Price Summary */
+    .price-summary {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.125rem;
+        color: #6b7280;
+    }
+
+    .price-row.total {
+        padding-top: 12px;
+        border-top: 2px solid #e5e7eb;
+        margin-top: 8px;
+        font-size: 1.125rem;
+        color: #111827;
+        font-weight: 700;
+    }
+
+    .price-row.total .price-value {
+        color: #ef4444;
+        font-size: 1.25rem;
+    }
+
+    .price-value {
+        font-weight: 600;
+        color: #111827;
+        
+    }
 
 /* Responsive Design */
 @media (max-width: 992px) {
@@ -881,8 +905,7 @@ button[type="submit"]:hover {
                 </div>
 
                 <div class="order-summary">
-                    <h4 class="cart-title">Giỏ hàng <span
-                            class="cart-count">3</span></h4>
+                    <h4 class="cart-title">Giỏ hàng</h4>
 
                     <div class="cart-items">
                         <!-- Product 1 -->
@@ -918,9 +941,10 @@ button[type="submit"]:hover {
 
                     <!-- Discount Code -->
                     <div class="discount-section">
-                        <input type="text" class="discount-input"
-                            placeholder="Mã giảm giá">
-                        <button class="btn-apply">Sử dụng</button>
+                        <div class="discount-input-group">
+                            <input type="text" placeholder="Mã giảm giá">
+                            <button class="btn-apply">Sử dụng</button>
+                        </div>
                     </div>
 
                     <!-- Price Summary -->
@@ -933,9 +957,13 @@ button[type="submit"]:hover {
                             <span>Phí vận chuyển</span>
                             <span>10,000₫</span>
                         </div>
+                        <div class="price-row">
+                            <span>Giảm giá</span>
+                            <span>0₫</span>
+                        </div>
                         <div class="price-row total">
                             <span>Tổng cộng</span>
-                            <span class="total-amount">VND 392,120₫</span>
+                            <span class="total-amount">392,120₫</span>
                         </div>
                     </div>
                 </div>
