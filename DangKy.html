@@ -174,12 +174,13 @@
         /* border-radius: 10px; */
         width: 530px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
     }
     h2{
         color: white;
         text-align: center;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
     .label{
         color: white;
@@ -204,14 +205,7 @@
         font-size: 14px;
         transition: 0.3s;
     }
-    .btn-doi .btn-kh-uutien{
-        background-color: #00C6AE;
-        color: white;
-    }
-    .btn-doi button:not(.btn-kh-uutien){
-        background-color: white;
-        color: #00C6AE;
-    }
+   
     .infor{
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -220,7 +214,7 @@
     }
     .infor .tt-chitiet label{
         font-size: 17px;
-        font-weight: bold;
+        font-weight: normal;
         color: white;
     }
    .infor .tt-chitiet input{
@@ -231,22 +225,24 @@
         outline: none;
         font-size: 14px;
         background: none;
+        color: white;
+        outline: none;
 
     }
     .infor .tt-chitiet input::placeholder{
         color: #B0B0B0;
     }
-    .btn-DangKy{
+    
+
+     .btn-DangKy {
         width: 100%;
-        background-color: #FFD700;
+        background-color: #F5DF4D;
+        padding: 10px;
         border: none;
-        border-radius: 25px;
-        padding: 12px;
-        font-weight: bold;
-        color: #003EAA;
+        border-radius: 5px;
         cursor: pointer;
-        font-size: 15px;
         margin-bottom: 15px;
+        color: #343A40;
     }
     .dang-nhap{
         text-align: center;
@@ -257,7 +253,11 @@
     .dang-nhap a{
         color: #FFD700;
         text-decoration: none;
-        font-weight: bold;
+
+    }
+    .dang-nhap a:hover{
+        color: #6C785B;
+        
     }
     .btn-dang-nhap-tt{
         display: flex;
@@ -497,13 +497,7 @@
     <div class="main">
         <div class="container">
         <h2>Đăng Ký</h2>
-        <div class="label">
-        Bạn là khách hàng:
-        </div>
-        <div class="btn-doi">
-        <button class="btn-kh-uutien">Khách hàng cá nhân</button>
-        <button class="btn-kh-uutien-2">Khách hàng ưu tiên (Xuất hóa đơn)</button>
-        </div>
+        
 
         <form action="" class="infor">
             <div class="tt-chitiet">
@@ -516,27 +510,7 @@
             <input type="text" name="" placeholder="Tên">
             </div>
 
-            <!-- thêm thông tin cho khách hàng ưu tiên xuất hóa đơn -->
-            <div class="tt-chitiet">
-                <label for="">Tên công ty(*):</label>
-                <input type="text" placeholder="Tên công ty">
-            </div>
-
-            <div class="tt-chitiet">
-                <label for="">Mã số thuế(*):</label>
-                <input type="text" placeholder="Mã số thuế">
-            </div>
-
-            <div class="tt-chitiet">
-                <label for="">Địa chỉ công ty(*):</label>
-                <input type="text" placeholder="Địa chỉ công ty">
-            </div>
-
-            <div class="tt-chitiet">
-                <label for="">Email công ty(*):</label>
-                <input type="text" placeholder="Email công ty">
-            </div>
-
+           
             <div class="tt-chitiet">
             <label for="Email">Email cá nhân(*):</label>
             <input type="text" name="" placeholder="Email cá nhân">
@@ -554,7 +528,7 @@
 
         <button class="btn-DangKy">Đăng ký</button>
         
-        <div class="dang-nhap">Bạn đã có tài khoản <a href="">Đăng nhập tại đây</a></div>
+        <div class="dang-nhap">Bạn đã có tài khoản <a href="DangNhap.html">Đăng nhập tại đây</a></div>
 
         <div class="btn-dang-nhap-tt">
         <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
