@@ -311,6 +311,11 @@
 
     }
 
+    .section-main-ca-nhan .container .canhan {
+      display: flex;
+      gap: 30px;
+    }
+
     .section-main-ca-nhan .container .tongquan-canhan {
       display: flex;
       flex-direction: column;
@@ -318,6 +323,12 @@
       gap: 15px;
       background-color: #F1F1F1;
       border-radius: 10px;
+      width: 30%;
+      padding: 10px;
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+
     }
 
     .section-main-ca-nhan .container .tongquan-canhan .logo-name {
@@ -350,6 +361,7 @@
       width: 100%;
       align-items: center;
       justify-content: center;
+
     }
 
     .section-main-ca-nhan .container .tongquan-canhan .list-canhan a {
@@ -357,19 +369,66 @@
       display: block;
       padding: 15px;
       background-color: #2659F3;
-      text-align: center;
       text-decoration: none;
       color: white;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
     }
 
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:nth-child(1) {
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:first-child {
       background-color: #FB9F10;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
+
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
 
     .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:hover {
       background-color: #FB9F10;
+      transition: all 0.4s;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan {
+      flex: 1;
+      background-color: #F1F1F1;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form h2 {
+      color: #FB9F10;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form input.button {
+      padding: 10px 25px;
+      color: white;
+      background-color: #2659F3;
+      border-radius: 20px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 10px;
+      margin: 0 auto;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form input.button:hover {
+      opacity: 0.9;
     }
 
     /* ENd section-main-ca-nhan */
@@ -628,17 +687,44 @@
   <!-- Begin section main -->
   <div class="section-main-ca-nhan">
     <div class="container">
-      <div class="tongquan-canhan">
-        <div class="logo-name">
-          HT
+      <div class="canhan">
+        <div class="tongquan-canhan">
+          <div class="logo-name">
+            HT
+          </div>
+          <p class="name-full">Xin chào, <span class="span">Hoàng Trần</span></p>
+          <div class="list-canhan">
+            <a href=""><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
+            <a href=""><i class="fa-solid fa-box-open"></i> Danh sách đơn hàng</a>
+            <a href=""><i class="fa-solid fa-location-dot"></i> Số địa chỉ</a>
+            <a href=""><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+          </div>
         </div>
-        <p class="name-full">Xin chào, <span class="span">Hoàng Trần</span></p>
-        <div class="list-canhan">
-          <a href="">Tổng quan tài khoản</a>
-          <a href="">Thông tin tài khoản</a>
-          <a href="">Danh sách đơn hàng</a>
-          <a href="">Số địa chỉ</a>
-          <a href="">Đăng xuất</a>
+        <div class="thongtin-canhan">
+          <form action="">
+            <h2>Thông tin tài khoản</h2>
+            <label for="hovaten">Họ và tên:</label>
+            <br>
+            <input type="text" id="hovaten" name="Họ và tên" value="Trần Bảo Hoàng">
+            <br>
+            <label for="email">Email:</label>
+            <br>
+            <input type="email" id="email" name="Email" placeholder="Email">
+            <br>
+            <label for=" sodienthoai">Số điện thoại:</label>
+            <br>
+            <input type="text" id="sodienthoai" name="Số điện thoại" placeholder="Số điện thoại(*)">
+            <br>
+            <label for="ngaysinh">Ngày sinh:</label>
+            <br>
+            <input type="date" id="ngaysinh" placeholder="Ngày sinh(*)">
+            <br>
+            <label for="diachi">Địa chỉ:</label>
+            <br>
+            <input type="text" id="diachi" placeholder="Địa chỉ(*)">
+            <br>
+            <input type="submit" value="Cập nhật thông tin" class="button">
+          </form>
         </div>
       </div>
     </div>
