@@ -437,12 +437,16 @@
     }
 
    /* order history */
-   .order-history {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
+      .order-history {
+      flex: 1;
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+   }
+
 
 .order-tabs {
   display: flex;
@@ -515,7 +519,8 @@
 .order-item {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
+  padding: 12px 0;
 }
 
 .order-item img {
@@ -524,6 +529,7 @@
   border-radius: 8px;
   object-fit: cover;
   border: 1px solid #e5e7eb;
+  flex-shrink: 0;
 }
 
 .order-info {
@@ -586,9 +592,45 @@
   background: #fee2e2;
 }
 
-.total {
-  font-size: 1rem;
+
+.order-history {
+  font-size: 16px; 
+}
+
+
+.order-name {
+  font-size: 17px;
+  font-weight: 600;
   color: #111827;
+}
+
+
+.order-quantity,
+.order-price p {
+  font-size: 15px;
+}
+
+
+.order-price strong {
+  font-size: 17px;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+
+.order-header {
+  font-size: 16px;
+}
+
+.order-buttons button {
+  font-size: 15px;
+}
+
+
+.total {
+  font-size: 20px;
+  font-weight: 600;
+    color: #ef4444;
 }
 
 
@@ -859,14 +901,15 @@
                         <p class="name-full">Xin chào, <span class="span">Hoàng
                                 Trần</span></p>
                         <div class="list-canhan">
-                            <a href><i class="fa-solid fa-user"></i> Thông tin
+                            <a href="TrangTongQuanCaNhan.html"><i
+                                    class="fa-solid fa-user"></i> Thông tin
                                 tài
                                 khoản</a>
                             <a href class="active"><i
                                     class="fa-solid fa-box-open"></i> Lịch sử
                                 mua
                                 hàng</a>
-                            <a href><i
+                            <a href="DangNhap.html"><i
                                     class="fa-solid fa-right-from-bracket"></i>Đăng
                                 xuất</a>
                         </div>
@@ -879,9 +922,10 @@
                             <button>Đã hủy</button>
                         </div>
 
+                        <!-- Đơn hàng 1 -->
                         <div class="order-card">
                             <div class="order-header">
-                                <span>Mã đơn: #DH00123</span>
+                                <span>Mã đơn: #DH001</span>
                                 <span class="order-status pending">Chờ xác
                                     nhận</span>
                             </div>
@@ -892,8 +936,7 @@
                                         alt="Sản phẩm 1">
                                     <div class="order-info">
                                         <p class="order-name">Bút Lông Thiên
-                                            Long
-                                            Fiber Pen Washable - Demon</p>
+                                            Long Fiber Pen Washable - Demon</p>
                                         <p class="order-quantity">Số lượng:
                                             2</p>
                                     </div>
@@ -921,7 +964,42 @@
 
                             <div class="order-footer">
                                 <span class="total">Tổng cộng:
-                                    <strong>382,100₫</strong></span>
+                                    <strong>392,100₫</strong></span>
+                                <div class="order-buttons">
+                                    <button class="btn-review">Đánh giá</button>
+                                    <button class="btn-cancel">Hủy đơn</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 2 -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span>Mã đơn: #DH002</span>
+                                <span class="order-status success">Hoàn
+                                    tất</span>
+                            </div>
+
+                            <div class="order-items">
+                                <div class="order-item">
+                                    <img src="./assets/images/logo/list1-4.jpg"
+                                        alt="Sản phẩm 3">
+                                    <div class="order-info">
+                                        <p class="order-name">Màu nước 8 màu
+                                            Thiên Long Colokit WACO-C06/AK</p>
+                                        <p class="order-quantity">Số lượng:
+                                            1</p>
+                                    </div>
+                                    <div class="order-price">
+                                        <p>31,080₫</p>
+                                        <strong>31,080₫</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="order-footer">
+                                <span class="total">Tổng cộng:
+                                    <strong>41,080₫</strong></span>
                                 <div class="order-buttons">
                                     <button class="btn-review">Đánh giá</button>
                                     <button class="btn-cancel">Hủy đơn</button>
@@ -932,124 +1010,126 @@
                 </div>
             </div>
         </div>
-        <!-- End section main -->
+    </div>
+</div>
+<!-- End section main -->
 
-        <!-- Begin footer-->
-        <footer id="footer-trang-chu">
-            <div class="footer-title">
-                <img src="./assets/images/logo/logo.png" alt
+<!-- Begin footer-->
+<footer id="footer-trang-chu">
+    <div class="footer-title">
+        <img src="./assets/images/logo/logo.png" alt
+            class="img-main">
+        <p class="footer-title-header">Thienlong.vn - Website
+            thương mại
+            điện tử thuộc Tập đoàn Thiên Long</p>
+        <p class="footer-title-description">Công ty Cổ Phần Tập
+            Đoàn
+            Thiên
+            Long
+            <br>
+            <br>
+            GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp
+            ngày
+            14/03/2005.
+        </p>
+        <form action class="footer-title-form">
+            <input type="email"
+                placeholder="Nhập địa chỉ email">
+            <a href>Đăng ký</a>
+        </form>
+        <img
+            src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
+            alt class="img-footer">
+    </div>
+    <div class="footer-diachi">
+        <h2>ĐỊA CHỈ CÔNG TY</h2>
+        <span>
+            Head Office:
+            <p class="footer-diachi-header"> Tầng 10, Sofic
+                Tower, Số 10
+                Đường Mai Chí Thọ, Phường An Khánh,
+                Thành Phố Hồ Chí Minh, Việt Nam
+            </span>
+            <br>
+            <span>
+                Miền Bắc:
+                <p class="footer-diachi-description"> Số 38,
+                    đường
+                    Gamuda
+                    Gardens 2-5, Khu đô thị mới C2 - Gamuda
+                    Gardens, Phường Trần Phú, Thành phố Hà Nội,
+                    Việt
+                    Nam.
+                </span>
+
+                <img src="./assets/images/logo/footer_bct.png"
+                    alt
                     class="img-main">
-                <p class="footer-title-header">Thienlong.vn - Website
-                    thương mại
-                    điện tử thuộc Tập đoàn Thiên Long</p>
-                <p class="footer-title-description">Công ty Cổ Phần Tập
-                    Đoàn
-                    Thiên
-                    Long
-                    <br>
-                    <br>
-                    GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp
-                    ngày
-                    14/03/2005.
-                </p>
-                <form action class="footer-title-form">
-                    <input type="email"
-                        placeholder="Nhập địa chỉ email">
-                    <a href>Đăng ký</a>
-                </form>
-                <img
-                    src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
-                    alt class="img-footer">
             </div>
-            <div class="footer-diachi">
-                <h2>ĐỊA CHỈ CÔNG TY</h2>
+            <div class="footer-help">
+                <h2>HỖ TRỢ KHÁCH HÀNG</h2>
                 <span>
-                    Head Office:
-                    <p class="footer-diachi-header"> Tầng 10, Sofic
-                        Tower, Số 10
-                        Đường Mai Chí Thọ, Phường An Khánh,
-                        Thành Phố Hồ Chí Minh, Việt Nam
+                    Hotline:
+                    <p class="footer-help-header">1900 866 819
                     </span>
-                    <br>
                     <span>
-                        Miền Bắc:
-                        <p class="footer-diachi-description"> Số 38,
-                            đường
-                            Gamuda
-                            Gardens 2-5, Khu đô thị mới C2 - Gamuda
-                            Gardens, Phường Trần Phú, Thành phố Hà Nội,
-                            Việt
-                            Nam.
-                        </span>
-
-                        <img src="./assets/images/logo/footer_bct.png"
-                            alt
-                            class="img-main">
+                        Thứ 2 - Thứ 6 (8h - 17h)
+                        salesonline@thienlongvn.com
+                        <div class="footer-help-header-list">
+                            <a href>
+                                - Hướng dẫn mua hàng
+                            </a>
+                            <a href>
+                                - Hướng dẫn thanh toán
+                            </a>
+                            <a href>
+                                - Chính sách giao hàng
+                            </a>
+                            <a href>
+                                - Chính sách đổi trả & hoàn tiền
+                            </a>
+                            <a href>
+                                - Khách hàng thân thiết
+                            </a>
+                            <a href>
+                                - Khách hàng ưu tiên
+                            </a>
+                            <a href>
+                                - Phản ánh chất lượng sản phẩm
+                            </a>
+                        </div>
+                    </span>
+                </div>
+                <div class="footer-information">
+                    <h2>VỀ THIENLONG.VN</h2>
+                    <div class="footer-information-header-list">
+                        <a href>
+                            - Giới thiệu
+                        </a>
+                        <a href>
+                            - Dịch vụ in ấn quảng cáo
+                        </a>
+                        <a href>
+                            - Chính sách bảo mật chung
+                        </a>
+                        <a href>
+                            - Chính sách bảo mật thông tin cá
+                            nhân
+                        </a>
+                        <a href>
+                            - Thông tin liên hệ
+                        </a>
+                        <a href>
+                            - Chương trình Affiliate
+                        </a>
                     </div>
-                    <div class="footer-help">
-                        <h2>HỖ TRỢ KHÁCH HÀNG</h2>
-                        <span>
-                            Hotline:
-                            <p class="footer-help-header">1900 866 819
-                            </span>
-                            <span>
-                                Thứ 2 - Thứ 6 (8h - 17h)
-                                salesonline@thienlongvn.com
-                                <div class="footer-help-header-list">
-                                    <a href>
-                                        - Hướng dẫn mua hàng
-                                    </a>
-                                    <a href>
-                                        - Hướng dẫn thanh toán
-                                    </a>
-                                    <a href>
-                                        - Chính sách giao hàng
-                                    </a>
-                                    <a href>
-                                        - Chính sách đổi trả & hoàn tiền
-                                    </a>
-                                    <a href>
-                                        - Khách hàng thân thiết
-                                    </a>
-                                    <a href>
-                                        - Khách hàng ưu tiên
-                                    </a>
-                                    <a href>
-                                        - Phản ánh chất lượng sản phẩm
-                                    </a>
-                                </div>
-                            </span>
-                        </div>
-                        <div class="footer-information">
-                            <h2>VỀ THIENLONG.VN</h2>
-                            <div class="footer-information-header-list">
-                                <a href>
-                                    - Giới thiệu
-                                </a>
-                                <a href>
-                                    - Dịch vụ in ấn quảng cáo
-                                </a>
-                                <a href>
-                                    - Chính sách bảo mật chung
-                                </a>
-                                <a href>
-                                    - Chính sách bảo mật thông tin cá
-                                    nhân
-                                </a>
-                                <a href>
-                                    - Thông tin liên hệ
-                                </a>
-                                <a href>
-                                    - Chương trình Affiliate
-                                </a>
-                            </div>
-                            <div class="footer-information-socials">
-                                <i class="fa-brands fa-facebook"></i>
-                                <i class="fa-brands fa-youtube"></i>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End footer-->
-                </body>
+                    <div class="footer-information-socials">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                </div>
+            </footer>
+            <!-- End footer-->
+        </body>
 
-            </html>
+    </html>
