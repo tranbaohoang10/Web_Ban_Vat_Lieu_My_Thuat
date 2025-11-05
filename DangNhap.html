@@ -203,45 +203,27 @@
         display: block;
         margin-bottom: 5px;
         /* font-size: 0.9em; */
-        color: #6CA4B9;
-    }
-
-    .form-2 {
-        margin-bottom: 20px;
-
-    }
-
-    .form-2 label {
-        display: block;
-        margin-bottom: 5px;
-        /* font-size: 0.9em; */
-        color: #6CA4B9;
+        color: white;
     }
 
     .form-1 input {
         width: 100%;
-        padding: 10px 0;
-        background: transparent;
         border: none;
-        border-bottom: 1px solid #ffffff;
-        /* color: white;
-        outline: none; */
-        box-sizing: border-box;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        /* box-sizing: border-box; */
+        background: none;
+        font-size: 14px;
+        border-radius: 8px;
+        padding: 10px;
+        color: #fff;
+        transition: border-color 0.3s;
+
     }
 
-    .form-2 input {
-        width: 100%;
-        padding: 10px 0;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid #ffffff;
-        /* color: white;
-        outline: none; */
-        box-sizing: border-box;
-    }
-
+    
     .form-1 input::placeholder {
-        color: #a0a0a0;
+        color: #B0B0B0;
     }
 
     .forgot-password {
@@ -261,6 +243,7 @@
     }
 
     .btn-login {
+        background: linear-gradient(90deg, #FFD700, #FFC107);
         width: 100%;
         background-color: #F5DF4D;
         padding: 10px;
@@ -268,7 +251,12 @@
         border-radius: 5px;
         cursor: pointer;
         margin-bottom: 15px;
-        color: #343A40;
+        color: #000;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .btn-login:hover {
+        transform: scale(1.05);
     }
 
     .link-dki {
@@ -294,9 +282,10 @@
         padding-left: 50px;
         padding-right: 50px;
         margin-top: 10px;
+        margin-left: 110px;
     }
 
-    .btn-fb {
+    /* .btn-fb {
         background-color: #49669C;
         color: white;
         border: none;
@@ -306,10 +295,11 @@
         padding-right: 50px;
         margin-top: 10px;
 
-    }
+    } */
 
     .btn-login-gg i {
         margin-right: 8px;
+
     }
 
     p {
@@ -531,12 +521,12 @@
             <h4>Đăng Nhập</h4>
             <form action="" class="form-login">
                 <div class="form-1">
-                    <label for="email"> Email*</label>
+                    <label for="email"> Email:</label>
                     <input type="text" name="" placeholder="Nhập Email">
 
                 </div>
                 <div class="form-1">
-                    <label for="password"> Mật Khẩu*</label>
+                    <label for="password"> Mật Khẩu:</label>
                     <input type="text" name="" placeholder="Nhập mật khẩu">
                 </div>
 
@@ -554,7 +544,7 @@
 
                     <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
 
-                    <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button>
+                    <!-- <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button> -->
                 </div>
 
 
