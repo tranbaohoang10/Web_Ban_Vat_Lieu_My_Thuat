@@ -15,12 +15,15 @@
 
 <body>
   <style>
-    .container {
-      width: 1200px;
-      margin: auto;
-
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 80px;
     }
-
 
     /* Begin section-info-mithuat */
     #section-info-mithuat {
@@ -152,75 +155,151 @@
     }
 
     /* End section-trangchinh-danhmuc-sanpham */
-    /* Begin section-main-gioi-thieu */
-    .section-main-gioi-thieu {
-      margin-bottom: 100px;
-      margin-top: 50px;
+    /* Begin section-main-ca-nhan */
+    .section-main-ca-nhan {
+      padding-bottom: 20px;
+      padding-top: 20px;
     }
 
-    .section-main-gioi-thieu .container {
-      border: 1px solid #ddd;
+    .section-main-ca-nhan .container {
       padding: 20px;
-      border-radius: 20px;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+
+    }
+
+    .section-main-ca-nhan .container .canhan {
+      display: flex;
+      gap: 30px;
+    }
+
+    .section-main-ca-nhan .container .tongquan-canhan {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      background-color: #F1F1F1;
+      border-radius: 10px;
+      width: 30%;
+      padding: 10px;
+
+      top: 20px;
+      height: fit-content;
+
+    }
+
+    .section-main-ca-nhan .container .tongquan-canhan .logo-name {
+      width: 80px;
+      height: 80px;
+      background-color: #FB9F10;
+      border-radius: 50%;
+      color: white;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+
+    .section-main-ca-nhan .container .tongquan-canhan .name-full {
       font-size: 18px;
-      line-height: 1.4;
+      font-style: italic;
     }
 
-    .section-main-gioi-thieu .container .header-main {
-      font-size: 28px;
-      color: black;
-    }
-
-    .section-main-gioi-thieu .container .description-main span {
-      color: #17479D;
+    .section-main-ca-nhan .container .tongquan-canhan .name-full .span {
+      color: #2659F3;
       font-weight: 600;
     }
 
-    .section-main-gioi-thieu .container .img-main {
-      display: block;
-      width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-main-gioi-thieu .container .sub-header {
-      font-size: 24px;
-      color: black;
-      margin-top: 30px;
-      margin-bottom: 15px;
-    }
-
-    .section-main-gioi-thieu .container .sub-description span {
-      color: #17479D;
-      font-weight: 600;
-    }
-
-    .section-main-gioi-thieu .container .img-sub {
-
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-main-gioi-thieu .container iframe {
-      display: block;
-      margin: 20px auto;
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan {
+      display: flex;
+      flex-direction: column;
       width: 100%;
+      align-items: center;
+      justify-content: center;
+
     }
 
-    /* End section-main-gioi-thieu */
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a {
+      width: calc(100% - 30px);
+      display: block;
+      padding: 15px;
+      background-color: #2659F3;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:first-child {
+      background-color: #FB9F10;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:hover {
+      background-color: #FB9F10;
+      transition: all 0.4s;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan {
+      flex: 1;
+      background-color: #F1F1F1;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form h2 {
+      color: #FB9F10;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form input.button {
+      padding: 10px 25px;
+      color: white;
+      background-color: #2659F3;
+      border-radius: 20px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 10px;
+      margin: 0 auto;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .section-main-ca-nhan .container .thongtin-canhan form input.button:hover {
+      opacity: 0.9;
+    }
+
+    /* ENd section-main-ca-nhan */
   </style>
   <!-- Begin header-->
 
   <header id="header-trang-chu" class="trang-chu">
     <div class="logo-trang-chu">
       <a href="TrangChinhChu.html">
-        <img src="./assets/images/logo/logo.png" alt="" onclick="window.location.href = 'TrangChinhChu.html'">
+        <img src="./assets/images/logo/logo.png" alt onclick="window.location.href = 'TrangChinhChu.html'">
       </a>
     </div>
-    <form action="" class="tim-kiem-san-pham">
-      <input type="text" name="" placeholder="Tìm kiếm sản phẩm...">
+    <form action class="tim-kiem-san-pham">
+      <input type="text" name placeholder="Tìm kiếm sản phẩm...">
       <i class="fa-solid fa-magnifying-glass"></i>
     </form>
     <div class="header-contact">
@@ -233,8 +312,8 @@
     <div class="header-dangnhap-dangki" onclick="window.location.href='DangNhap.html'">
       <i class="fa-solid fa-user"></i>
       <div class="dangnhap-dangki">
-        <div class="dangnhap">Đăng nhập</div>
-        <div class="dangki">Đăng kí</div>
+        <div class="dangnhap">Hi, Hoàng Trần</div>
+        <div class="dangki">Đăng xuất</div>
       </div>
 
     </div>
@@ -254,21 +333,21 @@
       <div class="hover-block">
         <div class="info-mithuat-description">
           <div class="info-mithuat-description-first">
-            <a href="">NEW ARRIVAL</a>
-            <a href="">Fiber Pen - Bút lông Màu</a>
-            <a href="">Bút chì màu</a>
-            <a href="">Màu nước</a>
-            <a href="">Tập vẽ tranh - Tập tô màu</a>
+            <a href>NEW ARRIVAL</a>
+            <a href>Fiber Pen - Bút lông Màu</a>
+            <a href>Bút chì màu</a>
+            <a href>Màu nước</a>
+            <a href>Tập vẽ tranh - Tập tô màu</a>
           </div>
           <div class="info-mithuat-description-second">
-            <a href="">Acrylic Marker - Bút sơn</a>
-            <a href="">Màu sáp, màu sáp dầu</a>
-            <a href="">Bút vẽ kỹ thuật</a>
-            <a href="">Sáp nặn</a>
-            <a href="">Combo mỹ thuật</a>
+            <a href>Acrylic Marker - Bút sơn</a>
+            <a href>Màu sáp, màu sáp dầu</a>
+            <a href>Bút vẽ kỹ thuật</a>
+            <a href>Sáp nặn</a>
+            <a href>Combo mỹ thuật</a>
           </div>
           <div class="info-mithuat-description-img">
-            <img src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg" alt="">
+            <img src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg" alt>
           </div>
         </div>
       </div>
@@ -279,104 +358,99 @@
   <div id="section-trangchinh-danhmuc-sanpham">
     <div class="container">
       <div class="content">
-        <a href="">
+        <a href>
           Trang chủ /
         </a>
         </a>
-        <a href="">
-          Giới thiệu về thiên long /
+        <a href>
+          Tài khoản
         </a>
       </div>
     </div>
   </div>
   <!-- End section trang chinh - danh muc - san pham -->
   <!-- Begin section main -->
-  <div class="section-main-gioi-thieu">
+  <div class="section-main-ca-nhan">
     <div class="container">
-      <h1 class="header-main">Giới thiệu về Thiên Long</h1>
-      <p class="description-main"><span>Thienlong.vn</span> là website thương mại điện tử thuộc Công ty Cổ phần Tập đoàn
-        Thiên Long.
-        Chúng tôi có kinh nghiệm
-        hơn 36 năm trong ngành nghiên cứu, sản xuất và phân phối bút viết, văn phòng phẩm, học cụ và dụng cụ mỹ thuật.
-        <span> Thienlong.vn</span> cung cấp các mặt hàng cho nhiều đối tượng khách hàng khác nhau, từ học sinh, sinh
-        viên, giới văn
-        phòng, từ sản phẩm cao cấp cho đến các loại bút viết phổ thông. Tất cả đều được tập đoàn Thiên Long nghiên cứu,
-        sản xuất và phân phối.
-      </p>
-      <img src="./assets/images/logo/logo_gioithieu.png" alt="" class="img-main">
-      <h2 class="sub-header">Định hướng hoạt động</h2>
-      <p class="sub-description">
-        <span>Thienlong.vn</span> ra đời với mong muốn mang sự tiện lợi cho khách hàng có nhu cầu văn phòng phẩm, học
-        cụ,
-        sản phẩm mỹ thuật có thể dễ dàng tiếp cận và chọn mua sản phẩm một cách nhanh chóng. Ngoài ra,
-        <span>Thienlong.vn</span> còn
-        mong muốn thay đổi thói quen tiêu dùng chọn mua văn phòng phẩm truyền thống, đem đến cho khách hàng một hệ thống
-        cung cấp các sản phẩm văn phòng, giáo dục trực tuyến một nơi uy tín và đáng tin cậy.
-        <br>
-        <span>Thienlong.vn</span> đặt mục tiêu trở thành sàn thương mại điện tử hàng đầu Việt Nam chuyên về sản phẩm văn
-        phòng, học cụ,
-        dụng cụ mỹ thuật và tất cả các sản phẩm liên quan đến giáo dục.
-      </p>
-      <img src="./assets/images/logo/sell_ball_point_pen_flexoffice.jpg" alt="" class="img-sub">
-      <h2 class="sub-header">Giá trị mang đến cho khách hàng</h2>
-      <p class="sub-description">
-        <span>Thienlong.vn</span> xác định luôn trung thành với những giá trị cốt lõi của mình để luôn là sự lựa chọn
-        hàng đầu của người tiêu dùng:
-      <p>- Hệ thống sản phẩm phong phú và đa dạng.</p>
-      <p>- Thanh toán bảo mật, an toàn.</p>
-      <p>- Giao hàng nhanh chóng trong 48 giờ.</p>
-      <p>- Nền tảng công nghệ hiện đại, giao dịch thuận tiện nhanh chóng.</p>
-      </p>
-      <h2 class="sub-header">Hệ thống phân phối</h2>
-      <p class="sub-description">
-        Dựa vào hệ thống phân phối hơn 65.000 điểm bán trên toàn quốc, hơn 160 Nhà Phân Phối, 2 tổng kho tại Miền Bắc và
-        Miền Nam được vận hàng bởi 4 Công ty thương mại có trụ sở tại Hà Nội, Đà Nẵng, TP. Hồ Chí Minh, Thiên Long sở
-        hữu một nền tảng vững chắc trong việc xây dựng và phát triển hoạt động thương mại điện tử. Bên cạnh đó, hệ thống
-        quản lý phân phối DMS của Thiên Long đã được chính thức được vận hành, Thiên Long càng có nhiều lợi thể để nâng
-        cao chất lượng bán hàng trực tuyến phục vụ nhu cầu của khách hàng trên khắp nước Việt Nam.
-      </p>
-      <img src="./assets/images/logo/picture1.png" alt="">
-      <h2 class="sub-header">Head Office</h2>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5081908292227!2d106.71996407451712!3d10.772335359270215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fcdd2041771%3A0xa46e9842e044baf4!2sThisofic%20Tower!5e0!3m2!1svi!2s!4v1762166913436!5m2!1svi!2s"
-        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="canhan">
+        <div class="tongquan-canhan">
+          <div class="logo-name">
+            HT
+          </div>
+          <p class="name-full">Xin chào, <span class="span">Hoàng
+              Trần</span></p>
+          <div class="list-canhan">
+            <a href><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
+            <a href="LichSuMuaHang.html"><i class="fa-solid fa-box-open"></i>
+              Lịch sử mua hàng</a>
+            <a href="DangNhap.html"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+          </div>
+        </div>
+        <div class="thongtin-canhan">
+          <form action>
+            <h2>Thông tin tài khoản</h2>
+            <label for="hovaten">Họ và tên:</label>
+            <br>
+            <input type="text" id="hovaten" name="Họ và tên" value="Trần Bảo Hoàng">
+            <br>
+            <label for="email">Email:</label>
+            <br>
+            <input type="email" id="email" name="Email" placeholder="Email">
+            <br>
+            <label for=" sodienthoai">Số điện thoại:</label>
+            <br>
+            <input type="text" id="sodienthoai" name="Số điện thoại" placeholder="Số điện thoại(*)">
+            <br>
+            <label for="ngaysinh">Ngày sinh:</label>
+            <br>
+            <input type="date" id="ngaysinh" placeholder="Ngày sinh(*)">
+            <br>
+            <label for="diachi">Địa chỉ:</label>
+            <br>
+            <input type="text" id="diachi" placeholder="Địa chỉ(*)">
+            <br>
+            <input type="submit" value="Cập nhật thông tin" class="button">
+          </form>
+        </div>
+      </div>
     </div>
-
   </div>
   <!-- End section main -->
   <!-- Begin footer-->
 
   <footer id="footer-trang-chu">
     <div class="footer-title">
-      <img src="./assets/images/logo/logo.png" alt="" class="img-main">
-      <p class="footer-title-header">Thienlong.vn - Website thương mại điện tử thuộc Tập đoàn Thiên Long</p>
+      <img src="./assets/images/logo/logo.png" alt class="img-main">
+      <p class="footer-title-header">Thienlong.vn - Website thương mại điện tử
+        thuộc Tập đoàn Thiên Long</p>
       <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn Thiên Long
         <br>
         <br>
         GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày 14/03/2005.
       </p>
-      <form action="" class="footer-title-form">
+      <form action class="footer-title-form">
         <input type="email" placeholder="Nhập địa chỉ email">
-        <a href="">Đăng ký</a>
+        <a href>Đăng ký</a>
       </form>
-      <img src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png" alt="" class="img-footer">
+      <img src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png" alt class="img-footer">
     </div>
     <div class="footer-diachi">
       <h2>ĐỊA CHỈ CÔNG TY</h2>
       <span>
         Head Office:
-        <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10 Đường Mai Chí Thọ, Phường An Khánh,
+        <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10 Đường Mai
+          Chí Thọ, Phường An Khánh,
           Thành Phố Hồ Chí Minh, Việt Nam
       </span>
       <br>
       <span>
         Miền Bắc:
-        <p class="footer-diachi-description"> Số 38, đường Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
+        <p class="footer-diachi-description"> Số 38, đường Gamuda Gardens 2-5,
+          Khu đô thị mới C2 - Gamuda
           Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt Nam.
       </span>
 
-      <img src="./assets/images/logo/footer_bct.png" alt="" class="img-main">
+      <img src="./assets/images/logo/footer_bct.png" alt class="img-main">
     </div>
     <div class="footer-help">
       <h2>HỖ TRỢ KHÁCH HÀNG</h2>
@@ -388,25 +462,25 @@
         Thứ 2 - Thứ 6 (8h - 17h)
         salesonline@thienlongvn.com
         <div class="footer-help-header-list">
-          <a href="">
+          <a href>
             - Hướng dẫn mua hàng
           </a>
-          <a href="">
+          <a href>
             - Hướng dẫn thanh toán
           </a>
-          <a href="">
+          <a href>
             - Chính sách giao hàng
           </a>
-          <a href="">
+          <a href>
             - Chính sách đổi trả & hoàn tiền
           </a>
-          <a href="">
+          <a href>
             - Khách hàng thân thiết
           </a>
-          <a href="">
+          <a href>
             - Khách hàng ưu tiên
           </a>
-          <a href="">
+          <a href>
             - Phản ánh chất lượng sản phẩm
           </a>
         </div>
@@ -415,22 +489,22 @@
     <div class="footer-information">
       <h2>VỀ THIENLONG.VN</h2>
       <div class="footer-information-header-list">
-        <a href="">
+        <a href>
           - Giới thiệu
         </a>
-        <a href="">
+        <a href>
           - Dịch vụ in ấn quảng cáo
         </a>
-        <a href="">
+        <a href>
           - Chính sách bảo mật chung
         </a>
-        <a href="">
+        <a href>
           - Chính sách bảo mật thông tin cá nhân
         </a>
-        <a href="">
+        <a href>
           - Thông tin liên hệ
         </a>
-        <a href="">
+        <a href>
           - Chương trình Affiliate
         </a>
       </div>
