@@ -35,7 +35,7 @@
         font-size: 16px;
         padding: 12px 40px;
         border-bottom: 1px solid #e5e7eb;
-        margin-top: 70px;
+        margin-top: 100px;
     }
 
     .grid {
@@ -63,14 +63,23 @@
     }
 
     .subtle {
-        color: #6b7280;
+        color: #282b30;
     }
 
     .divider {
         height: 1px;
-        background: #e5e7eb;
+        background: #969aa3;
         margin: 16px 0;
     }
+    .cart-item-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s ease;
+}
 
     .cart-list .item {
         padding: 8px 0;
@@ -116,28 +125,40 @@
     .qty {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
         background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
     }
 
     .qty button {
         width: 34px;
         height: 34px;
-        border-radius: 8px;
-        border: 1px solid #e5e7eb;
+        border: none;
         background: #fff;
         font-size: 18px;
-        line-height: 1;
         cursor: pointer;
+    }
+
+    .qty button:hover {
+        background: #f3f4f6;
     }
 
     .qty input[type="number"] {
         width: 50px;
         height: 34px;
         text-align: center;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
+        border: none;
         font-weight: 600;
+        outline: none;
+    }
+
+    .qty button:first-child {
+        border-right: 1px solid #e5e7eb;
+    }
+
+    .qty button:last-child {
+        border-left: 1px solid #e5e7eb;
     }
 
     .price {
@@ -175,6 +196,9 @@
         border-radius: 12px;
     }
 
+    .summary{
+        height: fit-content;
+    }
     .tinh-tien {
         display: flex;
         justify-content: space-between;
@@ -194,6 +218,31 @@
         font-weight: 700;
         font-size: 18px;
     }
+
+    .qty-wrap {
+        position: relative;
+        display: inline-block;
+    }
+
+    .Xoa-sp {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        width: 28px;
+        height: 28px;
+        border: none;
+        border-radius: 50%;
+        background: #111;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+        z-index: 2;
+    }
+    
 
     /* từ sửa sau */
     html,
@@ -263,60 +312,65 @@
 
                     <div class="cart-list">
                         <!-- Item 1 -->
-                        <div class="item">
-                            <div class="item-grid">
-                                <div class="select-product">
-                                    <input type="checkbox" checked />
+                        <div class="cart-item-card">
+                            <div class="item">
+                                <div class="item-grid">
+                                    <div class="select-product">
+                                        <input type="checkbox" checked />
+                                    </div>
+                                    <div class="thumb">
+                                        <img src="./assets/images/logo/list1-1.jpg" alt="Bút màu Fiber pen Washable" />
+                                    </div>
+                                    <div>
+                                        <div class="meta-title">Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable - Phiên
+                                            bản Demon Slayer</div>
+                                        <div class="muted">SWM-C012/DS 48 màu</div>
+                                    </div>
+                                    <div class="price">336,600₫</div>
+                                    <div class="qty-wrap">
+                                        <button class="Xoa-sp"><i class="fa-solid fa-xmark"></i></button>
+                                        <div class="qty">
+                                            <button class="dec">−</button>
+                                            <input type="number" value="2" min="1" />
+                                            <button class="inc">+</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="thumb">
-                                    <!-- <a href="#" class="remove">Xóa</a> -->
-                                    <img src="./assets/images/logo/list1-1.jpg" alt="Bút màu Fiber pen Washable" />
-                                </div>
-                                <div>
-
-                                    <div class="meta-title">Bút Lông Thiên
-                                        Long 48/60 Màu Fiber Pen Washable -
-                                        Phiên bản
-                                        Demon Slayer</div>
-                                    <div class="muted">SWM-C012/DS 48
-                                        màu</div>
-                                </div>
-                                <div class="price">336,600₫</div>
-                                <div class="qty">
-                                    <button class="dec" aria-label="Giảm">−</button>
-                                    <input type="number" value="2" min="1" />
-                                    <button class="inc" aria-label="Tăng">+</button>
-                                </div>
-
                             </div>
                         </div>
                         <!-- Item 2 -->
-                        <div class="item">
-                            <div class="item-grid">
-                                <div class="select-product">
-                                    <input type="checkbox" checked />
-                                </div>
-                                <div class="thumb">
-                                    <!-- <a href="#" class="remove">Xóa</a> -->
-                                    <img src="./assets/images/logo/list1-3.jpg" alt="Bút màu Fiber pen Washable" />
-                                </div>
-                                <div>
+                        <div class="cart-item-card">
+                            <div class="item">
+                                <div class="item-grid">
+                                    <div class="select-product">
+                                        <input type="checkbox" checked />
+                                    </div>
+                                    <div class="thumb">
+                                        <!-- <a href="#" class="remove">Xóa</a> -->
+                                        <img src="./assets/images/logo/list1-3.jpg" alt="Bút màu Fiber pen Washable" />
+                                    </div>
+                                    <div>
 
-                                    <div class="meta-title">Bút lông hiên
-                                        Long Colokit
-                                        - Màu sắc tươi sáng, Không thấm qua
-                                        mặt
-                                        giấy</div>
-                                    <div class="muted">SWM-C012/DS 36
-                                        màu</div>
-                                </div>
-                                <div class="price">45,500₫</div>
-                                <div class="qty">
-                                    <button class="dec" aria-label="Giảm">−</button>
-                                    <input type="number" value="1" min="1" />
-                                    <button class="inc" aria-label="Tăng">+</button>
-                                </div>
+                                        <div class="meta-title">Bút lông hiên
+                                            Long Colokit
+                                            - Màu sắc tươi sáng, Không thấm qua
+                                            mặt
+                                            giấy</div>
+                                        <div class="muted">SWM-C012/DS 36
+                                            màu</div>
+                                    </div>
+                                    <div class="price">45,500₫</div>
+                                    <div class="qty-wrap">
+                                        <button class="Xoa-sp" aria-label="Xóa sản phẩm"><i
+                                                class="fa-solid fa-xmark"></i></button>
+                                        <div class="qty">
+                                            <button class="dec" aria-label="Giảm">−</button>
+                                            <input type="number" value="1" min="1" />
+                                            <button class="inc" aria-label="Tăng">+</button>
+                                        </div>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
