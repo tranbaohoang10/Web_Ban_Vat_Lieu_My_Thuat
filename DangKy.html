@@ -9,15 +9,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <style>
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    /* Begin header */
     #header-trang-chu {
         background-color: var(--color-main);
         display: flex;
         align-items: center;
         position: fixed;
         z-index: 999;
-        top: 0;
         width: 100%;
     }
 
@@ -32,7 +38,6 @@
         background-color: transparent;
         width: 200px;
         height: 100%;
-
     }
 
     #header-trang-chu .tim-kiem-san-pham {
@@ -48,7 +53,6 @@
 
     #header-trang-chu .tim-kiem-san-pham {
         display: flex;
-
     }
 
     #header-trang-chu .tim-kiem-san-pham i {
@@ -56,7 +60,7 @@
         right: 0;
         width: 50px;
         height: 100%;
-        background-color: #0B234D;
+        background-color: #0b234d;
         line-height: 40px;
         cursor: pointer;
         color: white;
@@ -73,7 +77,7 @@
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background-color: #0B234D;
+        background-color: #0b234d;
         line-height: 30px;
         color: white;
     }
@@ -109,7 +113,7 @@
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background-color: #0B234D;
+        background-color: #0b234d;
         line-height: 30px;
         color: white;
     }
@@ -155,6 +159,171 @@
         border-radius: 50%;
     }
 
+    /* End header */
+    /* Begin footer */
+    #footer-trang-chu {
+        display: flex;
+        background-color: #17479d;
+        border-top-left-radius: 70px;
+        border-top-right-radius: 70px;
+        gap: 30px;
+        align-items: center;
+        justify-content: space-around;
+        position: relative;
+    }
+
+    #footer-trang-chu .footer-title {
+        text-align: justify;
+        margin-left: 30px;
+    }
+
+    #footer-trang-chu .footer-title .img-main {
+        background-color: transparent;
+        width: 400px;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-header {
+        color: #fbe263;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-description {
+        color: white;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form {
+        position: relative;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form input {
+        padding: 10px 15px;
+        border-radius: 10px;
+        width: 300px;
+        border: none;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form a {
+        position: absolute;
+        display: inline-flex;
+        width: 100px;
+        height: 36px;
+        background-color: #0b234d;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        top: 0;
+        right: 69px;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-title .img-footer {
+        width: 250px;
+        margin-top: 15px;
+        cursor: pointer;
+        margin-bottom: 50px;
+    }
+
+    #footer-trang-chu .footer-diachi {
+        width: 25%;
+    }
+
+    #footer-trang-chu .footer-diachi h2 {
+        font-size: 20px;
+        color: #fbe263;
+        margin: 0;
+    }
+
+    #footer-trang-chu .footer-diachi span {
+        color: #fbe263;
+        display: block;
+        padding-top: 15px;
+    }
+
+    #footer-trang-chu .footer-diachi .footer-diachi-header {
+        display: inline;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-diachi .footer-diachi-description {
+        display: inline;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-diachi .img-main {
+        display: block;
+        margin-top: 20px;
+    }
+
+    #footer-trang-chu .footer-help h2 {
+        font-size: 20px;
+        color: #fbe263;
+        margin: 0;
+    }
+
+    #footer-trang-chu .footer-help span {
+        display: block;
+        color: #fbe263;
+        padding-top: 15px;
+    }
+
+    #footer-trang-chu .footer-help .footer-help-header {
+        display: inline;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-help .footer-help-header-list a {
+        display: block;
+        text-decoration: none;
+        color: white;
+        line-height: 1.4;
+    }
+
+    #footer-trang-chu .footer-diachi .img-main {
+        cursor: pointer;
+    }
+
+    #footer-trang-chu .footer-information h2 {
+        font-size: 20px;
+        color: #fbe263;
+        margin: 0;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-header-list a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        line-height: 1.4;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials {
+        padding-top: 35px;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials i {
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 50%;
+        line-height: 50px;
+        font-size: 25px;
+        color: #17479d;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials i:nth-child(1) {
+        margin-right: 10px;
+    }
+
+    #footer-trang-chu::after {
+        display: block;
+        position: absolute;
+        content: "2025 © Thienlong.vn - Bản quyền thuộc Tập đoàn Thiên Long";
+        bottom: 0;
+        color: white;
+    }
+
+    /* End footer */
+
     /* style login */
     .main {
         margin: 0;
@@ -164,24 +333,26 @@
         align-items: center;
         min-height: 100vh;
         background-color: #1E76EF;
+        padding-top: 50px;
     }
 
     .container {
         background-color: rgba(0, 0, 0, 0.4);
-        padding: 30px 40px;
+        padding: 40px 50px;
         /* box-sizing: border-box; */
         /* overflow: hidden; */
         transition: 0.5s ease;
         /* border-radius: 10px; */
         width: 530px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
     }
 
     h2 {
         color: white;
         text-align: center;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 
     .label {
@@ -210,16 +381,6 @@
         transition: 0.3s;
     }
 
-    .btn-doi .btn-kh-uutien {
-        background-color: #00C6AE;
-        color: white;
-    }
-
-    .btn-doi button:not(.btn-kh-uutien) {
-        background-color: white;
-        color: #00C6AE;
-    }
-
     .infor {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -229,7 +390,7 @@
 
     .infor .tt-chitiet label {
         font-size: 17px;
-        font-weight: bold;
+        font-weight: normal;
         color: white;
     }
 
@@ -241,6 +402,13 @@
         outline: none;
         font-size: 14px;
         background: none;
+        color: white;
+        outline: none;
+
+        border-radius: 8px;
+        padding: 10px;
+        color: #fff;
+        transition: border-color 0.3s;
 
     }
 
@@ -248,17 +416,25 @@
         color: #B0B0B0;
     }
 
+
+
     .btn-DangKy {
+        background: linear-gradient(90deg, #FFD700, #FFC107);
         width: 100%;
-        background-color: #FFD700;
+        background-color: #F5DF4D;
+        padding: 10px;
         border: none;
-        border-radius: 25px;
-        padding: 12px;
-        font-weight: bold;
-        color: #003EAA;
+        border-radius: 5px;
         cursor: pointer;
-        font-size: 15px;
         margin-bottom: 15px;
+        /* color: #343A40; */
+        color: #000;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-DangKy:hover {
+        transform: scale(1.05);
     }
 
     .dang-nhap {
@@ -271,7 +447,12 @@
     .dang-nhap a {
         color: #FFD700;
         text-decoration: none;
-        font-weight: bold;
+
+    }
+
+    .dang-nhap a:hover {
+        color: #6C785B;
+
     }
 
     .btn-dang-nhap-tt {
@@ -295,202 +476,29 @@
 
     .btn-gg {
         background-color: #DE3F32;
+        margin-left: 140px;
     }
 
-    .btn-fb {
+    /* .btn-fb{
         background-color: #49669C;
 
-    }
-
+    } */
     .btn-dang-nhap-tt i {
         font-size: 16px;
     }
 
     /* end login */
-
-    /* Begin footer */
-    #footer-trang-chu {
-        display: flex;
-        background-color: #17479D;
-        border-top-left-radius: 70px;
-        border-top-right-radius: 70px;
-        gap: 30px;
-        align-items: center;
-        justify-content: space-around;
-        position: relative;
-    }
-
-    #footer-trang-chu .footer-title {
-        text-align: justify;
-        margin-left: 30px;
-    }
-
-    #footer-trang-chu .footer-title .img-main {
-        background-color: transparent;
-        width: 400px;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-header {
-        color: #FBE263;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-description {
-        color: white;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-form {
-        position: relative;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-form input {
-        padding: 10px 15px;
-        border-radius: 10px;
-        width: 300px;
-        border: none;
-
-    }
-
-    #footer-trang-chu .footer-title .footer-title-form a {
-        position: absolute;
-        display: inline-flex;
-        width: 100px;
-        height: 36px;
-        background-color: #0B234D;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        top: 0;
-        right: 69px;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-title .img-footer {
-        width: 250px;
-        margin-top: 15px;
-        cursor: pointer;
-        margin-bottom: 50px;
-    }
-
-    #footer-trang-chu .footer-diachi {
-        width: 25%;
-    }
-
-    #footer-trang-chu .footer-diachi h2 {
-        font-size: 20px;
-        color: #FBE263;
-        margin: 0;
-    }
-
-    #footer-trang-chu .footer-diachi span {
-        color: #FBE263;
-        display: block;
-        padding-top: 15px;
-    }
-
-    #footer-trang-chu .footer-diachi .footer-diachi-header {
-        display: inline;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-diachi .footer-diachi-description {
-        display: inline;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-diachi .img-main {
-        display: block;
-        margin-top: 20px;
-    }
-
-    #footer-trang-chu .footer-help {}
-
-    #footer-trang-chu .footer-help h2 {
-        font-size: 20px;
-        color: #FBE263;
-        margin: 0;
-    }
-
-    #footer-trang-chu .footer-help span {
-        display: block;
-        color: #FBE263;
-        padding-top: 15px;
-    }
-
-
-
-    #footer-trang-chu .footer-help .footer-help-header {
-        display: inline;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-help .footer-help-header-list a {
-        display: block;
-        text-decoration: none;
-        color: white;
-        line-height: 1.4;
-    }
-
-    #footer-trang-chu .footer-diachi .img-main {
-        cursor: pointer;
-    }
-
-    #footer-trang-chu .footer-information h2 {
-        font-size: 20px;
-        color: #FBE263;
-        margin: 0;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-header-list {}
-
-    #footer-trang-chu .footer-information .footer-information-header-list a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        line-height: 1.4;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-socials {
-        padding-top: 35px;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-socials i {
-        width: 50px;
-        height: 50px;
-        background: white;
-        border-radius: 50%;
-        line-height: 50px;
-        font-size: 25px;
-        color: #17479D;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-socials i:nth-child(1) {
-        margin-right: 10px;
-    }
-
-    #footer-trang-chu::after {
-        display: block;
-        position: absolute;
-        content: "2025 © Thienlong.vn - Bản quyền thuộc Tập đoàn Thiên Long";
-        bottom: 0;
-        color: white;
-    }
-
-    /* End footer */
 </style>
-
-
 
 <body>
     <header id="header-trang-chu" class="trang-chu">
         <div class="logo-trang-chu">
             <a href="index.html">
-                <img src="./assets/images/logo/logo.png" alt="">
+                <img src="./assets/images/logo/logo.png" alt>
             </a>
         </div>
-        <form action="" class="tim-kiem-san-pham">
-            <input type="text" name="" placeholder="Tìm kiếm sản phẩm...">
+        <form action class="tim-kiem-san-pham">
+            <input type="text" name placeholder="Tìm kiếm sản phẩm...">
             <i class="fa-solid fa-magnifying-glass"></i>
         </form>
         <div class="header-contact">
@@ -506,7 +514,6 @@
                 <div class="dangnhap">Đăng nhập</div>
                 <div class="dangki">Đăng kí</div>
             </div>
-
         </div>
         <div class="header-giohang">
             <i class="fa-solid fa-bag-shopping"></i>
@@ -516,68 +523,45 @@
     <div class="main">
         <div class="container">
             <h2>Đăng Ký</h2>
-            <div class="label">
-                Bạn là khách hàng:
-            </div>
-            <div class="btn-doi">
-                <button class="btn-kh-uutien">Khách hàng cá nhân</button>
-                <button class="btn-kh-uutien-2">Khách hàng ưu tiên (Xuất hóa đơn)</button>
-            </div>
+
 
             <form action="" class="infor">
                 <div class="tt-chitiet">
-                    <label for="Ho">Họ(*):</label>
+                    <label for="Ho">Họ:</label>
                     <input type="text" name="" placeholder="Họ">
                 </div>
 
                 <div class="tt-chitiet">
-                    <label for="Ten">Tên(*):</label>
+                    <label for="Ten">Tên:</label>
                     <input type="text" name="" placeholder="Tên">
                 </div>
 
-                <!-- thêm thông tin cho khách hàng ưu tiên xuất hóa đơn -->
+
                 <div class="tt-chitiet">
-                    <label for="">Tên công ty(*):</label>
-                    <input type="text" placeholder="Tên công ty">
+                    <label for="Email">Email cá nhân:</label>
+                    <input type="text" id="email" name="" placeholder="Email cá nhân">
+                    <span id="email-error" style="color: #FFD700; font-size: 14px;"></span>
                 </div>
 
                 <div class="tt-chitiet">
-                    <label for="">Mã số thuế(*):</label>
-                    <input type="text" placeholder="Mã số thuế">
-                </div>
-
-                <div class="tt-chitiet">
-                    <label for="">Địa chỉ công ty(*):</label>
-                    <input type="text" placeholder="Địa chỉ công ty">
-                </div>
-
-                <div class="tt-chitiet">
-                    <label for="">Email công ty(*):</label>
-                    <input type="text" placeholder="Email công ty">
-                </div>
-
-                <div class="tt-chitiet">
-                    <label for="Email">Email cá nhân(*):</label>
-                    <input type="text" name="" placeholder="Email cá nhân">
-                </div>
-
-                <div class="tt-chitiet">
-                    <label for="sdt">Số điện thoại(*):</label>
+                    <label for="sdt">Số điện thoại:</label>
                     <input type="text" name="" placeholder="Số điện thoại">
                 </div>
                 <div class="tt-chitiet" style="grid-column: span 2;">
-                    <label for="Mk">Mật khẩu(*):</label>
-                    <input type="text" name="" placeholder="Mật khẩu">
+                    <label for="Mk">Mật khẩu:</label>
+                    <input type="password" name="" placeholder="Mật khẩu">
+                    <i class="hide-display" id="togglePassword"
+                        style="position:absolute; right:10px; top:38px; cursor:pointer;"></i>
                 </div>
             </form>
 
-            <button class="btn-DangKy">Đăng ký</button>
+            <button class="btn-DangKy" onclick="window.location.href ='DangNhap.html'">Đăng ký</button>
 
-            <div class="dang-nhap">Bạn đã có tài khoản <a href="">Đăng nhập tại đây</a></div>
+            <div class="dang-nhap">Bạn đã có tài khoản <a href="DangNhap.html">Đăng nhập tại đây</a></div>
 
             <div class="btn-dang-nhap-tt">
                 <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
-                <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button>
+                <!-- <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button> -->
             </div>
         </div>
     </div>
@@ -650,7 +634,7 @@
         <div class="footer-information">
             <h2>VỀ THIENLONG.VN</h2>
             <div class="footer-information-header-list">
-                <a href="GioiThieu.html">
+                <a href="">
                     - Giới thiệu
                 </a>
                 <a href="">
@@ -675,6 +659,36 @@
             </div>
         </div>
     </footer>
+</body>
+<script>
+
+    // js check email
+    document.querySelector(".btn-DangKy").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const emailInput = document.getElementById("email");
+        const errorSpan = document.getElementById("email-error");
+        const email = emailInput.value.trim();
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        errorSpan.textContent = "";
+
+        if (email === "") {
+            errorSpan.textContent = "Vui lòng nhập email!";
+            emailInput.style.border = "1px solid red";
+        } else if (!emailPattern.test(email)) {
+            errorSpan.textContent = "Email không hợp lệ! (ví dụ: abc@gmail.com)";
+            emailInput.style.border = "1px solid red";
+        } else {
+            // errorSpan.textContent = "✅ Email hợp lệ!";
+            // errorSpan.style.color = "#00FF00";
+            // emailInput.style.border = "1px solid #00FF00";
+        }
+    }
+
+    );
+</script>
 </body>
 
 </html>
