@@ -155,8 +155,8 @@
         border-radius: 50%;
     }
 
-   /* style login */
-    .main{
+    /* style login */
+    .main {
         margin: 0;
         padding: 0;
         display: flex;
@@ -165,8 +165,9 @@
         min-height: 100vh;
         background-color: #1E76EF;
     }
-    .container{
-        
+
+    .container {
+
         background-color: rgba(0, 0, 0, 0.4);
         padding: 40px 50px;
         /* box-sizing: border-box; */
@@ -177,19 +178,21 @@
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
     }
-    h2{
+
+    h2 {
         color: white;
         text-align: center;
         text-transform: uppercase;
         margin-bottom: 15px;
     }
-    .label{
+
+    .label {
         color: white;
         padding-left: 38%;
         font-size: 18px;
     }
-    
-    .btn-doi{
+
+    .btn-doi {
         display: flex;
         justify-content: space-between;
         margin-bottom: 25px;
@@ -197,7 +200,8 @@
         border-radius: 30px;
         padding: 5px;
     }
-    .btn-doi button{
+
+    .btn-doi button {
         flex: 1;
         border: none;
         border-radius: 25px;
@@ -207,21 +211,23 @@
         font-size: 14px;
         transition: 0.3s;
     }
-   
-    .infor{
+
+    .infor {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px 20px;
         margin-bottom: 20px;
     }
-    .infor .tt-chitiet label{
+
+    .infor .tt-chitiet label {
         font-size: 17px;
         font-weight: normal;
         color: white;
     }
-   .infor .tt-chitiet input{
+
+    .infor .tt-chitiet input {
         width: 100%;
-        border:none;
+        border: none;
         padding: 8px;
         border-bottom: 1px solid #ccc;
         outline: none;
@@ -236,12 +242,13 @@
         transition: border-color 0.3s;
 
     }
-    .infor .tt-chitiet input::placeholder{
+
+    .infor .tt-chitiet input::placeholder {
         color: #B0B0B0;
     }
-    
 
-     .btn-DangKy {
+
+    .btn-DangKy {
         background: linear-gradient(90deg, #FFD700, #FFC107);
         width: 100%;
         background-color: #F5DF4D;
@@ -255,29 +262,35 @@
         font-weight: bold;
         transition: 0.3s;
     }
-    .btn-DangKy:hover{
+
+    .btn-DangKy:hover {
         transform: scale(1.05);
     }
-    .dang-nhap{
+
+    .dang-nhap {
         text-align: center;
         font-size: 17px;
         color: white;
         margin-bottom: 20px;
     }
-    .dang-nhap a{
+
+    .dang-nhap a {
         color: #FFD700;
         text-decoration: none;
 
     }
-    .dang-nhap a:hover{
+
+    .dang-nhap a:hover {
         color: #6C785B;
-        
+
     }
-    .btn-dang-nhap-tt{
+
+    .btn-dang-nhap-tt {
         display: flex;
         justify-content: space-between;
     }
-    .btn-dang-nhap-tt button{
+
+    .btn-dang-nhap-tt button {
         width: 48%;
         border: none;
         border-radius: 8px;
@@ -290,15 +303,17 @@
         justify-content: center;
         gap: 8px;
     }
-    .btn-gg{
+
+    .btn-gg {
         background-color: #DE3F32;
         margin-left: 140px;
     }
+
     /* .btn-fb{
         background-color: #49669C;
 
     } */
-    .btn-dang-nhap-tt i{
+    .btn-dang-nhap-tt i {
         font-size: 16px;
     }
 
@@ -511,45 +526,49 @@
 
     <div class="main">
         <div class="container">
-        <h2>Đăng Ký</h2>
-        
+            <h2>Đăng Ký</h2>
 
-        <form action="" class="infor">
-            <div class="tt-chitiet">
-            <label for="Ho" >Họ:</label>
-            <input type="text" name="" placeholder="Họ">
+
+            <form action="" class="infor">
+                <div class="tt-chitiet">
+                    <label for="Ho">Họ:</label>
+                    <input type="text" name="" placeholder="Họ">
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="Ten">Tên:</label>
+                    <input type="text" name="" placeholder="Tên">
+                </div>
+
+
+                <div class="tt-chitiet">
+                    <label for="Email">Email cá nhân:</label>
+                    <input type="text" id="email" name="" placeholder="Email cá nhân">
+                    <span id="email-error" style="color: #FFD700; font-size: 14px;"></span>
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="sdt">Số điện thoại:</label>
+                    <input type="text" name="" placeholder="Số điện thoại">
+                </div>
+                <div class="tt-chitiet" style="grid-column: span 2;">
+                    <label for="Mk">Mật khẩu:</label>
+                    <input type="text" name="" placeholder="Mật khẩu">
+                    <i class="fa-solid fa-eye" id="togglePassword"
+                        style="position:absolute; right:10px; top:38px; cursor:pointer; color:white;"></i>
+                    <span id="password-error" style="color:#FFD700; font-size:14px;"></span>
+                </div>
+            </form>
+
+            <button class="btn-DangKy">Đăng ký</button>
+
+            <div class="dang-nhap">Bạn đã có tài khoản <a href="DangNhap.html">Đăng nhập tại đây</a></div>
+
+            <div class="btn-dang-nhap-tt">
+                <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
+                <!-- <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button> -->
             </div>
-
-            <div class="tt-chitiet">
-            <label for="Ten">Tên:</label>
-            <input type="text" name="" placeholder="Tên">
-            </div>
-
-           
-            <div class="tt-chitiet">
-            <label for="Email">Email cá nhân:</label>
-            <input type="text" name="" placeholder="Email cá nhân">
-            </div>
-
-            <div class="tt-chitiet">
-            <label for="sdt">Số điện thoại:</label>
-            <input type="text" name="" placeholder="Số điện thoại">
-            </div>
-            <div class="tt-chitiet" style="grid-column: span 2;">
-            <label for="Mk">Mật khẩu:</label>
-            <input type="text" name="" placeholder="Mật khẩu">
-            </div>
-        </form>
-
-        <button class="btn-DangKy">Đăng ký</button>
-        
-        <div class="dang-nhap">Bạn đã có tài khoản <a href="DangNhap.html">Đăng nhập tại đây</a></div>
-
-        <div class="btn-dang-nhap-tt">
-        <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
-        <!-- <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button> -->
-        </div>   
-    </div>
+        </div>
     </div>
 
     <footer id="footer-trang-chu">
@@ -646,5 +665,45 @@
         </div>
     </footer>
 </body>
+<script>
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+
+    togglePassword.addEventListener("click", () => {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Đổi icon
+        togglePassword.classList.toggle("fa-eye");
+        togglePassword.classList.toggle("fa-eye-slash");
+    });
+    // js check email
+    document.querySelector(".btn-DangKy").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const emailInput = document.getElementById("email");
+        const errorSpan = document.getElementById("email-error");
+        const email = emailInput.value.trim();
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        errorSpan.textContent = "";
+
+        if (email === "") {
+            errorSpan.textContent = "Vui lòng nhập email!";
+            emailInput.style.border = "1px solid red";
+        } else if (!emailPattern.test(email)) {
+            errorSpan.textContent = "Email không hợp lệ! (ví dụ: abc@gmail.com)";
+            emailInput.style.border = "1px solid red";
+        } else {
+            // errorSpan.textContent = "✅ Email hợp lệ!";
+            // errorSpan.style.color = "#00FF00";
+            // emailInput.style.border = "1px solid #00FF00";
+        }
+    }
+
+    );
+</script>
+
 
 </html>
