@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
+</head>
+<style>
+    /* style login */
+    .main {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #1E76EF;
+    }
+
+    .container {
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 30px 40px;
+        /* box-sizing: border-box; */
+        /* overflow: hidden; */
+        transition: 0.5s ease;
+        /* border-radius: 10px; */
+        width: 530px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .label {
+        color: white;
+        padding-left: 38%;
+        font-size: 18px;
+    }
+
+    .btn-doi {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        background-color: white;
+        border-radius: 30px;
+        padding: 5px;
+    }
+
+    .btn-doi button {
+        flex: 1;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 0;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .btn-doi .btn-kh-uutien {
+        background-color: #00C6AE;
+        color: white;
+    }
+
+    .btn-doi button:not(.btn-kh-uutien) {
+        background-color: white;
+        color: #00C6AE;
+    }
+
+    .infor {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px 20px;
+        margin-bottom: 20px;
+    }
+
+    .infor .tt-chitiet label {
+        font-size: 17px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .infor .tt-chitiet input {
+        width: 100%;
+        border: none;
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        font-size: 14px;
+        background: none;
+
+    }
+
+    .infor .tt-chitiet input::placeholder {
+        color: #B0B0B0;
+    }
+
+    .btn-DangKy {
+        width: 100%;
+        background-color: #FFD700;
+        border: none;
+        border-radius: 25px;
+        padding: 12px;
+        font-weight: bold;
+        color: #003EAA;
+        cursor: pointer;
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .dang-nhap {
+        text-align: center;
+        font-size: 17px;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .dang-nhap a {
+        color: #FFD700;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn-dang-nhap-tt {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn-dang-nhap-tt button {
+        width: 48%;
+        border: none;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-gg {
+        background-color: #DE3F32;
+    }
+
+    .btn-fb {
+        background-color: #49669C;
+
+    }
+
+    .btn-dang-nhap-tt i {
+        font-size: 16px;
+    }
+
+    /* end login */
+</style>
+
+
+
+<body>
+    <header id="header-trang-chu" class="trang-chu">
+        <div class="logo-trang-chu">
+            <a href="index.html">
+                <img src="./assets/images/logo/logo.png" alt="">
+            </a>
+        </div>
+        <form action="" class="tim-kiem-san-pham">
+            <input type="text" name="" placeholder="Tìm kiếm sản phẩm...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </form>
+        <div class="header-contact">
+            <i class="fa-solid fa-phone"></i>
+            <div class="contact">
+                <div class="contact-phone-number">1900 866 819</div>
+                <div class="contact-phone-help">Hỗ trợ khách hàng</div>
+            </div>
+        </div>
+        <div class="header-dangnhap-dangki">
+            <i class="fa-solid fa-user"></i>
+            <div class="dangnhap-dangki">
+                <div class="dangnhap">Đăng nhập</div>
+                <div class="dangki">Đăng kí</div>
+            </div>
+
+        </div>
+        <div class="header-giohang">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="container">
+            <h2>Đăng Ký</h2>
+            <div class="label">
+                Bạn là khách hàng:
+            </div>
+            <div class="btn-doi">
+                <button class="btn-kh-uutien">Khách hàng cá nhân</button>
+                <button class="btn-kh-uutien-2">Khách hàng ưu tiên (Xuất hóa đơn)</button>
+            </div>
+
+            <form action="" class="infor">
+                <div class="tt-chitiet">
+                    <label for="Ho">Họ(*):</label>
+                    <input type="text" name="" placeholder="Họ">
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="Ten">Tên(*):</label>
+                    <input type="text" name="" placeholder="Tên">
+                </div>
+
+                <!-- thêm thông tin cho khách hàng ưu tiên xuất hóa đơn -->
+                <div class="tt-chitiet">
+                    <label for="">Tên công ty(*):</label>
+                    <input type="text" placeholder="Tên công ty">
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="">Mã số thuế(*):</label>
+                    <input type="text" placeholder="Mã số thuế">
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="">Địa chỉ công ty(*):</label>
+                    <input type="text" placeholder="Địa chỉ công ty">
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="">Email công ty(*):</label>
+                    <input type="text" placeholder="Email công ty">
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="Email">Email cá nhân(*):</label>
+                    <input type="text" name="" placeholder="Email cá nhân">
+                </div>
+
+                <div class="tt-chitiet">
+                    <label for="sdt">Số điện thoại(*):</label>
+                    <input type="text" name="" placeholder="Số điện thoại">
+                </div>
+                <div class="tt-chitiet" style="grid-column: span 2;">
+                    <label for="Mk">Mật khẩu(*):</label>
+                    <input type="text" name="" placeholder="Mật khẩu">
+                </div>
+            </form>
+
+            <button class="btn-DangKy">Đăng ký</button>
+
+            <div class="dang-nhap">Bạn đã có tài khoản <a href="">Đăng nhập tại đây</a></div>
+
+            <div class="btn-dang-nhap-tt">
+                <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
+                <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-trang-chu">
+        <div class="footer-title">
+            <img src="./assets/images/logo/logo.png" alt="" class="img-main">
+            <p class="footer-title-header">Thienlong.vn - Website thương mại điện tử thuộc Tập đoàn Thiên Long</p>
+            <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn Thiên Long
+                <br>
+                <br>
+                GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày 14/03/2005.
+            </p>
+            <form action="" class="footer-title-form">
+                <input type="email" placeholder="Nhập địa chỉ email">
+                <a href="">Đăng ký</a>
+            </form>
+            <img src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png" alt="" class="img-footer">
+        </div>
+        <div class="footer-diachi">
+            <h2>ĐỊA CHỈ CÔNG TY</h2>
+            <span>
+                Head Office:
+                <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10 Đường Mai Chí Thọ, Phường An Khánh,
+                    Thành Phố Hồ Chí Minh, Việt Nam
+            </span>
+            <br>
+            <span>
+                Miền Bắc:
+                <p class="footer-diachi-description"> Số 38, đường Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
+                    Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt Nam.
+            </span>
+
+            <img src="./assets/images/logo/footer_bct.png" alt="" class="img-main">
+        </div>
+        <div class="footer-help">
+            <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+            <span>
+                Hotline:
+                <p class="footer-help-header">1900 866 819
+            </span>
+            <span>
+                Thứ 2 - Thứ 6 (8h - 17h)
+                salesonline@thienlongvn.com
+                <div class="footer-help-header-list">
+                    <a href="">
+                        - Hướng dẫn mua hàng
+                    </a>
+                    <a href="">
+                        - Hướng dẫn thanh toán
+                    </a>
+                    <a href="">
+                        - Chính sách giao hàng
+                    </a>
+                    <a href="">
+                        - Chính sách đổi trả & hoàn tiền
+                    </a>
+                    <a href="">
+                        - Khách hàng thân thiết
+                    </a>
+                    <a href="">
+                        - Khách hàng ưu tiên
+                    </a>
+                    <a href="">
+                        - Phản ánh chất lượng sản phẩm
+                    </a>
+                </div>
+            </span>
+        </div>
+        <div class="footer-information">
+            <h2>VỀ THIENLONG.VN</h2>
+            <div class="footer-information-header-list">
+                <a href="GioiThieu.html">
+                    - Giới thiệu
+                </a>
+                <a href="">
+                    - Dịch vụ in ấn quảng cáo
+                </a>
+                <a href="">
+                    - Chính sách bảo mật chung
+                </a>
+                <a href="">
+                    - Chính sách bảo mật thông tin cá nhân
+                </a>
+                <a href="">
+                    - Thông tin liên hệ
+                </a>
+                <a href="">
+                    - Chương trình Affiliate
+                </a>
+            </div>
+            <div class="footer-information-socials">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
