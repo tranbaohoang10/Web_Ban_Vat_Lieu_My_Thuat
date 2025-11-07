@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="assets/css/header.css">
-        <link rel="stylesheet" href="assets/css/footer.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+</head>
 
-    <style>
-   
+<style>
     /* begin style shopping cart */
 
     .main {
@@ -198,261 +196,249 @@
     }
 
     /* từ sửa sau */
-    html, body {
+    html,
+    body {
         height: 100%;
         margin: 0;
         padding: 0;
     }
-    body{
+
+    body {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
     }
-    main{
+
+    main {
         flex: 1;
     }
 
 
     /* end style shopping cart */
-
 </style>
 
-    <body>
-        <header id="header-trang-chu" class="trang-chu">
-            <div class="logo-trang-chu">
-                <a href="index.html">
-                    <img src="./assets/images/logo/logo.png" alt>
-                </a>
+<body>
+    <header id="header-trang-chu" class="trang-chu">
+        <div class="logo-trang-chu">
+            <a href="index.html">
+                <img src="./assets/images/logo/logo.png" alt>
+            </a>
+        </div>
+        <form action class="tim-kiem-san-pham">
+            <input type="text" name placeholder="Tìm kiếm sản phẩm...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </form>
+        <div class="header-contact">
+            <i class="fa-solid fa-phone"></i>
+            <div class="contact">
+                <div class="contact-phone-number">1900 866 819</div>
+                <div class="contact-phone-help">Hỗ trợ khách hàng</div>
             </div>
-            <form action class="tim-kiem-san-pham">
-                <input type="text" name placeholder="Tìm kiếm sản phẩm...">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </form>
-            <div class="header-contact">
-                <i class="fa-solid fa-phone"></i>
-                <div class="contact">
-                    <div class="contact-phone-number">1900 866 819</div>
-                    <div class="contact-phone-help">Hỗ trợ khách hàng</div>
-                </div>
+        </div>
+        <div class="header-dangnhap-dangki">
+            <i class="fa-solid fa-user"></i>
+            <div class="dangnhap-dangki">
+                <div class="dangnhap">Đăng nhập</div>
+                <div class="dangki">Đăng kí</div>
             </div>
-            <div class="header-dangnhap-dangki">
-                <i class="fa-solid fa-user"></i>
-                <div class="dangnhap-dangki">
-                    <div class="dangnhap">Đăng nhập</div>
-                    <div class="dangki">Đăng kí</div>
-                </div>
 
-            </div>
-            <div class="header-giohang">
-                <i class="fa-solid fa-bag-shopping"></i>
-            </div>
-        </header>
-        <!-- Breadcrumb -->
-        <div class="breadcrumb">Trang chủ / Giỏ hàng</div>
+        </div>
+        <div class="header-giohang">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+    </header>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">Trang chủ / Giỏ hàng</div>
 
-        <div class="container">
+    <div class="container">
 
-            <div class="grid">
-                <!-- Left: Cart -->
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Giỏ hàng của bạn</h2>
-                        <p class="subtle">Bạn đang có 2 sản phẩm trong giỏ
-                            hàng</p>
-                        <div class="divider"></div>
+        <div class="grid">
+            <!-- Left: Cart -->
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Giỏ hàng của bạn</h2>
+                    <p class="subtle">Bạn đang có 2 sản phẩm trong giỏ
+                        hàng</p>
+                    <div class="divider"></div>
 
-                        <div class="cart-list">
-                            <!-- Item 1 -->
-                            <div class="item">
-                                <div class="item-grid">
-                                    <div class="thumb">
-                                        <!-- <a href="#" class="remove">Xóa</a> -->
-                                        <img
-                                            src="./assets/images/logo/list1-1.jpg"
-                                            alt="Bút màu Fiber pen Washable" />
-                                    </div>
-                                    <div>
-
-                                        <div class="meta-title">Bút Lông Thiên
-                                            Long 48/60 Màu Fiber Pen Washable -
-                                            Phiên bản
-                                            Demon Slayer</div>
-                                        <div class="muted">SWM-C012/DS 48
-                                            màu</div>
-                                    </div>
-                                    <div class="price">336,600₫</div>
-                                    <div class="qty">
-                                        <button class="dec"
-                                            aria-label="Giảm">−</button>
-                                        <input type="number" value="2"
-                                            min="1" />
-                                        <button class="inc"
-                                            aria-label="Tăng">+</button>
-                                    </div>
-
+                    <div class="cart-list">
+                        <!-- Item 1 -->
+                        <div class="item">
+                            <div class="item-grid">
+                                <div class="thumb">
+                                    <!-- <a href="#" class="remove">Xóa</a> -->
+                                    <img src="./assets/images/logo/list1-1.jpg" alt="Bút màu Fiber pen Washable" />
                                 </div>
+                                <div>
+
+                                    <div class="meta-title">Bút Lông Thiên
+                                        Long 48/60 Màu Fiber Pen Washable -
+                                        Phiên bản
+                                        Demon Slayer</div>
+                                    <div class="muted">SWM-C012/DS 48
+                                        màu</div>
+                                </div>
+                                <div class="price">336,600₫</div>
+                                <div class="qty">
+                                    <button class="dec" aria-label="Giảm">−</button>
+                                    <input type="number" value="2" min="1" />
+                                    <button class="inc" aria-label="Tăng">+</button>
+                                </div>
+
                             </div>
-                            <!-- Item 2 -->
-                            <div class="item">
-                                <div class="item-grid">
-                                    <div class="thumb">
-                                        <!-- <a href="#" class="remove">Xóa</a> -->
-                                        <img
-                                            src="./assets/images/logo/list1-3.jpg"
-                                            alt="Bút màu Fiber pen Washable" />
-                                    </div>
-                                    <div>
-
-                                        <div class="meta-title">Bút lông hiên
-                                            Long Colokit
-                                            - Màu sắc tươi sáng, Không thấm qua
-                                            mặt
-                                            giấy</div>
-                                        <div class="muted">SWM-C012/DS 36
-                                            màu</div>
-                                    </div>
-                                    <div class="price">45,500₫</div>
-                                    <div class="qty">
-                                        <button class="dec"
-                                            aria-label="Giảm">−</button>
-                                        <input type="number" value="1"
-                                            min="1" />
-                                        <button class="inc"
-                                            aria-label="Tăng">+</button>
-                                    </div>
-
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="item">
+                            <div class="item-grid">
+                                <div class="thumb">
+                                    <!-- <a href="#" class="remove">Xóa</a> -->
+                                    <img src="./assets/images/logo/list1-3.jpg" alt="Bút màu Fiber pen Washable" />
                                 </div>
+                                <div>
+
+                                    <div class="meta-title">Bút lông hiên
+                                        Long Colokit
+                                        - Màu sắc tươi sáng, Không thấm qua
+                                        mặt
+                                        giấy</div>
+                                    <div class="muted">SWM-C012/DS 36
+                                        màu</div>
+                                </div>
+                                <div class="price">45,500₫</div>
+                                <div class="qty">
+                                    <button class="dec" aria-label="Giảm">−</button>
+                                    <input type="number" value="1" min="1" />
+                                    <button class="inc" aria-label="Tăng">+</button>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Tổng tiền với đặt hàng-->
-                <div class="card summary">
-                    <div class="card-body">
-                        <div class="head">
-                            <h3
-                                style="margin:0;font-size:26px;font-weight:800">Thông
-                                tin đơn hàng</h3>
+            <!-- Tổng tiền với đặt hàng-->
+            <div class="card summary">
+                <div class="card-body">
+                    <div class="head">
+                        <h3 style="margin:0;font-size:26px;font-weight:800">Thông
+                            tin đơn hàng</h3>
 
-                        </div>
-                        <div class="divider"></div>
-                        <div class="tinh-tien">
-                            <p>Tổng tiền: </p>
-                            <span class="thanh-tien">382,100đ</span>
-                        </div>
-                        <p class="muted">Phí vận chuyển sẽ được tính ở trang
-                            Thanh toán</p>
-                        <p class="muted">Mã giảm giá được nhập ở trang Thanh
-                            toán</p>
-                        <button class="btn">THANH TOÁN</button>
                     </div>
+                    <div class="divider"></div>
+                    <div class="tinh-tien">
+                        <p>Tổng tiền: </p>
+                        <span class="thanh-tien">382,100đ</span>
+                    </div>
+                    <p class="muted">Phí vận chuyển sẽ được tính ở trang
+                        Thanh toán</p>
+                    <p class="muted">Mã giảm giá được nhập ở trang Thanh
+                        toán</p>
+                    <button class="btn" onclick="window.location.href = 'ThanhToan.html'">THANH TOÁN</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <footer id="footer-trang-chu">
-            <div class="footer-title">
-                <img src="./assets/images/logo/logo.png" alt class="img-main">
-                <p class="footer-title-header">Thienlong.vn - Website thương mại
-                    điện tử thuộc Tập đoàn Thiên Long</p>
-                <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn
-                    Thiên Long
-                    <br>
-                    <br>
-                    GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày
-                    14/03/2005.
-                </p>
-                <form action class="footer-title-form">
-                    <input type="email" placeholder="Nhập địa chỉ email">
-                    <a href>Đăng ký</a>
-                </form>
-                <img
-                    src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
-                    alt class="img-footer">
+    <footer id="footer-trang-chu">
+        <div class="footer-title">
+            <img src="./assets/images/logo/logo.png" alt class="img-main">
+            <p class="footer-title-header">Thienlong.vn - Website thương mại
+                điện tử thuộc Tập đoàn Thiên Long</p>
+            <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn
+                Thiên Long
+                <br>
+                <br>
+                GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày
+                14/03/2005.
+            </p>
+            <form action class="footer-title-form">
+                <input type="email" placeholder="Nhập địa chỉ email">
+                <a href>Đăng ký</a>
+            </form>
+            <img src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png" alt class="img-footer">
+        </div>
+        <div class="footer-diachi">
+            <h2>ĐỊA CHỈ CÔNG TY</h2>
+            <span>
+                Head Office:
+                <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10
+                    Đường Mai Chí Thọ, Phường An Khánh,
+                    Thành Phố Hồ Chí Minh, Việt Nam
+            </span>
+            <br>
+            <span>
+                Miền Bắc:
+                <p class="footer-diachi-description"> Số 38, đường
+                    Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
+                    Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt
+                    Nam.
+            </span>
+
+            <img src="./assets/images/logo/footer_bct.png" alt class="img-main">
+        </div>
+        <div class="footer-help">
+            <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+            <span>
+                Hotline:
+                <p class="footer-help-header">1900 866 819
+            </span>
+            <span>
+                Thứ 2 - Thứ 6 (8h - 17h)
+                salesonline@thienlongvn.com
+                <div class="footer-help-header-list">
+                    <a href>
+                        - Hướng dẫn mua hàng
+                    </a>
+                    <a href="ThanhToan.html">
+                        - Hướng dẫn thanh toán
+                    </a>
+                    <a href>
+                        - Chính sách giao hàng
+                    </a>
+                    <a href>
+                        - Chính sách đổi trả & hoàn tiền
+                    </a>
+                    <a href>
+                        - Khách hàng thân thiết
+                    </a>
+                    <a href>
+                        - Khách hàng ưu tiên
+                    </a>
+                    <a href>
+                        - Phản ánh chất lượng sản phẩm
+                    </a>
+                </div>
+            </span>
+        </div>
+        <div class="footer-information">
+            <h2>VỀ THIENLONG.VN</h2>
+            <div class="footer-information-header-list">
+                <a href="GioiThieu.html">
+                    - Giới thiệu
+                </a>
+                <a href>
+                    - Dịch vụ in ấn quảng cáo
+                </a>
+                <a href>
+                    - Chính sách bảo mật chung
+                </a>
+                <a href>
+                    - Chính sách bảo mật thông tin cá nhân
+                </a>
+                <a href>
+                    - Thông tin liên hệ
+                </a>
+                <a href>
+                    - Chương trình Affiliate
+                </a>
             </div>
-            <div class="footer-diachi">
-                <h2>ĐỊA CHỈ CÔNG TY</h2>
-                <span>
-                    Head Office:
-                    <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10
-                        Đường Mai Chí Thọ, Phường An Khánh,
-                        Thành Phố Hồ Chí Minh, Việt Nam
-                    </span>
-                    <br>
-                    <span>
-                        Miền Bắc:
-                        <p class="footer-diachi-description"> Số 38, đường
-                            Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
-                            Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt
-                            Nam.
-                        </span>
+            <div class="footer-information-socials">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+        </div>
+    </footer>
+</body>
 
-                        <img src="./assets/images/logo/footer_bct.png" alt
-                            class="img-main">
-                    </div>
-                    <div class="footer-help">
-                        <h2>HỖ TRỢ KHÁCH HÀNG</h2>
-                        <span>
-                            Hotline:
-                            <p class="footer-help-header">1900 866 819
-                            </span>
-                            <span>
-                                Thứ 2 - Thứ 6 (8h - 17h)
-                                salesonline@thienlongvn.com
-                                <div class="footer-help-header-list">
-                                    <a href>
-                                        - Hướng dẫn mua hàng
-                                    </a>
-                                    <a href="ThanhToan.html">
-                                        - Hướng dẫn thanh toán
-                                    </a>
-                                    <a href>
-                                        - Chính sách giao hàng
-                                    </a>
-                                    <a href>
-                                        - Chính sách đổi trả & hoàn tiền
-                                    </a>
-                                    <a href>
-                                        - Khách hàng thân thiết
-                                    </a>
-                                    <a href>
-                                        - Khách hàng ưu tiên
-                                    </a>
-                                    <a href>
-                                        - Phản ánh chất lượng sản phẩm
-                                    </a>
-                                </div>
-                            </span>
-                        </div>
-                        <div class="footer-information">
-                            <h2>VỀ THIENLONG.VN</h2>
-                            <div class="footer-information-header-list">
-                                <a href="GioiThieu.html">
-                                    - Giới thiệu
-                                </a>
-                                <a href>
-                                    - Dịch vụ in ấn quảng cáo
-                                </a>
-                                <a href>
-                                    - Chính sách bảo mật chung
-                                </a>
-                                <a href>
-                                    - Chính sách bảo mật thông tin cá nhân
-                                </a>
-                                <a href>
-                                    - Thông tin liên hệ
-                                </a>
-                                <a href>
-                                    - Chương trình Affiliate
-                                </a>
-                            </div>
-                            <div class="footer-information-socials">
-                                <i class="fa-brands fa-facebook"></i>
-                                <i class="fa-brands fa-youtube"></i>
-                            </div>
-                        </div>
-                    </footer>
-                </body>
-
-            </html>
+</html>

@@ -6,12 +6,6 @@ body {
 }
 :root {
   --color-main: #17479d;
-<<<<<<< HEAD
-    --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-
-}
-=======
   --font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
     sans-serif;
 }
->>>>>>> TrangMyThuatSauKhiDangNhap
