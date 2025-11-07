@@ -218,7 +218,7 @@
     }
 
     .item-grid {
-        display: grid;
+        display: flex;
         grid-template-columns: 84px 1fr auto auto;
         align-items: center;
         gap: 14px;
@@ -337,17 +337,20 @@
     }
 
     /* từ sửa sau */
-    html, body {
+    html,
+    body {
         height: 100%;
         margin: 0;
         padding: 0;
     }
-    body{
+
+    body {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
     }
-    main{
+
+    main {
         flex: 1;
     }
 
@@ -579,10 +582,13 @@
                         <!-- Item 1 -->
                         <div class="item">
                             <div class="item-grid">
+                                <div class="select-product">
+                                    <input type="checkbox" checked />
+                                </div>
                                 <div class="thumb">
+
                                     <!-- <a href="#" class="remove">Xóa</a> -->
-                                    <img src="./assets/images/logo/list1-1.jpg"
-                                        alt="Bút màu Fiber pen Washable" />
+                                    <img src="./assets/images/logo/list1-1.jpg" alt="Bút màu Fiber pen Washable" />
                                 </div>
                                 <div>
 
@@ -602,16 +608,18 @@
                         <!-- Item 2 -->
                         <div class="item">
                             <div class="item-grid">
+                                <div class="select-product">
+                                    <input type="checkbox" checked />
+                                </div>
                                 <div class="thumb">
                                     <!-- <a href="#" class="remove">Xóa</a> -->
-                                    <img src="./assets/images/logo/list1-3.jpg"
-                                        alt="Bút màu Fiber pen Washable" />
+                                    <img src="./assets/images/logo/list1-3.jpg" alt="Bút màu Fiber pen Washable" />
                                 </div>
                                 <div>
 
                                     <div class="meta-title">Bút lông hiên Long Colokit
-                                    - Màu sắc tươi sáng, Không thấm qua mặt
-                                    giấy</div>
+                                        - Màu sắc tươi sáng, Không thấm qua mặt
+                                        giấy</div>
                                     <div class="muted">SWM-C012/DS 36 màu</div>
                                 </div>
                                 <div class="price">45,500₫</div>
