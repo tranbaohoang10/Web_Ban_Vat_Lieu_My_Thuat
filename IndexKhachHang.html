@@ -9,159 +9,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/header.css">
+  <link rel="stylesheet" href="./assets/css/footer.css">
 </head>
 <style>
-  .container {
-    width: 1200px;
-    margin: auto;
-
-  }
-
-  /* Begin header */
-  #header-trang-chu {
-    background-color: var(--color-main);
-    display: flex;
-    align-items: center;
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-  }
-
-  #header-trang-chu .logo-trang-chu {
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
-
-  #header-trang-chu .logo-trang-chu img {
-    background-color: transparent;
-    width: 200px;
-    height: 100%;
-
-  }
-
-  #header-trang-chu .tim-kiem-san-pham {
-    position: relative;
-  }
-
-  #header-trang-chu .tim-kiem-san-pham input {
-    padding: 10px 15px;
-    width: 600px;
-    border-radius: 10px;
-    border: none;
-  }
-
-  #header-trang-chu .tim-kiem-san-pham {
-    display: flex;
-
-  }
-
-  #header-trang-chu .tim-kiem-san-pham i {
-    position: absolute;
-    right: 0;
-    width: 50px;
-    height: 100%;
-    background-color: #0B234D;
-    line-height: 40px;
-    cursor: pointer;
-    color: white;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-
-  #header-trang-chu .header-contact {
-    display: flex;
-    align-items: center;
-  }
-
-  #header-trang-chu .header-contact i {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #0B234D;
-    line-height: 30px;
-    color: white;
-  }
-
-  #header-trang-chu .header-contact {
-    margin-left: 100px;
-    margin-right: 50px;
-    cursor: pointer;
-  }
-
-  #header-trang-chu .header-contact .contact {
-    margin-left: 15px;
-  }
-
-  #header-trang-chu .header-contact .contact .contact-phone-number {
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-  }
-
-  #header-trang-chu .header-contact .contact .contact-phone-help {
-    color: white;
-    font-size: 16px;
-  }
-
-  #header-trang-chu .header-dangnhap-dangki {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  #header-trang-chu .header-dangnhap-dangki i {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #0B234D;
-    line-height: 30px;
-    color: white;
-  }
-
-  #header-trang-chu .header-dangnhap-dangki {
-    margin-right: 50px;
-  }
-
-  #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
-    margin-left: 15px;
-  }
-
   #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
     color: white;
     font-weight: 600;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+
   }
 
-  #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
-    color: white;
-    font-size: 16px;
-  }
-
-  #header-trang-chu .header-giohang {
-    font-size: 25px;
-    color: white;
-    position: relative;
-    cursor: pointer;
-  }
-
-  #header-trang-chu .header-giohang::after {
-    display: inline-flex;
-    content: "0";
-    width: 20px;
-    height: 20px;
-    left: 20px;
-    bottom: 15px;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    background-color: red;
-    position: absolute;
-    border-radius: 50%;
-  }
-
-  /* End header */
   /* Begin section-info-mithuat */
   #section-info-mithuat {
     padding-top: 100px;
@@ -597,177 +459,6 @@
   }
 
   /* End section main */
-  /* Begin footer */
-  #footer-trang-chu {
-    display: flex;
-    background-color: #17479D;
-    border-top-left-radius: 70px;
-    border-top-right-radius: 70px;
-    gap: 30px;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-  }
-
-  #footer-trang-chu .footer-title {
-    text-align: justify;
-    margin-left: 30px;
-  }
-
-  #footer-trang-chu .footer-title .img-main {
-    background-color: transparent;
-    width: 400px;
-  }
-
-  #footer-trang-chu .footer-title .footer-title-header {
-    color: #FBE263;
-  }
-
-  #footer-trang-chu .footer-title .footer-title-description {
-    color: white;
-  }
-
-  #footer-trang-chu .footer-title .footer-title-form {
-    position: relative;
-  }
-
-  #footer-trang-chu .footer-title .footer-title-form input {
-    padding: 10px 15px;
-    border-radius: 10px;
-    width: 300px;
-    border: none;
-
-  }
-
-  #footer-trang-chu .footer-title .footer-title-form a {
-    position: absolute;
-    display: inline-flex;
-    width: 100px;
-    height: 36px;
-    background-color: #0B234D;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    top: 0;
-    right: 69px;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-  }
-
-  #footer-trang-chu .footer-title .img-footer {
-    width: 250px;
-    margin-top: 15px;
-    cursor: pointer;
-    margin-bottom: 50px;
-  }
-
-  #footer-trang-chu .footer-diachi {
-    width: 25%;
-  }
-
-  #footer-trang-chu .footer-diachi h2 {
-    font-size: 20px;
-    color: #FBE263;
-    margin: 0;
-  }
-
-  #footer-trang-chu .footer-diachi span {
-    color: #FBE263;
-    display: block;
-    padding-top: 15px;
-  }
-
-  #footer-trang-chu .footer-diachi .footer-diachi-header {
-    display: inline;
-    color: white;
-  }
-
-  #footer-trang-chu .footer-diachi .footer-diachi-description {
-    display: inline;
-    color: white;
-  }
-
-  #footer-trang-chu .footer-diachi .img-main {
-    display: block;
-    margin-top: 20px;
-  }
-
-
-
-  #footer-trang-chu .footer-help h2 {
-    font-size: 20px;
-    color: #FBE263;
-    margin: 0;
-  }
-
-  #footer-trang-chu .footer-help span {
-    display: block;
-    color: #FBE263;
-    padding-top: 15px;
-  }
-
-
-
-  #footer-trang-chu .footer-help .footer-help-header {
-    display: inline;
-    color: white;
-  }
-
-  #footer-trang-chu .footer-help .footer-help-header-list a {
-    display: block;
-    text-decoration: none;
-    color: white;
-    line-height: 1.4;
-  }
-
-  #footer-trang-chu .footer-diachi .img-main {
-    cursor: pointer;
-  }
-
-  #footer-trang-chu .footer-information h2 {
-    font-size: 20px;
-    color: #FBE263;
-    margin: 0;
-  }
-
-
-
-  #footer-trang-chu .footer-information .footer-information-header-list a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    line-height: 1.4;
-  }
-
-  #footer-trang-chu .footer-information .footer-information-socials {
-    padding-top: 35px;
-  }
-
-  #footer-trang-chu .footer-information .footer-information-socials i {
-    width: 50px;
-    height: 50px;
-    background: white;
-    border-radius: 50%;
-    line-height: 50px;
-    font-size: 25px;
-    color: #17479D;
-  }
-
-  #footer-trang-chu .footer-information .footer-information-socials i:nth-child(1) {
-    margin-right: 10px;
-  }
-
-  #footer-trang-chu::after {
-    display: block;
-    position: absolute;
-    content: "2025 © Thienlong.vn - Bản quyền thuộc Tập đoàn Thiên Long";
-    bottom: 0;
-    color: white;
-
-  }
-
-  /* End footer */
 </style>
 
 <body>
@@ -793,8 +484,8 @@
     <div class="header-dangnhap-dangki" onclick="window.location.href='DangNhap.html'">
       <i class="fa-solid fa-user"></i>
       <div class="dangnhap-dangki">
-        <div class="dangnhap">Đăng nhập</div>
-        <div class="dangki">Đăng kí</div>
+        <div class="dangnhap">Hi, Hoàng Trần</div>
+        <div class="dangki">Đăng xuất</div>
       </div>
 
     </div>
@@ -808,7 +499,7 @@
     <div class="container">
       <div class="info-mithuat-header">
         <i class="fa-solid fa-palette"></i>
-        <p class="info-mithuat-header-content" onclick="window.location.href ='index.html'">Mỹ Thuật</p>
+        <p class="info-mithuat-header-content" onclick="window.location.href = 'index.html'">Danh mục</p>
         <i class="fa-solid fa-angle-down"></i>
       </div>
       <div class="hover-block">
@@ -881,370 +572,6 @@
   </script>
   <!-- End slider show -->
   <!-- Begin section -->
-  <div class="section-but">
-    <div class="container">
-      <img src="./assets/images/logo/section-but.webp" alt="">
-      <div class="section-but-header">
-        <h2>BÚT VIẾT</h2>
-        <div class="list-type">
-          <a href="">Bút gel</a>
-          <a href="">Bút bi</a>
-          <a href="">Bút chì</a>
-          <a href="">Bút dạ quang</a>
-          <a href="">Bút xoá</a>
-        </div>
-      </div>
-      <div class="section-but-content">
-        <div class="list-product">
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-1.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 6</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Bút gel xóa được Mazzic Thiên Long Merry Christmas GELE-006/XMAS - Vỉ 3 - Mực Xanh
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">29,250₫</h2>
-                <p class="price-product-before"> 45,000đ</p>
-                <span class="price-product-discount">-35%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-2.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 742</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Combo 10 Bút gel Minimalist Thiên Long Gel-072
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">69,000₫</h2>
-                <p class="price-product-before"> 116,000đ</p>
-                <span class="price-product-discount">-41%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-3.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 123</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Combo 10 Bút gel Minimalist Thiên Long Gel-071
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">69,000₫</h2>
-                <p class="price-product-before"> 116,000đ</p>
-                <span class="price-product-discount">-41%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-4.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 218</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Combo 10 Bút gel Joyee Thiên Long GEL-067 - Mực khô siêu nhanh
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">59,000₫</h2>
-                <p class="price-product-before"> 83,000đ</p>
-                <span class="price-product-discount">-29%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-5.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 6</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Bút Gel Thiên Long Doraemon GEL-012/DO Nature - Mực tím - Phiên bản 2025
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">7,500₫</h2>
-                <p class="price-product-before"> 10,000đ</p>
-                <span class="price-product-discount">-25%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-6.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>541</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Bút dạ quang màu Pastel Hi! Line Thiên Long HL-023 - Đầu bút siêu mềm, lướt giấy nhẹ
-                  êm
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">12,000₫</h2>
-                <p class="price-product-before"> 16,000đ</p>
-                <span class="price-product-discount">-25%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-7.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 123</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Bút gel Hoshi Thiên Long GEL-046/HS - Công nghệ Nhật Bản
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">19,000₫</h2>
-                <p class="price-product-before"> 24,800đ</p>
-                <span class="price-product-discount">-23%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-8.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 6</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Bút gel Hoshi Thiên Long GEL-048/HS - Công nghệ Nhật Bản
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">7,500₫</h2>
-                <p class="price-product-before"> 10,000đ</p>
-                <span class="price-product-discount">-25%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-9.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 147</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Bút gel Hoshi Thiên Long GEL-049/HS - Công nghệ Nhật Bản
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">7,500₫</h2>
-                <p class="price-product-before"> 10,000đ</p>
-                <span class="price-product-discount">-25%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
-            <img src="./assets/images/logo/but-10.jpg" alt="">
-            <div class="list-product-list1-content">
-              <div class="list-product-list1-content-socials">
-                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                </div>
-                <div class="list-product-list1-content-socials-2"><i
-                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 369</span></div>
-              </div>
-              <div class="list-product-list1-content-description">
-                <p class="content">Bút gel Quick Dry Thiên Long GEL-066 - Premium Tip - Vật liệu tái chế
-                </p>
-                <div class="star">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>(0)</span>
-                </div>
-                <h2 class="price-product-after">14,850₫</h2>
-                <p class="price-product-before"> 16,500đ</p>
-                <span class="price-product-discount">-10%</span>
-                <div class="button">
-                  <a href="ChiTietSanPham.html">
-                    <button class="btn-xemchitiet">
-                      <i class="fa-solid fa-eye"></i>
-                      Xem chi tiết
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section-but-button">
-        <button class="button">Xem tất cả <i class="fa-solid fa-angle-right"></i></button>
-
-      </div>
-    </div>
-  </div>
   <div class="section-but">
     <div class="container">
       <img src="./assets/images/logo/mythuat-logo.webp" alt="">
@@ -1617,6 +944,371 @@
       </div>
     </div>
   </div>
+  <div class="section-but">
+    <div class="container">
+      <img src="./assets/images/logo/section-but.webp" alt="">
+      <div class="section-but-header">
+        <h2>Dụng cụ học tập nghệ thuật</h2>
+        <div class="list-type">
+          <a href="">Bút vẽ & Marker</a>
+          <a href="">Giấy vẽ & Sketchbook</a>
+          <a href="">Màu tô sáng tạo</a>
+          <a href="">Dụng cụ thủ công</a>
+          <a href="">Trang trí – phụ kiện học sinh</a>
+        </div>
+      </div>
+      <div class="section-but-content">
+        <div class="list-product">
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-1.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 6</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Bút gel xóa được Mazzic Thiên Long Merry Christmas GELE-006/XMAS - Vỉ 3 - Mực Xanh
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">29,250₫</h2>
+                <p class="price-product-before"> 45,000đ</p>
+                <span class="price-product-discount">-35%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-2.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 742</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Combo 10 Bút gel Minimalist Thiên Long Gel-072
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">69,000₫</h2>
+                <p class="price-product-before"> 116,000đ</p>
+                <span class="price-product-discount">-41%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-3.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 123</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Combo 10 Bút gel Minimalist Thiên Long Gel-071
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">69,000₫</h2>
+                <p class="price-product-before"> 116,000đ</p>
+                <span class="price-product-discount">-41%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-4.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 218</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Combo 10 Bút gel Joyee Thiên Long GEL-067 - Mực khô siêu nhanh
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">59,000₫</h2>
+                <p class="price-product-before"> 83,000đ</p>
+                <span class="price-product-discount">-29%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-5.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 6</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Bút Gel Thiên Long Doraemon GEL-012/DO Nature - Mực tím - Phiên bản 2025
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">7,500₫</h2>
+                <p class="price-product-before"> 10,000đ</p>
+                <span class="price-product-discount">-25%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-6.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>541</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Bút dạ quang màu Pastel Hi! Line Thiên Long HL-023 - Đầu bút siêu mềm, lướt giấy nhẹ
+                  êm
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">12,000₫</h2>
+                <p class="price-product-before"> 16,000đ</p>
+                <span class="price-product-discount">-25%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-7.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 123</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Bút gel Hoshi Thiên Long GEL-046/HS - Công nghệ Nhật Bản
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">19,000₫</h2>
+                <p class="price-product-before"> 24,800đ</p>
+                <span class="price-product-discount">-23%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-8.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 6</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Bút gel Hoshi Thiên Long GEL-048/HS - Công nghệ Nhật Bản
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">7,500₫</h2>
+                <p class="price-product-before"> 10,000đ</p>
+                <span class="price-product-discount">-25%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-9.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 147</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Bút gel Hoshi Thiên Long GEL-049/HS - Công nghệ Nhật Bản
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">7,500₫</h2>
+                <p class="price-product-before"> 10,000đ</p>
+                <span class="price-product-discount">-25%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-product-list1" onclick="window.location.href='ChiTietSanPham.html'">
+            <img src="./assets/images/logo/but-10.jpg" alt="">
+            <div class="list-product-list1-content">
+              <div class="list-product-list1-content-socials">
+                <div class="list-product-list1-content-socials-1"><i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                </div>
+                <div class="list-product-list1-content-socials-2"><i
+                    class="fa-solid fa-arrow-up-right-dots"></i><span>Đã bán 369</span></div>
+              </div>
+              <div class="list-product-list1-content-description">
+                <p class="content">Bút gel Quick Dry Thiên Long GEL-066 - Premium Tip - Vật liệu tái chế
+                </p>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>(0)</span>
+                </div>
+                <h2 class="price-product-after">14,850₫</h2>
+                <p class="price-product-before"> 16,500đ</p>
+                <span class="price-product-discount">-10%</span>
+                <div class="button">
+                  <a href="ChiTietSanPham.html">
+                    <button class="btn-xemchitiet">
+                      <i class="fa-solid fa-eye"></i>
+                      Xem chi tiết
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-but-button">
+        <button class="button">Xem tất cả <i class="fa-solid fa-angle-right"></i></button>
+
+      </div>
+    </div>
+  </div>
+
   <!-- End section -->
 
   <!-- Begin footer-->
@@ -1689,7 +1381,7 @@
     <div class="footer-information">
       <h2>VỀ THIENLONG.VN</h2>
       <div class="footer-information-header-list">
-        <a href="">
+        <a href="GioiThieu.html">
           - Giới thiệu
         </a>
         <a href="">
