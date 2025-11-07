@@ -297,6 +297,7 @@
         padding-right: 50px;
         margin-top: 10px;
         cursor: pointer;
+        width: 100%;
     }
 
     .btn-fb {
@@ -536,8 +537,8 @@
             <form action="" class="form-login">
                 <div class="form-1">
                     <label for="email"> Email*</label>
-                    <input type="text" name="" placeholder="Nhập Email">
-
+                    <input type="email" name="" placeholder="Nhập Email" id="email">
+                    <span id="email-error" style="color: #FFD700; font-size: 14px;"></span>
                 </div>
                 <div class="form-1">
                     <label for="password"> Mật Khẩu*</label>
@@ -547,7 +548,7 @@
                 <div class="forgot-password">
                     <p>Quên mật khẩu? Nhấn vào <a href="">đây</a></p>
                 </div>
-                <button class="btn-login">Đăng Nhập</button>
+                <button class="btn-login" onclick="window.location.href = 'IndexKhachHang.html'">Đăng Nhập</button>
 
                 <div class="chuataikhoan">
                     Bạn chưa có tài khoản <a href="DangKy.html" class="link-dki">Đăng ký tại đây</a>
@@ -558,7 +559,7 @@
 
                     <button class="btn-gg"><i class="fa-brands fa-google"></i>Google</button>
 
-                    <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button>
+
                 </div>
 
 
@@ -660,6 +661,35 @@
             </div>
         </div>
     </footer>
+    <script>
+
+        // js check email
+        document.querySelector("btn-login").addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const emailInput = document.getElementById("email");
+            const errorSpan = document.getElementById("email-error");
+            const email = emailInput.value.trim();
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            errorSpan.textContent = "";
+
+            if (email === "") {
+                errorSpan.textContent = "Vui lòng nhập email!";
+                emailInput.style.border = "1px solid red";
+            } else if (!emailPattern.test(email)) {
+                errorSpan.textContent = "Email không hợp lệ! (ví dụ: abc@gmail.com)";
+                emailInput.style.border = "1px solid red";
+            } else {
+                // errorSpan.textContent = "✅ Email hợp lệ!";
+                // errorSpan.style.color = "#00FF00";
+                // emailInput.style.border = "1px solid #00FF00";
+            }
+        }
+
+        );
+    </script>
 </body>
 
 </html>
