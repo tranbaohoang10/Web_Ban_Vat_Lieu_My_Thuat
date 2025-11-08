@@ -477,7 +477,9 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background-color: #1E76EF;
+        /* background-color: #1E76EF; */
+        background: linear-gradient(to left, #2659F3, #09BCE4);
+
 
     }
 
@@ -510,7 +512,7 @@
         margin-bottom: 20px;
     }
 
-    .form-email .form-1 {
+    .form-email .form-1 input{
         width: 100%;
         border: none;
         padding: 8px;
@@ -519,26 +521,14 @@
         font-size: 14px;
         background: none;
         color: white;
-        outline: none;
-
         border-radius: 8px;
         padding: 10px;
         transition: border-color 0.3s;
     }
-    .form-email .form-1 input:hover{
-        color: #B0B0B0;
+
+    .form-email .form-1 input::placeholder {
+        color: #ccc5c5;
     }
-
-
-
-
-
-
-
-    .form-1 input::placeholder {
-        color: #a0a0a0;
-    }
-
 
 
     .forgot-password {
@@ -564,9 +554,26 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
         margin-top: 15px;
         color: #343A40;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .btn-lay-mk:hover {
+        transform: scale(1.05);
+    }
+    .quay-lai-dang-nhap {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .link-quay-lai {
+        color: white;
+        text-decoration: none;
+        text-align: center;
+    }
+    .link-quay-lai:hover {
+        color: #6C785B;
     }
 
     .link-dki {
@@ -578,10 +585,7 @@
         color: #6C785B;
     }
 
-    .btn-login-gg {
-        display: flex;
-        justify-content: space-between;
-    }
+   
 
     .btn-gg {
         background-color: #DE3F32;
@@ -596,18 +600,7 @@
         width: 100%;
     }
 
-    .btn-fb {
-        background-color: #49669C;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        padding-left: 50px;
-        padding-right: 50px;
-        margin-top: 10px;
-        cursor: pointer;
-
-    }
+    
 
     .btn-login-gg i {
         margin-right: 8px;
@@ -841,7 +834,7 @@
                 <button type="button" class="btn-lay-mk">Lấy lại mật khẩu</button>
 
                 <div class="quay-lai-dang-nhap">
-                    <a href="DangNhap.html" class="link-dki">Quay lại </a>
+                    <a href="DangNhap.html" class="link-quay-lai">Quay lại </a>
                 </div>
 
 
