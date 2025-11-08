@@ -11,11 +11,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-    .container {
-        width: 1200px;
-        margin: auto;
-    }
-
     /* Begin header */
     #header-trang-chu {
         background-color: var(--color-main);
@@ -468,41 +463,55 @@
         border-radius: 50%;
     }
 
-    /* login */
+    /* Lien He */
 
-    /* ===== Liên hệ (Contact) ===== */
-    .contact-wrapper {
-        max-width: 1100px;
-        margin: 0 auto;
-        background: #fff;
-        border-radius: 14px;
-        padding: 30px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    .hearder-lienhe {
+        background: #DBE8FF;
+        color: #17479d;
+        font-weight: 500;
+        font-size: 16px;
+        padding: 12px 40px;
+        border-bottom: 1px solid #e5e7eb;
+        margin-top: 100px;
+        margin-bottom: 0;
     }
+
 
     .page-contact {
+
         padding-top: 140px;
-        /* tránh header fixed che mất */
-        background: #f7f9fc;
-        padding-bottom: 60px;
+        padding-bottom: 120px;
+
     }
 
-    .contact-head {
-        margin-bottom: 14px;
+    .container-all {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        gap: 24px;
+        padding: 0 16px;
+        border: 1px solid #e8edf3;
+        border-radius: 12px;
+        
+
     }
 
-    .contact-head h1 {
-        font-size: 28px;
-        font-weight: 700;
-        margin: 0 0 10px;
-        color: #0b234d;
+    .container-right {
+        flex: 50%;
+        border: none;
     }
+
+    .container-left {
+        flex: 50%;
+        border: none;
+    }
+
 
     .contact-meta {
         display: grid;
         grid-template-columns: 1fr;
         gap: 8px;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
         color: #273142;
     }
 
@@ -516,7 +525,7 @@
     .contact-meta i {
         color: #17479d;
         min-width: 18px;
-        margin-top: 3px;
+        margin-top: 2px;
     }
 
     .contact-grid {
@@ -527,11 +536,8 @@
     }
 
     .card {
-        background: #fff;
-        border: 1px solid #e8edf3;
-        border-radius: 12px;
         padding: 18px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .03);
+        padding-top: 20px;
     }
 
     .form-title {
@@ -581,12 +587,17 @@
         background: #0c357c;
     }
 
+    .map-card {
+        padding-top: 50px;
+    }
+
     .map-card iframe {
         width: 100%;
         height: 520px;
         border: 0;
         border-radius: 12px;
     }
+
 
 
 
@@ -795,11 +806,15 @@
         </div>
     </header>
 
-    <main class="page-contact">
-        <div class="container-left">
-            <div class="contact-wrapper">
+<!-- header lien he -->
+ <div class="hearder-lienhe">Trang chủ / Thông tin liên hệ</div>
 
-                <div class="contact-head">
+    <main class="page-contact">
+        <div class="container-all">
+            <div class="container-left">
+
+                <div class="card">
+                    <!-- cho do chung voi lien he -->
                     <h1>Thienlong.com - Tập đoàn Thiên Long</h1>
                     <div class="contact-meta">
                         <div class="row">
@@ -823,43 +838,41 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-title">LIÊN HỆ VỚI CHÚNG TÔI</div>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="fullname" placeholder="Họ tên" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="tel" name="phone" placeholder="Số điện thoại" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" placeholder="Nhập nội dung"
+                                required></textarea>
+                        </div>
+                        <button class="btn-lienhe" type="submit">Gửi liên hệ của bạn</button>
+                    </form>
                 </div>
 
-                <div class="contact-grid">
-                     <div class="card">
-                        <div class="form-title">LIÊN HỆ VỚI CHÚNG TÔI</div>
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="fullname" placeholder="Họ tên" required>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="email" name="email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="tel" name="phone" placeholder="Số điện thoại"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" placeholder="Nhập nội dung"
-                                    required></textarea>
-                            </div>
-                            <button class="btn-lienhe" type="submit">Gửi liên hệ của bạn</button>
-                        </form>
-                    </div>
 
+
+            </div>
+
+            <!-- map -->
+            <div class="container-right">
+
+                <div class="card map-card">
+                    <iframe
+                        src="https://www.google.com/maps?q=10%20Mai%20Chi%20Tho,%20Thu%20Thiem,%20Thu%20Duc,%20Ho%20Chi%20Minh&hl=vi&z=16&output=embed"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
-        </div>
 
-        <!-- map -->
-        <div class="container-right">
-
-            <div class="card map-card">
-                <iframe
-                    src="https://www.google.com/maps?q=10%20Mai%20Chi%20Tho,%20Thu%20Thiem,%20Thu%20Duc,%20Ho%20Chi%20Minh&hl=vi&z=16&output=embed"
-                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
         </div>
     </main>
 
