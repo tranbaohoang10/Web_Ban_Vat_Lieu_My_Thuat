@@ -674,75 +674,22 @@
         margin-left: 32px;
     }
 
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+    #section-main .section-main-filter-tieuchi {
+        border-bottom: 1px solid #ddd;
+    }
+
+    #section-main .section-main-filter-tieuchi .list label {
+        display: inline-block;
+        margin-bottom: 10px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    #section-main .section-main-filter-tieuchi .list input {
+        display: inline-block;
         cursor: pointer;
     }
 
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau {
-        width: 15px;
-        height: 15px;
-        border: 1px solid #ddd;
-        cursor: pointer;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-do {
-        background-color: red;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-den {
-        background-color: black;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-vang {
-        background-color: yellow;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-hongnhat {
-        background-color: pink;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-xam {
-        background-color: gray;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-xanhduong {
-        background-color: blue;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-xanhla {
-        background-color: green;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-tim {
-        background-color: purple;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-nau {
-        background-color: brown;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-da {
-        background-color: #FEC864;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-xanhjean {
-        background-color: #304384;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-xanhlanhat {
-        background-color: #CCFF00;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-hongdam {
-        background-color: #F0569F;
-    }
-
-    #section-main .section-main-filter .section-main-filter-mausac .list-mau .mau.mau-xanhladam {
-        background-color: #00FF00;
-    }
 
     #section-main .section-main-content {
         width: 85%;
@@ -1274,28 +1221,28 @@
                     </form>
 
                 </div>
-                <div class="section-main-filter-mausac">
+                <div class="section-main-filter-tieuchi">
                     <h3 class="header">
-                        Màu sắc
+                        Tiêu chí
                     </h3>
+                    <form action class="list">
+                        <input type="checkbox" name="sanpham2" id="sanphamcaonhat">
+                        <label for="sanphamcaonhat">Giá cao nhất</label>
+                        <br>
+                        <input type="checkbox" name="sanpham2" id="sanphamthapnhat">
+                        <label for="sanphamthapnhat">Giá thấp nhất</label>
+                        <br>
+                        <input type="checkbox" name="sanpham3" id="sanphamdanhgiacaonhat">
+                        <label for="sanphamdanhgiacaonhat">Đánh giá cao nhất</label>
+                        <br>
+                        <input type="checkbox" name="sanpham4" id="sanphammoi">
+                        <label for="sanphammoi">Sản phẩm mới</label>
+                        <br>
 
-                    <div class="list-mau">
-                        <div class="mau mau-do"></div>
-                        <div class="mau mau-den"></div>
-                        <div class="mau mau-vang"></div>
-                        <div class="mau mau-hongnhat"></div>
-                        <div class="mau mau-xam"></div>
-                        <div class="mau mau-xanhduong"></div>
-                        <div class="mau mau-xanhla"></div>
-                        <div class="mau mau-tim"></div>
-                        <div class="mau mau-nau"></div>
-                        <div class="mau mau-da"></div>
-                        <div class="mau mau-xanhjean"></div>
-                        <div class="mau mau-xanhlanhat"></div>
-                        <div class="mau mau-hongdam"></div>
-                        <div class="mau mau-xanhladam"></div>
-                    </div>
+                    </form>
+
                 </div>
+
             </div>
             <div class="section-main-content">
                 <div class="section-main-content-image">
