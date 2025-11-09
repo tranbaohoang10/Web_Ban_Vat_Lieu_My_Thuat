@@ -375,6 +375,8 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        max-width: 500px;
+        margin: 0 auto;
     }
 
     .product-main-image {
@@ -1064,7 +1066,7 @@
                     <div class="product-images">
                         <!-- Main Image -->
                         <div class="product-main-image">
-                            <img src="./assets/images/product/sp1.jpg"
+                            <img src="./assets/images/logo/list1-1.jpg"
                                 alt="Bút Lông Thiên Long Demon Slayer"
                                 id="mainProductImage">
                             <div class="discount-badge">
@@ -1084,18 +1086,18 @@
                                 id="thumbnailContainer">
                                 <div class="thumbnail-item active" id="thumb-1"
                                     data-index="0">
-                                    <img src="./assets/images/product/sp1.jpg"
+                                    <img src="./assets/images/logo/list1-1.jpg"
                                         alt="Ảnh 1">
                                 </div>
                                 <div class="thumbnail-item" id="thumb-2"
                                     data-index="1">
-                                    <img src="./assets/images/product/sp1.jpg"
+                                    <img src="./assets/images/logo/list1-1.jpg"
                                         alt="Ảnh 2">
                                 </div>
                                 <div class="thumbnail-item" id="thumb-3"
                                     data-index="2">
                                     <img
-                                        src="./assets/images/product/sp1sđssdsd.jpg"
+                                        src="./assets/images/logo/list1-1-cont.png"
                                         alt="Ảnh 3">
                                 </div>
                             </div>
@@ -1133,16 +1135,6 @@
                             <div class="product-price">
                                 <span class="price-current">168,300₫</span>
                                 <span class="price-original">198,000₫</span>
-                            </div>
-                        </div>
-
-                        <div class="product-variants">
-                            <div class="variant-label">Phân loại:</div>
-                            <div class="variant-options">
-                                <div class="variant-option active">SWM-C012/DS
-                                    48 màu</div>
-                                <div class="variant-option">SWM-C013/DS 60
-                                    màu</div>
                             </div>
                         </div>
 
@@ -1388,6 +1380,10 @@
                 input.value = min;
             }
         }
+        addToCartBtn = document.getElementById('addToCartBtn');
+        addToCartBtn.addEventListener('click', function () {
+          alert('Sản phẩm đã được thêm vào giỏ hàng!');
+        });
 
         // su kien chuyen anh san pham
         document.addEventListener('DOMContentLoaded', function () {
