@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<style>
+  #main {
+    display: flex;
+  }
+
+  #main .left {
+    background-color: #17479D;
+    height: 100vh;
+    width: 17%;
+  }
+
+  #main .left .list-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #main .left .list-admin a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  #main .left .list-admin a i {
+    margin-right: 20px;
+  }
+
+  #main .left .list-admin a:hover {
+    background-color: #203247;
+    border-left: #3B7DDD 2px solid;
+  }
+
+  #main .right .container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 100px);
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Make right column grow to fill remaining space so children can space-between */
+  #main .right {
+    flex: 1;
+    background-color: #F9F9F9;
+  }
+
+  #main .right .container .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 10px;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  #main .right .container .dashboard h1 {
+    width: 100%;
+  }
+
+  #main .right .container .dashboard .total-box {
+    background-color: #17479D;
+    color: white;
+    border-radius: 5px;
+  }
+
+  #main .right .container .dashboard .total-box hr {
+    border: 1px solid #ffffff33;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #main .right .container .dashboard .total-box h2,
+  h3 {
+    padding: 10px 20px;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <div id="main">
+    <div class="left">
+      <div class="list-admin">
+        <a href=""><i class="fa-solid fa-house"></i> Tổng quan</a>
+        <a href=""><i class="fa-solid fa-person"></i> Danh sách người dùng</a>
+        <a href=""><i class="fa-solid fa-palette"></i> Danh sách sản phẩm</a>
+        <a href=""><i class="fa-solid fa-box-open"></i> Danh sách đơn hàng</a>
+        <a href=""><i class="fa-solid fa-gift"></i> Danh sách khuyến mãi</a>
+        <a href=""><i class="fa-solid fa-address-book"></i> Danh sách liên hệ</a>
+        <a href=""><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+      </div>
+    </div>
+    <div class="right">
+      <div class="container">
+        <div class="dashboard">
+          <h1>Tổng Quan</h1>
+          <div class="total-nguoidung total-box">
+            <h2><i class="fa-solid fa-chart-pie"></i> Tổng người dùng</h2>
+            <hr>
+            <h3>500 <span>Người dùng </span></h3>
+          </div>
+          <div class="total-sanpham total-box">
+            <h2><i class="fa-brands fa-product-hunt"></i> Tổng sản phẩm</h2>
+            <hr>
+            <h3>250 <span>Sản phẩm trong kho </span></h3>
+          </div>
+          <div class="total-doanhthu total-box">
+            <h2><i class="fa-solid fa-chart-line"></i>Tổng doanh thu</h2>
+            <hr>
+            <h3>300,000,000đ<span></span></h3>
+          </div>
+          <div class="total-donhangbanduoc total-box">
+            <h2><i class="fa-solid fa-file-invoice"></i> Tổng số đơn</h2>
+            <hr>
+            <h3>2000<span> Đơn hàng</span></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
