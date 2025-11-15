@@ -238,10 +238,135 @@ h1 {
     font-weight: bold;
     border-color: #2659F5;
 }
+.order-table td:nth-child(7) {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* phan hoi */
+.btn-reply {
+    background-color: #0D6EFD; /* xanh kiểu bootstrap */
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
 
+.btn-reply:hover {
+    background-color: #0b5ed7;
+}
 
+.btn-reply i {
+    font-size: 14px;
+}
+/* form gui phan hoi */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
 
- 
+.reply-box {
+    width: 500px;
+    background: white;
+    margin: 100px auto;
+    padding: 0;
+    border-radius: 8px;
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.close-reply {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-reply:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body p {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+}
+
+.modal-body label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.modal-body textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.modal-body textarea:focus {
+    border-color: #2659F3;
+    outline: none;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    text-align: right;
+}
+
+.btn-cancel {
+    background: #f5f5f5;
+    color: #333;
+    padding: 8px 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-cancel:hover {
+    background: #e5e5e5;
+}
+
+.btn-send {
+    background: #2659F3;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-send:hover {
+    background: #1e40af;
+}
+
 </style>
 
     <body>
@@ -267,11 +392,12 @@ h1 {
 
                 <div class="container">
                     <div class="order-container">
-                        <h1>Quản lý đơn hàng</h1>
+                        <h1>Quản lý liên hệ</h1>
 
+                        <!-- Ô tìm kiếm -->
                         <div class="search-box">
                             <input type="text"
-                                placeholder="Tìm kiếm đơn hàng...">
+                                placeholder="Tìm kiếm liên hệ...">
                             <button class="search-btn">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
@@ -280,13 +406,12 @@ h1 {
                         <table class="order-table">
                             <thead>
                                 <tr>
-                                    <th>Mã Đơn</th>
-                                    <th>Khách Hàng</th>
+                                    <th>STT</th>
+                                    <th>Họ Tên</th>
                                     <th>Số Điện Thoại</th>
-                                    <th>Ngày Đặt</th>
-                                    <th>Địa Chỉ Giao</th>
-                                    <th>Sản Phẩm</th>
-                                    <th>Thành Tiền</th>
+                                    <th>Email</th>
+                                    <th>Ngày Gửi</th>
+                                    <th>Nội Dung</th>
                                     <th>Trạng Thái</th>
                                     <th>Tùy Chọn</th>
                                 </tr>
@@ -294,16 +419,19 @@ h1 {
 
                             <tbody>
                                 <tr>
-                                    <td>DH01</td>
+                                    <td>1</td>
                                     <td>Nguyễn Văn A</td>
                                     <td>0909123456</td>
+                                    <td>vana@gmail.com</td>
                                     <td>25-11-2025</td>
-                                    <td>Hà Nội, Việt Nam</td>
-                                    <td>Bút Lông Thiên Long</td>
-                                    <td>5,000,000 VND</td>
-                                    <td><span class="status pending">Chờ xác
-                                            nhận</span></td>
+                                    <td>Tôi muốn hỏi về sản phẩm bút lông
+                                    </td>
+                                    <td><span class="status pending">Chờ phản
+                                            hổi</span></td>
                                     <td>
+                                        <button class="btn btn-reply btn-sm">
+                                            <i class="fa-solid fa-reply"></i>
+                                        </button>
                                         <button class="btn btn-warning btn-sm">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
@@ -316,60 +444,16 @@ h1 {
                                 </tr>
 
                                 <tr>
-                                    <td>DH02</td>
+                                    <td>2</td>
                                     <td>Trần Thị B</td>
                                     <td>0912345678</td>
-                                    <td>24-11-2025</td>
-                                    <td>TP.HCM, Việt Nam</td>
-                                    <td>Bảng màu 12 sắc</td>
-                                    <td>4,200,000 VND</td>
-                                    <td><span class="status pending">Chờ xác
-                                            nhận</span></td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>DH03</td>
-                                    <td>Phạm Minh C</td>
-                                    <td>0933456789</td>
-                                    <td>23-11-2025</td>
-                                    <td>Đà Nẵng, Việt Nam</td>
-                                    <td>Bộ bút chì gỗ cao cấp</td>
-                                    <td>7,800,000 VND</td>
-                                    <td><span class="status pending">Chờ xác
-                                            nhận</span></td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>DH04</td>
-                                    <td>Lê Thị D</td>
-                                    <td>0908567234</td>
+                                    <td>btran@gmail.com</td>
                                     <td>22-11-2025</td>
-                                    <td>Cần Thơ, Việt Nam</td>
-                                    <td>Tập vẽ mỹ thuật cao cấp</td>
-                                    <td>3,500,000 VND</td>
-                                    <td><span class="status delivery">Đang
-                                            giao</span></td>
+                                    <td>Tôi chưa nhận được đơn hàng.</td>
+                                    <td><span class="status success">Đã phản
+                                            hồi</span></td>
                                     <td>
+
                                         <button class="btn btn-warning btn-sm">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
@@ -382,93 +466,148 @@ h1 {
                                 </tr>
 
                                 <tr>
-                                    <td>DH05</td>
-                                    <td>Nguyễn Thị E</td>
-                                    <td>0987654321</td>
-                                    <td>21-11-2025</td>
-                                    <td>Hà Nội, Việt Nam</td>
-                                    <td>Bộ màu nước 24 màu</td>
-                                    <td>2,200,000 VND</td>
-                                    <td><span class="status success">Hoàn
-                                            tất</span></td>
+                                    <td>3</td>
+                                    <td>Lê Minh C</td>
+                                    <td>0933456789</td>
+                                    <td>minhc@gmail.com</td>
+                                    <td>20-11-2025</td>
+                                    <td>Sản phẩm bị lỗi, vui lòng đổi trả.</td>
+                                    <td><span class="status success">Đã phản
+                                            hồi</span></td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>DH06</td>
-                                    <td>Nguyễn Thị F</td>
-                                    <td>0987654321</td>
-                                    <td>21-11-2025</td>
-                                    <td>Hà Nội, Việt Nam</td>
-                                    <td>Bộ màu nước 24 màu</td>
-                                    <td>2,200,000 VND</td>
-                                    <td><span class="status pending">Chờ xác
-                                            nhận</span></td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>DH07</td>
-                                    <td>Nguyễn Thị G</td>
-                                    <td>0987654321</td>
-                                    <td>21-11-2025</td>
-                                    <td>Hà Nội, Việt Nam</td>
-                                    <td>Bộ màu nước 24 màu</td>
-                                    <td>2,200,000 VND</td>
-                                    <td><span class="status success">Hoàn
-                                            tất</span></td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>DH08</td>
-                                    <td>Nguyễn Thị H</td>
-                                    <td>0987654321</td>
-                                    <td>21-11-2025</td>
-                                    <td>Hà Nội, Việt Nam</td>
-                                    <td>Bộ màu nước 24 màu</td>
-                                    <td>2,200,000 VND</td>
-                                    <td><span class="status success">Hoàn
-                                            tất</span></td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
 
+                                        <button class="btn btn-warning btn-sm">
+                                            <i
+                                                class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button
+                                            class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Nguyễn Văn D</td>
+                                    <td>0909123456</td>
+                                    <td>vana@gmail.com</td>
+                                    <td>25-11-2025</td>
+                                    <td>Tôi muốn hỏi về sản phẩm bút lông
+                                    </td>
+                                    <td><span class="status success">Đã phản
+                                            hồi</span></td>
+                                    <td>
+
+                                        <button class="btn btn-warning btn-sm">
+                                            <i
+                                                class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button
+                                            class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Nguyễn Văn E</td>
+                                    <td>0909123456</td>
+                                    <td>vana@gmail.com</td>
+                                    <td>25-11-2025</td>
+                                    <td>Tôi muốn hỏi về sản phẩm bút lông
+                                    </td>
+                                    <td><span class="status pending">Chờ phản
+                                            hổi</span></td>
+                                    <td>
+                                        <button class="btn btn-reply btn-sm">
+                                            <i class="fa-solid fa-reply"></i>
+                                        </button>
+                                        <button class="btn btn-warning btn-sm">
+                                            <i
+                                                class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button
+                                            class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Nguyễn Văn F</td>
+                                    <td>0909123456</td>
+                                    <td>vana@gmail.com</td>
+                                    <td>25-11-2025</td>
+                                    <td>Tôi muốn hỏi về sản phẩm bút lông
+                                    </td>
+                                    <td><span class="status pending">Chờ phản
+                                            hổi</span></td>
+                                    <td>
+                                        <button class="btn btn-reply btn-sm">
+                                            <i class="fa-solid fa-reply"></i>
+                                        </button>
+                                        <button class="btn btn-warning btn-sm">
+                                            <i
+                                                class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button
+                                            class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Nguyễn Văn G</td>
+                                    <td>0909123456</td>
+                                    <td>vana@gmail.com</td>
+                                    <td>25-11-2025</td>
+                                    <td>Tôi muốn hỏi về sản phẩm bút lông
+                                    </td>
+                                    <td><span class="status pending">Chờ phản
+                                            hổi</span></td>
+                                    <td>
+                                        <button class="btn btn-reply btn-sm">
+                                            <i class="fa-solid fa-reply"></i>
+                                        </button>
+                                        <button class="btn btn-warning btn-sm">
+                                            <i
+                                                class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button
+                                            class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Nguyễn Văn H</td>
+                                    <td>0909123456</td>
+                                    <td>vana@gmail.com</td>
+                                    <td>25-11-2025</td>
+                                    <td>Tôi muốn hỏi về sản phẩm bút lông
+                                    </td>
+                                    <td><span class="status pending">Chờ phản
+                                            hổi</span></td>
+                                    <td>
+                                        <button class="btn btn-reply btn-sm">
+                                            <i class="fa-solid fa-reply"></i>
+                                        </button>
+                                        <button class="btn btn-warning btn-sm">
+                                            <i
+                                                class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button
+                                            class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 
+                        <!-- Phân trang -->
                         <div class="pagination">
                             <a href="#" class="page-link">Trước</a>
                             <a href="#" class="page-link active">1</a>
@@ -476,12 +615,71 @@ h1 {
                             <a href="#" class="page-link">3</a>
                             <a href="#" class="page-link">Sau</a>
                         </div>
-
                     </div>
 
                 </div>
 
             </div>
+
+            <!-- Modal Form Phản Hồi -->
+            <div id="replyModal" class="modal">
+                <div class="reply-box">
+                    <div class="modal-header">
+                        <span class="close-reply">&times;</span>
+                        <h3>Phản Hồi Khách Hàng</h3>
+                    </div>
+
+                    <div class="modal-body">
+                        <p><strong>Email:</strong> hanano1@gmail.com</p>
+
+                        <label for="replyMessage">Nội dung phản hồi:</label>
+                        <textarea id="replyMessage"
+                            placeholder="Nhập nội dung phản hồi..."
+                            rows="6"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn-cancel">Hủy</button>
+                        <button class="btn-send">Gửi phản hồi</button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Lấy các phần tử
+                const modal = document.getElementById('replyModal');
+                const closeBtn = document.querySelector('.close-reply');
+                const cancelBtn = document.querySelector('.btn-cancel');
+                const sendBtn = document.querySelector('.btn-send');
+                const replyBtns = document.querySelectorAll('.btn-reply');
+
+                // Mở modal khi click nút phản hồi
+                replyBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        modal.style.display = 'block';
+                    });
+                });
+
+               
+
+                // Đóng modal khi click nút Hủy
+                cancelBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+
+               
+
+                // Xử lý gửi phản hồi
+                sendBtn.addEventListener('click', function() {
+                    const message = document.getElementById('replyMessage').value;
+                    
+                   
+                    
+                    alert('Đã gửi phản hồi thành công!');
+                    document.getElementById('replyMessage').value = '';
+                    modal.style.display = 'none';
+                });
+            </script>
         </body>
 
     </html>
