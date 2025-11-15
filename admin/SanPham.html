@@ -298,6 +298,36 @@
   .form-right input {
     margin-bottom: 10px;
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+    gap: 5px;
+  }
+
+  .page-link {
+    padding: 6px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    color: #0d6efd;
+    background-color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+
+  .page-link:hover {
+    background-color: #e9ecef;
+  }
+
+  .page-link.active {
+    background-color: #2659F5;
+    color: white;
+    font-weight: bold;
+    border-color: #2659F5;
+  }
 </style>
 
 <body>
@@ -416,7 +446,11 @@
                 <td>80,800</td>
                 <td>14-11-2025</td>
                 <td>100</td>
-                <td><button class="chinhsua-sanpham">
+                <td>
+                  <button class="chinhsua-sanpham" data-id="SP01" data-name="Bút Lông Thiên Long" data-category="CAT01"
+                    data-price="168300" data-brand="Thiên Long" data-size="12 màu" data-madein="Việt Nam"
+                    data-warning="Không nuốt" data-thumbnail="images/sp01.jpg"
+                    data-subimgs='["images/sp01_1.jpg","images/sp01_2.jpg"]' data-discountprice='10'>
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
                   <button class="xoa-sanpham">
@@ -426,6 +460,13 @@
               </tr>
             </tbody>
           </table>
+          <div class="pagination">
+            <a href="#" class="page-link">Trước</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">Sau</a>
+          </div>
         </div>
       </div>
     </div>
@@ -600,6 +641,56 @@
       subImages.splice(index, 1);
       renderSubImages();
     }
+    // ================== Chỉnh sửa sản phẩm ==================
+
+    const editButtons = document.querySelectorAll(".chinhsua-sanpham");
+
+    editButtons.forEach(btn => {
+      btn.addEventListener("click", function () {
+
+        // Mở modal
+        modal.style.display = "flex";
+
+        // Gán vào form
+        document.getElementById("productID").value = 'SP01';
+        document.getElementById("name").value = 'Bút Lông Thiên Long';
+        document.getElementById("categoryID").value = 'CAT01';
+        document.getElementById("discountDefault").value = '10';
+        document.getElementById("price").value = '168300';
+        document.getElementById("brand").value = 'Thiên Long';
+        document.getElementById("size").value = '12 màu';
+        document.getElementById("madeIn").value = 'Việt Nam';
+        document.getElementById("warning").value = 'Tránh xa tầm tay trẻ em';
+
+        // ===== Ảnh chính =====
+        if (thumbnail && thumbnail !== "") {
+          previewImg.src = thumbnail;
+          previewImg.style.display = "block";
+          removeImgBtn.style.display = "inline-block";
+        }
+
+        // ===== Ảnh phụ =====
+        subImages = []; // reset
+        subimgs.forEach(url => {
+          subImages.push({ file: null, url: url });
+        });
+        renderSubImages();
+      });
+    });
+    // =================== Form Reset ===================
+    btnAdd.addEventListener("click", () => {
+      modal.style.display = "flex";
+
+      // reset form
+      document.querySelectorAll("#modal-add input").forEach(i => i.value = "");
+
+      previewImg.src = "";
+      previewImg.style.display = "none";
+      removeImgBtn.style.display = "none";
+
+      subImages = [];
+      renderSubImages();
+    });
   </script>
 </body>
 
