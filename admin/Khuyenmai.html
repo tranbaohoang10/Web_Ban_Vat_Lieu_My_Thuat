@@ -283,12 +283,12 @@
     text-align: center;
   }
 
-  #customerModal .modal-header h2 {
+  #Dialog-them-km .modal-header h2 {
     width: 100%;
     text-align: center;
   }
 
-  #editCustomerModal .modal-header h2 {
+  #Dialog-sua-km .modal-header h2 {
     width: 100%;
     text-align: center;
   }
@@ -444,85 +444,133 @@
       <div class="container">
 
         <div class="order-container">
-          <h1>Danh sách người dùng</h1>
+          <h1>Danh sách khuyến mãi</h1>
           <div class="search">
             <div class="search-input-icon">
-              <input type="text" placeholder="Tìm kiếm người dùng...">
+              <input type="text" placeholder="Tìm kiếm khuyến m...">
               <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
             </div>
-            <button class="btn-them-khach-hang">Thêm khách hàng</button>
+            <button class="btn-them-khach-hang">Thêm khuyến mãi</button>
           </div>
           <table class="order-table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Họ và tên</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Ngày đăng ký</th>
-                <th>Năm sinh</th>
-                <th>Vai trò</th>
+                <th>STT</th>
+                <th>Mã khuyến mãi</th>
+                <th>Tên khuyến mãi</th>
+                <th>Mô tả</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Giảm giá</th>
                 <th>Tùy chọn</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
-                <td>ND01</td>
-                <td>Nguyễn Văn A</td>
-                <td>0909123456</td>
-                <td>Hà Nội, Việt Nam</td>
-                <td>24/12/2025</td>
-                <td>01/06/2005</td>
-                <td>User</td>
+                <td>1</td>
+                <td>KM001</td>
+                <td>Giảm giá mùa hè</td>
+                <td>Khuyến mãi đặc biệt cho mùa hè, giảm giá các sản phẩm mùa hè.</td>
+                <td>01/06/2025</td>
+                <td>31/01/2025</td>
+                <td>30%</td>
                 <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
                   </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
               </tr>
 
               <tr>
-                <td>ND02</td>
-                <td>Trần Thị B</td>
-                <td>0912345678</td>
-                <td>TP.HCM, Việt Nam</td>
-                <td>15/09/2024</td>
-                <td>30/04/2005</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-
-              <tr>
-                <td>ND03</td>
-                <td>Phạm Minh C</td>
-                <td>0933456789</td>
-                <td>Đà Nẵng, Việt Nam</td>
-                <td>13/02/2024</td>
-                <td>02/09/2003</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-
-              <tr>
-                <td>ND04</td>
-                <td>Lê Thị D</td>
-                <td>0908567234</td>
-                <td>Cần Thơ, Việt Nam</td>
-                <td>06/12/2025</td>
-                <td>20/11/2004</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-
-              <tr>
-                <td>ND05</td>
-                <td>Nguyễn Thị E</td>
-                <td>0987654321</td>
-                <td>Hà Nội, Việt Nam</td>
+                <td>2</td>
+                <td>KM002</td>
+                <td>Khuyến mãi Tết Nguyên đán</td>
+                <td>Giảm giá đặc biệt nhân dịp Tết Nguyên Đán, áp dụng cho tất cả sản phẩm.</td>
                 <td>01/01/2025</td>
-                <td>20/10/2005</td>
-                <td>User</td>
+                <td>31/03/2025</td>
+                <td>15%</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>3</td>
+                <td>KM003</td>
+                <td>Giảm giá sinh viên </td>
+                <td>Khuyến mãi đặc biệt dành cho sinh viên, giảm giá cho các mặt hàng học tập.</td>
+                <td>01/03/2025</td>
+                <td>31/05/2025</td>
+                <td>10%</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>4</td>
+                <td>KM004</td>
+                <td>Khuyến mãi đầu năm</td>
+                <td>Giảm giá đặc biệt đầu năm, áp dụng cho tất cả các sản phẩm trong cửa hàng.</td>
+                <td>01/01/2025</td>
+                <td>15/01/2025</td>
+                <td>30%</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>5</td>
+                <td>KM005</td>
+                <td>Giảm giá Giáng Sinh</td>
+                <td>Khuyến mãi dịp Giáng Sinh, giảm giá lên đến 50% cho các sản phẩm mùa lễ hội.</td>
+                <td>01/12/2025</td>
+                <td>31/12/2025</td>
+                <td>50%</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>6</td>
+                <td>KM006</td>
+                <td>Giảm giá Tết Trung Thu</td>
+                <td>Giảm giá sản phẩm đặc biệt cho Tết Trung Thu, áp dụng cho các mặt hàng bánh trung thu.</td>
+                <td>01/09/2025</td>
+                <td>30/09/2025</td>
+                <td>10%</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>7</td>
+                <td>KM007</td>
+                <td>Giảm giá Black Friday</td>
+                <td>Giảm giá cực lớn nhân dịp Black Friday, lên đến 40% cho các mặt hàng công nghệ.</td>
+                <td>01/11/2025</td>
+                <td>30/11/2025</td>
+                <td>40%</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>8</td>
+                <td>KM005</td>
+                <td>Giảm giá Lễ Quốc Khách</td>
+                <td>Khuyến mãi đặc biệt trong dịp lễ Quốc Khánh, giảm giá cho các sản phẩm quà tặng.</td>
+                <td>01/09/2025</td>
+                <td>03/09/2025</td>
+                <td>5%</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>9</td>
+                <td>KM009</td>
+                <td>Giảm giá mua 1 tặng 1</td>
+                <td>Khuyến mãi Mua 1 Tặng 1, áp dụng cho tất cả sản phẩm trong cửa hàng.	</td>
+                <td>01/06/2025</td>
+                <td>30/06/2025</td>
+                <td>100%</td>
                 <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
                   </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
               </tr>
@@ -542,37 +590,43 @@
 
   </div>
 
-  <!-- Dialog thêm khách hàng -->
-  <div id="customerModal" class="modal">
+  <!-- =============Dialog thêm khuyến mãi============= -->
+  <div id="Dialog-them-km" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Thêm khách hàng</h2>
+        <h2>Thêm khuyến mãi</h2>
         <span class="close-modal">&times;</span>
       </div>
 
       <div class="modal-body">
         <div class="form-group">
-          <label for="tenKH">Họ và tên</label>
-          <input type="text" id="tenKH" placeholder="Nhập họ và tên">
+          <label for="maKM">Mã khuyến mãi</label>
+          <input type="text" id="maKM" placeholder="Nhập mã khuyến mãi">
         </div>
 
         <div class="form-group">
-          <label for="sdtKH">Số điện thoại</label>
-          <input type="text" id="sdtKH" placeholder="Nhập số điện thoại">
+          <label for="sdtKH">Tên khuyến mãi</label>
+          <input type="text" id="sdtKH" placeholder="Nhập tên khuyến mãi">
         </div>
 
         <div class="form-group">
-          <label for="diaChiKH">Địa chỉ</label>
-          <input type="text" id="diaChiKH" placeholder="Nhập địa chỉ">
+          <label for="diaChiKH">Mô tả</label>
+          <input type="text" id="diaChiKH" placeholder="Nhập mô tả">
         </div>
 
         <div class="form-group">
-          <label for="vaiTroKH">Vai trò</label>
-          <select id="vaiTroKH">
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-            <option value="Staff">Staff</option>
-          </select>
+          <label for="vaiTroKH">Ngày bắt đầu</label>
+            <input type="date" id="vaiTroKH" placeholder="Nhập ngày bắt đầu">
+        </div>
+
+        <div class="form-group">
+          <label for="vaiTroKH">Ngày ngày kết thúc</label>
+            <input type="date" id="vaiTroKH" placeholder="Nhập ngày kết thúc">
+        </div>
+
+        <div class="form-group">
+          <label for="vaiTroKH">Giảm giá</label>
+            <input type="text" id="vaiTroKH" placeholder="Nhập % giảm giá">
         </div>
       </div>
 
@@ -583,37 +637,30 @@
     </div>
   </div>
 
-  <!-- ========== Dialog SỬA khách hàng ========== -->
-  <div id="editCustomerModal" class="modal">
+  <!-- ========== Dialog chỉnh sửa khuyến mãi ========== -->
+  <div id="Dialog-sua-km" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Chỉnh sửa thông tin</h2>
+        <h2>Chỉnh sửa khuyến mãi</h2>
         <span class="close-edit-modal">&times;</span>
       </div>
 
       <div class="modal-body">
         <div class="form-group">
-          <label for="editTenKH">Họ và tên</label>
-          <input type="text" id="editTenKH" placeholder="Nhập họ và tên">
+          <label for="sua-ngay-km">Ngày bắt đầu</label>
+          <input type="date" id="sua-ngay-km" placeholder="Nhập bắt đầu">
         </div>
 
         <div class="form-group">
-          <label for="editSdtKH">Số điện thoại</label>
-          <input type="text" id="editSdtKH" placeholder="Nhập số điện thoại">
+          <label for="sua-ngay-km">Ngày kết thúc</label>
+          <input type="date" id="sua-ngay-km" placeholder="Nhập ngày kết thúc">
         </div>
 
-        <div class="form-group">
-          <label for="editDiaChiKH">Địa chỉ</label>
-          <input type="text" id="editDiaChiKH" placeholder="Nhập địa chỉ">
-        </div>
+        
 
         <div class="form-group">
-          <label for="editVaiTroKH">Vai trò</label>
-          <select id="editVaiTroKH">
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-            <option value="Staff">Staff</option>
-          </select>
+          <label for="sua-giam-gia">Giảm giá</label>
+          <input type="text" id="sua-giam-gia" placeholder="Nhập % giảm giá">
         </div>
       </div>
 
@@ -627,7 +674,7 @@
   <!-- JS mở / đóng dialog -->
   <script>
     const btnThemKH = document.querySelector('.btn-them-khach-hang');
-    const modal = document.getElementById('customerModal');
+    const modal = document.getElementById('Dialog-them-km');
     const btnClose = document.querySelector('.close-modal');
     const btnCancel = document.querySelector('.btn-cancel');
 
@@ -652,7 +699,7 @@
       }
     });
 
-    const modalEdit = document.getElementById("editCustomerModal");
+    const modalEdit = document.getElementById("Dialog-sua-km");
     const btnCloseEdit = document.querySelector(".close-edit-modal");
     const btnEditCancel = document.querySelector(".btn-edit-cancel");
 
@@ -672,7 +719,7 @@
         let vaitro = row.querySelector(".col-vaitro").innerText;
 
         // Gán vào dialog sửa
-        document.getElementById("editTenKH").value = ten;
+        document.getElementById("sua-ngay-km").value = ten;
         document.getElementById("editSdtKH").value = sdt;
         document.getElementById("editDiaChiKH").value = diachi;
         document.getElementById("editVaiTroKH").value = vaitro;
