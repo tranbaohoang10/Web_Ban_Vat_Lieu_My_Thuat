@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <title>Document</title>
-</head>
-<style>
+    <title>Document</title>
+  </head>
+  <style>
   #main {
     display: flex;
   }
@@ -330,169 +331,184 @@
   }
 </style>
 
-<body>
-  <div id="main">
-    <div class="left">
-      <div class="list-admin">
-        <a href><i class="fa-solid fa-house"></i> Tổng quan</a>
-        <a href><i class="fa-solid fa-palette"></i>Quản lý sản phẩm</a>
-        <a href><i class="fa-solid fa-person"></i>Quản lý người dùng</a>
-        <a href><i class="fa-solid fa-box-open"></i>Quản lý đơn hàng</a>
-        <a href><i class="fa-solid fa-gift"></i>Quản lý khuyến mãi</a>
-        <a href><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
-        <a href><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+  <body>
+    <div id="main">
+      <div class="left">
+        <div class="list-admin">
+          <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+          <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
+            kê</a>
+          <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
+            lý sản phẩm</a>
+          <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
+            lý người dùng</a>
+          <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
+            lý đơn hàng</a>
+          <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
+            khuyến mãi</a>
+          <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý
+            Slider Show</a>
+          <a href="AdminLienHe.html"><i
+              class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+          <a href><i class="fa-solid fa-right-from-bracket"></i>
+            Đăng xuất</a>
+        </div>
       </div>
-    </div>
-    <div class="right">
-      <div class="container">
-        <div class="list-sanpham-container">
-          <div class="sanpham-header">
-            <h1>Danh sách sản phẩm</h1>
-            <div class="sanpham-header-timkiem">
-              <input type="text" placeholder="Tìm kiếm">
-              <button class="icon-timkiem"><i class="fa-solid fa-magnifying-glass"></i></button>
-              <button class="them-sanpham">Thêm sản phẩm</button>
+      <div class="right">
+        <div class="container">
+          <div class="list-sanpham-container">
+            <div class="sanpham-header">
+              <h1>Danh sách sản phẩm</h1>
+              <div class="sanpham-header-timkiem">
+                <input type="text" placeholder="Tìm kiếm">
+                <button class="icon-timkiem"><i
+                    class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="them-sanpham">Thêm sản phẩm</button>
+              </div>
             </div>
-          </div>
-          <table class="sanpham-table">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>ID</th>
-                <th>Tên sản phẩm</th>
-                <th>Danh mục</th>
-                <th>Giá</th>
-                <th>Ngày tạo</th>
-                <th>Số lượng tồn</th>
-                <th>Tùy chọn</th>
-              </tr>
-            </thead>
+            <table class="sanpham-table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>ID</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Danh mục</th>
+                  <th>Giá</th>
+                  <th>Ngày tạo</th>
+                  <th>Số lượng tồn</th>
+                  <th>Tùy chọn</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>SP01</td>
-                <td>Bút Lông Thiên Long</td>
-                <td>Bút lông màu</td>
-                <td>168,300</td>
-                <td>14-11-2025</td>
-                <td>100</td>
-                <td>
-                  <button class="chinhsua-sanpham">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="xoa-sanpham">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>SP01</td>
+                  <td>Bút Lông Thiên Long</td>
+                  <td>Bút lông màu</td>
+                  <td>168,300</td>
+                  <td>14-11-2025</td>
+                  <td>100</td>
+                  <td>
+                    <button class="chinhsua-sanpham">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="xoa-sanpham">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
 
-              <tr>
-                <td>2</td>
-                <td>SP02</td>
-                <td>Bút sáp 12/18 màu Thiên Long</td>
-                <td>Bút sáp màu</td>
-                <td>11,800</td>
-                <td>14-11-2025</td>
-                <td>100</td>
-                <td><button class="chinhsua-sanpham">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="xoa-sanpham">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+                <tr>
+                  <td>2</td>
+                  <td>SP02</td>
+                  <td>Bút sáp 12/18 màu Thiên Long</td>
+                  <td>Bút sáp màu</td>
+                  <td>11,800</td>
+                  <td>14-11-2025</td>
+                  <td>100</td>
+                  <td><button class="chinhsua-sanpham">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="xoa-sanpham">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
 
-              <tr>
-                <td>3</td>
-                <td>SP03</td>
-                <td>Bút lông 12 màu Fiber Pen Thiên Long Colokit</td>
-                <td>Bút lông màu</td>
-                <td>21,780</td>
-                <td>14-11-2025</td>
-                <td>100</td>
-                <td><button class="chinhsua-sanpham">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="xoa-sanpham">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+                <tr>
+                  <td>3</td>
+                  <td>SP03</td>
+                  <td>Bút lông 12 màu Fiber Pen Thiên Long Colokit</td>
+                  <td>Bút lông màu</td>
+                  <td>21,780</td>
+                  <td>14-11-2025</td>
+                  <td>100</td>
+                  <td><button class="chinhsua-sanpham">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="xoa-sanpham">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
 
-              <tr>
-                <td>4</td>
-                <td>SP04</td>
-                <td>Acrylic Markers/ Bút sơn/ Bút lông ThiênLong Colokit</td>
-                <td>Bút lông màu</td>
-                <td>45,500</td>
-                <td>14-11-2025</td>
-                <td>100</td>
-                <td><button class="chinhsua-sanpham">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="xoa-sanpham">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+                <tr>
+                  <td>4</td>
+                  <td>SP04</td>
+                  <td>Acrylic Markers/ Bút sơn/ Bút lông ThiênLong Colokit</td>
+                  <td>Bút lông màu</td>
+                  <td>45,500</td>
+                  <td>14-11-2025</td>
+                  <td>100</td>
+                  <td><button class="chinhsua-sanpham">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="xoa-sanpham">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
 
-              <tr>
-                <td>5</td>
-                <td>SP05</td>
-                <td>Bộ màu Gouache dạng tuýp 12ml Thiên Long Colokit</td>
-                <td>Màu nước</td>
-                <td>80,800</td>
-                <td>14-11-2025</td>
-                <td>100</td>
-                <td>
-                  <button class="chinhsua-sanpham" data-id="SP01" data-name="Bút Lông Thiên Long" data-category="CAT01"
-                    data-price="168300" data-brand="Thiên Long" data-size="12 màu" data-madein="Việt Nam"
-                    data-warning="Không nuốt" data-thumbnail="images/sp01.jpg"
-                    data-subimgs='["images/sp01_1.jpg","images/sp01_2.jpg"]' data-discountprice='10'>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="xoa-sanpham">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="pagination">
-            <a href="#" class="page-link">Trước</a>
-            <a href="#" class="page-link active">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link">3</a>
-            <a href="#" class="page-link">Sau</a>
+                <tr>
+                  <td>5</td>
+                  <td>SP05</td>
+                  <td>Bộ màu Gouache dạng tuýp 12ml Thiên Long Colokit</td>
+                  <td>Màu nước</td>
+                  <td>80,800</td>
+                  <td>14-11-2025</td>
+                  <td>100</td>
+                  <td>
+                    <button class="chinhsua-sanpham" data-id="SP01"
+                      data-name="Bút Lông Thiên Long" data-category="CAT01"
+                      data-price="168300" data-brand="Thiên Long"
+                      data-size="12 màu" data-madein="Việt Nam"
+                      data-warning="Không nuốt" data-thumbnail="images/sp01.jpg"
+                      data-subimgs='["images/sp01_1.jpg","images/sp01_2.jpg"]'
+                      data-discountprice='10'>
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="xoa-sanpham">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <a href="#" class="page-link">Trước</a>
+              <a href="#" class="page-link active">1</a>
+              <a href="#" class="page-link">2</a>
+              <a href="#" class="page-link">3</a>
+              <a href="#" class="page-link">Sau</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- FORM THÊM SẢN PHẨM -->
-    <div id="modal-add" class="modal">
-      <div class="modal-content">
-        <h2>Thêm sản phẩm</h2>
+      <!-- FORM THÊM SẢN PHẨM -->
+      <div id="modal-add" class="modal">
+        <div class="modal-content">
+          <h2>Thêm sản phẩm</h2>
 
-        <div class="form-row">
+          <div class="form-row">
 
-          <!-- ================= LEFT COLUMN ================= -->
-          <div class="form-left">
+            <!-- ================= LEFT COLUMN ================= -->
+            <div class="form-left">
 
-            <label>Mã danh mục</label>
-            <input type="text" id="categoryID" placeholder="VD: CAT01">
+              <label>Mã danh mục</label>
+              <input type="text" id="categoryID" placeholder="VD: CAT01">
 
-            <label>Mã sản phẩm</label>
-            <input type="text" id="productID" placeholder="VD: SP01">
+              <label>Mã sản phẩm</label>
+              <input type="text" id="productID" placeholder="VD: SP01">
 
-            <label>Tên sản phẩm</label>
-            <input type="text" id="name" placeholder="Tên sản phẩm">
+              <label>Tên sản phẩm</label>
+              <input type="text" id="name" placeholder="Tên sản phẩm">
 
-            <label>Ảnh chính</label>
-            <input type="file" id="thumbnail-main" accept="image/*">
-            <img id="previewImg-main" src="" style="width:120px; display:none; margin-top: 10px;">
-            <button type="button" id="removeImgBtn-main" style="
+              <label>Ảnh chính</label>
+              <input type="file" id="thumbnail-main" accept="image/*">
+              <img id="previewImg-main" src
+                style="width:120px; display:none; margin-top: 10px;">
+              <button type="button" id="removeImgBtn-main" style="
           background:#DC3545;
           color:white;
           padding:5px 10px;
@@ -503,53 +519,52 @@
           display:none;
         ">Xóa ảnh</button>
 
-            <label>Ảnh phụ</label>
-            <input type="file" id="thumbnail-sub" multiple accept="image/*">
+              <label>Ảnh phụ</label>
+              <input type="file" id="thumbnail-sub" multiple accept="image/*">
 
-            <div id="sub-image-preview" style="
+              <div id="sub-image-preview" style="
           display:flex;
           flex-wrap:wrap;
           gap:10px;
           margin-top:10px;
         "></div>
-            <label>Giảm giá(%)</label>
-            <input type="number" id="discountDefault" placeholder="VD: 10">
+              <label>Giảm giá(%)</label>
+              <input type="number" id="discountDefault" placeholder="VD: 10">
 
-            <label>Giá bán</label>
-            <input type="number" id="price" placeholder="VD: 150000">
+              <label>Giá bán</label>
+              <input type="number" id="price" placeholder="VD: 150000">
+            </div>
+
+            <!-- ================= RIGHT COLUMN ================= -->
+            <div class="form-right">
+
+              <label>Thương hiệu</label>
+              <input type="text" id="brand" placeholder="VD: Coolkit">
+
+              <label>Kích thước</label>
+              <input type="text" id="size" placeholder="VD: 12 màu / 20cm">
+
+              <label>Xuất xứ</label>
+              <input type="text" id="madeIn" placeholder="VD: Việt Nam">
+
+              <label>Cảnh báo an toàn</label>
+              <input type="text" id="warning"
+                placeholder="VD: Tránh xa tầm tay trẻ em">
+
+            </div>
+
           </div>
 
-          <!-- ================= RIGHT COLUMN ================= -->
-          <div class="form-right">
-
-            <label>Thương hiệu</label>
-            <input type="text" id="brand" placeholder="VD: Coolkit">
-
-            <label>Kích thước</label>
-            <input type="text" id="size" placeholder="VD: 12 màu / 20cm">
-
-            <label>Xuất xứ</label>
-            <input type="text" id="madeIn" placeholder="VD: Việt Nam">
-
-            <label>Cảnh báo an toàn</label>
-            <input type="text" id="warning" placeholder="VD: Tránh xa tầm tay trẻ em">
-
-
-
+          <div class="modal-buttons">
+            <button id="btn-save">Lưu</button>
+            <button id="btn-close">Hủy</button>
           </div>
 
         </div>
-
-        <div class="modal-buttons">
-          <button id="btn-save">Lưu</button>
-          <button id="btn-close">Hủy</button>
-        </div>
-
       </div>
-    </div>
 
-  </div>
-  <script>
+    </div>
+    <script>
     const modal = document.getElementById("modal-add");
     const btnAdd = document.querySelector(".them-sanpham");
     const btnClose = document.getElementById("btn-close");
@@ -722,6 +737,6 @@
       });
     });
   </script>
-</body>
+  </body>
 
 </html>

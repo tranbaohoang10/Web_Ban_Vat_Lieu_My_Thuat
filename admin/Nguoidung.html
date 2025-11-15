@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-</head>
-<style>
+  </head>
+  <style>
   #main {
     display: flex;
   }
@@ -426,206 +427,227 @@
   }
 </style>
 
-<body>
-  <div id="main">
-    <div class="left">
-      <div class="list-admin">
-        <a href><i class="fa-solid fa-house"></i> Tổng quan</a>
-        <a href><i class="fa-solid fa-palette"></i>Quản lý sản phẩm</a>
-        <a href><i class="fa-solid fa-person"></i>Quản lý người dùng</a>
-        <a href><i class="fa-solid fa-box-open"></i>Quản lý đơn hàng</a>
-        <a href><i class="fa-solid fa-gift"></i>Quản lý khuyến mãi</a>
-        <a href><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
-        <a href><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+  <body>
+    <div id="main">
+      <div class="left">
+        <div class="list-admin">
+          <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+          <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
+            kê</a>
+          <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
+            lý sản phẩm</a>
+          <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
+            lý người dùng</a>
+          <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
+            lý đơn hàng</a>
+          <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
+            khuyến mãi</a>
+          <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý
+            Slider Show</a>
+          <a href="AdminLienHe.html"><i
+              class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+          <a href><i class="fa-solid fa-right-from-bracket"></i>
+            Đăng xuất</a>
+        </div>
       </div>
-    </div>
-    <div class="right">
+      <div class="right">
 
-      <div class="container">
+        <div class="container">
 
-        <div class="order-container">
-          <h1>Danh sách người dùng</h1>
-          <div class="search">
-            <div class="search-input-icon">
-              <input type="text" placeholder="Tìm kiếm người dùng...">
-              <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <div class="order-container">
+            <h1>Danh sách người dùng</h1>
+            <div class="search">
+              <div class="search-input-icon">
+                <input type="text" placeholder="Tìm kiếm người dùng...">
+                <div class="icon"><i
+                    class="fa-solid fa-magnifying-glass"></i></div>
+              </div>
+              <button class="btn-them-khach-hang">Thêm khách hàng</button>
             </div>
-            <button class="btn-them-khach-hang">Thêm khách hàng</button>
+            <table class="order-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Họ và tên</th>
+                  <th>Số điện thoại</th>
+                  <th>Địa chỉ</th>
+                  <th>Ngày đăng ký</th>
+                  <th>Năm sinh</th>
+                  <th>Vai trò</th>
+                  <th>Tùy chọn</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>ND01</td>
+                  <td>Nguyễn Văn A</td>
+                  <td>0909123456</td>
+                  <td>Hà Nội, Việt Nam</td>
+                  <td>24/12/2025</td>
+                  <td>01/06/2005</td>
+                  <td>User</td>
+                  <td><button class="btn-Sua"><i
+                        class="fa-solid fa-pen-to-square"></i>
+                    </button> <button class="btn-Xoa"><i
+                        class="fa-solid fa-trash"></i></button></td>
+                </tr>
+
+                <tr>
+                  <td>ND02</td>
+                  <td>Trần Thị B</td>
+                  <td>0912345678</td>
+                  <td>TP.HCM, Việt Nam</td>
+                  <td>15/09/2024</td>
+                  <td>30/04/2005</td>
+                  <td>User</td>
+                  <td><button class="btn-Sua"><i
+                        class="fa-solid fa-pen-to-square"></i>
+                    </button> <button class="btn-Xoa"><i
+                        class="fa-solid fa-trash"></i></button></td>
+                </tr>
+
+                <tr>
+                  <td>ND03</td>
+                  <td>Phạm Minh C</td>
+                  <td>0933456789</td>
+                  <td>Đà Nẵng, Việt Nam</td>
+                  <td>13/02/2024</td>
+                  <td>02/09/2003</td>
+                  <td>User</td>
+                  <td><button class="btn-Sua"><i
+                        class="fa-solid fa-pen-to-square"></i>
+                    </button> <button class="btn-Xoa"><i
+                        class="fa-solid fa-trash"></i></button></td>
+                </tr>
+
+                <tr>
+                  <td>ND04</td>
+                  <td>Lê Thị D</td>
+                  <td>0908567234</td>
+                  <td>Cần Thơ, Việt Nam</td>
+                  <td>06/12/2025</td>
+                  <td>20/11/2004</td>
+                  <td>User</td>
+                  <td><button class="btn-Sua"><i
+                        class="fa-solid fa-pen-to-square"></i>
+                    </button> <button class="btn-Xoa"><i
+                        class="fa-solid fa-trash"></i></button></td>
+                </tr>
+
+                <tr>
+                  <td>ND05</td>
+                  <td>Nguyễn Thị E</td>
+                  <td>0987654321</td>
+                  <td>Hà Nội, Việt Nam</td>
+                  <td>01/01/2025</td>
+                  <td>20/10/2005</td>
+                  <td>User</td>
+                  <td><button class="btn-Sua"><i
+                        class="fa-solid fa-pen-to-square"></i>
+                    </button> <button class="btn-Xoa"><i
+                        class="fa-solid fa-trash"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <a href="#" class="page-link">Trước</a>
+              <a href="#" class="page-link active">1</a>
+              <a href="#" class="page-link">2</a>
+              <a href="#" class="page-link">3</a>
+              <a href="#" class="page-link">Sau</a>
+            </div>
           </div>
-          <table class="order-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Họ và tên</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Ngày đăng ký</th>
-                <th>Năm sinh</th>
-                <th>Vai trò</th>
-                <th>Tùy chọn</th>
-              </tr>
-            </thead>
+        </div>
 
-            <tbody>
-              <tr>
-                <td>ND01</td>
-                <td>Nguyễn Văn A</td>
-                <td>0909123456</td>
-                <td>Hà Nội, Việt Nam</td>
-                <td>24/12/2025</td>
-                <td>01/06/2005</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
+      </div>
 
-              <tr>
-                <td>ND02</td>
-                <td>Trần Thị B</td>
-                <td>0912345678</td>
-                <td>TP.HCM, Việt Nam</td>
-                <td>15/09/2024</td>
-                <td>30/04/2005</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
+    </div>
 
-              <tr>
-                <td>ND03</td>
-                <td>Phạm Minh C</td>
-                <td>0933456789</td>
-                <td>Đà Nẵng, Việt Nam</td>
-                <td>13/02/2024</td>
-                <td>02/09/2003</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
+    <!-- Dialog thêm khách hàng -->
+    <div id="customerModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Thêm khách hàng</h2>
+          <span class="close-modal">&times;</span>
+        </div>
 
-              <tr>
-                <td>ND04</td>
-                <td>Lê Thị D</td>
-                <td>0908567234</td>
-                <td>Cần Thơ, Việt Nam</td>
-                <td>06/12/2025</td>
-                <td>20/11/2004</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="tenKH">Họ và tên</label>
+            <input type="text" id="tenKH" placeholder="Nhập họ và tên">
+          </div>
 
-              <tr>
-                <td>ND05</td>
-                <td>Nguyễn Thị E</td>
-                <td>0987654321</td>
-                <td>Hà Nội, Việt Nam</td>
-                <td>01/01/2025</td>
-                <td>20/10/2005</td>
-                <td>User</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="pagination">
-            <a href="#" class="page-link">Trước</a>
-            <a href="#" class="page-link active">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link">3</a>
-            <a href="#" class="page-link">Sau</a>
+          <div class="form-group">
+            <label for="sdtKH">Số điện thoại</label>
+            <input type="text" id="sdtKH" placeholder="Nhập số điện thoại">
+          </div>
+
+          <div class="form-group">
+            <label for="diaChiKH">Địa chỉ</label>
+            <input type="text" id="diaChiKH" placeholder="Nhập địa chỉ">
+          </div>
+
+          <div class="form-group">
+            <label for="vaiTroKH">Vai trò</label>
+            <select id="vaiTroKH">
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
+              <option value="Staff">Staff</option>
+            </select>
           </div>
         </div>
-      </div>
 
+        <div class="modal-footer">
+          <button class="btn-cancel">Hủy</button>
+          <button class="btn-save">Lưu</button>
+        </div>
+      </div>
     </div>
 
-  </div>
-
-  <!-- Dialog thêm khách hàng -->
-  <div id="customerModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Thêm khách hàng</h2>
-        <span class="close-modal">&times;</span>
-      </div>
-
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="tenKH">Họ và tên</label>
-          <input type="text" id="tenKH" placeholder="Nhập họ và tên">
+    <!-- ========== Dialog SỬA khách hàng ========== -->
+    <div id="editCustomerModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Chỉnh sửa thông tin</h2>
+          <span class="close-edit-modal">&times;</span>
         </div>
 
-        <div class="form-group">
-          <label for="sdtKH">Số điện thoại</label>
-          <input type="text" id="sdtKH" placeholder="Nhập số điện thoại">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="editTenKH">Họ và tên</label>
+            <input type="text" id="editTenKH" value="Nguyễn Văn A">
+          </div>
+
+          <div class="form-group">
+            <label for="editSdtKH">Số điện thoại</label>
+            <input type="text" id="editSdtKH" value="0909123456">
+          </div>
+
+          <div class="form-group">
+            <label for="editDiaChiKH">Địa chỉ</label>
+            <input type="text" id="editDiaChiKH" value="Hà Nội, Việt Nam">
+          </div>
+
+          <div class="form-group">
+            <label for="editVaiTroKH">Vai trò</label>
+            <select id="editVaiTroKH">
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
+              <option value="Staff">Staff</option>
+            </select>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="diaChiKH">Địa chỉ</label>
-          <input type="text" id="diaChiKH" placeholder="Nhập địa chỉ">
+        <div class="modal-footer">
+          <button class="btn-edit-cancel">Hủy</button>
+          <button class="btn-edit-save">Lưu thay đổi</button>
         </div>
-
-        <div class="form-group">
-          <label for="vaiTroKH">Vai trò</label>
-          <select id="vaiTroKH">
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-            <option value="Staff">Staff</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn-cancel">Hủy</button>
-        <button class="btn-save">Lưu</button>
       </div>
     </div>
-  </div>
 
-  <!-- ========== Dialog SỬA khách hàng ========== -->
-  <div id="editCustomerModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Chỉnh sửa thông tin</h2>
-        <span class="close-edit-modal">&times;</span>
-      </div>
-
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="editTenKH">Họ và tên</label>
-          <input type="text" id="editTenKH" value="Nguyễn Văn A">
-        </div>
-
-        <div class="form-group">
-          <label for="editSdtKH">Số điện thoại</label>
-          <input type="text" id="editSdtKH" value="0909123456">
-        </div>
-
-        <div class="form-group">
-          <label for="editDiaChiKH">Địa chỉ</label>
-          <input type="text" id="editDiaChiKH" value="Hà Nội, Việt Nam">
-        </div>
-
-        <div class="form-group">
-          <label for="editVaiTroKH">Vai trò</label>
-          <select id="editVaiTroKH">
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-            <option value="Staff">Staff</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn-edit-cancel">Hủy</button>
-        <button class="btn-edit-save">Lưu thay đổi</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- JS mở / đóng dialog -->
-  <script>
+    <!-- JS mở / đóng dialog -->
+    <script>
     const btnThemKH = document.querySelector('.btn-them-khach-hang');
     const modal = document.getElementById('customerModal');
     const btnClose = document.querySelector('.close-modal');
@@ -696,6 +718,6 @@
       }
     });
   </script>
-</body>
+  </body>
 
 </html>
