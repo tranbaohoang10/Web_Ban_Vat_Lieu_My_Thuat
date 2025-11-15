@@ -253,6 +253,91 @@ h1 {
 .btn-add-category:hover {
     background-color: #1e48c0;
 }
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Khung modal */
+.category-box {
+    width: 450px;
+    background: #fff;
+    border-radius: 8px;
+    animation: fadeIn 0.2s;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.modal-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-add {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Body */
+.modal-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.modal-body input:focus {
+    border-color: #2659F5;
+}
+
+/* Footer */
+.modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancel, .btn-cancel-edit {
+    background: #6c757d;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-save, .btn-save-edit {
+    background: #2659F5;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
 
 
@@ -314,10 +399,12 @@ h1 {
                                     <td>CT01</td>
                                     <td>Bút lông màu</td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-category">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
+
                                         <button
                                             class="btn btn-danger btn-sm btn-delete">
                                             <i class="fa-solid fa-trash"></i>
@@ -329,7 +416,8 @@ h1 {
                                     <td>CT02</td>
                                     <td>Màu nước</td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-category">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -344,7 +432,8 @@ h1 {
                                     <td>CT03</td>
                                     <td>Bút chì</td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-category">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -372,5 +461,108 @@ h1 {
             </div>
 
         </div>
+        <!-- Modal Thêm Danh Mục -->
+        <div id="addCategoryModal" class="modal">
+            <div class="modal-content category-box">
+
+                <div class="modal-header">
+                    <h3>Thêm Danh Mục</h3>
+                    <span class="close-add">&times;</span>
+                </div>
+
+                <div class="modal-body">
+                    <label>Mã danh mục:</label>
+                    <input type="text" id="catCode"
+                        placeholder="Nhập mã danh mục...">
+
+                    <label>Tên danh mục:</label>
+                    <input type="text" id="catName"
+                        placeholder="Nhập tên danh mục...">
+
+                    <label>Ảnh danh mục:</label>
+                    <input type="file" id="catImage">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-cancel">Hủy</button>
+                    <button class="btn-save">Thêm danh mục</button>
+                </div>
+
+            </div>
+        </div>
+        <div id="editCategoryModal" class="modal">
+            <div class="modal-content category-box">
+
+                <div class="modal-header">
+                    <h3>Sửa Danh Mục</h3>
+                    <span class="close-edit">&times;</span>
+                </div>
+
+                <div class="modal-body">
+                    <label>Mã danh mục:</label>
+                    <input type="text" id="editCatCode" placeholder="CT01..."
+                        disabled>
+
+                    <label>Tên danh mục:</label>
+                    <input type="text" id="editCatName"
+                        placeholder="Bút lông màu...">
+
+                    <label>Ảnh danh mục:</label>
+                    <input type="file" id="editCatImage">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-cancel-edit">Hủy</button>
+                    <button class="btn-save-edit">Cập nhật</button>
+                </div>
+
+            </div>
+        </div>
+
     </body>
+    <script>
+        const addModal = document.getElementById("addCategoryModal");
+        const btnAdd = document.querySelector(".btn-add-category");
+        const closeAdd = document.querySelector(".close-add");
+        const btnCancel = document.querySelector(".btn-cancel");
+        const btnSave = document.querySelector(".btn-save");
+        
+        
+        btnAdd.onclick = () => {
+            addModal.style.display = "flex";
+        };
+       closeAdd.onclick = () => addModal.style.display = "none";
+        btnCancel.onclick = () => addModal.style.display = "none";
+        btnSave.onclick = () => {
+            alert("Danh mục đã được thêm ");
+            addModal.style.display = "none";
+        };
+
+        const editModal = document.getElementById("editCategoryModal");
+        const closeEdit = document.querySelector(".close-edit");
+        const btnCancelEdit = document.querySelector(".btn-cancel-edit");
+        const btnSaveEdit = document.querySelector(".btn-save-edit");
+
+        document.querySelectorAll(".btn-edit-category").forEach(btn => {
+            btn.addEventListener("click", () => {
+                editModal.style.display = "flex";
+            
+               
+                document.getElementById("editCatCode").value = "";
+                document.getElementById("editCatName").value = "";
+                document.getElementById("editCatImage").value = "";
+            });
+        });
+
+        
+        closeEdit.onclick = () => editModal.style.display = "none";
+        btnCancelEdit.onclick = () => editModal.style.display = "none";
+
+        btnSaveEdit.onclick = () => {
+            alert("Danh mục đã được cập nhật ");
+            editModal.style.display = "none";
+        };
+
+</script>
+
 </html>
