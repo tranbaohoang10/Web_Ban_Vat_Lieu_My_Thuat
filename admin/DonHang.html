@@ -19,7 +19,7 @@
 
   #main .left {
     background-color: #17479D;
-    height: 100vh;
+    height: 100%vh;
     width: 17%;
   }
 
@@ -44,6 +44,7 @@
     background-color: #203247;
     border-left: #3B7DDD 2px solid;
   }
+ 
 
   #main .right .container {
     display: flex;
@@ -87,6 +88,18 @@ h1 {
     border-collapse: collapse;
     margin-top: 10px;
 }
+.order-table td:nth-child(6) {
+    white-space: normal !important;
+}
+.order-table td:nth-child(8) {
+    white-space: nowrap !important;
+}
+.order-table td:nth-child(9) {
+    white-space: nowrap !important;
+}
+
+
+
 
 .order-table th {
     background: #2659F5;
@@ -184,6 +197,10 @@ h1 {
     font-size: 14px;
 }
 .search-box {
+    margin-left: auto;
+}
+
+.search-box {
     display: flex;
     align-items: center;
     width: 400px;
@@ -248,10 +265,102 @@ h1 {
     font-weight: bold;
     border-color: #2659F5;
 }
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
+/* Khung modal */
+.category-box {
+    width: 450px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
+/* Header */
+.modal-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
- 
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-add {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Body */
+.modal-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.modal-body input:focus {
+    border-color: #2659F5;
+}
+
+/* Footer */
+.modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancel, .btn-cancel-edit {
+    background: #6c757d;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-save, .btn-save-edit {
+    background: #2659F5;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.modal-body select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 15px;
+}
+
+.modal-body select:focus {
+    border-color: #2659F5;
+}
+
 </style>
 
     <body>
@@ -263,6 +372,9 @@ h1 {
                     <a href="ThongKe.html"><i
                             class="fa-solid fa-chart-line"></i>Thống
                         kê</a>
+                    <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản
+                        lý danh
+                        mục</a>
                     <a href="SanPham.html"><i
                             class="fa-solid fa-palette"></i>Quản
                         lý sản phẩm</a>
@@ -321,7 +433,8 @@ h1 {
                                     <td>0909123456</td>
                                     <td>25-11-2025</td>
                                     <td>Hà Nội, Việt Nam</td>
-                                    <td>Bút Lông Thiên Long</td>
+                                    <td>Bút Lông Thiên Long, Bộ màu Gouache dạng
+                                        tuýp</td>
                                     <td>5,000,000 VND</td>
                                     <td><span class="status pending">Chờ xác
                                             nhận</span></td>
@@ -329,7 +442,8 @@ h1 {
                                         <button class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-check"></i>
                                         </button>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -346,7 +460,8 @@ h1 {
                                     <td>0912345678</td>
                                     <td>24-11-2025</td>
                                     <td>TP.HCM, Việt Nam</td>
-                                    <td>Bảng màu 12 sắc</td>
+                                    <td>Bảng màu 12 sắc, Bộ màu Gouache dạng
+                                        tuýp</td>
                                     <td>4,200,000 VND</td>
                                     <td><span class="status pending">Chờ xác
                                             nhận</span></td>
@@ -354,7 +469,8 @@ h1 {
                                         <button class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-check"></i>
                                         </button>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -371,7 +487,8 @@ h1 {
                                     <td>0933456789</td>
                                     <td>23-11-2025</td>
                                     <td>Đà Nẵng, Việt Nam</td>
-                                    <td>Bộ bút chì gỗ cao cấp</td>
+                                    <td>Bộ bút chì gỗ cao cấp, Bộ màu Gouache
+                                        dạng tuýp</td>
                                     <td>7,800,000 VND</td>
                                     <td><span class="status pending">Chờ xác
                                             nhận</span></td>
@@ -379,7 +496,8 @@ h1 {
                                         <button class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-check"></i>
                                         </button>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -397,7 +515,8 @@ h1 {
                                     <td>0908567234</td>
                                     <td>22-11-2025</td>
                                     <td>Cần Thơ, Việt Nam</td>
-                                    <td>Tập vẽ mỹ thuật cao cấp</td>
+                                    <td>Tập vẽ mỹ thuật cao cấp, Bộ màu Gouache
+                                        dạng tuýp</td>
                                     <td>3,500,000 VND</td>
                                     <td><span class="status delivery">Đang
                                             giao</span></td>
@@ -405,7 +524,8 @@ h1 {
                                         <button class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-check"></i>
                                         </button>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -422,12 +542,14 @@ h1 {
                                     <td>0987654321</td>
                                     <td>21-11-2025</td>
                                     <td>Hà Nội, Việt Nam</td>
-                                    <td>Bộ màu nước 24 màu</td>
+                                    <td>Bộ màu nước 24 màu, Bộ bút chì gỗ cao
+                                        cấp</td>
                                     <td>2,200,000 VND</td>
                                     <td><span class="status success">Hoàn
                                             tất</span></td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -451,7 +573,8 @@ h1 {
                                         <button class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-check"></i>
                                         </button>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -472,7 +595,8 @@ h1 {
                                     <td><span class="status success">Hoàn
                                             tất</span></td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -493,9 +617,10 @@ h1 {
                                     <td><span class="status success">Hoàn
                                             tất</span></td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
+                                        <button
+                                            class="btn btn-warning btn-sm btn-edit-order">
                                             <i
-                                                class="fa-solid fa-pen-to-square"></i>
+                                                class="fa-solid fa-pen-to-square "></i>
                                         </button>
                                         <button
                                             class="btn btn-danger btn-sm btn-delete">
@@ -520,6 +645,69 @@ h1 {
                 </div>
 
             </div>
+            <!-- Modal Cập Nhật Đơn Hàng -->
+            <div id="editOrderModal" class="modal">
+                <div class="modal-content category-box">
+
+                    <div class="modal-header">
+                        <h3>Cập Nhật Đơn Hàng</h3>
+                        <span class="close-edit-order">&times;</span>
+                    </div>
+
+                    <div class="modal-body">
+                        <label>Mã đơn hàng:</label>
+                        <input type="text" id="editOrderId" value="DH01"
+                            disabled>
+
+                        <label>Họ tên khách hàng:</label>
+                        <input type="text" id="editOrderName"
+                            value="Nguyễn Văn A">
+
+                        <label>Số điện thoại:</label>
+                        <input type="text" id="editOrderPhone"
+                            value="0909123456">
+
+                        <label>Địa chỉ giao hàng:</label>
+                        <input type="text" id="editOrderAddress"
+                            value="Hà Nội, Việt Nam">
+                        <label>Trạng thái đơn hàng:</label>
+                        <select id="editOrderStatus">
+                            <option value="Đang giao">Đang giao</option>
+                            <option value="Hoàn tất">Hoàn tất</option>
+                            <option value="Đã huỷ">Đã huỷ</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn-cancel-edit">Hủy</button>
+                        <button class="btn-save-edit">Cập nhật</button>
+                    </div>
+
+                </div>
+            </div>
+
         </body>
+        <script>
+    const editOrderModal = document.getElementById("editOrderModal");
+    const closeEditOrder = document.querySelector(".close-edit-order");
+    const btnCancelOrder = document.querySelector(".btn-cancel-edit");
+    const btnSaveOrder = document.querySelector(".btn-save-edit");
+
+    document.querySelectorAll(".btn-edit-order").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        editOrderModal.style.display = "flex";
+
+        
+    });
+});
+    closeEditOrder.onclick = () => editOrderModal.style.display = "none";
+    btnCancelOrder.onclick = () => editOrderModal.style.display = "none";
+    btnSaveOrder.onclick = () => {
+    alert("Đơn hàng đã được cập nhật!");
+    editOrderModal.style.display = "none";
+};
+    
+    </script>
 
     </html>
