@@ -52,7 +52,6 @@
     margin-right: auto;
   }
 
-  /* Make right column grow to fill remaining space so children can space-between */
   #main .right {
     flex: 1;
     background-color: #F9F9F9;
@@ -101,6 +100,13 @@ h1 {
 .order-table tr:nth-child(even) td {
     background: #f0f0f0;
 }
+.order-table td:nth-child(6) {
+    max-width: 220px;       
+    white-space: nowrap;    
+    overflow: hidden;       
+    text-overflow: ellipsis; 
+}
+
 
 .order-table td, 
 .order-table th {
@@ -132,27 +138,17 @@ h1 {
     background-color: #e0a800;
 }
 
-/* Nút xoá */
-.btn-delete {
-    background-color: #DC3545;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 4px; 
-    transition: 0.2s;
-}
-
-.btn-delete:hover {
-    background-color: #b02a37;
-}
 
 
-.btn-sm i,
-.btn-delete i {
+
+.btn-sm i {
     font-size: 14px;
 }
+.search-box {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
 .search-box {
     display: flex;
     align-items: center;
@@ -268,7 +264,6 @@ h1 {
     width: 450px;
     background: #fff;
     border-radius: 8px;
-    animation: fadeIn 0.2s;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
@@ -338,6 +333,16 @@ h1 {
     border-radius: 6px;
     cursor: pointer;
 }
+.order-table img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
 
 
 
@@ -352,6 +357,9 @@ h1 {
                     <a href="ThongKe.html"><i
                             class="fa-solid fa-chart-line"></i>Thống
                         kê</a>
+                    <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản
+                        lý danh
+                        mục</a>
                     <a href="SanPham.html"><i
                             class="fa-solid fa-palette"></i>Quản
                         lý sản phẩm</a>
@@ -400,6 +408,7 @@ h1 {
                                 <tr>
                                     <th>Mã Danh Mục</th>
                                     <th>Tên Danh Mục</th>
+                                    <th>Hình Ảnh</th>
                                     <th>Tùy Chọn</th>
                                 </tr>
                             </thead>
@@ -408,6 +417,9 @@ h1 {
                                 <tr>
                                     <td>CT01</td>
                                     <td>Bút lông màu</td>
+                                    <td><img
+                                            src="..\assets\images\logo\banner-3.webp"
+                                            alt="Danh mục 1"></td>
                                     <td>
                                         <button
                                             class="btn btn-warning btn-sm btn-edit-category">
@@ -415,42 +427,38 @@ h1 {
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
 
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>CT02</td>
                                     <td>Màu nước</td>
+                                    <td><img
+                                            src="..\assets\images\logo\ct-maunuoc.jpg"
+                                            alt="Danh mục 2"></td>
                                     <td>
                                         <button
                                             class="btn btn-warning btn-sm btn-edit-category">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
+
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>CT03</td>
                                     <td>Bút chì</td>
+                                    <td><img
+                                            src="..\assets\images\logo\banner-2.webp"
+                                            alt="Danh mục 3"></td>
                                     <td>
                                         <button
                                             class="btn btn-warning btn-sm btn-edit-category">
                                             <i
                                                 class="fa-solid fa-pen-to-square"></i>
                                         </button>
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
+
                                     </td>
                                 </tr>
 
@@ -510,12 +518,10 @@ h1 {
 
                 <div class="modal-body">
                     <label>Mã danh mục:</label>
-                    <input type="text" id="editCatCode" placeholder="CT01..."
-                        disabled>
-
+                    <input type="text" id="editCatCode" value="CT01" disabled>
                     <label>Tên danh mục:</label>
                     <input type="text" id="editCatName"
-                        placeholder="Bút lông màu...">
+                        value="Bút lông màu">
 
                     <label>Ảnh danh mục:</label>
                     <input type="file" id="editCatImage">
@@ -556,11 +562,7 @@ h1 {
         document.querySelectorAll(".btn-edit-category").forEach(btn => {
             btn.addEventListener("click", () => {
                 editModal.style.display = "flex";
-            
-               
-                document.getElementById("editCatCode").value = "";
-                document.getElementById("editCatName").value = "";
-                document.getElementById("editCatImage").value = "";
+                                    
             });
         });
 
