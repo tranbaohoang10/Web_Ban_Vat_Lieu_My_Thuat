@@ -201,6 +201,36 @@
   .product-container .thoigian input[type="date"]:hover {
     border-color: #2659F5
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+    gap: 5px;
+  }
+
+  .page-link {
+    padding: 6px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    color: #0d6efd;
+    background-color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+
+  .page-link:hover {
+    background-color: #e9ecef;
+  }
+
+  .page-link.active {
+    background-color: #2659F5;
+    color: white;
+    font-weight: bold;
+    border-color: #2659F5;
+  }
 </style>
 
 <body>
@@ -209,23 +239,22 @@
     <div class="left">
       <div class="list-admin">
         <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
-          <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
-            kê</a>
-            <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản lý danh
-            mục</a>
-          <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
-            lý sản phẩm</a>
-          <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
-            lý người dùng</a>
-          <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
-            lý đơn hàng</a>
-          <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
-            khuyến mãi</a>
-          <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý Slider Show</a>
-              <a href="AdminLienHe.html"><i
-              class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
-          <a href><i class="fa-solid fa-right-from-bracket"></i>
-            Đăng xuất</a>
+        <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
+          kê</a>
+        <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản lý danh
+          mục</a>
+        <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
+          lý sản phẩm</a>
+        <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
+          lý người dùng</a>
+        <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
+          lý đơn hàng</a>
+        <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
+          khuyến mãi</a>
+        <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý Slider Show</a>
+        <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+        <a href><i class="fa-solid fa-right-from-bracket"></i>
+          Đăng xuất</a>
       </div>
     </div>
     <div class="right">
@@ -315,7 +344,15 @@
 
               </tr>
             </tbody>
+
           </table>
+          <div class="pagination">
+            <a href="#" class="page-link">Trước</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">Sau</a>
+          </div>
           <div class="product-chart-container" style="
   width: 95%;
   margin: 30px auto;
@@ -328,6 +365,7 @@
             <canvas id="chartBestSeller"></canvas>
           </div>
         </div>
+
         <div class="product-container">
           <h1>Thống kê sản phẩm không bán được</h1>
           <div class="thoigian">
@@ -409,6 +447,13 @@
               </tr>
             </tbody>
           </table>
+          <div class="pagination">
+            <a href="#" class="page-link">Trước</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">Sau</a>
+          </div>
         </div>
       </div>
     </div>
