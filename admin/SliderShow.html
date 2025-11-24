@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    </head>
-    <style>
+</head>
+<style>
     #main {
         display: flex;
     }
@@ -26,7 +25,7 @@
     #main .left .list-admin {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
 
     #main .left .list-admin a {
@@ -45,6 +44,21 @@
         border-left: #3B7DDD 2px solid;
     }
 
+    #main .left .list-admin .logo img {
+        width: 100%;
+        height: auto;
+        margin: 10px 0 20px 0;
+    }
+
+    #main .left .list-admin a.logo {
+        padding: 0;
+    }
+
+    #main .left .list-admin a.logo:hover {
+        background-color: #203247;
+        border-left: none;
+    }
+
     #main .right .container {
         display: flex;
         flex-direction: column;
@@ -54,7 +68,6 @@
         margin-right: auto;
     }
 
-    /* Make right column grow to fill remaining space so children can space-between */
     #main .right {
         flex: 1;
         background-color: #F9F9F9;
@@ -435,235 +448,204 @@
     }
 </style>
 
-    <body>
-        <div id="main">
-            <div class="left">
-                <div class="list-admin">
-                    <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng
-                        quan</a>
-                    <a href="ThongKe.html"><i
-                            class="fa-solid fa-chart-line"></i>Thống
-                        kê</a>
-                    <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản
-                        lý danh
-                        mục</a>
-                    <a href="SanPham.html"><i
-                            class="fa-solid fa-palette"></i>Quản
-                        lý sản phẩm</a>
-                    <a href="Nguoidung.html"><i
-                            class="fa-solid fa-person"></i>Quản
-                        lý người dùng</a>
-                    <a href="DonHang.html"><i
-                            class="fa-solid fa-box-open"></i>Quản
-                        lý đơn hàng</a>
-                    <a href="Khuyenmai.html"><i
-                            class="fa-solid fa-gift"></i>Quản lý
-                        khuyến mãi</a>
-                    <a href="SliderShow.html"><i
-                            class="fa-solid fa-sliders"></i>Quản lý Slider
-                        Show</a>
-                    <a href="AdminLienHe.html"><i
-                            class="fa-solid fa-address-book"></i>Quản lý liên
-                        hệ</a>
-                    <a href><i class="fa-solid fa-right-from-bracket"></i>
-                        Đăng xuất</a>
-                </div>
+<body>
+    <div id="main">
+        <div class="left">
+            <div class="list-admin">
+                <a href="Admin.html" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
+                <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng
+                    quan</a>
+                <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
+                    kê</a>
+                <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản
+                    lý danh
+                    mục</a>
+                <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
+                    lý sản phẩm</a>
+                <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
+                    lý người dùng</a>
+                <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
+                    lý đơn hàng</a>
+                <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
+                    khuyến mãi</a>
+                <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý Slider
+                    Show</a>
+                <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên
+                    hệ</a>
+                <a href><i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất</a>
             </div>
-            <div class="right">
+        </div>
+        <div class="right">
 
-                <div class="container">
+            <div class="container">
 
-                    <div class="order-container">
-                        <h1>Danh sách banner</h1>
-                        <div class="search">
-                            <div class="search-input-icon">
-                                <input type="text"
-                                    placeholder="Tìm kiếm tin tức...">
-                                <div class="icon"><i
-                                        class="fa-solid fa-magnifying-glass"></i></div>
-                            </div>
-                            <button class="btn-them-khach-hang">Thêm
-                                banner</button>
+                <div class="order-container">
+                    <h1>Danh sách banner</h1>
+                    <div class="search">
+                        <div class="search-input-icon">
+                            <input type="text" placeholder="Tìm kiếm tin tức...">
+                            <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                         </div>
-                        <table class="order-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tiêu đề</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Ảnh</th>
-                                    <th>Tùy chọn</th>
-                                </tr>
-                            </thead>
+                        <button class="btn-them-khach-hang">Thêm
+                            banner</button>
+                    </div>
+                    <table class="order-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tiêu đề</th>
+                                <th>Ngày tạo</th>
+                                <th>Ảnh</th>
+                                <th>Tùy chọn</th>
+                            </tr>
+                        </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Banner 1</td>
-                                    <td>2024-11-26</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-1.webp"
-                                            alt="tintuc1"></td>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Banner 1</td>
+                                <td>2024-11-26</td>
+                                <td><img src="../assets/images/logo/banner-1.webp" alt="tintuc1"></td>
 
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
+                                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                                    </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td>Banner 2</td>
-                                    <td>2024-11-27</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-2.webp"
-                                            alt="tintuc2"></td>
+                            <tr>
+                                <td>2</td>
+                                <td>Banner 2</td>
+                                <td>2024-11-27</td>
+                                <td><img src="../assets/images/logo/banner-2.webp" alt="tintuc2"></td>
 
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
+                                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                                    </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
 
-                                <tr>
-                                    <td>3</td>
-                                    <td>Banner 3</td>
-                                    <td>2024-11-28</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-3.webp"
-                                            alt="tintuc3"></td>
+                            <tr>
+                                <td>3</td>
+                                <td>Banner 3</td>
+                                <td>2024-11-28</td>
+                                <td><img src="../assets/images/logo/banner-3.webp" alt="tintuc3"></td>
 
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
+                                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                                    </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
 
-                                <tr>
-                                    <td>4</td>
-                                    <td>Banner 4</td>
-                                    <td>2024-11-29</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-1.webp"
-                                            alt></td>
+                            <tr>
+                                <td>4</td>
+                                <td>Banner 4</td>
+                                <td>2024-11-29</td>
+                                <td><img src="../assets/images/logo/banner-1.webp" alt></td>
 
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
+                                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                                    </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
 
-                                <tr>
-                                    <td>5</td>
-                                    <td>Banner 5</td>
-                                    <td>2024-11-30</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-2.webp"
-                                            alt></td>
+                            <tr>
+                                <td>5</td>
+                                <td>Banner 5</td>
+                                <td>2024-11-30</td>
+                                <td><img src="../assets/images/logo/banner-2.webp" alt></td>
 
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="pagination">
-                            <a href="#" class="page-link">Trước</a>
-                            <a href="#" class="page-link active">1</a>
-                            <a href="#" class="page-link">2</a>
-                            <a href="#" class="page-link">3</a>
-                            <a href="#" class="page-link">Sau</a>
-                        </div>
+                                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                                    </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <a href="#" class="page-link">Trước</a>
+                        <a href="#" class="page-link active">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+                        <a href="#" class="page-link">Sau</a>
                     </div>
                 </div>
-
             </div>
 
         </div>
 
-        <!-- Dialog thêm khách hàng -->
-        <div id="customerModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Thêm banner</h2>
-                    <span class="close-modal">&times;</span>
+    </div>
+
+    <!-- Dialog thêm khách hàng -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thêm banner</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="tenKH">Tên</label>
+                    <input type="text" id="tenKH" placeholder="Nhập tên banner">
                 </div>
 
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="tenKH">Tên</label>
-                        <input type="text" id="tenKH"
-                            placeholder="Nhập tên banner">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tenKH">Trạng thái</label>
-                        <input type="text" id="tenKH"
-                            placeholder="Nhập trạng thái">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sdtKH">Thứ tự hiển thị</label>
-                        <input type="text" id="sdtKH"
-                            placeholder="Nhập số điện thoại">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sdtKH">Ảnh banner</label>
-                        <input type="file" id="sdtKH" placeholder="Thêm ảnh">
-                    </div>
-
+                <div class="form-group">
+                    <label for="tenKH">Trạng thái</label>
+                    <input type="text" id="tenKH" placeholder="Nhập trạng thái">
                 </div>
 
-                <div class="modal-footer">
-                    <button class="btn-cancel">Hủy</button>
-                    <button class="btn-save">Lưu</button>
+                <div class="form-group">
+                    <label for="sdtKH">Thứ tự hiển thị</label>
+                    <input type="text" id="sdtKH" placeholder="Nhập số điện thoại">
                 </div>
+
+                <div class="form-group">
+                    <label for="sdtKH">Ảnh banner</label>
+                    <input type="file" id="sdtKH" placeholder="Thêm ảnh">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-cancel">Hủy</button>
+                <button class="btn-save">Lưu</button>
             </div>
         </div>
+    </div>
 
-        <!-- ========== Dialog SỬA khách hàng ========== -->
-        <div id="editCustomerModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Chỉnh sửa thông tin</h2>
-                    <span class="close-edit-modal">&times;</span>
+    <!-- ========== Dialog SỬA khách hàng ========== -->
+    <div id="editCustomerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Chỉnh sửa thông tin</h2>
+                <span class="close-edit-modal">&times;</span>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editTenKH">Tiêu đề</label>
+                    <input type="text" id="editTenKH" value="Banner 2">
                 </div>
 
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="editTenKH">Tiêu đề</label>
-                        <input type="text" id="editTenKH" value="Banner 2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editSdtKH">Thứ tự hiển thị</label>
-                        <input type="text" id="editSdtKH" value="2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editDiaChiKH">Trạng thái</label>
-                        <input type="text" id="editDiaChiKH" value="Hiển thị">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editDiaChiKH">Thêm ảnh</label>
-                        <input type="file" id="editDiaChiKH" value="../assets/images/logo/banner-2.webp">
-                    </div>
-
+                <div class="form-group">
+                    <label for="editSdtKH">Thứ tự hiển thị</label>
+                    <input type="text" id="editSdtKH" value="2">
                 </div>
 
-                <div class="modal-footer">
-                    <button class="btn-edit-cancel">Hủy</button>
-                    <button class="btn-edit-save">Lưu thay đổi</button>
+                <div class="form-group">
+                    <label for="editDiaChiKH">Trạng thái</label>
+                    <input type="text" id="editDiaChiKH" value="Hiển thị">
                 </div>
+
+                <div class="form-group">
+                    <label for="editDiaChiKH">Thêm ảnh</label>
+                    <input type="file" id="editDiaChiKH" value="../assets/images/logo/banner-2.webp">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-edit-cancel">Hủy</button>
+                <button class="btn-edit-save">Lưu thay đổi</button>
             </div>
         </div>
+    </div>
 
-        <!-- JS mở / đóng dialog -->
-        <script>
+    <!-- JS mở / đóng dialog -->
+    <script>
         const btnThemKH = document.querySelector('.btn-them-khach-hang');
         const modal = document.getElementById('customerModal');
         const btnClose = document.querySelector('.close-modal');
@@ -734,6 +716,6 @@
             }
         });
     </script>
-    </body>
+</body>
 
 </html>

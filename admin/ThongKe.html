@@ -26,7 +26,7 @@
   #main .left .list-admin {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
   }
 
   #main .left .list-admin a {
@@ -45,6 +45,21 @@
     border-left: #3B7DDD 2px solid;
   }
 
+  #main .left .list-admin .logo img {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 20px 0;
+  }
+
+  #main .left .list-admin a.logo {
+    padding: 0;
+  }
+
+  #main .left .list-admin a.logo:hover {
+    background-color: #203247;
+    border-left: none;
+  }
+
   #main .right .container {
     display: flex;
     flex-direction: column;
@@ -54,7 +69,7 @@
     margin-right: auto;
   }
 
-  /* Make right column grow to fill remaining space so children can space-between */
+
   #main .right {
     flex: 1;
     background-color: #F9F9F9;
@@ -238,6 +253,7 @@
   <div id="main">
     <div class="left">
       <div class="list-admin">
+        <a href="Admin.html" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
         <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
         <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
           kê</a>

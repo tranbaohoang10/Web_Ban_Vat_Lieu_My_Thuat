@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  </head>
-  <style>
+</head>
+<style>
   #main {
     display: flex;
   }
@@ -26,7 +25,7 @@
   #main .left .list-admin {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
   }
 
   #main .left .list-admin a {
@@ -45,6 +44,21 @@
     border-left: #3B7DDD 2px solid;
   }
 
+  #main .left .list-admin .logo img {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 20px 0;
+  }
+
+  #main .left .list-admin a.logo {
+    padding: 0;
+  }
+
+  #main .left .list-admin a.logo:hover {
+    background-color: #203247;
+    border-left: none;
+  }
+
   #main .right .container {
     display: flex;
     flex-direction: column;
@@ -54,7 +68,7 @@
     margin-right: auto;
   }
 
-  /* Make right column grow to fill remaining space so children can space-between */
+
   #main .right {
     flex: 1;
     background-color: #F9F9F9;
@@ -381,6 +395,7 @@
     background: #17479D;
     color: #fff;
   }
+
   /* =========Xem trang trc sau======== */
 
   .pagination {
@@ -389,9 +404,9 @@
     align-items: center;
     margin: 25px 0;
     gap: 5px;
-}
+  }
 
-.page-link {
+  .page-link {
     padding: 6px 12px;
     border: 1px solid #d0d7de;
     border-radius: 4px;
@@ -400,18 +415,18 @@
     text-decoration: none;
     font-size: 14px;
     transition: 0.2s;
-}
+  }
 
-.page-link:hover {
+  .page-link:hover {
     background-color: #e9ecef;
-}
+  }
 
-.page-link.active {
+  .page-link.active {
     background-color: #2659F5;
     color: white;
     font-weight: bold;
     border-color: #2659F5;
-}
+  }
 
   /* Hiệu ứng nhỏ khi mở modal */
   @keyframes fadeInScale {
@@ -427,301 +442,282 @@
   }
 </style>
 
-  <body>
-    <div id="main">
-      <div class="left">
-        <div class="list-admin">
-          <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
-          <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
-            kê</a>
-          <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản lý danh
-            mục</a>
-          <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
-            lý sản phẩm</a>
-          <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
-            lý người dùng</a>
-          <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
-            lý đơn hàng</a>
-          <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
-            khuyến mãi</a>
-          <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý
-            Slider Show</a>
-          <a href="AdminLienHe.html"><i
-              class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
-          <a href><i class="fa-solid fa-right-from-bracket"></i>
-            Đăng xuất</a>
-        </div>
+<body>
+  <div id="main">
+    <div class="left">
+      <div class="list-admin">
+        <a href="Admin.html" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
+        <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+        <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
+          kê</a>
+        <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản lý danh
+          mục</a>
+        <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
+          lý sản phẩm</a>
+        <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
+          lý người dùng</a>
+        <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
+          lý đơn hàng</a>
+        <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
+          khuyến mãi</a>
+        <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý
+          Slider Show</a>
+        <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+        <a href><i class="fa-solid fa-right-from-bracket"></i>
+          Đăng xuất</a>
       </div>
-      <div class="right">
+    </div>
+    <div class="right">
 
-        <div class="container">
+      <div class="container">
 
-          <div class="order-container">
-            <h1>Danh sách khuyến mãi</h1>
-            <div class="search">
-              <div class="search-input-icon">
-                <input type="text" placeholder="Tìm kiếm khuyến m...">
-                <div class="icon"><i
-                    class="fa-solid fa-magnifying-glass"></i></div>
-              </div>
-              <button class="btn-them-khach-hang">Thêm khuyến mãi</button>
+        <div class="order-container">
+          <h1>Danh sách khuyến mãi</h1>
+          <div class="search">
+            <div class="search-input-icon">
+              <input type="text" placeholder="Tìm kiếm khuyến m...">
+              <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
             </div>
-            <table class="order-table">
-              <thead>
-                <tr>
-                  <th>STT</th>
-                  <th>Mã khuyến mãi</th>
-                  <th>Tên khuyến mãi</th>
-                  <th>Mô tả</th>
-                  <th>Ngày bắt đầu</th>
-                  <th>Ngày kết thúc</th>
-                  <th>Giảm giá</th>
-                  <th>Tùy chọn</th>
-                </tr>
-              </thead>
+            <button class="btn-them-khach-hang">Thêm khuyến mãi</button>
+          </div>
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã khuyến mãi</th>
+                <th>Tên khuyến mãi</th>
+                <th>Mô tả</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Giảm giá</th>
+                <th>Tùy chọn</th>
+              </tr>
+            </thead>
 
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>KM001</td>
-                  <td>Giảm giá mùa hè</td>
-                  <td>Khuyến mãi đặc biệt cho mùa hè, giảm giá các sản phẩm mùa
-                    hè.</td>
-                  <td>01/06/2025</td>
-                  <td>31/01/2025</td>
-                  <td>40000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>KM001</td>
+                <td>Giảm giá mùa hè</td>
+                <td>Khuyến mãi đặc biệt cho mùa hè, giảm giá các sản phẩm mùa
+                  hè.</td>
+                <td>01/06/2025</td>
+                <td>31/01/2025</td>
+                <td>40000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>2</td>
-                  <td>KM002</td>
-                  <td>Khuyến mãi Tết Nguyên đán</td>
-                  <td>Giảm giá đặc biệt nhân dịp Tết Nguyên Đán, áp dụng cho tất
-                    cả sản phẩm.</td>
-                  <td>01/01/2025</td>
-                  <td>31/03/2025</td>
-                  <td>25000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+              <tr>
+                <td>2</td>
+                <td>KM002</td>
+                <td>Khuyến mãi Tết Nguyên đán</td>
+                <td>Giảm giá đặc biệt nhân dịp Tết Nguyên Đán, áp dụng cho tất
+                  cả sản phẩm.</td>
+                <td>01/01/2025</td>
+                <td>31/03/2025</td>
+                <td>25000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>3</td>
-                  <td>KM003</td>
-                  <td>Giảm giá sinh viên </td>
-                  <td>Khuyến mãi đặc biệt dành cho sinh viên, giảm giá cho các
-                    mặt hàng học tập.</td>
-                  <td>01/03/2025</td>
-                  <td>31/05/2025</td>
-                  <td>10000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+              <tr>
+                <td>3</td>
+                <td>KM003</td>
+                <td>Giảm giá sinh viên </td>
+                <td>Khuyến mãi đặc biệt dành cho sinh viên, giảm giá cho các
+                  mặt hàng học tập.</td>
+                <td>01/03/2025</td>
+                <td>31/05/2025</td>
+                <td>10000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>4</td>
-                  <td>KM004</td>
-                  <td>Khuyến mãi đầu năm</td>
-                  <td>Giảm giá đặc biệt đầu năm, áp dụng cho tất cả các sản phẩm
-                    trong cửa hàng.</td>
-                  <td>01/01/2025</td>
-                  <td>15/01/2025</td>
-                  <td>20000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+              <tr>
+                <td>4</td>
+                <td>KM004</td>
+                <td>Khuyến mãi đầu năm</td>
+                <td>Giảm giá đặc biệt đầu năm, áp dụng cho tất cả các sản phẩm
+                  trong cửa hàng.</td>
+                <td>01/01/2025</td>
+                <td>15/01/2025</td>
+                <td>20000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>5</td>
-                  <td>KM005</td>
-                  <td>Giảm giá Giáng Sinh</td>
-                  <td>Khuyến mãi dịp Giáng Sinh, giảm giá lên đến 50% cho các
-                    sản phẩm mùa lễ hội.</td>
-                  <td>01/12/2025</td>
-                  <td>31/12/2025</td>
-                  <td>50000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+              <tr>
+                <td>5</td>
+                <td>KM005</td>
+                <td>Giảm giá Giáng Sinh</td>
+                <td>Khuyến mãi dịp Giáng Sinh, giảm giá lên đến 50% cho các
+                  sản phẩm mùa lễ hội.</td>
+                <td>01/12/2025</td>
+                <td>31/12/2025</td>
+                <td>50000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>6</td>
-                  <td>KM006</td>
-                  <td>Giảm giá Tết Trung Thu</td>
-                  <td>Giảm giá sản phẩm đặc biệt cho Tết Trung Thu, áp dụng cho
-                    các mặt hàng bánh trung thu.</td>
-                  <td>01/09/2025</td>
-                  <td>30/09/2025</td>
-                  <td>30000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+              <tr>
+                <td>6</td>
+                <td>KM006</td>
+                <td>Giảm giá Tết Trung Thu</td>
+                <td>Giảm giá sản phẩm đặc biệt cho Tết Trung Thu, áp dụng cho
+                  các mặt hàng bánh trung thu.</td>
+                <td>01/09/2025</td>
+                <td>30/09/2025</td>
+                <td>30000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>7</td>
-                  <td>KM007</td>
-                  <td>Giảm giá Black Friday</td>
-                  <td>Giảm giá cực lớn nhân dịp Black Friday, lên đến 40% cho
-                    các mặt hàng công nghệ.</td>
-                  <td>01/11/2025</td>
-                  <td>30/11/2025</td>
-                  <td>40000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+              <tr>
+                <td>7</td>
+                <td>KM007</td>
+                <td>Giảm giá Black Friday</td>
+                <td>Giảm giá cực lớn nhân dịp Black Friday, lên đến 40% cho
+                  các mặt hàng công nghệ.</td>
+                <td>01/11/2025</td>
+                <td>30/11/2025</td>
+                <td>40000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>8</td>
-                  <td>KM005</td>
-                  <td>Giảm giá Lễ Quốc Khách</td>
-                  <td>Khuyến mãi đặc biệt trong dịp lễ Quốc Khánh, giảm giá cho
-                    các sản phẩm quà tặng.</td>
-                  <td>01/09/2025</td>
-                  <td>03/09/2025</td>
-                  <td>50000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
+              <tr>
+                <td>8</td>
+                <td>KM005</td>
+                <td>Giảm giá Lễ Quốc Khách</td>
+                <td>Khuyến mãi đặc biệt trong dịp lễ Quốc Khánh, giảm giá cho
+                  các sản phẩm quà tặng.</td>
+                <td>01/09/2025</td>
+                <td>03/09/2025</td>
+                <td>50000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
 
-                <tr>
-                  <td>9</td>
-                  <td>KM009</td>
-                  <td>Giảm giá mua 1 tặng 1</td>
-                  <td>Khuyến mãi Mua 1 Tặng 1, áp dụng cho tất cả sản phẩm trong
-                    cửa hàng. </td>
-                  <td>01/06/2025</td>
-                  <td>30/06/2025</td>
-                  <td>100000đ</td>
-                  <td><button class="btn-Sua"><i
-                        class="fa-solid fa-pen-to-square"></i>
-                    </button> <button class="btn-Xoa"><i
-                        class="fa-solid fa-trash"></i></button></td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="pagination">
-              <a href="#" class="page-link">Trước</a>
-              <a href="#" class="page-link active">1</a>
-              <a href="#" class="page-link">2</a>
-              <a href="#" class="page-link">3</a>
-              <a href="#" class="page-link">Sau</a>
-            </div>
+              <tr>
+                <td>9</td>
+                <td>KM009</td>
+                <td>Giảm giá mua 1 tặng 1</td>
+                <td>Khuyến mãi Mua 1 Tặng 1, áp dụng cho tất cả sản phẩm trong
+                  cửa hàng. </td>
+                <td>01/06/2025</td>
+                <td>30/06/2025</td>
+                <td>100000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <a href="#" class="page-link">Trước</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">Sau</a>
           </div>
         </div>
-
       </div>
 
     </div>
 
-    <!-- =============Dialog thêm khuyến mãi============= -->
-    <div id="Dialog-them-km" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Thêm khuyến mãi</h2>
-          <span class="close-modal">&times;</span>
+  </div>
+
+  <!-- =============Dialog thêm khuyến mãi============= -->
+  <div id="Dialog-them-km" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Thêm khuyến mãi</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="maKM">Mã khuyến mãi</label>
+          <input type="text" id="maKM" placeholder="Nhập mã khuyến mãi">
         </div>
 
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="maKM">Mã khuyến mãi</label>
-            <input type="text" id="maKM" placeholder="Nhập mã khuyến mãi">
-          </div>
-
-          <div class="form-group">
-            <label for="tenKM">Tên khuyến mãi</label>
-            <input type="text" id="tenKM" placeholder="Nhập tên khuyến mãi">
-          </div>
-
-          <div class="form-group">
-            <label for="mota">Mô tả</label>
-            <input type="text" id="mota" placeholder="Nhập mô tả">
-          </div>
-
-          <div class="form-group">
-            <label for="ngaybatdau">Ngày bắt đầu</label>
-            <input type="date" id="ngaybatdau" placeholder="Nhập ngày bắt đầu">
-          </div>
-
-          <div class="form-group">
-            <label for="ngàyketthuc">Ngày ngày kết thúc</label>
-            <input type="date" id="ngàyketthuc" placeholder="Nhập ngày kết thúc">
-          </div>
-
-          <div class="form-group">
-            <label for="giamgia">Giảm giá</label>
-            <input type="text" id="giamgia" placeholder="Nhập số tiền giảm">
-          </div>
-
-          <div class="form-group">
-            <label for="sl">Số lượng</label>
-            <input type="text" id="sl" placeholder="Nhập số lượng">
-          </div>
+        <div class="form-group">
+          <label for="tenKM">Tên khuyến mãi</label>
+          <input type="text" id="tenKM" placeholder="Nhập tên khuyến mãi">
         </div>
 
-        <div class="modal-footer">
-          <button class="btn-cancel">Hủy</button>
-          <button class="btn-save">Lưu</button>
+        <div class="form-group">
+          <label for="mota">Mô tả</label>
+          <input type="text" id="mota" placeholder="Nhập mô tả">
+        </div>
+
+        <div class="form-group">
+          <label for="ngaybatdau">Ngày bắt đầu</label>
+          <input type="date" id="ngaybatdau" placeholder="Nhập ngày bắt đầu">
+        </div>
+
+        <div class="form-group">
+          <label for="ngàyketthuc">Ngày ngày kết thúc</label>
+          <input type="date" id="ngàyketthuc" placeholder="Nhập ngày kết thúc">
+        </div>
+
+        <div class="form-group">
+          <label for="giamgia">Giảm giá</label>
+          <input type="text" id="giamgia" placeholder="Nhập số tiền giảm">
+        </div>
+
+        <div class="form-group">
+          <label for="sl">Số lượng</label>
+          <input type="text" id="sl" placeholder="Nhập số lượng">
         </div>
       </div>
-    </div>
 
-    <!-- ========== Dialog chỉnh sửa khuyến mãi ========== -->
-    <div id="Dialog-sua-km" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Chỉnh sửa khuyến mãi</h2>
-          <span class="close-edit-modal">&times;</span>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="sua-ngay-km">Ngày bắt đầu</label>
-            <input type="date" id="sua-ngay-km" value="2025-06-01">
-          </div>
-
-          <div class="form-group">
-            <label for="sua-ngay-km">Ngày kết thúc</label>
-            <input type="date" id="sua-ngay-km" value="2025-01-31">
-          </div>
-
-          <div class="form-group">
-            <label for="sua-giam-gia">Giảm giá</label>
-            <input type="text" id="sua-giam-gia" value="40000đ">
-          </div>
-
-           <div class="form-group">
-            <label for="trangthai">Trạng thái</label>
-            <input type="text" id="trangthai" value="Hoạt động">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn-edit-cancel">Hủy</button>
-          <button class="btn-edit-save">Lưu thay đổi</button>
-        </div>
+      <div class="modal-footer">
+        <button class="btn-cancel">Hủy</button>
+        <button class="btn-save">Lưu</button>
       </div>
     </div>
+  </div>
 
-    <!-- JS mở / đóng dialog -->
-    <script>
+  <!-- ========== Dialog chỉnh sửa khuyến mãi ========== -->
+  <div id="Dialog-sua-km" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Chỉnh sửa khuyến mãi</h2>
+        <span class="close-edit-modal">&times;</span>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="sua-ngay-km">Ngày bắt đầu</label>
+          <input type="date" id="sua-ngay-km" value="2025-06-01">
+        </div>
+
+        <div class="form-group">
+          <label for="sua-ngay-km">Ngày kết thúc</label>
+          <input type="date" id="sua-ngay-km" value="2025-01-31">
+        </div>
+
+        <div class="form-group">
+          <label for="sua-giam-gia">Giảm giá</label>
+          <input type="text" id="sua-giam-gia" value="40000đ">
+        </div>
+
+        <div class="form-group">
+          <label for="trangthai">Trạng thái</label>
+          <input type="text" id="trangthai" value="Hoạt động">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-edit-cancel">Hủy</button>
+        <button class="btn-edit-save">Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS mở / đóng dialog -->
+  <script>
     const btnThemKH = document.querySelector('.btn-them-khach-hang');
     const modal = document.getElementById('Dialog-them-km');
     const btnClose = document.querySelector('.close-modal');
@@ -792,6 +788,6 @@
       }
     });
   </script>
-  </body>
+</body>
 
 </html>
