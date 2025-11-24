@@ -604,7 +604,8 @@
 
       // Reset form
       document.querySelectorAll("#modal-add input").forEach(i => i.value = "");
-
+      document.getElementById("productID").disabled = false;
+      document.getElementById("categoryID").disabled = false;
       // Reset ảnh chính
       previewImg.src = "";
       previewImg.style.display = "none";
@@ -725,8 +726,10 @@
 
         // Gán vào form
         document.getElementById("productID").value = 'SP01';
+        document.getElementById("productID").disabled = true;
         document.getElementById("name").value = 'Bút Lông Thiên Long';
         document.getElementById("categoryID").value = 'CAT01';
+        document.getElementById("categoryID").disabled = true;
         document.getElementById("discountDefault").value = '10';
         document.getElementById("price").value = '168300';
         document.getElementById("quantity").value = '100';
