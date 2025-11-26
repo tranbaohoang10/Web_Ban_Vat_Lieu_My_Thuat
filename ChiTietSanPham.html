@@ -745,7 +745,112 @@
         box-shadow: 0 8px 20px rgba(23, 71, 157, 0.4);
     }
 
+    /* Animation cho nút thêm vào giỏ */
+    .btn-add-cart.adding {
+        animation: addToCartPulse 0.6s ease;
+    }
 
+    @keyframes addToCartPulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.95);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /* Toast Notification */
+    .toast-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 9999;
+        opacity: 0;
+        transform: translateX(400px);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .toast-notification.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .toast-notification i {
+        font-size: 1.5rem;
+        animation: checkmarkPop 0.6s ease;
+    }
+
+    @keyframes checkmarkPop {
+        0% {
+            transform: scale(0) rotate(0deg);
+        }
+        50% {
+            transform: scale(1.2) rotate(180deg);
+        }
+        100% {
+            transform: scale(1) rotate(360deg);
+        }
+    }
+
+    .toast-notification .toast-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .toast-notification .toast-title {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .toast-notification .toast-message {
+        font-size: 0.875rem;
+        opacity: 0.9;
+    }
+
+    .toast-notification .toast-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.25rem;
+        cursor: pointer;
+        padding: 0;
+        margin-left: 0.5rem;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+    }
+
+    .toast-notification .toast-close:hover {
+        opacity: 1;
+    }
+
+    /* Cart icon animation */
+    .header-giohang.cart-updated {
+        animation: cartShake 0.6s ease;
+    }
+
+    @keyframes cartShake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-5px);
+        }
+        75% {
+            transform: translateX(5px);
+        }
+    }
 
     /* Policy Section */
     .policy {
@@ -913,6 +1018,16 @@
         margin: 0;
         font-size: 1rem;
     }
+    .link {
+    display: flex;           
+    align-items: center;
+    text-decoration: none;   
+    color: inherit;         
+}
+.btn-buy-now {
+     text-decoration: none;
+    color: #fff;  
+}
 
     /* Responsive Design */
     @media (max-width: 992px) {
@@ -1031,335 +1146,333 @@
                     <div class="contact-phone-help">Hỗ trợ khách hàng</div>
                 </div>
             </div>
-            <div class="header-dangnhap-dangki"
-                onclick="window.location.href = 'DangNhap.html'">
+            <a href="DangNhap.html" class="link header-dangnhap-dangki">
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
                     <div class="dangnhap">Đăng nhập</div>
                     <div class="dangki">Đăng kí</div>
                 </div>
+            </a>
+
+        </div>
+        <a href="GioHang.html" class="link header-giohang" id="cartIcon"
+            data-count="0">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </a>
+
+    </header>
+    <nav>
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a>
+            <span>/</span>
+            <a href="ti">Bút Lông Màu</a>
+            <span>/</span>
+            <span>Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable -
+                Phiên
+                bản Demon Slayer</span>
+        </div>
+
+        <!-- Product Detail -->
+        <div class="product-detail-container">
+            <div class="product-detail">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <!-- Main Image -->
+                    <div class="product-main-image">
+                        <img src="./assets/images/logo/list1-1.jpg"
+                            alt="Bút Lông Thiên Long Demon Slayer"
+                            id="mainProductImage">
+                        <div class="discount-badge">
+                            <div>Tiết kiệm</div>
+                            <div style="font-size: 1rem;">15%</div>
+                        </div>
+
+                        <a href="javascript:void(0)" id="prevImageBtn"
+                            class="main-image-nav main-image-prev">&lt;</a>
+                        <a href="javascript:void(0)" id="nextImageBtn"
+                            class="main-image-nav main-image-next">&gt;</a>
+                    </div>
+
+                    <!-- Thumbnail Gallery -->
+                    <div class="thumbnail-gallery">
+                        <div class="thumbnail-container"
+                            id="thumbnailContainer">
+                            <div class="thumbnail-item active" id="thumb-1"
+                                data-index="0">
+                                <img src="./assets/images/logo/list1-1.jpg"
+                                    alt="Ảnh 1">
+                            </div>
+                            <div class="thumbnail-item" id="thumb-2"
+                                data-index="1">
+                                <img src="./assets/images/logo/list1-1.jpg"
+                                    alt="Ảnh 2">
+                            </div>
+                            <div class="thumbnail-item" id="thumb-3"
+                                data-index="2">
+                                <img
+                                    src="./assets/images/logo/list1-1-cont.png"
+                                    alt="Ảnh 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1 class="product-title">Bút Lông Thiên Long 48/60
+                        Màu
+                        Fiber Pen Washable - Phiên bản Demon Slayer
+                    </h1>
+
+                    <div class="product-meta">
+                        <div class="product-meta-item">
+                            <span class="product-meta-label">Thương
+                                hiệu:</span>
+                            <span class="product-meta-value"><a
+                                    href="#">Colokit</a></span>
+                        </div>
+                        <div class="product-meta-item">
+                            <span class="product-meta-label">Tình
+                                trạng:</span>
+                            <span class="product-meta-value"
+                                style="color: #10b981;">Còn hàng</span>
+                        </div>
+                        <div class="product-meta-item">
+                            <span class="product-meta-label">Mã sản
+                                phẩm:</span>
+                            <span class="product-meta-value">50016740</span>
+                        </div>
+                    </div>
+
+                    <div class="product-price-section">
+                        <div class="product-price">
+                            <span class="price-current">168,300₫</span>
+                            <span class="price-original">198,000₫</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-section">
+                        <div class="variant-label">Số lượng:</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn"
+                                onclick="decreaseQuantity()">-</button>
+                            <input type="number" class="quantity-input"
+                                value="1" min="1" id="quantity">
+                            <button class="quantity-btn"
+                                onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-add-cart" id="addToCartBtn">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            THÊM VÀO GIỎ
+                        </button>
+
+                        <a href="GioHang.html" class="btn btn-buy-now link">
+                            MUA NGAY
+                        </a>
+                    </div>
+
+                </div>
 
             </div>
-            <div class="header-giohang" id="cartIcon" data-count="0">
+            <div class="policy alpha bg-while">
+                <div class="policy_title">
+                    <h2>Thiên Long xin cam kết</h2>
+                </div>
+                <div class="policy_list">
+                    <div class="policy_detail">
+                        <img
+                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
+                            alt>
+                        <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất
+                            liệu
+                            an toàn, bền đẹp.</p>
+                    </div>
+                    <div class="policy_detail">
+                        <img
+                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/icon%20lap%20dat140848.png"
+                            alt>
+                        <p>Giá niêm yết & minh bạch phí Không phụ
+                            phí
+                            ẩn</p>
+                    </div>
+                    <div class="policy_detail">
+                        <img
+                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/Exchange150303.png"
+                            alt>
+                        <p>Quy trình đổi trả nhanh chóng, minh
+                            bạch.</p>
+                    </div>
 
-                <i class="fa-solid fa-bag-shopping"
-                    onclick="window.location.href='GioHang.html'"></i>
+                </div>
+            </div>
+            <div class="product_content alpha bg-while">
+
+                <div class="content_name ">
+                    <h3>Thông số kĩ thuật</h3>
+                </div>
+                <div class="content_blog " id="content_blog">
+
+                    <div class="content_blog-item">
+
+                        <div class="item-main">
+                            <ul>
+                                <li>
+                                    <h3>Thương hiệu : </h3>
+                                    <p>Colokit</p>
+                                </li>
+                                <li>
+                                    <h3>Kích thước bút: </h3>
+                                    <p>140.6 mm</p>
+                                </li>
+                                <li>
+                                    <h3>Tiêu chuẩn : </h3>
+                                    <p>TCCS 005: 2011/TL-BLM; châu
+                                        Âu EN
+                                        71/3</p>
+                                </li>
+                                <li>
+                                    <h3>Sản xuất : </h3>
+                                    <p>Việt Nam</p>
+                                </li>
+                                <li>
+                                    <h3>Khuyến cáo : </h3>
+                                    <p>Tránh nguồn nhiệt, hóa chất.
+                                        Không
+                                        thích hợp cho trẻ dưới 3
+                                        tuổi.</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
-        </header>
-        <nav>
-            <!-- Breadcrumb -->
-            <div class="breadcrumb">
-                <a href="index.html">Trang chủ</a>
-                <span>/</span>
-                <a href="#">Bút Lông Màu</a>
-                <span>/</span>
-                <span>Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable -
-                    Phiên
-                    bản Demon Slayer</span>
-            </div>
+            <div class="product_rate alpha bg-while  magin-bottom">
 
-            <!-- Product Detail -->
-            <div class="product-detail-container">
-                <div class="product-detail">
-                    <!-- Product Images -->
-                    <div class="product-images">
-                        <!-- Main Image -->
-                        <div class="product-main-image">
-                            <img src="./assets/images/logo/list1-1.jpg"
-                                alt="Bút Lông Thiên Long Demon Slayer"
-                                id="mainProductImage">
-                            <div class="discount-badge">
-                                <div>Tiết kiệm</div>
-                                <div style="font-size: 1rem;">15%</div>
-                            </div>
-
-                            <a href="javascript:void(0)" id="prevImageBtn"
-                                class="main-image-nav main-image-prev">&lt;</a>
-                            <a href="javascript:void(0)" id="nextImageBtn"
-                                class="main-image-nav main-image-next">&gt;</a>
-                        </div>
-
-                        <!-- Thumbnail Gallery -->
-                        <div class="thumbnail-gallery">
-                            <div class="thumbnail-container"
-                                id="thumbnailContainer">
-                                <div class="thumbnail-item active" id="thumb-1"
-                                    data-index="0">
-                                    <img src="./assets/images/logo/list1-1.jpg"
-                                        alt="Ảnh 1">
-                                </div>
-                                <div class="thumbnail-item" id="thumb-2"
-                                    data-index="1">
-                                    <img src="./assets/images/logo/list1-1.jpg"
-                                        alt="Ảnh 2">
-                                </div>
-                                <div class="thumbnail-item" id="thumb-3"
-                                    data-index="2">
-                                    <img
-                                        src="./assets/images/logo/list1-1-cont.png"
-                                        alt="Ảnh 3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Info -->
-                    <div class="product-info">
-                        <h1 class="product-title">Bút Lông Thiên Long 48/60
-                            Màu
-                            Fiber Pen Washable - Phiên bản Demon Slayer
-                        </h1>
-
-                        <div class="product-meta">
-                            <div class="product-meta-item">
-                                <span class="product-meta-label">Thương
-                                    hiệu:</span>
-                                <span class="product-meta-value"><a
-                                        href="#">Colokit</a></span>
-                            </div>
-                            <div class="product-meta-item">
-                                <span class="product-meta-label">Tình
-                                    trạng:</span>
-                                <span class="product-meta-value"
-                                    style="color: #10b981;">Còn hàng</span>
-                            </div>
-                            <div class="product-meta-item">
-                                <span class="product-meta-label">Mã sản
-                                    phẩm:</span>
-                                <span class="product-meta-value">50016740</span>
-                            </div>
-                        </div>
-
-                        <div class="product-price-section">
-                            <div class="product-price">
-                                <span class="price-current">168,300₫</span>
-                                <span class="price-original">198,000₫</span>
-                            </div>
-                        </div>
-
-                        <div class="quantity-section">
-                            <div class="variant-label">Số lượng:</div>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn"
-                                    onclick="decreaseQuantity()">-</button>
-                                <input type="number" class="quantity-input"
-                                    value="1" min="1" id="quantity">
-                                <button class="quantity-btn"
-                                    onclick="increaseQuantity()">+</button>
-                            </div>
-                        </div>
-
-                        <div class="product-actions">
-                            <button class="btn btn-add-cart" id="addToCartBtn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                THÊM VÀO GIỎ
-                            </button>
-
-                            <button class="btn btn-buy-now"
-                                onclick="window.location.href='GioHang.html'">
-                                MUA NGAY
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="policy alpha bg-while">
-                    <div class="policy_title">
-                        <h2>Thiên Long xin cam kết</h2>
-                    </div>
-                    <div class="policy_list">
-                        <div class="policy_detail">
-                            <img
-                                src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
-                                alt>
-                            <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất
-                                liệu
-                                an toàn, bền đẹp.</p>
-                        </div>
-                        <div class="policy_detail">
-                            <img
-                                src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/icon%20lap%20dat140848.png"
-                                alt>
-                            <p>Giá niêm yết & minh bạch phí Không phụ
-                                phí
-                                ẩn</p>
-                        </div>
-                        <div class="policy_detail">
-                            <img
-                                src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/Exchange150303.png"
-                                alt>
-                            <p>Quy trình đổi trả nhanh chóng, minh
-                                bạch.</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="product_content alpha bg-while">
-
-                    <div class="content_name ">
-                        <h3>Thông số kĩ thuật</h3>
-                    </div>
-                    <div class="content_blog " id="content_blog">
-
-                        <div class="content_blog-item">
-
-                            <div class="item-main">
-                                <ul>
-                                    <li>
-                                        <h3>Thương hiệu : </h3>
-                                        <p>Colokit</p>
-                                    </li>
-                                    <li>
-                                        <h3>Kích thước bút: </h3>
-                                        <p>140.6 mm</p>
-                                    </li>
-                                    <li>
-                                        <h3>Tiêu chuẩn : </h3>
-                                        <p>TCCS 005: 2011/TL-BLM; châu
-                                            Âu EN
-                                            71/3</p>
-                                    </li>
-                                    <li>
-                                        <h3>Sản xuất : </h3>
-                                        <p>Việt Nam</p>
-                                    </li>
-                                    <li>
-                                        <h3>Khuyến cáo : </h3>
-                                        <p>Tránh nguồn nhiệt, hóa chất.
-                                            Không
-                                            thích hợp cho trẻ dưới 3
-                                            tuổi.</p>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="product_rate alpha bg-while  magin-bottom">
-
-                    <a class="btn_view buy_now" href="DanhGia.html">
-
-                        <p>Xem đánh giá</p>
-                    </a>
-                </div>
+                <a class="btn_view buy_now" href="DanhGia.html">
+                    <p>Xem đánh giá</p>
+                </a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <footer id="footer-trang-chu">
-        <div class="footer-title">
-            <img src="./assets/images/logo/logo.png" alt class="img-main">
-            <p class="footer-title-header">Thienlong.vn - Website
-                thương mại
-                điện tử thuộc Tập đoàn Thiên Long</p>
-            <p class="footer-title-description">Công ty Cổ Phần Tập
-                Đoàn Thiên
-                Long
-                <br>
-                <br>
-                GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp
-                ngày
-                14/03/2005.
-            </p>
-            <form action class="footer-title-form">
-                <input type="email" placeholder="Nhập địa chỉ email">
-                <a href>Đăng ký</a>
-            </form>
-            <img
-                src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
-                alt class="img-footer">
-        </div>
-        <div class="footer-diachi">
-            <h2>ĐỊA CHỈ CÔNG TY</h2>
+<footer id="footer-trang-chu">
+    <div class="footer-title">
+        <img src="./assets/images/logo/logo.png" alt class="img-main">
+        <p class="footer-title-header">Thienlong.vn - Website
+            thương mại
+            điện tử thuộc Tập đoàn Thiên Long</p>
+        <p class="footer-title-description">Công ty Cổ Phần Tập
+            Đoàn Thiên
+            Long
+            <br>
+            <br>
+            GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp
+            ngày
+            14/03/2005.
+        </p>
+        <form action class="footer-title-form">
+            <input type="email" placeholder="Nhập địa chỉ email">
+            <a href>Đăng ký</a>
+        </form>
+        <img
+            src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
+            alt class="img-footer">
+    </div>
+    <div class="footer-diachi">
+        <h2>ĐỊA CHỈ CÔNG TY</h2>
+        <span>
+            Head Office:
+            <p class="footer-diachi-header"> Tầng 10, Sofic
+                Tower, Số 10
+                Đường Mai Chí Thọ, Phường An Khánh,
+                Thành Phố Hồ Chí Minh, Việt Nam
+            </span>
+            <br>
             <span>
-                Head Office:
-                <p class="footer-diachi-header"> Tầng 10, Sofic
-                    Tower, Số 10
-                    Đường Mai Chí Thọ, Phường An Khánh,
-                    Thành Phố Hồ Chí Minh, Việt Nam
+                Miền Bắc:
+                <p class="footer-diachi-description"> Số 38,
+                    đường Gamuda
+                    Gardens 2-5, Khu đô thị mới C2 - Gamuda
+                    Gardens, Phường Trần Phú, Thành phố Hà Nội,
+                    Việt Nam.
                 </span>
-                <br>
-                <span>
-                    Miền Bắc:
-                    <p class="footer-diachi-description"> Số 38,
-                        đường Gamuda
-                        Gardens 2-5, Khu đô thị mới C2 - Gamuda
-                        Gardens, Phường Trần Phú, Thành phố Hà Nội,
-                        Việt Nam.
-                    </span>
 
-                    <img src="./assets/images/logo/footer_bct.png" alt
-                        class="img-main">
-                </div>
-                <div class="footer-help">
-                    <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+                <img src="./assets/images/logo/footer_bct.png" alt
+                    class="img-main">
+            </div>
+            <div class="footer-help">
+                <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+                <span>
+                    Hotline:
+                    <p class="footer-help-header">1900 866 819
+                    </span>
                     <span>
-                        Hotline:
-                        <p class="footer-help-header">1900 866 819
-                        </span>
-                        <span>
-                            Thứ 2 - Thứ 6 (8h - 17h)
-                            salesonline@thienlongvn.com
-                            <div class="footer-help-header-list">
-                                <a href>
-                                    - Hướng dẫn mua hàng
-                                </a>
-                                <a href>
-                                    - Hướng dẫn thanh toán
-                                </a>
-                                <a href>
-                                    - Chính sách giao hàng
-                                </a>
-                                <a href>
-                                    - Chính sách đổi trả & hoàn tiền
-                                </a>
-                                <a href>
-                                    - Khách hàng thân thiết
-                                </a>
-                                <a href>
-                                    - Khách hàng ưu tiên
-                                </a>
-                                <a href>
-                                    - Phản ánh chất lượng sản phẩm
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                    <div class="footer-information">
-                        <h2>VỀ THIENLONG.VN</h2>
-                        <div class="footer-information-header-list">
-                            <a href="GioiThieu.html">
-                                - Giới thiệu
+                        Thứ 2 - Thứ 6 (8h - 17h)
+                        salesonline@thienlongvn.com
+                        <div class="footer-help-header-list">
+                            <a href>
+                                - Hướng dẫn mua hàng
                             </a>
                             <a href>
-                                - Dịch vụ in ấn quảng cáo
+                                - Hướng dẫn thanh toán
                             </a>
                             <a href>
-                                - Chính sách bảo mật chung
+                                - Chính sách giao hàng
                             </a>
                             <a href>
-                                - Chính sách bảo mật thông tin cá
-                                nhân
+                                - Chính sách đổi trả & hoàn tiền
                             </a>
                             <a href>
-                                - Thông tin liên hệ
+                                - Khách hàng thân thiết
                             </a>
                             <a href>
-                                - Chương trình Affiliate
+                                - Khách hàng ưu tiên
+                            </a>
+                            <a href>
+                                - Phản ánh chất lượng sản phẩm
                             </a>
                         </div>
-                        <div class="footer-information-socials">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-youtube"></i>
-                        </div>
+                    </span>
+                </div>
+                <div class="footer-information">
+                    <h2>VỀ THIENLONG.VN</h2>
+                    <div class="footer-information-header-list">
+                        <a href="GioiThieu.html">
+                            - Giới thiệu
+                        </a>
+                        <a href>
+                            - Dịch vụ in ấn quảng cáo
+                        </a>
+                        <a href>
+                            - Chính sách bảo mật chung
+                        </a>
+                        <a href>
+                            - Chính sách bảo mật thông tin cá
+                            nhân
+                        </a>
+                        <a href>
+                            - Thông tin liên hệ
+                        </a>
+                        <a href>
+                            - Chương trình Affiliate
+                        </a>
                     </div>
-                </footer>
-                <!-- su kien nut tang giam so luong -->
-                <script>
+                    <div class="footer-information-socials">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                </div>
+            </footer>
+            <!-- su kien nut tang giam so luong -->
+            <script>
         function increaseQuantity() {
             const input = document.getElementById("quantity");
             let value = parseInt(input.value);
@@ -1382,8 +1495,79 @@
         }
         addToCartBtn = document.getElementById('addToCartBtn');
         addToCartBtn.addEventListener('click', function () {
-          alert('Sản phẩm đã được thêm vào giỏ hàng!');
+            // Thêm animation cho nút
+            addToCartBtn.classList.add('adding');
+            setTimeout(() => {
+                addToCartBtn.classList.remove('adding');
+            }, 600);
+
+            showToastNotification();
+
+            const cartIcon = document.getElementById('cartIcon');
+            if (cartIcon) {
+                cartIcon.classList.add('cart-updated');
+                setTimeout(() => {
+                    cartIcon.classList.remove('cart-updated');
+                }, 600);
+
+                // Cập nhật số lượng sản phẩm trong giỏ
+                const currentCount = parseInt(cartIcon.getAttribute('data-count')) || 0;
+                cartIcon.setAttribute('data-count', currentCount + 1);
+            }
         });
+
+        function showToastNotification() {
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+
+            const icon = document.createElement('i');
+            icon.className = 'fa-solid fa-circle-check';
+            toast.appendChild(icon);
+
+            const toastContent = document.createElement('div');
+            toastContent.className = 'toast-content';
+
+            const toastTitle = document.createElement('div');
+            toastTitle.className = 'toast-title';
+            toastTitle.textContent = 'Thành công!';
+            toastContent.appendChild(toastTitle);
+
+            const toastMessage = document.createElement('div');
+            toastMessage.className = 'toast-message';
+            toastMessage.textContent = 'Đã thêm sản phẩm vào giỏ hàng';
+            toastContent.appendChild(toastMessage);
+
+            toast.appendChild(toastContent);
+
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'toast-close';
+            closeBtn.textContent = '×';
+            toast.appendChild(closeBtn);
+
+            document.body.appendChild(toast);
+
+      
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+
+          
+            closeBtn.addEventListener('click', () => {
+                hideToast(toast);
+            });
+
+            setTimeout(() => {
+                hideToast(toast);
+            }, 3000);
+        }
+          function hideToast(toast) {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 400);
+        }
 
         // su kien chuyen anh san pham
         document.addEventListener('DOMContentLoaded', function () {
@@ -1433,6 +1617,6 @@
         });
     </script>
 
-            </body>
+        </body>
 
-        </html>
+    </html>

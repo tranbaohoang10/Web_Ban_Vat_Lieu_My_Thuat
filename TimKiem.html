@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <style>
     .container {
         width: 1200px;
         margin: auto;
@@ -1086,24 +1087,14 @@
     /* End footer */
 </style>
 
-<body>
-    <!-- Begin header-->
+    <body>
+        <!-- Begin header-->
 
-    <header id="header-trang-chu" class="trang-chu">
-        <div class="logo-trang-chu">
-            <a href="index.html">
-                <img src="./assets/images/logo/logo.png" alt>
-            </a>
-        </div>
-        <form action class="tim-kiem-san-pham">
-            <input type="text" name placeholder="Tìm kiếm sản phẩm...">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </form>
-        <div class="header-contact">
-            <i class="fa-solid fa-phone"></i>
-            <div class="contact">
-                <div class="contact-phone-number">1900 866 819</div>
-                <div class="contact-phone-help">Hỗ trợ khách hàng</div>
+        <header id="header-trang-chu" class="trang-chu">
+            <div class="logo-trang-chu">
+                <a href="index.html">
+                    <img src="./assets/images/logo/logo.png" alt>
+                </a>
             </div>
         </div>
         <div class="header-dangnhap-dangki" >
@@ -1113,6 +1104,13 @@
                 <a href="DangKy.html"><div class="dangki">Đăng kí</div></a>
                 
             </div>
+            <div class="header-dangnhap-dangki"
+                onclick="window.location.href='DangNhap.html'">
+                <i class="fa-solid fa-user"></i>
+                <div class="dangnhap-dangki">
+                    <div class="dangnhap">Đăng nhập</div>
+                    <div class="dangki">Đăng kí</div>
+                </div>
 
         </div>
         <div class="header-giohang">
@@ -1130,135 +1128,162 @@
                 <p class="info-mithuat-header-content">Danh mục</p>
                 <i class="fa-solid fa-angle-down"></i>
             </div>
-            <div class="hover-block">
-                <div class="info-mithuat-description">
-                    <div class="info-mithuat-description-first">
-                        <a href>NEW ARRIVAL</a>
-                        <a href>Fiber Pen - Bút lông Màu</a>
-                        <a href>Bút chì màu</a>
-                        <a href>Màu nước</a>
-                        <a href>Tập vẽ tranh - Tập tô màu</a>
-                    </div>
-                    <div class="info-mithuat-description-second">
-                        <a href>Acrylic Marker - Bút sơn</a>
-                        <a href>Màu sáp, màu sáp dầu</a>
-                        <a href>Bút vẽ kỹ thuật</a>
-                        <a href>Sáp nặn</a>
-                        <a href>Combo mỹ thuật</a>
-                    </div>
-                    <div class="info-mithuat-description-img">
-                        <img src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg" alt>
-                    </div>
+            <div class="header-giohang">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+        </header>
+        <!-- End header-->
+
+        <!-- Begin section info mithuat -->
+        <div id="section-info-mithuat">
+            <div class="container">
+                <div class="info-mithuat-header">
+                    <i class="fa-solid fa-palette"></i>
+                    <p class="info-mithuat-header-content">Danh mục</p>
+                    <i class="fa-solid fa-angle-down"></i>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- End section info mithuat -->
-    <!-- Begin section trang chinh - danh muc - san pham -->
-    <div id="section-trangchinh-danhmuc-sanpham">
-        <div class="container">
-            <div class="content">
-                <a href>
-                    Trang chủ /
-                </a>
-                <a href>
-                    Danh mục /
-                </a>
-                <a href>
-                    Tất cả sản phẩm
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- End section trang chinh - danh muc - san pham -->
-    <!-- Begin section main -->
-    <div id="section-main">
-        <div class="container">
-            <div class="section-main-filter">
-                <div class="section-main-filter-loaisanpham">
-                    <h3 class="header">
-                        Loại sản phẩm
-                    </h3>
-                    <form action class="list">
-                        <input type="checkbox" name="sanpham1" id="sanpham1">
-                        <label for="sanpham1">Bút lông màu</label>
-                        <br>
-                        <input type="checkbox" name="sanpham2" id="sanpham2">
-                        <label for="sanpham2">Bút sáp màu</label>
-                        <br>
-                        <input type="checkbox" name="sanpham3" id="sanpham3">
-                        <label for="sanpham3">Bút chì màu</label>
-                        <br>
-                        <input type="checkbox" name="sanpham4" id="sanpham4">
-                        <label for="sanpham4">Khác</label>
-                        <br>
-                        <input type="checkbox" name="sanpham5" id="sanpham5">
-                        <label for="sanpham5">Bút sáp dầu</label>
-                        <br>
-                    </form>
-                    <div class="xemthem">
-                        <div class="content">
-                            Xem thêm
-                            <i class="fa-solid fa-angle-down"></i>
+                <div class="hover-block">
+                    <div class="info-mithuat-description">
+                        <div class="info-mithuat-description-first">
+                            <a href>NEW ARRIVAL</a>
+                            <a href>Fiber Pen - Bút lông Màu</a>
+                            <a href>Bút chì màu</a>
+                            <a href>Màu nước</a>
+                            <a href>Tập vẽ tranh - Tập tô màu</a>
+                        </div>
+                        <div class="info-mithuat-description-second">
+                            <a href>Acrylic Marker - Bút sơn</a>
+                            <a href>Màu sáp, màu sáp dầu</a>
+                            <a href>Bút vẽ kỹ thuật</a>
+                            <a href>Sáp nặn</a>
+                            <a href>Combo mỹ thuật</a>
+                        </div>
+                        <div class="info-mithuat-description-img">
+                            <img
+                                src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg"
+                                alt>
                         </div>
                     </div>
                 </div>
-                <div class="section-main-filter-mucgia">
-                    <h3 class="header">
-                        Mức giá
-                    </h3>
-                    <form action class="list">
-                        <label for="sanpham1">Giá dưới 100.000đ</label>
-                        <br>
-                        <input type="checkbox" name="sanpham2" id="sanpham-mucgia-2">
-                        <label for="sanpham-mucgia-2">100.000đ -
-                            300.000đ</label>
-                        <br>
-                        <input type="checkbox" name="sanpham3" id="sanpham-mucgia-3">
-                        <label for="sanpham-mucgia-3">300.000đ -
-                            500.000đ</label>
-                        <br>
-                        <input type="checkbox" name="sanpham4" id="sanpham-mucgia-4">
-                        <label for="sanpham-mucgia-4">500.000đ -
-                            700.000đ</label>
-                        <br>
-                        <input type="checkbox" name="sanpham5" id="sanpham-mucgia-5">
-                        <label for="sanpham-mucgia-5">700.000đ -
-                            1.000.000đ</label>
-                        <br>
-                        <input type="checkbox" name="sanpham1" id="sanpham-mucgia-6">
-                        <label for="sanpham-mucgia-6">Giá trên
-                            1.000.000đ</label>
-                        <br>
-                    </form>
-
-                </div>
-                <div class="section-main-filter-tieuchi">
-                    <h3 class="header">
-                        Tiêu chí
-                    </h3>
-                    <form action class="list">
-                        <input type="checkbox" name="sanpham2" id="sanphamcaonhat">
-                        <label for="sanphamcaonhat">Giá cao nhất</label>
-                        <br>
-                        <input type="checkbox" name="sanpham2" id="sanphamthapnhat">
-                        <label for="sanphamthapnhat">Giá thấp nhất</label>
-                        <br>
-                        <input type="checkbox" name="sanpham3" id="sanphamdanhgiacaonhat">
-                        <label for="sanphamdanhgiacaonhat">Đánh giá cao nhất</label>
-                        <br>
-                        <input type="checkbox" name="sanpham4" id="sanphammoi">
-                        <label for="sanphammoi">Sản phẩm mới</label>
-                        <br>
-
-                    </form>
-
-                </div>
-
             </div>
-            <div class="section-main-content">
-                <div class="section-main-content-image">
-                    <img src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg" alt>
+        </div>
+        <!-- End section info mithuat -->
+        <!-- Begin section trang chinh - danh muc - san pham -->
+        <div id="section-trangchinh-danhmuc-sanpham">
+            <div class="container">
+                <div class="content">
+                    <a href>
+                        Trang chủ /
+                    </a>
+                    <a href>
+                        Danh mục /
+                    </a>
+                    <a href>
+                        Tất cả sản phẩm
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End section trang chinh - danh muc - san pham -->
+        <!-- Begin section main -->
+        <div id="section-main">
+            <div class="container">
+                <div class="section-main-filter">
+                    <div class="section-main-filter-loaisanpham">
+                        <h3 class="header">
+                            Loại sản phẩm
+                        </h3>
+                        <form action class="list">
+                            <input type="checkbox" name="sanpham1"
+                                id="sanpham1">
+                            <label for="sanpham1">Bút lông màu</label>
+                            <br>
+                            <input type="checkbox" name="sanpham2"
+                                id="sanpham2">
+                            <label for="sanpham2">Bút sáp màu</label>
+                            <br>
+                            <input type="checkbox" name="sanpham3"
+                                id="sanpham3">
+                            <label for="sanpham3">Bút chì màu</label>
+                            <br>
+                            <input type="checkbox" name="sanpham4"
+                                id="sanpham4">
+                            <label for="sanpham4">Khác</label>
+                            <br>
+                            <input type="checkbox" name="sanpham5"
+                                id="sanpham5">
+                            <label for="sanpham5">Bút sáp dầu</label>
+                            <br>
+                        </form>
+                        <div class="xemthem">
+                            <div class="content">
+                                Xem thêm
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-main-filter-mucgia">
+                        <h3 class="header">
+                            Mức giá
+                        </h3>
+                        <form action class="list">
+                            <label for="sanpham1">Giá dưới 100.000đ</label>
+                            <br>
+                            <input type="checkbox" name="sanpham2"
+                                id="sanpham-mucgia-2">
+                            <label for="sanpham-mucgia-2">100.000đ -
+                                300.000đ</label>
+                            <br>
+                            <input type="checkbox" name="sanpham3"
+                                id="sanpham-mucgia-3">
+                            <label for="sanpham-mucgia-3">300.000đ -
+                                500.000đ</label>
+                            <br>
+                            <input type="checkbox" name="sanpham4"
+                                id="sanpham-mucgia-4">
+                            <label for="sanpham-mucgia-4">500.000đ -
+                                700.000đ</label>
+                            <br>
+                            <input type="checkbox" name="sanpham5"
+                                id="sanpham-mucgia-5">
+                            <label for="sanpham-mucgia-5">700.000đ -
+                                1.000.000đ</label>
+                            <br>
+                            <input type="checkbox" name="sanpham1"
+                                id="sanpham-mucgia-6">
+                            <label for="sanpham-mucgia-6">Giá trên
+                                1.000.000đ</label>
+                            <br>
+                        </form>
+
+                    </div>
+                    <div class="section-main-filter-tieuchi">
+                        <h3 class="header">
+                            Tiêu chí
+                        </h3>
+                        <form action class="list">
+                            <input type="checkbox" name="sanpham2"
+                                id="sanphamcaonhat">
+                            <label for="sanphamcaonhat">Giá cao nhất</label>
+                            <br>
+                            <input type="checkbox" name="sanpham2"
+                                id="sanphamthapnhat">
+                            <label for="sanphamthapnhat">Giá thấp nhất</label>
+                            <br>
+                            <input type="checkbox" name="sanpham3"
+                                id="sanphamdanhgiacaonhat">
+                            <label for="sanphamdanhgiacaonhat">Đánh giá cao
+                                nhất</label>
+                            <br>
+                            <input type="checkbox" name="sanpham4"
+                                id="sanphammoi">
+                            <label for="sanphammoi">Sản phẩm mới</label>
+                            <br>
+
+                        </form>
+
+                    </div>
+
                 </div>
                 <div class="section-main-content-list">
                     <h2 class="header">Mỹ Thuật</h2>
@@ -1274,30 +1299,46 @@
                                             class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
                                             bán 6</span></div>
                                 </div>
-                                <div class="list-product-list1-content-description">
-                                    <p class="content">Bút Lông Thiên Long
-                                        48/60 Màu Fiber Pen Washable - Phiên
-                                        bản
-                                        Demon Slayer</p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <span>(0)</span>
+                            </div>
+                            <div class="list-product-list1">
+                                <img src="./assets/images/logo/list1-2.jpg" alt>
+                                <div class="list-product-list1-content">
+                                    <div
+                                        class="list-product-list1-content-socials">
+                                        <div
+                                            class="list-product-list1-content-socials-1"><i
+                                                class="fa-solid fa-thumbs-up"></i><span>New</span></div>
+                                        <div
+                                            class="list-product-list1-content-socials-2"><i
+                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
+                                                bán 11</span></div>
                                     </div>
-                                    <h2 class="price-product-after">168,300₫</h2>
-                                    <p class="price-product-before">
-                                        198,000đ</p>
-                                    <span class="price-product-discount">-15%</span>
-                                    <div class="button">
-                                        <a href="ChiTietSanPham.html">
+                                    <div
+                                        class="list-product-list1-content-description">
+                                        <p class="content">[Bộ 12/18/24] Màu
+                                            Gouache dạng tuýp 12ml Thiên Long
+                                            Colokit
+                                        </p>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+                                        <h2
+                                            class="price-product-after">80,800₫</h2>
+                                        <p
+                                            class="price-product-before">101,000đ</p>
+                                        <span
+                                            class="price-product-discount">-20%</span>
+                                        <div class="button">
                                             <button class="btn-xemchitiet">
                                                 <i class="fa-solid fa-eye"></i>
                                                 Xem chi tiết
                                             </button>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1368,14 +1409,34 @@
                                         <i class="fa-solid fa-star"></i>
                                         <span>(0)</span>
                                     </div>
-                                    <h2 class="price-product-after">45,500₫</h2>
-                                    <p class="price-product-before">65,000₫</p>
-                                    <span class="price-product-discount">-30%</span>
-                                    <div class="button">
-                                        <button class="btn-xemchitiet">
-                                            <i class="fa-solid fa-eye"></i>
-                                            Xem chi tiết
-                                        </button>
+                                    <div
+                                        class="list-product-list1-content-description">
+                                        <p class="content">[Tặng 2/4/6 màu]
+                                            Acrylic Markers/ Bút sơn/ Bút lông
+                                            12/24/36
+                                            màu
+                                            ThiênLong
+                                        </p>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+                                        <h2
+                                            class="price-product-after">45,500₫</h2>
+                                        <p
+                                            class="price-product-before">65,000₫</p>
+                                        <span
+                                            class="price-product-discount">-30%</span>
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1406,14 +1467,33 @@
                                         <i class="fa-solid fa-star"></i>
                                         <span>(0)</span>
                                     </div>
-                                    <h2 class="price-product-after">31,040₫</h2>
-                                    <p class="price-product-before">38,800₫</p>
-                                    <span class="price-product-discount">-20%</span>
-                                    <div class="button">
-                                        <button class="btn-xemchitiet">
-                                            <i class="fa-solid fa-eye"></i>
-                                            Xem chi tiết
-                                        </button>
+                                    <div
+                                        class="list-product-list1-content-description">
+                                        <p class="content">Màu nước 8 màu Thiên
+                                            Long Colokit WACO-C06/AK - Dễ dàng
+                                            pha
+                                            trộn
+                                            màu - Phiên bản Akooland</p>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+                                        <h2
+                                            class="price-product-after">31,040₫</h2>
+                                        <p
+                                            class="price-product-before">38,800₫</p>
+                                        <span
+                                            class="price-product-discount">-20%</span>
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div></a>
@@ -1444,14 +1524,33 @@
                                         <i class="fa-solid fa-star"></i>
                                         <span>(0)</span>
                                     </div>
-                                    <h2 class="price-product-after">21,780₫</h2>
-                                    <p class="price-product-before">39,600₫</p>
-                                    <span class="price-product-discount">-45%</span>
-                                    <div class="button">
-                                        <button class="btn-xemchitiet">
-                                            <i class="fa-solid fa-eye"></i>
-                                            Xem chi tiết
-                                        </button>
+                                    <div
+                                        class="list-product-list1-content-description">
+                                        <p class="content">Bút lông 12 màu Fiber
+                                            Pen Thiên Long Colokit FP-01/AK -
+                                            Ngòi Fine
+                                            tô đều màu và liên tục - Phiên bản
+                                            Akooland</p>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+                                        <h2
+                                            class="price-product-after">21,780₫</h2>
+                                        <p
+                                            class="price-product-before">39,600₫</p>
+                                        <span
+                                            class="price-product-discount">-45%</span>
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1483,14 +1582,33 @@
                                         <i class="fa-solid fa-star"></i>
                                         <span>(0)</span>
                                     </div>
-                                    <h2 class="price-product-after">36,000₫</h2>
-                                    <p class="price-product-before">60,000₫</p>
-                                    <span class="price-product-discount">-40%</span>
-                                    <div class="button">
-                                        <button class="btn-xemchitiet">
-                                            <i class="fa-solid fa-eye"></i>
-                                            Xem chi tiết
-                                        </button>
+                                    <div
+                                        class="list-product-list1-content-description">
+                                        <p class="content">Bút lông 6/12 màu nhũ
+                                            Fiber Pen Metallic Thiên Long
+                                            Colokit - Màu
+                                            nhũ lấp lánh, vẽ được trên giấy
+                                            đen</p>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+                                        <h2
+                                            class="price-product-after">36,000₫</h2>
+                                        <p
+                                            class="price-product-before">60,000₫</p>
+                                        <span
+                                            class="price-product-discount">-40%</span>
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1521,14 +1639,32 @@
                                         <i class="fa-solid fa-star"></i>
                                         <span>(0)</span>
                                     </div>
-                                    <h2 class="price-product-after">11,800₫</h2>
-                                    <p class="price-product-before">19,800₫</p>
-                                    <span class="price-product-discount">-40%</span>
-                                    <div class="button">
-                                        <button class="btn-xemchitiet">
-                                            <i class="fa-solid fa-eye"></i>
-                                            Xem chi tiết
-                                        </button>
+                                    <div
+                                        class="list-product-list1-content-description">
+                                        <p class="content">Bút sáp 12/18 màu
+                                            Thiên Long Colokit - Màu sắc tươi
+                                            sáng Phủ đều
+                                            Bền màu - Phiên bản Akooland</p>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+                                        <h2
+                                            class="price-product-after">11,800₫</h2>
+                                        <p
+                                            class="price-product-before">19,800₫</p>
+                                        <span
+                                            class="price-product-discount">-40%</span>
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1560,14 +1696,33 @@
                                         <i class="fa-solid fa-star"></i>
                                         <span>(0)</span>
                                     </div>
-                                    <h2 class="price-product-after">61,380₫</h2>
-                                    <p class="price-product-before">102,300₫</p>
-                                    <span class="price-product-discount">-40%</span>
-                                    <div class="button">
-                                        <button class="btn-xemchitiet">
-                                            <i class="fa-solid fa-eye"></i>
-                                            Xem chi tiết
-                                        </button>
+                                    <div
+                                        class="list-product-list1-content-description">
+                                        <p class="content">Acrylic Markers/ Bút
+                                            sơn/ Bút lông 12/24/36 màu ThiênLong
+                                            Colokit
+                                            - Màu sắc tươi sáng, Không thấm qua
+                                            mặt giấy</p>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+                                        <h2
+                                            class="price-product-after">61,380₫</h2>
+                                        <p
+                                            class="price-product-before">102,300₫</p>
+                                        <span
+                                            class="price-product-discount">-40%</span>
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1585,118 +1740,119 @@
                     <a href><i class="fa-solid fa-angle-right"></i></a>
                     <a href><i class="fa-solid fa-angles-right"></i></a>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End section main -->
+        <!-- End section main -->
 
-    <!-- Begin footer-->
+        <!-- Begin footer-->
 
-    <footer id="footer-trang-chu">
-        <div class="footer-title">
-            <img src="./assets/images/logo/logo.png" alt class="img-main">
-            <p class="footer-title-header">Thienlong.vn - Website thương mại
-                điện tử thuộc Tập đoàn Thiên Long</p>
-            <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn
-                Thiên Long
-                <br>
-                <br>
-                GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày
-                14/03/2005.
-            </p>
-            <form action class="footer-title-form">
-                <input type="email" placeholder="Nhập địa chỉ email">
-                <a href>Đăng ký</a>
-            </form>
-            <img src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png" alt class="img-footer">
-        </div>
-        <div class="footer-diachi">
-            <h2>ĐỊA CHỈ CÔNG TY</h2>
-            <span>
-                Head Office:
-                <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10
-                    Đường Mai Chí Thọ, Phường An Khánh,
-                    Thành Phố Hồ Chí Minh, Việt Nam
-            </span>
-            <br>
-            <span>
-                Miền Bắc:
-                <p class="footer-diachi-description"> Số 38, đường
-                    Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
-                    Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt
-                    Nam.
-            </span>
-
-            <img src="./assets/images/logo/footer_bct.png" alt class="img-main">
-        </div>
-        <div class="footer-help">
-            <h2>HỖ TRỢ KHÁCH HÀNG</h2>
-            <span>
-                Hotline:
-                <p class="footer-help-header">1900 866 819
-            </span>
-            <span>
-                Thứ 2 - Thứ 6 (8h - 17h)
-                salesonline@thienlongvn.com
-                <div class="footer-help-header-list">
-                    <a href>
-                        - Hướng dẫn mua hàng
-                    </a>
-                    <a href>
-                        - Hướng dẫn thanh toán
-                    </a>
-                    <a href>
-                        - Chính sách giao hàng
-                    </a>
-                    <a href>
-                        - Chính sách đổi trả & hoàn tiền
-                    </a>
-                    <a href>
-                        - Khách hàng thân thiết
-                    </a>
-                    <a href>
-                        - Khách hàng ưu tiên
-                    </a>
-                    <a href>
-                        - Phản ánh chất lượng sản phẩm
-                    </a>
-                </div>
-            </span>
-        </div>
-        <div class="footer-information">
-            <h2>VỀ THIENLONG.VN</h2>
-            <div class="footer-information-header-list">
-                <a href="GioiThieu.html">
-                    - Giới thiệu
-                </a>
-                <a href>
-                    - Dịch vụ in ấn quảng cáo
-                </a>
-                <a href>
-                    - Chính sách bảo mật chung
-                </a>
-                <a href>
-                    - Chính sách bảo mật thông tin cá nhân
-                </a>
-                <a href>
-                    - Thông tin liên hệ
-                </a>
-                <a href>
-                    - Chương trình Affiliate
-                </a>
+        <footer id="footer-trang-chu">
+            <div class="footer-title">
+                <img src="./assets/images/logo/logo.png" alt class="img-main">
+                <p class="footer-title-header">Thienlong.vn - Website thương mại
+                    điện tử thuộc Tập đoàn Thiên Long</p>
+                <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn
+                    Thiên Long
+                    <br>
+                    <br>
+                    GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày
+                    14/03/2005.
+                </p>
+                <form action class="footer-title-form">
+                    <input type="email" placeholder="Nhập địa chỉ email">
+                    <a href>Đăng ký</a>
+                </form>
+                <img
+                    src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
+                    alt class="img-footer">
             </div>
+            <div class="footer-diachi">
+                <h2>ĐỊA CHỈ CÔNG TY</h2>
+                <span>
+                    Head Office:
+                    <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10
+                        Đường Mai Chí Thọ, Phường An Khánh,
+                        Thành Phố Hồ Chí Minh, Việt Nam
+                    </span>
+                    <br>
+                    <span>
+                        Miền Bắc:
+                        <p class="footer-diachi-description"> Số 38, đường
+                            Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
+                            Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt
+                            Nam.
+                        </span>
 
+                        <img src="./assets/images/logo/footer_bct.png" alt
+                            class="img-main">
+                    </div>
+                    <div class="footer-help">
+                        <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+                        <span>
+                            Hotline:
+                            <p class="footer-help-header">1900 866 819
+                            </span>
+                            <span>
+                                Thứ 2 - Thứ 6 (8h - 17h)
+                                salesonline@thienlongvn.com
+                                <div class="footer-help-header-list">
+                                    <a href>
+                                        - Hướng dẫn mua hàng
+                                    </a>
+                                    <a href>
+                                        - Hướng dẫn thanh toán
+                                    </a>
+                                    <a href>
+                                        - Chính sách giao hàng
+                                    </a>
+                                    <a href>
+                                        - Chính sách đổi trả & hoàn tiền
+                                    </a>
+                                    <a href>
+                                        - Khách hàng thân thiết
+                                    </a>
+                                    <a href>
+                                        - Khách hàng ưu tiên
+                                    </a>
+                                    <a href>
+                                        - Phản ánh chất lượng sản phẩm
+                                    </a>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="footer-information">
+                            <h2>VỀ THIENLONG.VN</h2>
+                            <div class="footer-information-header-list">
+                                <a href="GioiThieu.html">
+                                    - Giới thiệu
+                                </a>
+                                <a href>
+                                    - Dịch vụ in ấn quảng cáo
+                                </a>
+                                <a href>
+                                    - Chính sách bảo mật chung
+                                </a>
+                                <a href>
+                                    - Chính sách bảo mật thông tin cá nhân
+                                </a>
+                                <a href>
+                                    - Thông tin liên hệ
+                                </a>
+                                <a href>
+                                    - Chương trình Affiliate
+                                </a>
+                            </div>
 
+                            <div class="footer-information-socials">
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-youtube"></i>
+                            </div>
 
-            <div class="footer-information-socials">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-youtube"></i>
-            </div>
+                        </footer>
+                        <!-- End footer-->
 
-    </footer>
-    <!-- End footer-->
+                    </body>
 
-</body>
-
-</html>
+                </html>
