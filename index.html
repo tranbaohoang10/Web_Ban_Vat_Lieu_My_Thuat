@@ -144,6 +144,10 @@
         position: relative;
         cursor: pointer;
     }
+    #header-trang-chu .header-giohang a i {
+        color: white;
+
+    }
 
     #header-trang-chu .header-giohang::after {
         display: inline-flex;
@@ -344,6 +348,13 @@
         padding: 20px 0px;
         font-weight: 500;
     }
+    /* them the a */
+
+    a{
+        text-decoration: none;
+        color: black;
+        
+    }
 
     #section-info-mithuat .info-mithuat-header .info-mithuat-header-content {
         margin: 0 5px;
@@ -360,7 +371,7 @@
 
     #section-info-mithuat .info-mithuat-header:hover .info-mithuat-header-content,
     i:nth-child(2) {
-        color: #17479D;
+        color: #17479D; 
     }
 
     #section-info-mithuat .info-mithuat-header:hover .fa-angle-down {
@@ -676,6 +687,7 @@
 
     .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description p {
         font-size: 14px;
+        color: black;
     }
 
     .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .star i {
@@ -773,8 +785,8 @@
             </div>
             <form action class="tim-kiem-san-pham">
                 <input type="text" name placeholder="Tìm kiếm sản phẩm...">
-                <i class="fa-solid fa-magnifying-glass"
-                    onclick="window.location.href='TimKiem.html'"></i>
+                <a href="TimKiem.html"><i class="fa-solid fa-magnifying-glass"></i></a>
+                
             </form>
             <div class="header-contact">
                 <i class="fa-solid fa-phone"></i>
@@ -784,16 +796,19 @@
                 </div>
             </div>
             <div class="header-dangnhap-dangki"
-                onclick="window.location.href='DangNhap.html'">
+                >
+                
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
-                    <div class="dangnhap">Đăng nhập</div>
-                    <div class="dangki">Đăng kí</div>
+                    <a href="DangNhap.html"><div class="dangnhap">Đăng nhập</div></a>
+                    <a href="DangKy.html"><div class="dangki">Đăng kí</div></a>
+                    
                 </div>
 
             </div>
             <div class="header-giohang">
-                <i class="fa-solid fa-bag-shopping"></i>
+                <a class="" href="GioHang.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                
             </div>
         </header>
         <!-- End header-->
@@ -803,8 +818,8 @@
                 <div class="info-mithuat-header">
                     <i class="fa-solid fa-palette"></i>
                     <p class="info-mithuat-header-content"
-                        onclick="window.location.href = 'TimKiem.html'">Danh
-                        mục</p>
+                        ><a href="TimKiem.html">Danh
+                        mục</a> </p>
                     <i class="fa-solid fa-angle-down"></i>
                 </div>
                 <div class="hover-block">
@@ -889,7 +904,7 @@
                 <div class="section-but-content">
                     <div class="list-product">
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
+                           > <a href="ChiTietSanPham.html">
                             <img src="./assets/images/logo/mythuat-1.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
@@ -932,9 +947,11 @@
                                     </div>
                                 </div>
                             </div>
+                           </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
+                           > <a href="ChiTietSanPham.html">
                             <img src="./assets/images/logo/mythuat-2.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
@@ -975,10 +992,12 @@
                                     </div>
                                 </div>
                             </div>
+                           </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/mythuat-3.jpg" alt>
+                             > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/mythuat-3.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1020,9 +1039,11 @@
                                     </div>
                                 </div>
                             </div>
+                             </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
+                           > <a href="ChiTietSanPham.html">
                             <img src="./assets/images/logo/mythuat-4.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
@@ -1065,10 +1086,12 @@
                                     </div>
                                 </div>
                             </div>
+                           </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/mythuat-5.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/mythuat-5.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1110,10 +1133,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/mythuat-6.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/mythuat-6.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1155,10 +1180,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/mythuat-7.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/mythuat-7.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1200,10 +1227,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/mythuat-8.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                 <img src="./assets/images/logo/mythuat-8.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1245,9 +1274,11 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                           
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
+                           ><a href="ChiTietSanPham.html">
                             <img src="./assets/images/logo/mythuat-9.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
@@ -1290,10 +1321,12 @@
                                     </div>
                                 </div>
                             </div>
+                           </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/mythuat-10.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/mythuat-10.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1337,12 +1370,11 @@
                             </div>
                         </div>
                     </div>
+                            </a>
+                            
                 </div>
-                <div class="section-but-button">
-                    <button class="button"
-                        onclick="window.location.href='TimKiem.html'">Xem
-                        tất cả <i class="fa-solid fa-angle-right"></i></button>
-
+                <div class="section-but-button">      
+                        <a class="button" href="TimKiem.html">Xem tất cả<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -1356,8 +1388,8 @@
                 <div class="section-but-content">
                     <div class="list-product">
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo1.jpg" alt>
+                            ><a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/combo1.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1398,10 +1430,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo2.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                 <img src="./assets/images/logo/combo2.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1441,9 +1475,11 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                           
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
+                           > <a href="ChiTietSanPham.html">
                             <img src="./assets/images/logo/combo3.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
@@ -1485,9 +1521,11 @@
                                     </div>
                                 </div>
                             </div>
+                           </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
+                           > <a href="ChiTietSanPham.html">
                             <img src="./assets/images/logo/combo4.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
@@ -1529,10 +1567,12 @@
                                     </div>
                                 </div>
                             </div>
+                           </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo5.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/combo5.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1573,10 +1613,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo6.png" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/combo6.png" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1617,10 +1659,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo7.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/combo7.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1664,10 +1708,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo8.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/combo8.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1708,10 +1754,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo9.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/combo8.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1721,15 +1769,12 @@
                                     <div
                                         class="list-product-list1-content-socials-2"><i
                                             class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                            bán 147</span></div>
+                                            bán 6</span></div>
                                 </div>
                                 <div
                                     class="list-product-list1-content-description">
-                                    <p class="content">Combo Mỹ thuật SẮC MÀU -
-                                        5 Món (Vở vẽ A3, Bút chì gỗ 2B, Bút sáp
-                                        màu,
-                                        Bút sáp dầu,
-                                        Sách tương tác)
+                                    <p class="content">Bộ dụng cụ mỹ thuật
+                                        Colokit KIT-C012
                                     </p>
                                     <div class="star">
                                         <i class="fa-solid fa-star"></i>
@@ -1755,10 +1800,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
+                            
                         </div>
                         <div class="list-product-list1"
-                            onclick="window.location.href='ChiTietSanPham.html'">
-                            <img src="./assets/images/logo/combo10.jpg" alt>
+                            > <a href="ChiTietSanPham.html">
+                                <img src="./assets/images/logo/combo10.jpg" alt>
                             <div class="list-product-list1-content">
                                 <div class="list-product-list1-content-socials">
                                     <div
@@ -1801,12 +1848,14 @@
                             </div>
                         </div>
                     </div>
+                            </a>
+                            
                 </div>
                 <div class="section-but-button">
-                    <button class="button"
-                        onclick="window.location.href='TimKiem.html'">Xem tất cả
+                    
+                            <a class="button" href="TimKiem.html">Xem tất cả
                         <i
-                            class="fa-solid fa-angle-right"></i></button>
+                            class="fa-solid fa-angle-right"></i></a>
 
                 </div>
             </div>
