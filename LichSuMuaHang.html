@@ -728,29 +728,42 @@
       align-items: center;
     }
 
-    .order-buttons button {
-      padding: 8px 16px;
-      border: 1px solid #2659F3;
-      border-radius: 8px;
-      background: white;
-      cursor: pointer;
-      transition: 0.3s;
-      font-weight: 600;
-      color: #2659F3;
-    }
+   .order-buttons .btn-review,
+.order-buttons .btn-cancel {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  text-decoration: none; 
+}
+.order-buttons {
+  display: flex;
+  gap: 8px;                 
+}
 
-    .order-buttons .btn-review:hover {
-      background: #eff6ff;
-    }
+
+
+.order-buttons .btn-review {
+  border: 1px solid #2659F3;
+  background: #ffffff;
+  color: #2659F3;
+}
+
+.order-buttons .btn-review:hover {
+  background: #eff6ff;
+}
 
     .order-buttons .btn-cancel {
-      border-color: #ef4444;
-      color: #ef4444;
-    }
+  border: 1px solid #f43f3f;
+  background: #ffffff;
+  color: #f43f3f;
+}
 
-    .order-buttons .btn-cancel:hover {
-      background: #fee2e2;
-    }
+.order-buttons .btn-cancel:hover {
+  background: #fee2e2;
+}
 
 
     .order-history {
@@ -791,6 +804,12 @@
       font-size: 20px;
       color: #ef4444;
     }
+     .link {
+    display: flex;           
+    align-items: center;
+    text-decoration: none;   
+    color: inherit;         
+}
 
 
     /* ENd section-main-ca-nhan */
@@ -799,9 +818,8 @@
 
     <header id="header-trang-chu" class="trang-chu">
       <div class="logo-trang-chu">
-        <a href="index.html">
-          <img src="./assets/images/logo/logo.png" alt
-            onclick="window.location.href = 'index.html'">
+        <a href="IndexKhachHang.html">
+          <img src="./assets/images/logo/logo.png" alt>
         </a>
       </div>
       <form action class="tim-kiem-san-pham">
@@ -815,13 +833,15 @@
           <div class="contact-phone-help">Hỗ trợ khách hàng</div>
         </div>
       </div>
-      <div class="header-dangnhap-dangki"
-        onclick="window.location.href='DangNhap.html'">
-        <i class="fa-solid fa-user"></i>
-        <div class="dangnhap-dangki">
-          <div class="dangnhap">Hi, Hoàng Trần</div>
+       <a href="DangNhap.html" class="link header-dangnhap-dangki">
+                <i class="fa-solid fa-user"></i>
+                <div class="dangnhap-dangki">
+                     <div class="dangnhap">Hi, Hoàng...</div>
           <div class="dangki">Đăng xuất</div>
-        </div>
+                </div>
+            </a>
+         
+        
 
       </div>
       <div class="header-giohang">
@@ -834,8 +854,7 @@
       <div class="container">
         <div class="info-mithuat-header">
           <i class="fa-solid fa-palette"></i>
-          <p class="info-mithuat-header-content"
-            onclick="window.location.href = 'TimKiem.html'">Danh mục</p>
+          <a href="TimKiem.html" class="info-mithuat-header-content link">Danh mục</a>
           <i class="fa-solid fa-angle-down"></i>
         </div>
         <div class="hover-block">
@@ -952,9 +971,7 @@
                 <span class="total">Tổng cộng:
                   <strong>382,100₫</strong></span>
                 <div class="order-buttons">
-                  <button class="btn-review"
-                    onclick="window.location.href='DanhGia.html'">Đánh
-                    giá</button>
+                  <a href="DanhGia.html" class="btn-review">Đánh giá</a>
                   <button class="btn-cancel">Hủy đơn</button>
                 </div>
               </div>
@@ -988,9 +1005,7 @@
                 <span class="total">Tổng cộng:
                   <strong>31,080₫</strong></span>
                 <div class="order-buttons">
-                  <button class="btn-review"
-                    onclick="window.location.href='DanhGia.html'">Đánh
-                    giá</button>
+                  <a href="DanhGia.html" class="btn-review">Đánh giá</a>
                   <button class="btn-cancel">Xác nhận</button>
                 </div>
               </div>
