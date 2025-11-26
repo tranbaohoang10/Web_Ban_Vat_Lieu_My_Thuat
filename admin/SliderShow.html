@@ -25,7 +25,7 @@
     #main .left .list-admin {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
 
     #main .left .list-admin a {
@@ -44,6 +44,28 @@
         border-left: #3B7DDD 2px solid;
     }
 
+    #main .left .list-admin .logo img {
+        width: 100%;
+        height: auto;
+        margin: 10px 0 20px 0;
+    }
+
+    #main .left .list-admin a.logo {
+        padding: 0;
+    }
+
+    #main .left .list-admin a.logo:hover {
+        background-color: #203247;
+        border-left: none;
+    }
+
+    .list-admin a.active {
+        background-color: #203247;
+        border-left: 4px solid #FFD700;
+        /* hoặc màu khác */
+        font-weight: bold;
+    }
+
     #main .right .container {
         display: flex;
         flex-direction: column;
@@ -53,7 +75,6 @@
         margin-right: auto;
     }
 
-    /* Make right column grow to fill remaining space so children can space-between */
     #main .right {
         flex: 1;
         background-color: #F9F9F9;
@@ -170,12 +191,16 @@
         border-radius: 4px;
         transition: 0.2s;
     }
+
     .btn-Xoa:hover {
         background-color: #b02a37;
     }
-    .btn-Sua i, .btn-Xoa i {
+
+    .btn-Sua i,
+    .btn-Xoa i {
         font-size: 14px;
     }
+
     .btn-them-banner {
         background-color: #2659F5;
         border: none;
@@ -448,6 +473,7 @@
     <div id="main">
         <div class="left">
             <div class="list-admin">
+                <a href="Admin.html" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
                 <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng
                     quan</a>
                 <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
@@ -463,11 +489,11 @@
                     lý đơn hàng</a>
                 <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
                     khuyến mãi</a>
-                <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý Slider
+                <a href="SliderShow.html" class="active"><i class="fa-solid fa-sliders"></i>Quản lý Slider
                     Show</a>
-                <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên
+                <a href="LienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên
                     hệ</a>
-                <a href><i class="fa-solid fa-right-from-bracket"></i>
+                <a href="../DangNhap.html"><i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất</a>
             </div>
         </div>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<style>
+    #main {
+        display: flex;
+    }
+
+    #main .left {
+        background-color: #17479D;
+        height: 100vh;
+        width: 17%;
+    }
+
+    #main .left .list-admin {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #main .left .list-admin a {
+        display: block;
+        text-decoration: none;
+        color: white;
+        padding: 10px 20px;
+    }
+
+    #main .left .list-admin a i {
+        margin-right: 20px;
+    }
+
+    #main .left .list-admin a:hover {
+        background-color: #203247;
+        border-left: #3B7DDD 2px solid;
+    }
+
+    #main .left .list-admin .logo img {
+        width: 100%;
+        height: auto;
+        margin: 10px 0 20px 0;
+    }
+
+    #main .left .list-admin a.logo {
+        padding: 0;
+    }
+
+    #main .left .list-admin a.logo:hover {
+        background-color: #203247;
+        border-left: none;
+    }
+
+    .list-admin a.active {
+        background-color: #203247;
+        border-left: 4px solid #FFD700;
+        /* hoặc màu khác */
+        font-weight: bold;
+    }
+
+    #main .right .container {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 100px);
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    #main .right {
+        flex: 1;
+        background-color: #F9F9F9;
+    }
+
+
+    .order-container {
+        width: 95%;
+        margin: 30px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        margin: 0;
+        margin-bottom: 10px;
+        color: #222;
+    }
+
+    .sub-title {
+        color: #555;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .order-table th {
+        background: #2659F5;
+        color: white;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .order-table td {
+        padding: 12px;
+        background: #fafafa;
+    }
+
+    .order-table tr:nth-child(even) td {
+        background: #f0f0f0;
+    }
+
+    .order-table td,
+    .order-table th {
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    /* Trạng thái đơn hàng */
+    .status {
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .status.pending {
+        background: #FFF3CD;
+        color: #555;
+    }
+
+    .status.delivery {
+        background: #484ddf;
+        color: white;
+    }
+
+    .status.success {
+        background: #D1FAE5;
+        color: #0f5132;
+    }
+
+    .status.cancel {
+        background: #ffd6d6;
+        color: #b91c1c;
+    }
+
+    .btn-sm {
+        background-color: #FFC107;
+        color: black;
+        border: none;
+        padding: 6px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .btn-sm:hover {
+        background-color: #e0a800;
+    }
+
+    /* Nút xoá */
+    .btn-delete {
+        background-color: #DC3545;
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .btn-delete:hover {
+        background-color: #b02a37;
+    }
+
+
+    .btn-sm i,
+    .btn-delete i {
+        font-size: 14px;
+    }
+
+    .search-box {
+        margin-left: auto;
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        width: 400px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding-left: 10px;
+        overflow: hidden;
+    }
+
+    .search-box input {
+        border: none;
+        outline: none;
+        padding: 8px 10px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .search-btn {
+        background: #ddd;
+        border: none;
+        color: black;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        border-left: 1px solid #ddd;
+    }
+
+    .search-btn:hover {
+        background: #ccc;
+    }
+
+    .search-btn i {
+        font-size: 14px;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 25px 0;
+        gap: 5px;
+    }
+
+    .page-link {
+        padding: 6px 12px;
+        border: 1px solid #d0d7de;
+        border-radius: 4px;
+        color: #0d6efd;
+        background-color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .page-link:hover {
+        background-color: #e9ecef;
+    }
+
+    .page-link.active {
+        background-color: #2659F5;
+        color: white;
+        font-weight: bold;
+        border-color: #2659F5;
+    }
+
+    .order-table td:nth-child(7) {
+        max-width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* phan hoi */
+    .btn-reply {
+        background-color: #0D6EFD;
+        /* xanh kiểu bootstrap */
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .btn-reply:hover {
+        background-color: #0b5ed7;
+    }
+
+    .btn-reply i {
+        font-size: 14px;
+    }
+
+    /* form gui phan hoi */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .reply-box {
+        width: 500px;
+        background: white;
+        margin: 100px auto;
+        padding: 0;
+        border-radius: 8px;
+    }
+
+    .modal-header {
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .close-reply {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+        color: #999;
+    }
+
+    .close-reply:hover {
+        color: #333;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-body p {
+        margin: 0 0 15px 0;
+        font-size: 14px;
+    }
+
+    .modal-body label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .modal-body textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .modal-body textarea:focus {
+        border-color: #2659F3;
+        outline: none;
+    }
+
+    .modal-footer {
+        padding: 15px 20px;
+        border-top: 1px solid #ddd;
+        text-align: right;
+    }
+
+    .btn-cancel {
+        background: #f5f5f5;
+        color: #333;
+        padding: 8px 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .btn-cancel:hover {
+        background: #e5e5e5;
+    }
+
+    .btn-send {
+        background: #2659F3;
+        color: white;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-send:hover {
+        background: #1e40af;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <div class="left">
+            <div class="list-admin">
+                <a href="Admin.html" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
+                <a href="Admin.html"><i class="fa-solid fa-house"></i> Tổng
+                    quan</a>
+                <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
+                    kê</a>
+                <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản
+                    lý danh
+                    mục</a>
+                <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
+                    lý sản phẩm</a>
+                <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
+                    lý người dùng</a>
+                <a href="DonHang.html"><i class="fa-solid fa-box-open"></i>Quản
+                    lý đơn hàng</a>
+                <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
+                    khuyến mãi</a>
+                <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý Slider
+                    Show</a>
+                <a href="LienHe.html" class="active"><i class="fa-solid fa-address-book"></i>Quản lý liên
+                    hệ</a>
+                <a href="../DangNhap.html"><i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất</a>
+            </div>
+        </div>
+        <div class="right">
+
+            <div class="container">
+                <div class="order-container">
+                    <h1>Quản lý liên hệ</h1>
+
+                    <!-- Ô tìm kiếm -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Tìm kiếm liên hệ...">
+                        <button class="search-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+
+                    <table class="order-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ Tên</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Email</th>
+                                <th>Ngày Gửi</th>
+                                <th>Nội Dung</th>
+                                <th>Trạng Thái</th>
+                                <th>Tùy Chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>0909123456</td>
+                                <td>vana@gmail.com</td>
+                                <td>25-11-2025</td>
+                                <td>Tôi muốn hỏi về sản phẩm bút lông
+                                </td>
+                                <td><span class="status pending">Chờ phản
+                                        hổi</span></td>
+                                <td>
+                                    <button class="btn btn-reply btn-sm">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td>Trần Thị B</td>
+                                <td>0912345678</td>
+                                <td>btran@gmail.com</td>
+                                <td>22-11-2025</td>
+                                <td>Tôi chưa nhận được đơn hàng.</td>
+                                <td><span class="status success">Đã phản
+                                        hồi</span></td>
+                                <td>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td>Lê Minh C</td>
+                                <td>0933456789</td>
+                                <td>minhc@gmail.com</td>
+                                <td>20-11-2025</td>
+                                <td>Sản phẩm bị lỗi, vui lòng đổi trả.</td>
+                                <td><span class="status success">Đã phản
+                                        hồi</span></td>
+                                <td>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Nguyễn Văn D</td>
+                                <td>0909123456</td>
+                                <td>vana@gmail.com</td>
+                                <td>25-11-2025</td>
+                                <td>Tôi muốn hỏi về sản phẩm bút lông
+                                </td>
+                                <td><span class="status success">Đã phản
+                                        hồi</span></td>
+                                <td>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Nguyễn Văn E</td>
+                                <td>0909123456</td>
+                                <td>vana@gmail.com</td>
+                                <td>25-11-2025</td>
+                                <td>Tôi muốn hỏi về sản phẩm bút lông
+                                </td>
+                                <td><span class="status pending">Chờ phản
+                                        hổi</span></td>
+                                <td>
+                                    <button class="btn btn-reply btn-sm">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Nguyễn Văn F</td>
+                                <td>0909123456</td>
+                                <td>vana@gmail.com</td>
+                                <td>25-11-2025</td>
+                                <td>Tôi muốn hỏi về sản phẩm bút lông
+                                </td>
+                                <td><span class="status pending">Chờ phản
+                                        hổi</span></td>
+                                <td>
+                                    <button class="btn btn-reply btn-sm">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Nguyễn Văn G</td>
+                                <td>0909123456</td>
+                                <td>vana@gmail.com</td>
+                                <td>25-11-2025</td>
+                                <td>Tôi muốn hỏi về sản phẩm bút lông
+                                </td>
+                                <td><span class="status pending">Chờ phản
+                                        hổi</span></td>
+                                <td>
+                                    <button class="btn btn-reply btn-sm">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Nguyễn Văn H</td>
+                                <td>0909123456</td>
+                                <td>vana@gmail.com</td>
+                                <td>25-11-2025</td>
+                                <td>Tôi muốn hỏi về sản phẩm bút lông
+                                </td>
+                                <td><span class="status pending">Chờ phản
+                                        hổi</span></td>
+                                <td>
+                                    <button class="btn btn-reply btn-sm">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+
+                                    <button class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Phân trang -->
+                    <div class="pagination">
+                        <a href="#" class="page-link">Trước</a>
+                        <a href="#" class="page-link active">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+                        <a href="#" class="page-link">Sau</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Modal Form Phản Hồi -->
+        <div id="replyModal" class="modal">
+            <div class="reply-box">
+                <div class="modal-header">
+                    <span class="close-reply">&times;</span>
+                    <h3>Phản Hồi Khách Hàng</h3>
+                </div>
+
+                <div class="modal-body">
+                    <p><strong>Email:</strong> hanano1@gmail.com</p>
+
+                    <label for="replyMessage">Nội dung phản hồi:</label>
+                    <textarea id="replyMessage" placeholder="Nhập nội dung phản hồi..." rows="6"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-cancel">Hủy</button>
+                    <button class="btn-send">Gửi phản hồi</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Lấy các phần tử
+            const modal = document.getElementById('replyModal');
+            const closeBtn = document.querySelector('.close-reply');
+            const cancelBtn = document.querySelector('.btn-cancel');
+            const sendBtn = document.querySelector('.btn-send');
+            const replyBtns = document.querySelectorAll('.btn-reply');
+
+            // Mở modal khi click nút phản hồi
+            replyBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    modal.style.display = 'block';
+                });
+            });
+
+
+
+            // Đóng modal khi click nút Hủy
+            cancelBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+
+
+
+            // Xử lý gửi phản hồi
+            sendBtn.addEventListener('click', function () {
+                const message = document.getElementById('replyMessage').value;
+
+
+
+                alert('Đã gửi phản hồi thành công!');
+                document.getElementById('replyMessage').value = '';
+                modal.style.display = 'none';
+            });
+        </script>
+</body>
+
+</html>
