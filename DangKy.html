@@ -487,6 +487,24 @@
     .btn-dang-nhap-tt i {
         font-size: 16px;
     }
+    .text-login {
+    margin-top: 16px;
+    text-align: center;
+    color: #ffffff;          /* màu chữ “Bạn đã có tài khoản” */
+    font-size: 16px;
+}
+
+/* Style riêng cho link Đăng nhập */
+.text-login a {
+    color: #FFD700;          /* màu vàng giống theme */
+    text-decoration: none;   /* bỏ gạch chân */
+    font-weight: 500;
+}
+
+.text-login a:hover {
+    text-decoration: underline;  /* nếu muốn hover có gạch chân */
+}
+
 
     /* end login */
 </style>
@@ -528,41 +546,48 @@
                 <form action class="infor">
                     <div class="tt-chitiet" style="grid-column: span 2;">
                         <label for="Ho">Họ và Tên:</label>
-                        <input type="text" name placeholder="Họ và Tên">
+                        <input type="text" id="Ho" name="fullName"
+                            placeholder="Họ và Tên" required>
                     </div>
 
                     <div class="tt-chitiet">
                         <label for="Email">Email cá nhân:</label>
-                        <input type="text" id="email" name
-                            placeholder="Email cá nhân">
+                        <input type="email" id="email" name="email"
+                            placeholder="Email cá nhân" required>
                         <span id="email-error"
                             style="color: #FFD700; font-size: 14px;"></span>
                     </div>
 
                     <div class="tt-chitiet">
                         <label for="sdt">Số điện thoại:</label>
-                        <input type="text" name placeholder="Số điện thoại">
+                        <input type="text" id="sdt" name="phone"
+                            placeholder="Số điện thoại">
                     </div>
 
-                    <div class="tt-chitiet" style="grid-column: span 2;">
+                    <div class="tt-chitiet"
+                        style="grid-column: span 2; position: relative;">
                         <label for="Mk">Mật khẩu:</label>
-                        <input type="password" name placeholder="Mật khẩu">
+                        <input type="password" id="Mk" name="password"
+                            placeholder="Mật khẩu" required>
                         <i class="hide-display" id="togglePassword"
                             style="position:absolute; right:10px; top:38px; cursor:pointer;"></i>
                     </div>
+
+                    <button type="submit" class="btn-DangKy"
+                        style="grid-column: span 2;">
+                        Đăng ký
+                    </button>
                 </form>
 
-                <button class="btn-DangKy"
-                    onclick="window.location.href ='DangNhap.html'">Đăng
-                    ký</button>
-
-                <div class="dang-nhap">Bạn đã có tài khoản <a
-                        href="DangNhap.html">Đăng nhập tại đây</a></div>
+                <p class="text-login">
+                    Bạn đã có tài khoản
+                    <a href="DangNhap.html">Đăng nhập tại đây</a>
+                </p>
 
                 <div class="btn-dang-nhap-tt">
                     <button class="btn-gg"><i
                             class="fa-brands fa-google"></i>Google</button>
-                    <!-- <button class="btn-fb"><i class="fa-brands fa-facebook"></i>Facebook</button> -->
+
                 </div>
             </div>
         </div>
@@ -669,36 +694,17 @@
                             </div>
                         </div>
                     </footer>
-                </body>
-                <script>
+                    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.infor');
 
-    // js check email
-    document.querySelector(".btn-DangKy").addEventListener("click", function (e) {
-        e.preventDefault();
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        const emailInput = document.getElementById("email");
-        const errorSpan = document.getElementById("email-error");
-        const email = emailInput.value.trim();
-
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        errorSpan.textContent = "";
-
-        if (email === "") {
-            errorSpan.textContent = "Vui lòng nhập email!";
-            emailInput.style.border = "1px solid red";
-        } else if (!emailPattern.test(email)) {
-            errorSpan.textContent = "Email không hợp lệ! (ví dụ: abc@gmail.com)";
-            emailInput.style.border = "1px solid red";
-        } else {
-            // errorSpan.textContent = "✅ Email hợp lệ!";
-            // errorSpan.style.color = "#00FF00";
-            // emailInput.style.border = "1px solid #00FF00";
-        }
-    }
-
-    );
+            alert('Đăng ký thành công!');
+        });
+    });
 </script>
-            </body>
+                </body>
 
-        </html>
+            </html>

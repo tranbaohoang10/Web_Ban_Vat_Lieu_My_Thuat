@@ -59,6 +59,13 @@
     border-left: none;
   }
 
+  .list-admin a.active {
+    background-color: #203247;
+    border-left: 4px solid #FFD700;
+    /* hoặc màu khác */
+    font-weight: bold;
+  }
+
   #main .right .container {
     display: flex;
     flex-direction: column;
@@ -295,7 +302,9 @@
 
   .form-row {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
   }
 
   .form-left,
@@ -355,7 +364,7 @@
           kê</a>
         <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản lý danh
           mục</a>
-        <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
+        <a href="SanPham.html" class="active"><i class="fa-solid fa-palette"></i>Quản
           lý sản phẩm</a>
         <a href="Nguoidung.html"><i class="fa-solid fa-person"></i>Quản
           lý người dùng</a>
@@ -365,8 +374,8 @@
           khuyến mãi</a>
         <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý
           Slider Show</a>
-        <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
-        <a href><i class="fa-solid fa-right-from-bracket"></i>
+        <a href="LienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+        <a href="../DangNhap.html"><i class="fa-solid fa-right-from-bracket"></i>
           Đăng xuất</a>
       </div>
     </div>
@@ -601,6 +610,7 @@
     btnAdd.addEventListener("click", () => {
 
       modal.style.display = "flex";
+      modal.style.gap = "20px";
 
       // Reset form
       document.querySelectorAll("#modal-add input").forEach(i => i.value = "");

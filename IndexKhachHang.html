@@ -132,17 +132,29 @@
     font-weight: 600;
     font-size: 18px;
   }
+  
 
   #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
     color: white;
     font-size: 16px;
   }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+ 
 
   #header-trang-chu .header-giohang {
     font-size: 25px;
     color: white;
     position: relative;
     cursor: pointer;
+  }
+  /* them the a */
+  .header-giohang a{
+    
+    color: white;
+   
   }
 
   #header-trang-chu .header-giohang::after {
@@ -358,6 +370,11 @@
 
   #section-info-mithuat .info-mithuat-header .info-mithuat-header-content {
     margin: 0 5px;
+    
+  }
+  #section-info-mithuat .info-mithuat-header .info-mithuat-header-content a{
+    text-decoration: none;
+    
   }
 
   #section-info-mithuat .info-mithuat-header i:nth-child(1) {
@@ -687,6 +704,7 @@
 
   .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description p {
     font-size: 14px;
+    color: black;
   }
 
   .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .star i {
@@ -796,16 +814,19 @@
       <div class="header-dangnhap-dangki">
         <i class="fa-solid fa-user"></i>
         <div class="dangnhap-dangki">
-          <div class="dangnhap"
-            onclick="window.location.href = 'ThongTinKhachHang.html'">Hi, Hoàng
-            Trần</div>
-          <div class="dangki" onclick="window.location.href = 'index.html'">Đăng
-            xuất</div>
+          <div class="dangnhap">
+            <a class="dangnhap" href="ThongTinKhachHang.html">Hi, Hoàng
+            Trần</a>
+          </div>
+          <div class="dangki" > <a class="dangki" href="index.html">Đăng
+            xuất</a> </div>
         </div>
 
       </div>
       <div class=" header-giohang">
-        <i class="fa-solid fa-bag-shopping"></i>
+        <a href="GioHang.html"><i class="fa-solid fa-bag-shopping"></i></a>
+        
+        
       </div>
     </header>
     <!-- End header-->
@@ -815,7 +836,7 @@
         <div class="info-mithuat-header">
           <i class="fa-solid fa-palette"></i>
           <p class="info-mithuat-header-content"
-            onclick="window.location.href = 'index.html'">Danh mục</p>
+           ><a  href="index.html">Danh mục</a></p>
           <i class="fa-solid fa-angle-down"></i>
         </div>
         <div class="hover-block">
@@ -897,10 +918,11 @@
           <h2>MỸ THUẬT</h2>
 
         </div>
+        <!--  -->
         <div class="section-but-content">
           <div class="list-product">
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
+             ><a href="ChiTietSanPham.html">
               <img src="./assets/images/logo/mythuat-1.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
@@ -936,10 +958,14 @@
                   </div>
                 </div>
               </div>
+             </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-2.jpg" alt>
+
+            <!--  -->
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-2.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -974,10 +1000,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-3.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-3.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1013,10 +1041,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-4.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-4.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1052,10 +1082,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-5.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-5.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1091,10 +1123,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-6.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-6.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1130,10 +1164,11 @@
                   </div>
                 </div>
               </div>
+              </a>
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-7.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-7.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1169,10 +1204,11 @@
                   </div>
                 </div>
               </div>
+              </a>
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-8.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-8.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1208,10 +1244,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-9.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-9.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1247,10 +1285,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/mythuat-10.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/mythuat-10.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1288,10 +1328,13 @@
               </div>
             </div>
           </div>
+              </a>
+              
         </div>
         <div class="section-but-button">
-          <button class="button">Xem tất cả <i
-              class="fa-solid fa-angle-right"></i></button>
+          <a class="button" href="TimKiem.html">Xem tất cả <i
+              class="fa-solid fa-angle-right"></i></a>
+          
 
         </div>
       </div>
@@ -1305,8 +1348,8 @@
         <div class="section-but-content">
           <div class="list-product">
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo1.jpg" alt>
+              >
+              <a href="ChiTietSanPham.html"><img src="./assets/images/logo/combo1.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1339,11 +1382,11 @@
                     </a>
                   </div>
                 </div>
-              </div>
+              </div></a>
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo2.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo2.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1377,10 +1420,11 @@
                   </div>
                 </div>
               </div>
+              </a>   
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo3.jpg" alt>
+            <div class="list-product-list1">
+              <a href="">
+                <img src="./assets/images/logo/combo3.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1414,10 +1458,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
-            <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo4.jpg" alt>
+            <div class="list-product-list1">
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo4.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1450,11 +1496,13 @@
                     </a>
                   </div>
                 </div>
-              </div>
+              </div></a>
+              
             </div>
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo5.jpg" alt>
+              >
+              <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo5.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1488,10 +1536,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo6.png" alt>
+              > <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo6.png" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1525,10 +1575,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo7.jpg" alt>
+              > <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo7.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1564,10 +1616,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo8.jpg" alt>
+              > <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo8.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1601,10 +1655,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo9.jpg" alt>
+              > <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo9.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1640,10 +1696,12 @@
                   </div>
                 </div>
               </div>
+              </a>
+              
             </div>
             <div class="list-product-list1"
-              onclick="window.location.href='ChiTietSanPham.html'">
-              <img src="./assets/images/logo/combo10.jpg" alt>
+              > <a href="ChiTietSanPham.html">
+                <img src="./assets/images/logo/combo10.jpg" alt>
               <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                   <div class="list-product-list1-content-socials-1"><i
@@ -1679,10 +1737,13 @@
               </div>
             </div>
           </div>
+              </a>
+              
         </div>
         <div class="section-but-button">
-          <button class="button">Xem tất cả <i
-              class="fa-solid fa-angle-right"></i></button>
+          <a class="button" href="TimKiem.html">Xem tất cả <i
+              class="fa-solid fa-angle-right"></i></a>
+          
 
         </div>
       </div>

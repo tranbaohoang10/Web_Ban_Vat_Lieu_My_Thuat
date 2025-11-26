@@ -58,6 +58,13 @@
             border-left: none;
         }
 
+        .list-admin a.active {
+            background-color: #203247;
+            border-left: 4px solid #FFD700;
+            /* hoặc màu khác */
+            font-weight: bold;
+        }
+
         #main .right .container {
             display: flex;
             flex-direction: column;
@@ -188,9 +195,9 @@
         }
 
         .search-btn {
-            background: #2659F5;
+            background: #ddd;
             border: none;
-            color: white;
+            color: black;
             padding: 8px 12px;
             cursor: pointer;
             font-size: 14px;
@@ -198,7 +205,7 @@
         }
 
         .search-btn:hover {
-            background: #0f2e6d;
+            background: #ccc;
         }
 
         .search-btn i {
@@ -381,7 +388,7 @@
                     quan</a>
                 <a href="ThongKe.html"><i class="fa-solid fa-chart-line"></i>Thống
                     kê</a>
-                <a href="DanhMuc.html"><i class="fa-solid fa-list"></i>Quản
+                <a href="DanhMuc.html" class="active"><i class="fa-solid fa-list"></i>Quản
                     lý danh
                     mục</a>
                 <a href="SanPham.html"><i class="fa-solid fa-palette"></i>Quản
@@ -394,9 +401,9 @@
                     khuyến mãi</a>
                 <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý Slider
                     Show</a>
-                <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên
+                <a href="LienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên
                     hệ</a>
-                <a href><i class="fa-solid fa-right-from-bracket"></i>
+                <a href="../DangNhap.html"><i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất</a>
             </div>
         </div>

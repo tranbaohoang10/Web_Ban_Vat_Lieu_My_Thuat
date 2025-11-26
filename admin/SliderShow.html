@@ -59,6 +59,13 @@
         border-left: none;
     }
 
+    .list-admin a.active {
+        background-color: #203247;
+        border-left: 4px solid #FFD700;
+        /* hoặc màu khác */
+        font-weight: bold;
+    }
+
     #main .right .container {
         display: flex;
         flex-direction: column;
@@ -161,27 +168,41 @@
 
     .btn-Sua {
         background-color: #FFC107;
+        color: black;
         border: none;
-        color: white;
-        padding: 0.25rem;
-        font-size: 14px;
-        border-radius: 5px;
+        padding: 6px 10px;
         cursor: pointer;
-        margin-right: 5px;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .btn-Sua:hover {
+        background-color: #e0a800;
     }
 
     .btn-Xoa {
-        background-color: #dc3545;
-        border: none;
+        background-color: #DC3545;
         color: white;
-        padding: 0.25rem;
-        font-size: 14px;
-        border-radius: 5px;
+        border: none;
+        padding: 6px 10px;
         cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: 0.2s;
     }
 
-    .btn-them-khach-hang {
-        background-color: #17479D;
+    .btn-Xoa:hover {
+        background-color: #b02a37;
+    }
+
+    .btn-Sua i,
+    .btn-Xoa i {
+        font-size: 14px;
+    }
+
+    .btn-them-banner {
+        background-color: #2659F5;
         border: none;
         color: white;
         padding: 8px 16px;
@@ -294,7 +315,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 12px 16px;
-        background-color: #17479D;
+        background-color: #2659F5;
         color: #fff;
     }
 
@@ -353,7 +374,7 @@
 
     .form-group input:focus,
     .form-group select:focus {
-        border-color: #17479D;
+        border-color: #2659F5;
     }
 
     .modal-footer {
@@ -379,7 +400,7 @@
     }
 
     .btn-save {
-        background: #17479D;
+        background: #2659F5;
         color: #fff;
     }
 
@@ -398,7 +419,7 @@
     }
 
     .btn-edit-save {
-        background: #17479D;
+        background: #2659F5;
         color: #fff;
     }
 
@@ -468,11 +489,11 @@
                     lý đơn hàng</a>
                 <a href="Khuyenmai.html"><i class="fa-solid fa-gift"></i>Quản lý
                     khuyến mãi</a>
-                <a href="SliderShow.html"><i class="fa-solid fa-sliders"></i>Quản lý Slider
+                <a href="SliderShow.html" class="active"><i class="fa-solid fa-sliders"></i>Quản lý Slider
                     Show</a>
-                <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên
+                <a href="LienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên
                     hệ</a>
-                <a href><i class="fa-solid fa-right-from-bracket"></i>
+                <a href="../DangNhap.html"><i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất</a>
             </div>
         </div>
@@ -484,10 +505,10 @@
                     <h1>Danh sách banner</h1>
                     <div class="search">
                         <div class="search-input-icon">
-                            <input type="text" placeholder="Tìm kiếm tin tức...">
+                            <input type="text" placeholder="Tìm kiếm slider...">
                             <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                         </div>
-                        <button class="btn-them-khach-hang">Thêm
+                        <button class="btn-them-banner">Thêm
                             banner</button>
                     </div>
                     <table class="order-table">
@@ -626,8 +647,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="editDiaChiKH">Trạng thái</label>
-                    <input type="text" id="editDiaChiKH" value="Hiển thị">
+                    <label for="TrangThai">Trạng Thái</label>
+                    <select id="TrangThai">
+                        <option value="display">Hiển thị</option>
+                        <option value="hide">Ẩn</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -646,7 +670,7 @@
 
     <!-- JS mở / đóng dialog -->
     <script>
-        const btnThemKH = document.querySelector('.btn-them-khach-hang');
+        const btnThemKH = document.querySelector('.btn-them-banner');
         const modal = document.getElementById('customerModal');
         const btnClose = document.querySelector('.close-modal');
         const btnCancel = document.querySelector('.btn-cancel');
