@@ -808,6 +808,10 @@ button[type="submit"]:hover {
         color: #111827;
         
     }
+    a{
+        text-decoration: none;
+        width: 100%;
+    }
 
 /* Responsive Design */
 @media (max-width: 992px) {
@@ -927,15 +931,14 @@ button[type="submit"]:hover {
                             <div class="input-group col-md-6">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-input-item"
-                                    id="email" placeholder="Email" required
-                                    onkeyup="checkErrorEmail()">
+                                    id="email" placeholder="Email" required>
                                 <span id="error_email"></span>
                             </div>
                             <div class="input-group col-md-6">
                                 <label for="phone">Số điện thoại</label>
                                 <input type="number" class="form-input-item"
                                     id="phone" placeholder="Số điện thoại"
-                                    onkeyup="checkErrorPhone()" required>
+                                    required>
                                 <span id="error_phone"></span>
                             </div>
                         </div>
@@ -989,11 +992,10 @@ button[type="submit"]:hover {
                                 </label>
                             </div>
                         </div>
+                        <a href="ThanhToanThanhCong.html" class="btn-continue">
+                            Thanh toán ngay
+                        </a>
 
-                        <button type="submit" class="btn-continue"
-                            onclick="window.location.href='ThanhToanThanhCong.html'">Thanh
-                            toán
-                            ngay</button>
                     </form>
                 </div>
 
@@ -1183,50 +1185,6 @@ button[type="submit"]:hover {
                         </div>
                     </footer>
 
-                    <script>
-                                        // Validate Email
-                                        function checkErrorEmail() {
-                                            const email = document.getElementById('email').value;
-                                            const errorEmail = document.getElementById('error_email');
-                                            
-                                            if (email === '') {
-                                                errorEmail.textContent = '';
-                                                errorEmail.style.display = 'none';
-                                                return;
-                                            }
-                                            
-                                            if (!email.includes('@') || !email.includes('.')) {
-                                                errorEmail.textContent = 'Nhập đúng định dạng email';
-                                                errorEmail.style.color = 'red';
-                                                errorEmail.style.display = 'block';
-                                            } else {
-                                                errorEmail.textContent = '';
-                                                errorEmail.style.display = 'none';
-                                            }
-                                        }
-
-                                        // Validate Phone Number
-                                        function checkErrorPhone() {
-                                            const phone = document.getElementById('phone').value;
-                                            const errorPhone = document.getElementById('error_phone');
-                                            
-                                            if (phone === '') {
-                                                errorPhone.textContent = '';
-                                                errorPhone.style.display = 'none';
-                                                return;
-                                            }
-                                            
-                                            if (phone.length < 10) {
-                                                errorPhone.textContent = 'Nhập số điện thoại trên 8 số';
-                                                errorPhone.style.color = 'red';
-                                                errorPhone.style.display = 'block';
-                                            } else {
-                                                errorPhone.textContent = '';
-                                                errorPhone.style.display = 'none';
-                                            }
-                                        }
-                                        
-                        </script>
                 </body>
 
             </html>
