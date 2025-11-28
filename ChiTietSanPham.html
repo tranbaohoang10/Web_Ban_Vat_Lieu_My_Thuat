@@ -147,7 +147,7 @@
 
     #header-trang-chu .header-giohang::after {
         display: inline-flex;
-        content: "0";
+        content: attr(data-count);
         width: 20px;
         height: 20px;
         left: 20px;
@@ -158,6 +158,27 @@
         background-color: red;
         position: absolute;
         border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    /* Animation khi cập nhật giỏ hàng */
+    #header-trang-chu .header-giohang.cart-updated::after {
+        animation: cartCountPulse 0.6s ease;
+    }
+
+    @keyframes cartCountPulse {
+        0% {
+            transform: scale(1);
+            background-color: red;
+        }
+        50% {
+            transform: scale(1.4);
+            background-color: #10b981;
+        }
+        100% {
+            transform: scale(1);
+            background-color: red;
+        }
     }
 
     /* End header */
@@ -1270,7 +1291,7 @@
                             THÊM VÀO GIỎ
                         </button>
 
-                        <a href="GioHang.html" class="btn btn-buy-now link">
+                        <a href="ThanhToan.html" class="btn btn-buy-now link">
                             MUA NGAY
                         </a>
                     </div>

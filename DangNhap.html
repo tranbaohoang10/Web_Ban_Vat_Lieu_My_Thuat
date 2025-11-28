@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Đăng Nhập</title>
         <link rel="stylesheet" href="./assets/css/style.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -845,26 +845,28 @@
         <div class="main">
             <div class="container">
                 <h4>Đăng Nhập</h4>
-                <form action class="form-login">
+                <form action="IndexKhachHang.html" class="form-login">
                     <div class="form-1">
                         <label for="email"> Email*</label>
                         <input type="email" name placeholder="Nhập Email"
+                            required
                             id="email">
                         <span id="email-error"
                             style="color: #FFD700; font-size: 14px;"></span>
                     </div>
                     <div class="form-1">
                         <label for="password"> Mật Khẩu*</label>
-                        <input type="password" name placeholder="Nhập mật khẩu">
+                        <input type="password" name placeholder="Nhập mật khẩu"
+                            required id="password">
                     </div>
 
                     <div class="forgot-password">
                         <p>Quên mật khẩu? Nhấn vào <a
                                 href="QuenMatKhau.html">đây</a></p>
                     </div>
-                    <a href="IndexKhachHang.html"><button type="button"
-                            class="btn-login">Đăng
-                            Nhập</button></a>
+                    <button type="submit"
+                        class="btn-login">Đăng
+                        Nhập</button>
 
                     <div class="chuataikhoan">
                         Bạn chưa có tài khoản <a href="DangKy.html"
