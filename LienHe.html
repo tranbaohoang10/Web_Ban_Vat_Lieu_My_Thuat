@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Liên hệ</title>
         <link rel="stylesheet" href="./assets/css/style.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -860,7 +860,7 @@
                                     placeholder="Nhập nội dung"
                                     required></textarea>
                             </div>
-                            <button class="btn-lienhe" type="submit">Gửi liên hệ
+                            <button class="btn-lienhe" type="button">Gửi liên hệ
                                 của bạn</button>
                         </form>
                     </div>
@@ -984,6 +984,11 @@
                             </div>
                         </div>
                     </footer>
+                    <script>
+    document.querySelector('.btn-lienhe').addEventListener('click', function () {
+        alert('Gửi liên hệ thành công!');
+    });
+</script>
 
                 </body>
 
