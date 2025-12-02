@@ -1,0 +1,815 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh giá</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+</head>
+<style>
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    /* Begin header */
+    #header-trang-chu {
+        background-color: var(--color-main);
+        display: flex;
+        align-items: center;
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+    }
+
+    #header-trang-chu .logo-trang-chu {
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    #header-trang-chu .logo-trang-chu img {
+        background-color: transparent;
+        width: 200px;
+        height: 100%;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham {
+        position: relative;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham input {
+        padding: 10px 15px;
+        width: 600px;
+        border-radius: 10px;
+        border: none;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham {
+        display: flex;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham i {
+        position: absolute;
+        right: 0;
+        width: 50px;
+        height: 100%;
+        background-color: #0b234d;
+        line-height: 40px;
+        cursor: pointer;
+        color: white;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    #header-trang-chu .header-contact {
+        display: flex;
+        align-items: center;
+    }
+
+    #header-trang-chu .header-contact i {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #0b234d;
+        line-height: 30px;
+        color: white;
+    }
+
+    #header-trang-chu .header-contact {
+        margin-left: 100px;
+        margin-right: 50px;
+        cursor: pointer;
+    }
+
+    #header-trang-chu .header-contact .contact {
+        margin-left: 15px;
+    }
+
+    #header-trang-chu .header-contact .contact .contact-phone-number {
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #header-trang-chu .header-contact .contact .contact-phone-help {
+        color: white;
+        font-size: 16px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki i {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #0b234d;
+        line-height: 30px;
+        color: white;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki {
+        margin-right: 50px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
+        margin-left: 15px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
+        color: white;
+        font-size: 16px;
+    }
+
+    #header-trang-chu .header-giohang {
+        font-size: 25px;
+        color: white;
+        position: relative;
+        cursor: pointer;
+    }
+
+    #header-trang-chu .header-giohang::after {
+        display: inline-flex;
+        content: "0";
+        width: 20px;
+        height: 20px;
+        left: 20px;
+        bottom: 15px;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        background-color: red;
+        position: absolute;
+        border-radius: 50%;
+    }
+
+    /* End header */
+    /* Begin footer */
+    #footer-trang-chu {
+        display: flex;
+        background-color: #17479d;
+        border-top-left-radius: 70px;
+        border-top-right-radius: 70px;
+        gap: 30px;
+        align-items: center;
+        justify-content: space-around;
+        position: relative;
+    }
+
+    #footer-trang-chu .footer-title {
+        text-align: justify;
+        margin-left: 30px;
+    }
+
+    #footer-trang-chu .footer-title .img-main {
+        background-color: transparent;
+        width: 400px;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-header {
+        color: #fbe263;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-description {
+        color: white;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form {
+        position: relative;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form input {
+        padding: 10px 15px;
+        border-radius: 10px;
+        width: 300px;
+        border: none;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form a {
+        position: absolute;
+        display: inline-flex;
+        width: 100px;
+        height: 36px;
+        background-color: #0b234d;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        top: 0;
+        right: 69px;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-title .img-footer {
+        width: 250px;
+        margin-top: 15px;
+        cursor: pointer;
+        margin-bottom: 50px;
+    }
+
+    #footer-trang-chu .footer-diachi {
+        width: 25%;
+    }
+
+    #footer-trang-chu .footer-diachi h2 {
+        font-size: 20px;
+        color: #fbe263;
+        margin: 0;
+    }
+
+    #footer-trang-chu .footer-diachi span {
+        color: #fbe263;
+        display: block;
+        padding-top: 15px;
+    }
+
+    #footer-trang-chu .footer-diachi .footer-diachi-header {
+        display: inline;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-diachi .footer-diachi-description {
+        display: inline;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-diachi .img-main {
+        display: block;
+        margin-top: 20px;
+    }
+
+    #footer-trang-chu .footer-help h2 {
+        font-size: 20px;
+        color: #fbe263;
+        margin: 0;
+    }
+
+    #footer-trang-chu .footer-help span {
+        display: block;
+        color: #fbe263;
+        padding-top: 15px;
+    }
+
+    #footer-trang-chu .footer-help .footer-help-header {
+        display: inline;
+        color: white;
+    }
+
+    #footer-trang-chu .footer-help .footer-help-header-list a {
+        display: block;
+        text-decoration: none;
+        color: white;
+        line-height: 1.4;
+    }
+
+    #footer-trang-chu .footer-diachi .img-main {
+        cursor: pointer;
+    }
+
+    #footer-trang-chu .footer-information h2 {
+        font-size: 20px;
+        color: #fbe263;
+        margin: 0;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-header-list a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        line-height: 1.4;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials {
+        padding-top: 35px;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials i {
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 50%;
+        line-height: 50px;
+        font-size: 25px;
+        color: #17479d;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials i:nth-child(1) {
+        margin-right: 10px;
+    }
+
+    #footer-trang-chu::after {
+        display: block;
+        position: absolute;
+        content: "2025 © Thienlong.vn - Bản quyền thuộc Tập đoàn Thiên Long";
+        bottom: 0;
+        color: white;
+    }
+
+    /* End footer */
+
+    /* content review */
+    .breadcrumb {
+        background-color: #f0f4f8;
+        padding: 1rem 2.5rem;
+        font-size: 0.875rem;
+    }
+
+    .breadcrumb a {
+        color: #17479d;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+        color: #0d2a5e;
+        text-decoration: underline;
+    }
+
+    .breadcrumb span {
+        color: #666;
+        margin: 0 0.5rem;
+    }
+
+    .review-container {
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        background-color: white;
+    }
+
+
+    .filter-section {
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .filter-options {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+
+    }
+
+    .filter-btn {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+        background-color: #2659F3;
+        color: #fff;
+    }
+
+    .reviews-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .review {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        height: fit-content;
+    }
+
+    .review h3 {
+        margin-bottom: 5px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .review p {
+        margin-top: 5px;
+    }
+
+    .rating {
+        color: #ff9800;
+        font-size: 20px;
+    }
+
+    .timestamp {
+        padding-top: 10px;
+        font-size: 13px;
+        color: #666;
+    }
+
+
+    .star-rating {
+        display: flex;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .star-rating [type="radio"] {
+        appearance: none;
+    }
+
+    .star-rating i {
+        color: #eee;
+        font-size: 30px;
+        transition: 0.3s;
+    }
+
+
+    .star-rating label:is(:hover, :has(~ :hover)) i {
+        transform: scale(1.35);
+        color: #fffdba;
+    }
+
+    .star-rating label:has(~ :checked) i {
+        color: rgb(245, 245, 74);
+        text-shadow: 0 0 2px #ffffff, 0 0 10px #ffee58;
+    }
+
+
+    .area_submit {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn_writeReview {
+        margin-top: 25px;
+        font-size: 16px;
+        padding: 10px 10px;
+    }
+
+    .form_review {
+        justify-content: center;
+    }
+
+    .area_review {
+        padding: 10px;
+        width: 100%;
+        height: 100px;
+    }
+
+    .content {
+        border-right: 1px #ece5e5 solid;
+
+    }
+
+    .content h4 {
+        margin: 1rem 0;
+        font-size: 1.8rem;
+    }
+
+    .form {
+
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    textarea:focus-visible {
+        outline: 2px solid #b2d2f4;
+        border: 1px solid #b2d2f4;
+    }
+
+    input:focus-visible {
+        outline: 2px solid #b2d2f4;
+        border: 1px solid #b2d2f4;
+    }
+
+    .form textarea {
+        font-family: Arial, Helvetica, sans-serif;
+        width: 100%;
+        height: 10rem;
+        margin-bottom: 1rem;
+        border: 1px solid #cdc4c4;
+        border-radius: 5px;
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+
+
+    .form-group {
+        display: flex;
+        gap: 1rem;
+        flex: 1;
+        margin-bottom: 1rem;
+    }
+
+    .gender {
+        display: flex;
+        gap: 1rem;
+
+    }
+
+    .form-group>* {
+        flex-basis: 50%;
+    }
+
+    .form-group .infor_contact {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .btn_writeReview {
+        background-color: #2659F3;
+        color: #fff;
+        border: none;
+        padding: 0.7rem 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+
+
+    .sidebar {
+
+        padding: 1.4rem;
+    }
+
+    .sidebar h3 {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+
+
+    .sidebar ul li {
+        margin-bottom: 1rem;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 1rem;
+        font-weight: bold;
+
+    }
+
+    .sidebar ul li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Hiệu ứng nhảy nhẹ khi chọn sao */
+    @keyframes jump {
+
+        0%,
+        50% {
+            transform: translateY(0) scale(1.35);
+        }
+
+        100% {
+            transform: translateY(-15%) scale(1.35);
+        }
+    }
+</style>
+
+<body>
+    <header id="header-trang-chu" class="trang-chu">
+        <div class="logo-trang-chu">
+            <a href="index.jsp">
+                <img src="./assets/images/logo/logo.png" alt>
+            </a>
+        </div>
+        <form action class="tim-kiem-san-pham">
+            <input type="text" name placeholder="Tìm kiếm sản phẩm...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </form>
+        <div class="header-contact">
+            <i class="fa-solid fa-phone"></i>
+            <div class="contact">
+                <div class="contact-phone-number">1900 866 819</div>
+                <div class="contact-phone-help">Hỗ trợ khách hàng</div>
+            </div>
+        </div>
+        <div class="header-dangnhap-dangki">
+            <i class="fa-solid fa-user"></i>
+            <div class="dangnhap-dangki">
+                <div class="dangnhap">Đăng nhập</div>
+                <div class="dangki">Đăng kí</div>
+            </div>
+
+        </div>
+        <div class="header-giohang">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+    </header>
+    <nav>
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.jsp">Trang chủ</a>
+            <span>/</span>
+            <a href="ChiTietSanPham.jsp">Bút Lông Màu</a>
+            <span>/</span>
+            <span>Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable - Phiên
+                bản Demon Slayer</span>
+        </div>
+        <div class="review-container  bg-while">
+            <h2>Đánh giá sản phẩm</h2>
+
+            <div class="reviews-section">
+                <p class="reviews_star">
+                    <span class="star-rating">
+                        <input type="radio" name="rating" id="rate-0" value="0" checked style="display: none;">
+                        <label for="rate-1" style="--i:1"><i class="fa-solid fa-star"></i></label>
+                        <input type="radio" name="rating" id="rate-1" value="1">
+                        <label for="rate-2" style="--i:2"><i class="fa-solid fa-star"></i></label>
+                        <input type="radio" name="rating" id="rate-2" value="2">
+                        <label for="rate-3" style="--i:3"><i class="fa-solid fa-star"></i></label>
+                        <input type="radio" name="rating" id="rate-3" value="3">
+                        <label for="rate-4" style="--i:4"><i class="fa-solid fa-star"></i></label>
+                        <input type="radio" name="rating" id="rate-4" value="4">
+                        <label for="rate-5" style="--i:5"><i class="fa-solid fa-star"></i></label>
+                        <input type="radio" name="rating" id="rate-5" value="5">
+                    </span>
+                </p>
+                <div class="reviews_detail">
+
+                    <div class="form-group form_review">
+                        <input type="text" class="infor_contact" placeholder="Họ và tên">
+                        <input type="number" class="infor_contact" placeholder="Số điện thoại">
+                    </div>
+                    <textarea class="area_review" placeholder="Nhập nội dung"></textarea>
+                    <div class="area_submit">
+                        <button class="btn_writeReview">Gửi đánh giá</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="review-container bg-while">
+            <div class="filter-section">
+                <h2>Lọc đánh giá</h2>
+                <div class="filter-options">
+                    <button class="filter-btn active">Tất cả</button>
+                    <button class="filter-btn">5 ★</i></button>
+                    <button class="filter-btn">4 ★</i></button>
+                    <button class="filter-btn">3 ★</i></button>
+                    <button class="filter-btn">2 ★</i></button>
+                    <button class="filter-btn">1 ★</i></button>
+                </div>
+                <label>
+                    <input type="checkbox" />
+                    Có hình ảnh (20)
+                </label>
+            </div>
+
+            <div class="reviews-section">
+                <div class="review">
+                    <h3>Bảo Hoàng</h3>
+                    <div class="rating">★★★★★</div>
+                    <p>Màu đẹp lắm! Cho Shop 5 sao</p>
+
+                    <p class="timestamp">Đã dùng khoảng 1 ngày</p>
+                </div>
+
+                <div class="review">
+                    <h3>Đăng Hậu</h3>
+                    <div class="rating">★★★★</div>
+                    <p>Giao hàng nhanh chóng, giá cả hợp lý, OK!</p>
+                    <p class="timestamp">Đã dùng khoảng 2 tuần</p>
+                </div>
+
+            </div>
+        </div>
+
+
+    </nav>
+
+    <footer id="footer-trang-chu">
+        <div class="footer-title">
+            <img src="./assets/images/logo/logo.png" alt class="img-main">
+            <p class="footer-title-header">Thienlong.vn - Website thương mại
+                điện tử thuộc Tập đoàn Thiên Long</p>
+            <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn
+                Thiên Long
+                <br>
+                <br>
+                GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày
+                14/03/2005.
+            </p>
+            <form action class="footer-title-form">
+                <input type="email" placeholder="Nhập địa chỉ email">
+                <a href>Đăng ký</a>
+            </form>
+            <img src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png" alt class="img-footer">
+        </div>
+        <div class="footer-diachi">
+            <h2>ĐỊA CHỈ CÔNG TY</h2>
+            <span>
+                Head Office:
+                <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10
+                    Đường Mai Chí Thọ, Phường An Khánh,
+                    Thành Phố Hồ Chí Minh, Việt Nam
+            </span>
+            <br>
+            <span>
+                Miền Bắc:
+                <p class="footer-diachi-description"> Số 38, đường
+                    Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
+                    Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt
+                    Nam.
+            </span>
+
+            <img src="./assets/images/logo/footer_bct.png" alt class="img-main">
+        </div>
+        <div class="footer-help">
+            <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+            <span>
+                Hotline:
+                <p class="footer-help-header">1900 866 819
+            </span>
+            <span>
+                Thứ 2 - Thứ 6 (8h - 17h)
+                salesonline@thienlongvn.com
+                <div class="footer-help-header-list">
+                    <a href>
+                        - Hướng dẫn mua hàng
+                    </a>
+                    <a href>
+                        - Hướng dẫn thanh toán
+                    </a>
+                    <a href>
+                        - Chính sách giao hàng
+                    </a>
+                    <a href>
+                        - Chính sách đổi trả & hoàn tiền
+                    </a>
+                    <a href>
+                        - Khách hàng thân thiết
+                    </a>
+                    <a href>
+                        - Khách hàng ưu tiên
+                    </a>
+                    <a href>
+                        - Phản ánh chất lượng sản phẩm
+                    </a>
+                </div>
+            </span>
+        </div>
+        <div class="footer-information">
+            <h2>VỀ THIENLONG.VN</h2>
+            <div class="footer-information-header-list">
+                <a href="GioiThieu.jsp">
+                    - Giới thiệu
+                </a>
+                <a href>
+                    - Dịch vụ in ấn quảng cáo
+                </a>
+                <a href>
+                    - Chính sách bảo mật chung
+                </a>
+                <a href>
+                    - Chính sách bảo mật thông tin cá nhân
+                </a>
+                <a href>
+                    - Thông tin liên hệ
+                </a>
+                <a href>
+                    - Chương trình Affiliate
+                </a>
+            </div>
+            <div class="footer-information-socials">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

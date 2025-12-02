@@ -1,0 +1,783 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  </head>
+
+  <body>
+    <style>
+    .container {
+      width: 1200px;
+      margin: auto;
+    }
+
+    /* Begin header */
+    #header-trang-chu {
+      background-color: var(--color-main);
+      display: flex;
+      align-items: center;
+      position: fixed;
+      z-index: 999;
+      width: 100%;
+    }
+
+    #header-trang-chu .logo-trang-chu {
+      margin-left: 50px;
+      margin-right: 50px;
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
+    #header-trang-chu .logo-trang-chu img {
+      background-color: transparent;
+      width: 200px;
+      height: 100%;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham {
+      position: relative;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham input {
+      padding: 10px 15px;
+      width: 600px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham {
+      display: flex;
+    }
+
+    #header-trang-chu .tim-kiem-san-pham i {
+      position: absolute;
+      right: 0;
+      width: 50px;
+      height: 100%;
+      background-color: #0b234d;
+      line-height: 40px;
+      cursor: pointer;
+      color: white;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    #header-trang-chu .header-contact {
+      display: flex;
+      align-items: center;
+    }
+
+    #header-trang-chu .header-contact i {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #0b234d;
+      line-height: 30px;
+      color: white;
+    }
+
+    #header-trang-chu .header-contact {
+      margin-left: 100px;
+      margin-right: 50px;
+      cursor: pointer;
+    }
+
+    #header-trang-chu .header-contact .contact {
+      margin-left: 15px;
+    }
+
+    #header-trang-chu .header-contact .contact .contact-phone-number {
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    #header-trang-chu .header-contact .contact .contact-phone-help {
+      color: white;
+      font-size: 16px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki i {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #0b234d;
+      line-height: 30px;
+      color: white;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki {
+      margin-right: 50px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
+      margin-left: 15px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
+      color: white;
+      font-size: 16px;
+    }
+
+    #header-trang-chu .header-giohang {
+      font-size: 25px;
+      color: white;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #header-trang-chu .header-giohang::after {
+      display: inline-flex;
+      content: "0";
+      width: 20px;
+      height: 20px;
+      left: 20px;
+      bottom: 15px;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      background-color: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    /* End header */
+    /* Begin footer */
+    #footer-trang-chu {
+      display: flex;
+      background-color: #17479d;
+      border-top-left-radius: 70px;
+      border-top-right-radius: 70px;
+      gap: 30px;
+      align-items: center;
+      justify-content: space-around;
+      position: relative;
+    }
+
+    #footer-trang-chu .footer-title {
+      text-align: justify;
+      margin-left: 30px;
+    }
+
+    #footer-trang-chu .footer-title .img-main {
+      background-color: transparent;
+      width: 400px;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-header {
+      color: #fbe263;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-description {
+      color: white;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form {
+      position: relative;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form input {
+      padding: 10px 15px;
+      border-radius: 10px;
+      width: 300px;
+      border: none;
+    }
+
+    #footer-trang-chu .footer-title .footer-title-form a {
+      position: absolute;
+      display: inline-flex;
+      width: 100px;
+      height: 36px;
+      background-color: #0b234d;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      top: 0;
+      right: 69px;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    #footer-trang-chu .footer-title .img-footer {
+      width: 250px;
+      margin-top: 15px;
+      cursor: pointer;
+      margin-bottom: 50px;
+    }
+
+    #footer-trang-chu .footer-diachi {
+      width: 25%;
+    }
+
+    #footer-trang-chu .footer-diachi h2 {
+      font-size: 20px;
+      color: #fbe263;
+      margin: 0;
+    }
+
+    #footer-trang-chu .footer-diachi span {
+      color: #fbe263;
+      display: block;
+      padding-top: 15px;
+    }
+
+    #footer-trang-chu .footer-diachi .footer-diachi-header {
+      display: inline;
+      color: white;
+    }
+
+    #footer-trang-chu .footer-diachi .footer-diachi-description {
+      display: inline;
+      color: white;
+    }
+
+    #footer-trang-chu .footer-diachi .img-main {
+      display: block;
+      margin-top: 20px;
+    }
+
+    #footer-trang-chu .footer-help h2 {
+      font-size: 20px;
+      color: #fbe263;
+      margin: 0;
+    }
+
+    #footer-trang-chu .footer-help span {
+      display: block;
+      color: #fbe263;
+      padding-top: 15px;
+    }
+
+    #footer-trang-chu .footer-help .footer-help-header {
+      display: inline;
+      color: white;
+    }
+
+    #footer-trang-chu .footer-help .footer-help-header-list a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      line-height: 1.4;
+    }
+
+    #footer-trang-chu .footer-diachi .img-main {
+      cursor: pointer;
+    }
+
+    #footer-trang-chu .footer-information h2 {
+      font-size: 20px;
+      color: #fbe263;
+      margin: 0;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-header-list a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      line-height: 1.4;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials {
+      padding-top: 35px;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials i {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      line-height: 50px;
+      font-size: 25px;
+      color: #17479d;
+    }
+
+    #footer-trang-chu .footer-information .footer-information-socials i:nth-child(1) {
+      margin-right: 10px;
+    }
+
+    #footer-trang-chu::after {
+      display: block;
+      position: absolute;
+      content: "2025 © Thienlong.vn - Bản quyền thuộc Tập đoàn Thiên Long";
+      bottom: 0;
+      color: white;
+    }
+
+    /* End footer */
+
+
+    /* Begin section-info-mithuat */
+    #section-info-mithuat {
+      padding-top: 100px;
+      background: #E5EEFF;
+    }
+
+    #section-info-mithuat .container {
+      position: relative;
+    }
+
+    #section-info-mithuat .info-mithuat-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 18px;
+      padding: 20px 0px;
+      font-weight: 500;
+    }
+
+    #section-info-mithuat .info-mithuat-header .info-mithuat-header-content {
+      margin: 0 5px;
+    }
+
+    #section-info-mithuat .info-mithuat-header i:nth-child(1) {
+      color: #F7D74E;
+    }
+
+    #section-info-mithuat .info-mithuat-header:hover {
+      background-color: white;
+      cursor: pointer;
+    }
+
+    #section-info-mithuat .info-mithuat-header:hover .info-mithuat-header-content,
+    i:nth-child(2) {
+      color: #17479D;
+    }
+
+    #section-info-mithuat .info-mithuat-header:hover .fa-angle-down {
+      color: #17479D;
+    }
+
+    #section-info-mithuat .hover-block {
+      display: none;
+    }
+
+    #section-info-mithuat .info-mithuat-header:hover+.hover-block {
+      display: block;
+    }
+
+    /* Keep dropdown visible when hovering the header OR the dropdown itself */
+    #section-info-mithuat .container:hover .hover-block,
+    #section-info-mithuat .hover-block:hover {
+      display: block;
+    }
+
+    #section-info-mithuat .info-mithuat-description {
+      display: flex;
+      padding: 20px;
+      border: 1px solid #ddd;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      gap: 70px;
+      position: absolute;
+      z-index: 1;
+      background-color: white;
+      left: 0;
+      right: 0;
+      box-sizing: border-box;
+      flex-wrap: nowrap;
+    }
+
+
+    #section-info-mithuat .info-mithuat-description .info-mithuat-description-first a {
+      display: block;
+      padding-right: 20px;
+      width: 100%;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: black;
+    }
+
+    #section-info-mithuat .info-mithuat-description .info-mithuat-description-first a:hover {
+      color: #17479D;
+    }
+
+    #section-info-mithuat .info-mithuat-description .info-mithuat-description-second a {
+      display: block;
+      padding-right: 20px;
+      width: 100%;
+      margin-bottom: 15px;
+      text-decoration: none;
+      color: black;
+    }
+
+    #section-info-mithuat .info-mithuat-description .info-mithuat-description-second a:hover {
+      color: #17479D;
+    }
+
+
+
+    #section-info-mithuat .info-mithuat-description .info-mithuat-description-img img {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* End section-info-mithuat */
+    /* Begin section-trangchinh-danhmuc-sanpham */
+    #section-trangchinh-danhmuc-sanpham {
+      background-color: #DBE8FF;
+    }
+
+    #section-trangchinh-danhmuc-sanpham .content {
+
+      padding: 20px 0;
+      margin-bottom: 30px;
+    }
+
+    #section-trangchinh-danhmuc-sanpham .content a {
+      text-decoration: none;
+    }
+
+    #section-trangchinh-danhmuc-sanpham .content a {
+      color: black;
+    }
+
+    #section-trangchinh-danhmuc-sanpham .content a:nth-child(2) {
+      color: #17479D;
+    }
+
+    /* End section-trangchinh-danhmuc-sanpham */
+    /* Begin section-main-gioi-thieu */
+    .section-main-gioi-thieu {
+      margin-bottom: 100px;
+      margin-top: 50px;
+    }
+
+    .section-main-gioi-thieu .container {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .section-main-gioi-thieu .container .header-main {
+      font-size: 28px;
+      color: black;
+    }
+
+    .section-main-gioi-thieu .container .description-main span {
+      color: #17479D;
+      font-weight: 600;
+    }
+
+    .section-main-gioi-thieu .container .img-main {
+      display: block;
+      width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-main-gioi-thieu .container .sub-header {
+      font-size: 24px;
+      color: black;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    .section-main-gioi-thieu .container .sub-description span {
+      color: #17479D;
+      font-weight: 600;
+    }
+
+    .section-main-gioi-thieu .container .img-sub {
+
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-main-gioi-thieu .container iframe {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+    }
+        .link {
+    display: flex;           
+    align-items: center;
+    text-decoration: none;   
+    color: inherit;         
+}
+
+    /* End section-main-gioi-thieu */
+  </style>
+    <!-- Begin header-->
+
+    <header id="header-trang-chu" class="trang-chu">
+      <div class="logo-trang-chu">
+        <a href="index.jsp">
+          <img src="./assets/images/logo/logo.png" alt>
+        </a>
+      </div>
+      <form action class="tim-kiem-san-pham">
+        <input type="text" name placeholder="Tìm kiếm sản phẩm...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </form>
+      <div class="header-contact">
+        <i class="fa-solid fa-phone"></i>
+        <div class="contact">
+          <div class="contact-phone-number">1900 866 819</div>
+          <div class="contact-phone-help">Hỗ trợ khách hàng</div>
+        </div>
+      </div>
+      <a href="DangNhap.jsp" class="link header-dangnhap-dangki">
+        <i class="fa-solid fa-user"></i>
+        <div class="dangnhap-dangki">
+          <div class="dangnhap">Đăng nhập</div>
+          <div class="dangki">Đăng kí</div>
+        </div>
+      </a>
+
+    </div>
+    <div class="header-giohang">
+      <i class="fa-solid fa-bag-shopping"></i>
+    </div>
+  </header>
+  <!-- End header-->
+  <!-- Begin section info mithuat -->
+  <div id="section-info-mithuat">
+    <div class="container">
+      <div class="info-mithuat-header">
+        <i class="fa-solid fa-palette"></i>
+        <p class="info-mithuat-header-content">Danh mục</p>
+        <i class="fa-solid fa-angle-down"></i>
+      </div>
+      <div class="hover-block">
+        <div class="info-mithuat-description">
+          <div class="info-mithuat-description-first">
+            <a href>NEW ARRIVAL</a>
+            <a href>Fiber Pen - Bút lông Màu</a>
+            <a href>Bút chì màu</a>
+            <a href>Màu nước</a>
+            <a href>Tập vẽ tranh - Tập tô màu</a>
+          </div>
+          <div class="info-mithuat-description-second">
+            <a href>Acrylic Marker - Bút sơn</a>
+            <a href>Màu sáp, màu sáp dầu</a>
+            <a href>Bút vẽ kỹ thuật</a>
+            <a href>Sáp nặn</a>
+            <a href>Combo mỹ thuật</a>
+          </div>
+          <div class="info-mithuat-description-img">
+            <img
+              src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg"
+              alt>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End section info mithuat -->
+  <!-- Begin section trang chinh - danh muc - san pham -->
+  <div id="section-trangchinh-danhmuc-sanpham">
+    <div class="container">
+      <div class="content">
+        <a href>
+          Trang chủ /
+        </a>
+      </a>
+      <a href>
+        Giới thiệu về thiên long /
+      </a>
+    </div>
+  </div>
+</div>
+<!-- End section trang chinh - danh muc - san pham -->
+<!-- Begin section main -->
+<div class="section-main-gioi-thieu">
+  <div class="container">
+    <h1 class="header-main">Giới thiệu về Thiên Long</h1>
+    <p class="description-main"><span>Thienlong.vn</span> là website thương
+      mại điện tử thuộc Công ty Cổ phần Tập đoàn
+      Thiên Long.
+      Chúng tôi có kinh nghiệm
+      hơn 36 năm trong ngành nghiên cứu, sản xuất và phân phối bút viết, văn
+      phòng phẩm, học cụ và dụng cụ mỹ thuật.
+      <span> Thienlong.vn</span> cung cấp các mặt hàng cho nhiều đối tượng
+      khách hàng khác nhau, từ học sinh, sinh
+      viên, giới văn
+      phòng, từ sản phẩm cao cấp cho đến các loại bút viết phổ thông. Tất cả
+      đều được tập đoàn Thiên Long nghiên cứu,
+      sản xuất và phân phối.
+    </p>
+    <img src="./assets/images/logo/logo_gioithieu.png" alt class="img-main">
+    <h2 class="sub-header">Định hướng hoạt động</h2>
+    <p class="sub-description">
+      <span>Thienlong.vn</span> ra đời với mong muốn mang sự tiện lợi cho
+      khách hàng có nhu cầu văn phòng phẩm, học
+      cụ,
+      sản phẩm mỹ thuật có thể dễ dàng tiếp cận và chọn mua sản phẩm một cách
+      nhanh chóng. Ngoài ra,
+      <span>Thienlong.vn</span> còn
+      mong muốn thay đổi thói quen tiêu dùng chọn mua văn phòng phẩm truyền
+      thống, đem đến cho khách hàng một hệ thống
+      cung cấp các sản phẩm văn phòng, giáo dục trực tuyến một nơi uy tín và
+      đáng tin cậy.
+      <br>
+      <span>Thienlong.vn</span> đặt mục tiêu trở thành sàn thương mại điện tử
+      hàng đầu Việt Nam chuyên về sản phẩm văn
+      phòng, học cụ,
+      dụng cụ mỹ thuật và tất cả các sản phẩm liên quan đến giáo dục.
+    </p>
+    <img src="./assets/images/logo/banner-3.webp" alt class="img-sub">
+    <h2 class="sub-header">Giá trị mang đến cho khách hàng</h2>
+    <p class="sub-description">
+      <span>Thienlong.vn</span> xác định luôn trung thành với những giá trị
+      cốt lõi của mình để luôn là sự lựa chọn
+      hàng đầu của người tiêu dùng:
+      <p>- Hệ thống sản phẩm phong phú và đa dạng.</p>
+      <p>- Thanh toán bảo mật, an toàn.</p>
+      <p>- Giao hàng nhanh chóng trong 48 giờ.</p>
+      <p>- Nền tảng công nghệ hiện đại, giao dịch thuận tiện nhanh chóng.</p>
+    </p>
+    <h2 class="sub-header">Hệ thống phân phối</h2>
+    <p class="sub-description">
+      Dựa vào hệ thống phân phối hơn 65.000 điểm bán trên toàn quốc, hơn 160
+      Nhà Phân Phối, 2 tổng kho tại Miền Bắc và
+      Miền Nam được vận hàng bởi 4 Công ty thương mại có trụ sở tại Hà Nội, Đà
+      Nẵng, TP. Hồ Chí Minh, Thiên Long sở
+      hữu một nền tảng vững chắc trong việc xây dựng và phát triển hoạt động
+      thương mại điện tử. Bên cạnh đó, hệ thống
+      quản lý phân phối DMS của Thiên Long đã được chính thức được vận hành,
+      Thiên Long càng có nhiều lợi thể để nâng
+      cao chất lượng bán hàng trực tuyến phục vụ nhu cầu của khách hàng trên
+      khắp nước Việt Nam.
+    </p>
+    <img src="./assets/images/logo/picture1.png" alt>
+    <h2 class="sub-header">Head Office</h2>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5081908292227!2d106.71996407451712!3d10.772335359270215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fcdd2041771%3A0xa46e9842e044baf4!2sThisofic%20Tower!5e0!3m2!1svi!2s!4v1762166913436!5m2!1svi!2s"
+      width="600" height="450" style="border:0;" allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+</div>
+<!-- End section main -->
+<!-- Begin footer-->
+
+<footer id="footer-trang-chu">
+  <div class="footer-title">
+    <img src="./assets/images/logo/logo.png" alt class="img-main">
+    <p class="footer-title-header">Thienlong.vn - Website thương mại điện tử
+      thuộc Tập đoàn Thiên Long</p>
+    <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn Thiên Long
+      <br>
+      <br>
+      GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày 14/03/2005.
+    </p>
+    <form action class="footer-title-form">
+      <input type="email" placeholder="Nhập địa chỉ email">
+      <a href>Đăng ký</a>
+    </form>
+    <img
+      src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
+      alt class="img-footer">
+  </div>
+  <div class="footer-diachi">
+    <h2>ĐỊA CHỈ CÔNG TY</h2>
+    <span>
+      Head Office:
+      <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10 Đường Mai
+        Chí Thọ, Phường An Khánh,
+        Thành Phố Hồ Chí Minh, Việt Nam
+      </span>
+      <br>
+      <span>
+        Miền Bắc:
+        <p class="footer-diachi-description"> Số 38, đường Gamuda Gardens 2-5,
+          Khu đô thị mới C2 - Gamuda
+          Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt Nam.
+        </span>
+
+        <img src="./assets/images/logo/footer_bct.png" alt class="img-main">
+      </div>
+      <div class="footer-help">
+        <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+        <span>
+          Hotline:
+          <p class="footer-help-header">1900 866 819
+          </span>
+          <span>
+            Thứ 2 - Thứ 6 (8h - 17h)
+            salesonline@thienlongvn.com
+            <div class="footer-help-header-list">
+              <a href>
+                - Hướng dẫn mua hàng
+              </a>
+              <a href>
+                - Hướng dẫn thanh toán
+              </a>
+              <a href>
+                - Chính sách giao hàng
+              </a>
+              <a href>
+                - Chính sách đổi trả & hoàn tiền
+              </a>
+              <a href>
+                - Khách hàng thân thiết
+              </a>
+              <a href>
+                - Khách hàng ưu tiên
+              </a>
+              <a href>
+                - Phản ánh chất lượng sản phẩm
+              </a>
+            </div>
+          </span>
+        </div>
+        <div class="footer-information">
+          <h2>VỀ THIENLONG.VN</h2>
+          <div class="footer-information-header-list">
+            <a href>
+              - Giới thiệu
+            </a>
+            <a href>
+              - Dịch vụ in ấn quảng cáo
+            </a>
+            <a href>
+              - Chính sách bảo mật chung
+            </a>
+            <a href>
+              - Chính sách bảo mật thông tin cá nhân
+            </a>
+            <a href>
+              - Thông tin liên hệ
+            </a>
+            <a href>
+              - Chương trình Affiliate
+            </a>
+          </div>
+          <div class="footer-information-socials">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+        </div>
+      </footer>
+      <!-- End footer-->
+    </body>
+
+  </html>
