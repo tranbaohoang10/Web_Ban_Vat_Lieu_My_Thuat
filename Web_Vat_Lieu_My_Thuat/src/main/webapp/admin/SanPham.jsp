@@ -1,374 +1,376 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
       integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Quản lý sản phẩm</title>
   </head>
   <style>
-  #main {
-    display: flex;
-  }
-
-  #main .left {
-    background-color: #17479D;
-    height: 100vh;
-    width: 17%;
-  }
-
-  #main .left .list-admin {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  #main .left .list-admin a {
-    display: block;
-    text-decoration: none;
-    color: white;
-    padding: 10px 20px;
-  }
-
-  #main .left .list-admin a i {
-    margin-right: 20px;
-  }
-
-  #main .left .list-admin a:hover {
-    background-color: #203247;
-    bsanpham-left: #3B7DDD 2px solid;
-  }
-
-  #main .left .list-admin .logo img {
-    width: 100%;
-    height: auto;
-    margin: 10px 0 20px 0;
-  }
-
-  #main .left .list-admin a.logo {
-    padding: 0;
-  }
-
-  #main .left .list-admin a.logo:hover {
-    background-color: #203247;
-    border-left: none;
-  }
-
-  .list-admin a.active {
-    background-color: #203247;
-    border-left: 4px solid #FFD700;
-    /* hoặc màu khác */
-    font-weight: bold;
-  }
-
-  #main .right .container {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 100px);
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #main .right {
-    flex: 1;
-    background-color: #F9F9F9;
-  }
-
-  .list-sanpham-container {
-    width: 95%;
-    margin: 30px auto;
-    background: white;
-    padding: 25px;
-    bsanpham-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .sub-title {
-    color: #555;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-
-  .sanpham-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-
-  .sanpham-table th {
-    background: #2659F5;
-    color: white;
-    padding: 12px;
-    font-size: 14px;
-
-  }
-
-  .sanpham-table td {
-    padding: 12px;
-    background: #fafafa;
-  }
-
-  .sanpham-table tr:nth-child(even) td {
-    background: #f0f0f0;
-  }
-
-  .sanpham-table td,
-  .sanpham-table th {
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-  }
-
-  .sanpham-table button {
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-    border: none;
-  }
-
-  .sanpham-table button:hover {
-    opacity: 0.8;
-
-  }
-
-  .sanpham-table .chinhsua-sanpham {
-    background-color: #FFC107;
-    color: black;
-
-  }
-
-  .sanpham-table .xoa-sanpham {
-    background-color: #DC3545;
-  }
-
-  .sanpham-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .sanpham-header .sanpham-header-timkiem {
-    position: relative;
-  }
-
-  .sanpham-header .sanpham-header-timkiem input {
-    padding: 8px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-
-  .sanpham-header .sanpham-header-timkiem .icon-timkiem {
-    position: absolute;
-    border-radius: 5px;
-    left: 184px;
-    top: 1px;
-    border: none;
-    padding: 8px;
-  }
-
-  .sanpham-header .sanpham-header-timkiem .them-sanpham {
-    background-color: #2659F5;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .sanpham-header .sanpham-header-timkiem .them-sanpham:hover {
-    background-color: #17479D;
-  }
-
-  .sanpham-header .sanpham-header-timkiem .icon-timkiem:hover {
-    cursor: pointer;
-    background-color: #ddd;
-  }
-
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-
-  .modal-content {
-    background: white;
-    padding: 25px;
-    width: 800px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    animation: fadeIn .2s ease;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
+    #main {
+      display: flex;
     }
 
-    to {
-      opacity: 1;
-      transform: scale(1);
+    #main .left {
+      background-color: #17479D;
+      height: 100vh;
+      width: 17%;
     }
-  }
 
-  .modal-content h2 {
-    margin-bottom: 10px;
-  }
+    #main .left .list-admin {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-  .modal-content label {
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #444;
-  }
+    #main .left .list-admin a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      padding: 10px 20px;
+    }
 
-  .modal-content input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+    #main .left .list-admin a i {
+      margin-right: 20px;
+    }
 
-  .modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-    gap: 10px;
-  }
+    #main .left .list-admin a:hover {
+      background-color: #203247;
+      bsanpham-left: #3B7DDD 2px solid;
+    }
 
-  #btn-save {
-    background-color: #2659F5;
-    color: white;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+    #main .left .list-admin .logo img {
+      width: 100%;
+      height: auto;
+      margin: 10px 0 20px 0;
+    }
 
-  #btn-close {
-    background-color: #ccc;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+    #main .left .list-admin a.logo {
+      padding: 0;
+    }
 
-  .sub-img-box {
-    position: relative;
-    display: inline-block;
-  }
+    #main .left .list-admin a.logo:hover {
+      background-color: #203247;
+      border-left: none;
+    }
 
-  .sub-img-box img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-  }
+    .list-admin a.active {
+      background-color: #203247;
+      border-left: 4px solid #FFD700;
+      /* hoặc màu khác */
+      font-weight: bold;
+    }
 
-  .sub-img-box button {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #DC3545;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    font-size: 12px;
-  }
+    #main .right .container {
+      display: flex;
+      flex-direction: column;
+      width: calc(100% - 100px);
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-  }
+    #main .right {
+      flex: 1;
+      background-color: #F9F9F9;
+    }
 
-  .form-left,
-  .form-right {
-    width: 50%;
-  }
+    .list-sanpham-container {
+      width: 95%;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      bsanpham-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-  .form-left label,
-  .form-right label {
-    font-weight: 500;
-    margin-top: 5px;
-  }
+    .sub-title {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
 
-  .form-left input,
-  .form-right input {
-    margin-bottom: 10px;
-  }
+    .sanpham-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
 
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 25px 0;
-    gap: 5px;
-  }
+    .sanpham-table th {
+      background: #2659F5;
+      color: white;
+      padding: 12px;
+      font-size: 14px;
 
-  .page-link {
-    padding: 6px 12px;
-    border: 1px solid #d0d7de;
-    border-radius: 4px;
-    color: #0d6efd;
-    background-color: white;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.2s;
-  }
+    }
 
-  .page-link:hover {
-    background-color: #e9ecef;
-  }
+    .sanpham-table td {
+      padding: 12px;
+      background: #fafafa;
+    }
 
-  .page-link.active {
-    background-color: #2659F5;
-    color: white;
-    font-weight: bold;
-    border-color: #2659F5;
-  }
-</style>
+    .sanpham-table tr:nth-child(even) td {
+      background: #f0f0f0;
+    }
+
+    .sanpham-table td,
+    .sanpham-table th {
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    .sanpham-table button {
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 5px;
+      border: none;
+    }
+
+    .sanpham-table button:hover {
+      opacity: 0.8;
+
+    }
+
+    .sanpham-table .chinhsua-sanpham {
+      background-color: #FFC107;
+      color: black;
+
+    }
+
+    .sanpham-table .xoa-sanpham {
+      background-color: #DC3545;
+    }
+
+    .sanpham-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .sanpham-header .sanpham-header-timkiem {
+      position: relative;
+    }
+
+    .sanpham-header .sanpham-header-timkiem input {
+      padding: 8px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .sanpham-header .sanpham-header-timkiem .icon-timkiem {
+      position: absolute;
+      border-radius: 5px;
+      left: 184px;
+      top: 1px;
+      border: none;
+      padding: 8px;
+    }
+
+    .sanpham-header .sanpham-header-timkiem .them-sanpham {
+      background-color: #2659F5;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .sanpham-header .sanpham-header-timkiem .them-sanpham:hover {
+      background-color: #17479D;
+    }
+
+    .sanpham-header .sanpham-header-timkiem .icon-timkiem:hover {
+      cursor: pointer;
+      background-color: #ddd;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 25px;
+      width: 800px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeIn .2s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-content h2 {
+      margin-bottom: 10px;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    #btn-save {
+      background-color: #2659F5;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #btn-close {
+      background-color: #ccc;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .sub-img-box {
+      position: relative;
+      display: inline-block;
+    }
+
+    .sub-img-box img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .sub-img-box button {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #DC3545;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    .form-left,
+    .form-right {
+      width: 50%;
+    }
+
+    .form-left label,
+    .form-right label {
+      font-weight: 500;
+      margin-top: 5px;
+    }
+
+    .form-left input,
+    .form-right input {
+      margin-bottom: 10px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 25px 0;
+      gap: 5px;
+    }
+
+    .page-link {
+      padding: 6px 12px;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      color: #0d6efd;
+      background-color: white;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .page-link:hover {
+      background-color: #e9ecef;
+    }
+
+    .page-link.active {
+      background-color: #2659F5;
+      color: white;
+      font-weight: bold;
+      border-color: #2659F5;
+    }
+  </style>
 
   <body>
     <div id="main">
       <div class="left">
         <div class="list-admin">
-          <a href="Admin.jsp" class="logo"><img
-              src="../assets/images/logo/logo.png" alt></a>
+          <a href="Admin.jsp" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
           <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng quan</a>
           <a href="ThongKe.jsp"><i class="fa-solid fa-chart-line"></i>Thống
             kê</a>
           <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh
             mục</a>
-          <a href="SanPham.html" class="active"><i
-              class="fa-solid fa-palette"></i>Quản
+          <a href="SanPham.html" class="active"><i class="fa-solid fa-palette"></i>Quản
             lý sản phẩm</a>
           <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản
             lý người dùng</a>
@@ -380,8 +382,7 @@
             Slider Show</a>
           <a href="LienHe.jsp"><i class="fa-solid fa-address-book"></i>Quản lý
             liên hệ</a>
-          <a href="../DangNhap.jsp"><i
-              class="fa-solid fa-right-from-bracket"></i>
+          <a href="../DangNhap.jsp"><i class="fa-solid fa-right-from-bracket"></i>
             Đăng xuất</a>
         </div>
       </div>
@@ -392,8 +393,7 @@
               <h1>Danh sách sản phẩm</h1>
               <div class="sanpham-header-timkiem">
                 <input type="text" placeholder="Tìm kiếm">
-                <button class="icon-timkiem"><i
-                    class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="icon-timkiem"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <button class="them-sanpham">Thêm sản phẩm</button>
               </div>
             </div>
@@ -490,13 +490,10 @@
                   <td>14-11-2025</td>
                   <td>100</td>
                   <td>
-                    <button class="chinhsua-sanpham" data-id="SP01"
-                      data-name="Bút Lông Thiên Long" data-category="CAT01"
-                      data-price="168300" data-brand="Thiên Long"
-                      data-size="12 màu" data-madein="Việt Nam"
-                      data-warning="Không nuốt" data-thumbnail="images/sp01.jpg"
-                      data-subimgs='["images/sp01_1.jpg","images/sp01_2.jpg"]'
-                      data-discountprice='10'>
+                    <button class="chinhsua-sanpham" data-id="SP01" data-name="Bút Lông Thiên Long"
+                      data-category="CAT01" data-price="168300" data-brand="Thiên Long" data-size="12 màu"
+                      data-madein="Việt Nam" data-warning="Không nuốt" data-thumbnail="images/sp01.jpg"
+                      data-subimgs='["images/sp01_1.jpg","images/sp01_2.jpg"]' data-discountprice='10'>
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button class="xoa-sanpham">
@@ -537,8 +534,7 @@
 
               <label>Ảnh chính</label>
               <input type="file" id="thumbnail-main" accept="image/*">
-              <img id="previewImg-main" src
-                style="width:120px; display:none; margin-top: 10px;">
+              <img id="previewImg-main" src style="width:120px; display:none; margin-top: 10px;">
               <button type="button" id="removeImgBtn-main" style="
           background:#DC3545;
           color:white;
@@ -581,8 +577,7 @@
               <input type="text" id="madeIn" placeholder="VD: Việt Nam">
 
               <label>Cảnh báo an toàn</label>
-              <input type="text" id="warning"
-                placeholder="VD: Tránh xa tầm tay trẻ em">
+              <input type="text" id="warning" placeholder="VD: Tránh xa tầm tay trẻ em">
 
             </div>
 
@@ -598,183 +593,183 @@
 
     </div>
     <script>
-    const modal = document.getElementById("modal-add");
-    const btnAdd = document.querySelector(".them-sanpham");
-    const btnClose = document.getElementById("btn-close");
+      const modal = document.getElementById("modal-add");
+      const btnAdd = document.querySelector(".them-sanpham");
+      const btnClose = document.getElementById("btn-close");
 
 
 
-    // THUMBNAIL MAIN
-    const thumbnailInput = document.getElementById("thumbnail-main");
-    const previewImg = document.getElementById("previewImg-main");
-    const removeImgBtn = document.getElementById("removeImgBtn-main");
+      // THUMBNAIL MAIN
+      const thumbnailInput = document.getElementById("thumbnail-main");
+      const previewImg = document.getElementById("previewImg-main");
+      const removeImgBtn = document.getElementById("removeImgBtn-main");
 
-    // THUMBNAIL SUB
-    const thumbnailSub = document.getElementById("thumbnail-sub");
-    const labelSub = thumbnailSub.previousElementSibling;
-    const subPreviewContainer = document.getElementById("sub-image-preview");
+      // THUMBNAIL SUB
+      const thumbnailSub = document.getElementById("thumbnail-sub");
+      const labelSub = thumbnailSub.previousElementSibling;
+      const subPreviewContainer = document.getElementById("sub-image-preview");
 
-    let subImages = []; // danh sách ảnh phụ (UI)
+      let subImages = []; // danh sách ảnh phụ (UI)
 
-    // ===============================
-    //      MỞ FORM THÊM SẢN PHẨM
-    // ===============================
-    btnAdd.addEventListener("click", () => {
+      // ===============================
+      //      MỞ FORM THÊM SẢN PHẨM
+      // ===============================
+      btnAdd.addEventListener("click", () => {
 
-      modal.style.display = "flex";
-      modal.style.gap = "20px";
-
-      // Reset form
-      document.querySelectorAll("#modal-add input").forEach(i => i.value = "");
-      document.getElementById("productID").disabled = false;
-      document.getElementById("categoryID").disabled = false;
-      // Reset ảnh chính
-      previewImg.src = "";
-      previewImg.style.display = "none";
-      removeImgBtn.style.display = "none";
-
-      // Reset ảnh phụ
-      subImages = [];
-      renderSubImages();
-
-      // Hiện ảnh phụ
-      thumbnailSub.style.display = "block";
-      labelSub.style.display = "block";
-      subPreviewContainer.style.display = "flex";
-    });
-
-    // ===============================
-    //           ĐÓNG FORM
-    // ===============================
-    btnClose.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    });
-
-
-    // ===============================
-    //     ẢNH CHÍNH — PREVIEW
-    // ===============================
-    thumbnailInput.addEventListener("change", function () {
-      const file = this.files[0];
-      if (file) {
-        const url = URL.createObjectURL(file);
-        previewImg.src = url;
-        previewImg.style.display = "block";
-        removeImgBtn.style.display = "inline-block";
-      }
-    });
-
-    removeImgBtn.addEventListener("click", function () {
-      thumbnailInput.value = "";
-      previewImg.src = "";
-      previewImg.style.display = "none";
-      removeImgBtn.style.display = "none";
-    });
-
-
-    // ===============================
-    //       ẢNH PHỤ — PREVIEW
-    // ===============================
-    thumbnailSub.addEventListener("change", function () {
-      const files = Array.from(this.files);
-
-      files.forEach(file => {
-        const url = URL.createObjectURL(file);
-        subImages.push({ file, url });
-      });
-
-      renderSubImages();
-      thumbnailSub.value = "";
-    });
-
-    function renderSubImages() {
-      subPreviewContainer.innerHTML = "";
-
-      subImages.forEach((imgObj, index) => {
-        const box = document.createElement("div");
-        box.className = "sub-img-box";
-
-        const img = document.createElement("img");
-        img.src = imgObj.url;
-
-        const btn = document.createElement("button");
-        btn.innerHTML = "×";
-        btn.onclick = () => {
-          subImages.splice(index, 1);
-          renderSubImages();
-        };
-
-        box.appendChild(img);
-        box.appendChild(btn);
-        subPreviewContainer.appendChild(box);
-      });
-    }
-
-
-    // ===============================
-    //     CHỈNH SỬA SẢN PHẨM
-    // ===============================
-    const editButtons = document.querySelectorAll(".chinhsua-sanpham");
-
-    editButtons.forEach(btn => {
-      btn.addEventListener("click", function () {
         modal.style.display = "flex";
+        modal.style.gap = "20px";
 
-        // ẨN ảnh phụ trong chế độ edit
-        thumbnailSub.style.display = "none";
-        labelSub.style.display = "none";
-        subPreviewContainer.style.display = "none";
+        // Reset form
+        document.querySelectorAll("#modal-add input").forEach(i => i.value = "");
+        document.getElementById("productID").disabled = false;
+        document.getElementById("categoryID").disabled = false;
+        // Reset ảnh chính
+        previewImg.src = "";
+        previewImg.style.display = "none";
+        removeImgBtn.style.display = "none";
 
-        // Lấy dữ liệu từ data-attribute
-        // const id = btn.getAttribute("data-id");
-        // const name = btn.getAttribute("data-name");
-        // const category = btn.getAttribute("data-category");
-        // const price = btn.getAttribute("data-price");
-        // const brand = btn.getAttribute("data-brand");
-        // const size = btn.getAttribute("data-size");
-        // const madeIn = btn.getAttribute("data-madein");
-        // const warning = btn.getAttribute("data-warning");
-        // const discount = btn.getAttribute("data-discountprice");
-        // const thumbnail = btn.getAttribute("data-thumbnail");
+        // Reset ảnh phụ
+        subImages = [];
+        renderSubImages();
 
-        let subimgs = [];
-        try {
-          subimgs = JSON.parse(btn.getAttribute("data-subimgs"));
-        } catch { subimgs = []; }
+        // Hiện ảnh phụ
+        thumbnailSub.style.display = "block";
+        labelSub.style.display = "block";
+        subPreviewContainer.style.display = "flex";
+      });
 
-        // Gán vào form
-        document.getElementById("productID").value = 'SP01';
-        document.getElementById("productID").disabled = true;
-        document.getElementById("name").value = 'Bút Lông Thiên Long';
-        document.getElementById("categoryID").value = 'CAT01';
-        document.getElementById("categoryID").disabled = true;
-        document.getElementById("discountDefault").value = '10';
-        document.getElementById("price").value = '168300';
-        document.getElementById("quantity").value = '100';
-        document.getElementById("brand").value = 'Thiên Long';
-        document.getElementById("size").value = '12 màu';
-        document.getElementById("madeIn").value = 'Việt Nam';
-        document.getElementById("warning").value = 'Tránh xa tầm tay trẻ em';
+      // ===============================
+      //           ĐÓNG FORM
+      // ===============================
+      btnClose.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
 
-        // Ảnh chính
-        if (thumbnail) {
-          previewImg.src = thumbnail;
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      });
+
+
+      // ===============================
+      //     ẢNH CHÍNH — PREVIEW
+      // ===============================
+      thumbnailInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+          const url = URL.createObjectURL(file);
+          previewImg.src = url;
           previewImg.style.display = "block";
           removeImgBtn.style.display = "inline-block";
         }
+      });
 
-        // Ảnh phụ (không hiển thị vì đang sửa)
-        subImages = [];
-        subimgs.forEach(imgURL => {
-          subImages.push({ file: null, url: imgURL });
+      removeImgBtn.addEventListener("click", function () {
+        thumbnailInput.value = "";
+        previewImg.src = "";
+        previewImg.style.display = "none";
+        removeImgBtn.style.display = "none";
+      });
+
+
+      // ===============================
+      //       ẢNH PHỤ — PREVIEW
+      // ===============================
+      thumbnailSub.addEventListener("change", function () {
+        const files = Array.from(this.files);
+
+        files.forEach(file => {
+          const url = URL.createObjectURL(file);
+          subImages.push({ file, url });
+        });
+
+        renderSubImages();
+        thumbnailSub.value = "";
+      });
+
+      function renderSubImages() {
+        subPreviewContainer.innerHTML = "";
+
+        subImages.forEach((imgObj, index) => {
+          const box = document.createElement("div");
+          box.className = "sub-img-box";
+
+          const img = document.createElement("img");
+          img.src = imgObj.url;
+
+          const btn = document.createElement("button");
+          btn.innerHTML = "×";
+          btn.onclick = () => {
+            subImages.splice(index, 1);
+            renderSubImages();
+          };
+
+          box.appendChild(img);
+          box.appendChild(btn);
+          subPreviewContainer.appendChild(box);
+        });
+      }
+
+
+      // ===============================
+      //     CHỈNH SỬA SẢN PHẨM
+      // ===============================
+      const editButtons = document.querySelectorAll(".chinhsua-sanpham");
+
+      editButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+          modal.style.display = "flex";
+
+          // ẨN ảnh phụ trong chế độ edit
+          thumbnailSub.style.display = "none";
+          labelSub.style.display = "none";
+          subPreviewContainer.style.display = "none";
+
+          // Lấy dữ liệu từ data-attribute
+          // const id = btn.getAttribute("data-id");
+          // const name = btn.getAttribute("data-name");
+          // const category = btn.getAttribute("data-category");
+          // const price = btn.getAttribute("data-price");
+          // const brand = btn.getAttribute("data-brand");
+          // const size = btn.getAttribute("data-size");
+          // const madeIn = btn.getAttribute("data-madein");
+          // const warning = btn.getAttribute("data-warning");
+          // const discount = btn.getAttribute("data-discountprice");
+          // const thumbnail = btn.getAttribute("data-thumbnail");
+
+          let subimgs = [];
+          try {
+            subimgs = JSON.parse(btn.getAttribute("data-subimgs"));
+          } catch { subimgs = []; }
+
+          // Gán vào form
+          document.getElementById("productID").value = 'SP01';
+          document.getElementById("productID").disabled = true;
+          document.getElementById("name").value = 'Bút Lông Thiên Long';
+          document.getElementById("categoryID").value = 'CAT01';
+          document.getElementById("categoryID").disabled = true;
+          document.getElementById("discountDefault").value = '10';
+          document.getElementById("price").value = '168300';
+          document.getElementById("quantity").value = '100';
+          document.getElementById("brand").value = 'Thiên Long';
+          document.getElementById("size").value = '12 màu';
+          document.getElementById("madeIn").value = 'Việt Nam';
+          document.getElementById("warning").value = 'Tránh xa tầm tay trẻ em';
+
+          // Ảnh chính
+          if (thumbnail) {
+            previewImg.src = thumbnail;
+            previewImg.style.display = "block";
+            removeImgBtn.style.display = "inline-block";
+          }
+
+          // Ảnh phụ (không hiển thị vì đang sửa)
+          subImages = [];
+          subimgs.forEach(imgURL => {
+            subImages.push({ file: null, url: imgURL });
+          });
         });
       });
-    });
-  </script>
+    </script>
   </body>
 
-</html>
+  </html>
