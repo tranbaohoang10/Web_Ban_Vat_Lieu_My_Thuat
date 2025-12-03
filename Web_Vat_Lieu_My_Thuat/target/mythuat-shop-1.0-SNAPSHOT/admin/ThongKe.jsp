@@ -1,0 +1,593 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thống kê</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<style>
+  #main {
+    display: flex;
+    align-items: stretch;
+  }
+
+  #main .left {
+    background-color: #17479D;
+    height: auto;
+    width: 17%;
+  }
+
+  #main .left .list-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #main .left .list-admin a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  #main .left .list-admin a i {
+    margin-right: 20px;
+  }
+
+  #main .left .list-admin a:hover {
+    background-color: #203247;
+    border-left: #3B7DDD 2px solid;
+  }
+
+  .list-admin a.active {
+    background-color: #203247;
+    border-left: 4px solid #FFD700;
+    /* hoặc màu khác */
+    font-weight: bold;
+  }
+
+  #main .left .list-admin .logo img {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 20px 0;
+  }
+
+  #main .left .list-admin a.logo {
+    padding: 0;
+  }
+
+  #main .left .list-admin a.logo:hover {
+    background-color: #203247;
+    border-left: none;
+  }
+
+  #main .right .container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 100px);
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  #main .right {
+    flex: 1;
+    background-color: #F9F9F9;
+
+  }
+
+  #main .right .container .thongke-doanhthu {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px 10px;
+    background-color: white;
+    border-radius: 5px;
+    align-items: stretch;
+  }
+
+  #main .right .container .thongke-doanhthu h1 {
+    width: 100%;
+  }
+
+  #main .right .container .thongke-doanhthu .tong-doanhthu {
+    width: 50%;
+    border-right: 2px solid #ddd;
+    background-color: #17479D;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  #main .right .container .thongke-doanhthu .tong-doanhthu hr {
+    border: 1px solid #ffffff33;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #main .right .container .thongke-doanhthu .bieudo-doanhthu {
+    width: 45%;
+    min-height: 300px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-container {
+    width: 95%;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-container .thoigian .sothang label[for="sothang"] {
+    padding: 10px 12px;
+    font-size: 18px;
+  }
+
+  .product-container .thoigian .sothang input {
+    padding: 10px 12px;
+    width: 100px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    transition: 0.25s;
+    background: #fff;
+  }
+
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .product-table th {
+    background: #2659F5;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .product-table td {
+    padding: 12px;
+    background: #fafafa;
+  }
+
+  .product-table tr:nth-child(even) td {
+    background: #f0f0f0;
+  }
+
+  .product-table td,
+  .product-table th {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+
+  .product-table td:last-child {
+    text-align: center;
+  }
+
+  .product-table .xoa-sanpham {
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .product-table .xoa-sanpham:hover {
+    opacity: 0.9;
+  }
+
+  /* Khung form thời gian */
+  .product-container .thoigian {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    padding: 15px 0;
+  }
+
+  /* Label */
+  .product-container .thoigian label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2659F5
+  }
+
+  /* Input ngày */
+  .product-container .thoigian input[type="date"] {
+    padding: 10px 12px;
+    width: 200px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    transition: 0.25s;
+    background: #fff;
+  }
+
+  /* Khi focus */
+  .product-container .thoigian input[type="date"]:focus {
+    border-color: #3B7DDD;
+    box-shadow: 0 0 4px rgba(59, 125, 221, 0.4);
+    outline: none;
+  }
+
+  /* Hover */
+  .product-container .thoigian input[type="date"]:hover {
+    border-color: #2659F5
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+    gap: 5px;
+  }
+
+  .page-link {
+    padding: 6px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    color: #0d6efd;
+    background-color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+
+  .page-link:hover {
+    background-color: #e9ecef;
+  }
+
+  .page-link.active {
+    background-color: #2659F5;
+    color: white;
+    font-weight: bold;
+    border-color: #2659F5;
+  }
+</style>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div id="main">
+    <div class="left">
+      <div class="list-admin">
+        <a href="Admin.jsp" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
+        <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng quan</a>
+        <a href="ThongKe.html" class="active"><i class="fa-solid fa-chart-line"></i>Thống
+          kê</a>
+        <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh
+          mục</a>
+        <a href="SanPham.jsp"><i class="fa-solid fa-palette"></i>Quản
+          lý sản phẩm</a>
+        <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản
+          lý người dùng</a>
+        <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i>Quản
+          lý đơn hàng</a>
+        <a href="Khuyenmai.jsp"><i class="fa-solid fa-gift"></i>Quản lý
+          khuyến mãi</a>
+        <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý Slider Show</a>
+        <a href="LienHe.jsp"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+        <a href="../DangNhap.jsp"><i class="fa-solid fa-right-from-bracket"></i>
+          Đăng xuất</a>
+      </div>
+    </div>
+    <div class="right">
+      <div class="container">
+        <div class="thongke-doanhthu">
+          <h1>Thống kê doanh thu</h1>
+          <div class="tong-doanhthu">
+            <h2>Tổng doanh thu</h2>
+            <hr>
+            <h3>300.000.000 VNĐ</h3>
+          </div>
+          <div class="bieudo-doanhthu">
+            <canvas id="chartDoanhThu"></canvas>
+          </div>
+        </div>
+        <div class="product-container">
+          <h1>Thống kê sản phẩm bán chạy theo số lượng bán</h1>
+
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Giá</th>
+
+                <th>Ngày tạo</th>
+                <th>Đã bán</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>SP01</td>
+                <td>Bút Lông Thiên Long</td>
+                <td>Bút lông màu</td>
+                <td>168,300</td>
+                <td>14-11-2025</td>
+                <td>110</td>
+
+              </tr>
+
+              <tr>
+                <td>2</td>
+                <td>SP02</td>
+                <td>Bút sáp 12/18 màu Thiên Long</td>
+                <td>Bút sáp màu</td>
+                <td>11,800</td>
+                <td>14-11-2025</td>
+                <td>91</td>
+
+              </tr>
+
+              <tr>
+                <td>3</td>
+                <td>SP03</td>
+                <td>Bút lông 12 màu Fiber Pen Thiên Long Colokit</td>
+                <td>Bút lông màu</td>
+                <td>21,780</td>
+                <td>14-11-2025</td>
+                <td>85</td>
+
+              </tr>
+
+              <tr>
+                <td>4</td>
+                <td>SP04</td>
+                <td>Acrylic Markers/ Bút sơn/ Bút lông ThiênLong Colokit</td>
+                <td>Bút lông màu</td>
+                <td>45,500</td>
+                <td>14-11-2025</td>
+                <td>72</td>
+
+              </tr>
+
+              <tr>
+                <td>5</td>
+                <td>SP05</td>
+                <td>Bộ màu Gouache dạng tuýp 12ml Thiên Long Colokit</td>
+                <td>Màu nước</td>
+                <td>80,800</td>
+                <td>14-11-2025</td>
+                <td>64</td>
+
+              </tr>
+            </tbody>
+
+          </table>
+          <div class="pagination">
+            <a href="#" class="page-link">Trước</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">Sau</a>
+          </div>
+          <div class="product-chart-container" style="
+  width: 95%;
+  margin: 30px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+">
+            <h1>Biểu đồ sản phẩm bán chạy</h1>
+            <canvas id="chartBestSeller"></canvas>
+          </div>
+        </div>
+
+        <div class="product-container">
+          <h1>Thống kê sản phẩm không bán được</h1>
+          <div class="thoigian">
+            <div class="sothang">
+              <label for="sothang">Nhập số tháng</label>
+              <input type="number" id="sothang" min="1" max="12" value="1">
+            </div>
+          </div>
+
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Giá</th>
+
+                <th>Ngày tạo</th>
+                <th>Số lượng tồn</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>6</td>
+                <td>SP06</td>
+                <td>Bút Lông Thiên Long</td>
+                <td>Bút lông màu</td>
+                <td>168,300</td>
+                <td>14-11-2025</td>
+                <td>200</td>
+
+              </tr>
+
+              <tr>
+                <td>7</td>
+                <td>SP07</td>
+                <td>Bút sáp 12/18 màu Thiên Long</td>
+                <td>Bút sáp màu</td>
+                <td>11,800</td>
+                <td>14-11-2025</td>
+                <td>200</td>
+
+              </tr>
+
+              <tr>
+                <td>8</td>
+                <td>SP08</td>
+                <td>Bút lông 12 màu Fiber Pen Thiên Long Colokit</td>
+                <td>Bút lông màu</td>
+                <td>21,780</td>
+                <td>14-11-2025</td>
+                <td>200</td>
+
+              </tr>
+
+              <tr>
+                <td>9</td>
+                <td>SP09</td>
+                <td>Acrylic Markers/ Bút sơn/ Bút lông ThiênLong Colokit</td>
+                <td>Bút lông màu</td>
+                <td>45,500</td>
+                <td>14-11-2025</td>
+                <td>200</td>
+
+              </tr>
+
+              <tr>
+                <td>10</td>
+                <td>SP10</td>
+                <td>Bộ màu Gouache dạng tuýp 12ml Thiên Long Colokit</td>
+                <td>Màu nước</td>
+                <td>80,800</td>
+                <td>14-11-2025</td>
+                <td>200</td>
+
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <a href="#" class="page-link">Trước</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">Sau</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+  <script>
+    //Bieu do mien thong ke
+    const ctx = document.getElementById('chartDoanhThu');
+
+    new Chart(ctx, {
+      type: 'line',  // ⭐ CHUYỂN SANG BIỂU ĐỒ MIỀN
+      data: {
+        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6'],
+        datasets: [{
+          label: 'Doanh thu (VNĐ)',
+          data: [40000000, 55000000, 35000000, 70000000, 50000000, 50000000],
+
+          fill: true,                           // ⭐ Tô nền
+          backgroundColor: 'rgba(59,125,221,0.25)', // ⭐ Màu nền mềm
+          borderColor: '#3B7DDD',               // ⭐ Màu đường
+          borderWidth: 2,
+          tension: 0.4,                         // ⭐ Bo cong đường để nhìn mượt
+          pointBackgroundColor: '#3B7DDD',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return value.toLocaleString('vi-VN') + 'đ';
+              }
+            }
+          },
+          x: {
+            ticks: { font: { size: 12 } }
+          }
+        }
+      }
+    });
+    // bieu do cot ban pham ban chay
+    const ctx2 = document.getElementById('chartBestSeller');
+
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['SP01', 'SP02', 'SP03', 'SP04', 'SP05'], // Mã sản phẩm
+        datasets: [{
+          label: 'Số lượng bán',
+          data: [110, 91, 85, 72, 64],
+          backgroundColor: [
+            '#3B7DDD',
+            '#28A745',
+            '#FFC107',
+            '#DC3545',
+            '#6F42C1'
+          ],
+          borderRadius: 6,
+
+          maxBarThickness: 70
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          },
+          x: {
+            ticks: { font: { size: 12 } }
+          }
+        }
+      }
+    });
+    const monthInput = document.getElementById("sothang");
+
+    monthInput.addEventListener("input", function () {
+      let value = parseInt(this.value);
+
+      if (value < 1) this.value = 1;
+      if (value > 12) this.value = 12;
+    });
+  </script>
+</body>
+
+</html>

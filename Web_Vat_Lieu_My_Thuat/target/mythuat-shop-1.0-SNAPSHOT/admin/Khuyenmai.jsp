@@ -1,0 +1,812 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý khuyến mãi</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<style>
+  #main {
+    display: flex;
+  }
+
+  #main .left {
+    background-color: #17479D;
+    height: auto;
+    width: 17%;
+  }
+
+  #main .left .list-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #main .left .list-admin a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  #main .left .list-admin a i {
+    margin-right: 20px;
+  }
+
+  #main .left .list-admin a:hover {
+    background-color: #203247;
+    border-left: #3B7DDD 2px solid;
+  }
+
+  #main .left .list-admin .logo img {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 20px 0;
+  }
+
+  #main .left .list-admin a.logo {
+    padding: 0;
+  }
+
+  #main .left .list-admin a.logo:hover {
+    background-color: #203247;
+    border-left: none;
+  }
+
+  .list-admin a.active {
+    background-color: #203247;
+    border-left: 4px solid #FFD700;
+    /* hoặc màu khác */
+    font-weight: bold;
+  }
+
+  #main .right .container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 100px);
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  #main .right {
+    flex: 1;
+    background-color: #F9F9F9;
+  }
+
+  #main .right .container .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 10px;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  #main .right .container .dashboard h1 {
+    width: 100%;
+  }
+
+  #main .right .container .dashboard .total-box {
+    background-color: #17479D;
+    color: white;
+    border-radius: 5px;
+  }
+
+  #main .right .container .dashboard .total-box hr {
+    border: 1px solid #ffffff33;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #main .right .container .dashboard .total-box h2,
+  h3 {
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  /* sửa margin */
+  .order-container {
+    width: 95%;
+    margin: 10px auto 5px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /*  */
+
+  .search {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+  }
+
+  .search-input-icon {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .search-input-icon input {
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    width: 250px;
+    font-size: 14px;
+  }
+
+  .icon {
+    background: #f1f1f1;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .icon i {
+    font-size: 16px;
+    color: #333;
+  }
+
+  .btn-Sua {
+    background-color: #FFC107;
+    color: black;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: 0.2s;
+  }
+
+  .btn-Sua:hover {
+    background-color: #e0a800;
+  }
+
+  .btn-Xoa {
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: 0.2s;
+    margin-top: 5px;
+  }
+
+  .btn-Xoa:hover {
+    background-color: #b02a37;
+  }
+
+  .btn-them-km {
+    background-color: #2659F5;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0;
+  }
+
+  /*  */
+
+
+  h1 {
+    margin: 0;
+    margin-bottom: 10px;
+    color: #222;
+  }
+
+  .sub-title {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .order-table th {
+    background: #2659F5;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .order-table td {
+    padding: 12px;
+    background: #fafafa;
+  }
+
+  .order-table tr:nth-child(even) td {
+    background: #f0f0f0;
+  }
+
+  .order-table td,
+  .order-table th {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  /* Trạng thái đơn hàng */
+  .status {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .status.pending {
+    background: #FFF3CD;
+    color: #555;
+  }
+
+  .status.success {
+    background: #D1FAE5;
+    color: #0f5132;
+  }
+
+  .status.cancel {
+    background: #ffd6d6;
+    color: #b91c1c;
+  }
+
+  /* ================== MODAL THÊM KHÁCH HÀNG ================== */
+  .modal {
+    position: fixed;
+    inset: 0;
+    /* top:0; right:0; bottom:0; left:0 */
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    /* Ẩn mặc định */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    z-index: 999;
+  }
+
+  .modal-content {
+    background: #fff;
+    width: 400px;
+    max-width: 95%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    animation: fadeInScale 0.2s ease-out;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #2659F5;
+    color: #fff;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  #Dialog-them-km .modal-header h2 {
+    width: 100%;
+    text-align: center;
+  }
+
+  #Dialog-sua-km .modal-header h2 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .close-modal {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 5px;
+  }
+
+  .close-edit-modal {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 5px;
+  }
+
+  .modal-body {
+    padding: 15px 16px 5px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #333;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #17479D;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px 16px 14px;
+    background: #f7f7f7;
+  }
+
+  .btn-cancel,
+  .btn-save {
+    border: none;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-cancel {
+    background: #e0e0e0;
+    color: #333;
+  }
+
+  .btn-save {
+    background: #2659F5;
+    color: #fff;
+  }
+
+  .btn-edit-cancel,
+  .btn-edit-save {
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-edit-cancel {
+    background: #e0e0e0;
+    color: #333;
+  }
+
+  .btn-edit-save {
+    background: #2659F5;
+    color: #fff;
+  }
+
+  /* =========Xem trang trc sau======== */
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+    gap: 5px;
+  }
+
+  .page-link {
+    padding: 6px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    color: #0d6efd;
+    background-color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+
+  .page-link:hover {
+    background-color: #e9ecef;
+  }
+
+  .page-link.active {
+    background-color: #2659F5;
+    color: white;
+    font-weight: bold;
+    border-color: #2659F5;
+  }
+
+  /* Hiệu ứng nhỏ khi mở modal */
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+<body>
+  <div id="main">
+    <div class="left">
+      <div class="list-admin">
+        <a href="Admin.jsp" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
+        <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng quan</a>
+        <a href="ThongKe.jsp"><i class="fa-solid fa-chart-line"></i>Thống
+          kê</a>
+        <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh
+          mục</a>
+        <a href="SanPham.jsp"><i class="fa-solid fa-palette"></i>Quản
+          lý sản phẩm</a>
+        <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản
+          lý người dùng</a>
+        <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i>Quản
+          lý đơn hàng</a>
+        <a href="Khuyenmai.html" class="active"><i class="fa-solid fa-gift"></i>Quản lý
+          khuyến mãi</a>
+        <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý
+          Slider Show</a>
+        <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+        <a href="../DangNhap.jsp"><i class="fa-solid fa-right-from-bracket"></i>
+          Đăng xuất</a>
+      </div>
+    </div>
+    <div class="right">
+
+      <div class="container">
+
+        <div class="order-container">
+          <h1>Danh sách khuyến mãi</h1>
+          <div class="search">
+            <div class="search-input-icon">
+              <input type="text" placeholder="Tìm kiếm khuyến m...">
+              <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            </div>
+            <button class="btn-them-km">Thêm khuyến mãi</button>
+
+          </div>
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã khuyến mãi</th>
+                <th>Tên khuyến mãi</th>
+                <th>Mô tả</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Giảm giá</th>
+                <th>Tùy chọn</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>KM001</td>
+                <td>Giảm giá mùa hè</td>
+                <td>Khuyến mãi đặc biệt cho mùa hè, giảm giá các sản phẩm mùa
+                  hè.</td>
+                <td>01/06/2025</td>
+                <td>31/01/2025</td>
+                <td>40000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+                <td>KM002</td>
+                <td>Khuyến mãi Tết Nguyên đán</td>
+                <td>Giảm giá đặc biệt nhân dịp Tết Nguyên Đán, áp dụng cho tất
+                  cả sản phẩm.</td>
+                <td>01/01/2025</td>
+                <td>31/03/2025</td>
+                <td>25000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>3</td>
+                <td>KM003</td>
+                <td>Giảm giá sinh viên </td>
+                <td>Khuyến mãi đặc biệt dành cho sinh viên, giảm giá cho các
+                  mặt hàng học tập.</td>
+                <td>01/03/2025</td>
+                <td>31/05/2025</td>
+                <td>10000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>4</td>
+                <td>KM004</td>
+                <td>Khuyến mãi đầu năm</td>
+                <td>Giảm giá đặc biệt đầu năm, áp dụng cho tất cả các sản phẩm
+                  trong cửa hàng.</td>
+                <td>01/01/2025</td>
+                <td>15/01/2025</td>
+                <td>20000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>5</td>
+                <td>KM005</td>
+                <td>Giảm giá Giáng Sinh</td>
+                <td>Khuyến mãi dịp Giáng Sinh, giảm giá lên đến 50% cho các
+                  sản phẩm mùa lễ hội.</td>
+                <td>01/12/2025</td>
+                <td>31/12/2025</td>
+                <td>50000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>6</td>
+                <td>KM006</td>
+                <td>Giảm giá Tết Trung Thu</td>
+                <td>Giảm giá sản phẩm đặc biệt cho Tết Trung Thu, áp dụng cho
+                  các mặt hàng bánh trung thu.</td>
+                <td>01/09/2025</td>
+                <td>30/09/2025</td>
+                <td>30000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>7</td>
+                <td>KM007</td>
+                <td>Giảm giá Black Friday</td>
+                <td>Giảm giá cực lớn nhân dịp Black Friday, lên đến 40% cho
+                  các mặt hàng công nghệ.</td>
+                <td>01/11/2025</td>
+                <td>30/11/2025</td>
+                <td>40000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>8</td>
+                <td>KM005</td>
+                <td>Giảm giá Lễ Quốc Khách</td>
+                <td>Khuyến mãi đặc biệt trong dịp lễ Quốc Khánh, giảm giá cho
+                  các sản phẩm quà tặng.</td>
+                <td>01/09/2025</td>
+                <td>03/09/2025</td>
+                <td>50000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+
+              <tr>
+                <td>9</td>
+                <td>KM009</td>
+                <td>Giảm giá mua 1 tặng 1</td>
+                <td>Khuyến mãi Mua 1 Tặng 1, áp dụng cho tất cả sản phẩm trong
+                  cửa hàng. </td>
+                <td>01/06/2025</td>
+                <td>30/06/2025</td>
+                <td>100000đ</td>
+                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
+                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <a href="#" class="page-link">Trước</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">Sau</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+
+  <!-- =============Dialog thêm khuyến mãi============= -->
+  <div id="Dialog-them-km" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Thêm khuyến mãi</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="maKM">Mã khuyến mãi</label>
+          <input type="text" id="maKM" placeholder="Nhập mã khuyến mãi">
+        </div>
+
+        <div class="form-group">
+          <label for="tenKM">Tên khuyến mãi</label>
+          <input type="text" id="tenKM" placeholder="Nhập tên khuyến mãi">
+        </div>
+
+        <div class="form-group">
+          <label for="mota">Mô tả</label>
+          <input type="text" id="mota" placeholder="Nhập mô tả">
+        </div>
+
+        <div class="form-group">
+          <label for="ngaybatdau">Ngày bắt đầu</label>
+          <input type="date" id="ngaybatdau" placeholder="Nhập ngày bắt đầu">
+        </div>
+
+        <div class="form-group">
+          <label for="ngàyketthuc">Ngày ngày kết thúc</label>
+          <input type="date" id="ngàyketthuc" placeholder="Nhập ngày kết thúc">
+        </div>
+
+        <div class="form-group">
+          <label for="giamgia">Giảm giá</label>
+          <input type="text" id="giamgia" placeholder="Nhập số tiền giảm">
+        </div>
+
+        <div class="form-group">
+          <label for="sl">Số lượng</label>
+          <input type="text" id="sl" placeholder="Nhập số lượng">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel">Hủy</button>
+        <button class="btn-save">Lưu</button>
+      </div>
+    </div>
+  </div>
+  <!-- ========== Dialog chỉnh sửa khuyến mãi ========== -->
+  <div id="Dialog-sua-km" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Chỉnh sửa khuyến mãi</h2>
+        <span class="close-edit-modal">&times;</span>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="sua-ngay-km">Ngày bắt đầu</label>
+          <input type="date" id="sua-ngay-km" value="2025-06-01">
+        </div>
+
+        <div class="form-group">
+          <label for="sua-ngay-km">Ngày kết thúc</label>
+          <input type="date" id="sua-ngay-km" value="2025-01-31">
+        </div>
+
+        <div class="form-group">
+          <label for="sua-giam-gia">Giảm giá</label>
+          <input type="text" id="sua-giam-gia" value="40000đ">
+        </div>
+
+        <div class="form-group">
+          <label for="trangthai">Trạng thái</label>
+          <input type="text" id="trangthai" value="Hoạt động">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-edit-cancel">Hủy</button>
+        <button class="btn-edit-save">Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS mở / đóng dialog -->
+  <script>
+    const btnThemKH = document.querySelector('.btn-them-km');
+    const modal = document.getElementById('Dialog-them-km');
+    const btnClose = document.querySelector('.close-modal');
+    const btnCancel = document.querySelector('.btn-cancel');
+
+    // Mở dialog
+    btnThemKH.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    // Đóng dialog khi bấm dấu X hoặc nút Hủy
+    btnClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    btnCancel.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Click ra ngoài khung dialog cũng đóng
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    const modalEdit = document.getElementById("Dialog-sua-km");
+    const btnCloseEdit = document.querySelector(".close-edit-modal");
+    const btnEditCancel = document.querySelector(".btn-edit-cancel");
+
+    // Lấy danh sách nút sửa
+    const btnSuaList = document.querySelectorAll(".btn-Sua");
+
+    // Khi nhấn Sửa
+    btnSuaList.forEach(btn => {
+      btn.addEventListener("click", () => {
+        modalEdit.style.display = "flex";
+
+        // Lấy dữ liệu từ dòng bảng (ví dụ)
+        let row = btn.closest("tr");
+        let ten = row.querySelector(".col-ten").innerText;
+        let sdt = row.querySelector(".col-sdt").innerText;
+        let diachi = row.querySelector(".col-diachi").innerText;
+        let vaitro = row.querySelector(".col-vaitro").innerText;
+
+        // Gán vào dialog sửa
+        document.getElementById("sua-ngay-km").value = ten;
+        document.getElementById("editSdtKH").value = sdt;
+        document.getElementById("editDiaChiKH").value = diachi;
+        document.getElementById("editVaiTroKH").value = vaitro;
+      });
+    });
+
+    // Đóng dialog khi bấm X
+    btnCloseEdit.addEventListener("click", () => {
+      modalEdit.style.display = "none";
+    });
+
+    // Đóng khi bấm Hủy
+    btnEditCancel.addEventListener("click", () => {
+      modalEdit.style.display = "none";
+    });
+
+    // Click ra ngoài đóng modal
+    window.addEventListener("click", (e) => {
+      if (e.target === modalEdit) {
+        modalEdit.style.display = "none";
+      }
+    });
+  </script>
+</body>
+
+</html>
