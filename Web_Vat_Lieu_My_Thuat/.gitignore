@@ -37,3 +37,11 @@ build/
 
 ### Mac OS ###
 .DS_Store
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Build output
+out/
+target/
+*.war
