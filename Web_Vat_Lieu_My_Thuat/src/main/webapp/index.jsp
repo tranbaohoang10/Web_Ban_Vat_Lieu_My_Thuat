@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -906,540 +907,60 @@
                 </div>
                 <div class="section-but-content">
                     <div class="list-product">
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-1.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
+                        <c:forEach var="p" items="${products}">
+                            <div class="list-product-list1">
+                                <a href="ChiTietSanPham.jsp?id=${p.id}">
+                                    <img src="${pageContext.request.contextPath}/${p.thumbnail}" alt="${p.name}">
+                                    <div class="list-product-list1-content">
+                                        <div class="list-product-list1-content-socials">
+                                            <div class="list-product-list1-content-socials-1">
+                                                <i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                                            </div>
+                                            <div class="list-product-list1-content-socials-2">
+                                                <i class="fa-solid fa-arrow-up-right-dots"></i>
+                                                <span>Đã bán ${p.soldQuantity}</span>
+                                            </div>
                                         </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 6</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Bút Lông Thiên Long
-                                            48/60
-                                            Màu Fiber Pen Washable - Phiên bản
-                                            Demon
-                                            Slayer
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">178,200₫</h2>
-                                        <p class="price-product-before">
-                                            198,000đ</p>
-                                        <span
-                                            class="price-product-discount">-10%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                                        <div class="list-product-list1-content-description">
+                                            <!-- Tên sản phẩm -->
+                                            <p class="content">${p.name}</p>
 
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-2.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 11</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Bộ 12/18/24 màu
-                                            Gouache
-                                            dạng tuýp 12ml Thiên Long Colokit
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">55,500₫</h2>
-                                        <p class="price-product-before">
-                                            101,000đ</p>
-                                        <span
-                                            class="price-product-discount">-45%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                                            <!-- Rating: tạm thời để cứng (0), sau này có bảng review thì đổi -->
+                                            <div class="star">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <span>(0)</span>
+                                            </div>
 
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-3.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 827</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">[Tặng 2/4/6 màu]
-                                            Acrylic
-                                            Markers/ Bút sơn/ Bút lông 12/24/36
-                                            màu
-                                            ThiênLong Colokit -
-                                            Màu sắc tươi sáng, Không thấm qua
-                                            mặt
-                                            giấy
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">42,250₫</h2>
-                                        <p class="price-product-before">
-                                            65,000đ</p>
-                                        <span
-                                            class="price-product-discount">-35%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                                            <!-- Giá sau giảm, giá gốc, % giảm -->
+                                            <h2 class="price-product-after">
+                                                    ${p.priceAfterDiscount}₫
+                                            </h2>
+                                            <p class="price-product-before">
+                                                    ${p.price}đ
+                                            </p>
+                                            <span class="price-product-discount">
+                            -${p.discountDefault}%
+                        </span>
 
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-4.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 74</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Màu nước 8 màu Thiên
-                                            Long
-                                            Colokit WACO-C06/AK - Dễ dàng pha
-                                            trộn
-                                            màu
-                                            - Phiên bản
-                                            Akooland
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">31,040₫</h2>
-                                        <p class="price-product-before">
-                                            38,800đ</p>
-                                        <span
-                                            class="price-product-discount">-20%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
+                                            <div class="button">
+                                                <a href="ChiTietSanPham.jsp?id=${p.id}">
+                                                    <button class="btn-xemchitiet">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                        Xem chi tiết
+                                                    </button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-5.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 79</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Bút lông 12 màu Fiber
-                                            Pen
-                                            Thiên Long Colokit FP-01/AK - Ngòi
-                                            Fine
-                                            tô
-                                            đều màu và liên
-                                            tục - Phiên bản Akooland
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">31,680₫</h2>
-                                        <p class="price-product-before">
-                                            39,600đ</p>
-                                        <span
-                                            class="price-product-discount">-20%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-6.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>170</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Bút lông 6/12 màu nhũ
-                                            Fiber Pen Metallic Thiên Long
-                                            Colokit -
-                                            Màu nhũ
-                                            lấp lánh, vẽ
-                                            được trên giấy đen
-                                            êm
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">45,000₫</h2>
-                                        <p class="price-product-before">
-                                            60,000đ</p>
-                                        <span
-                                            class="price-product-discount">-25%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-7.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 123</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Bút sáp 12/18 màu
-                                            Thiên
-                                            Long Colokit - Màu sắc tươi sáng Phủ
-                                            đều
-                                            Bền
-                                            màu - Phiên bản
-                                            Akooland
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">15,840₫</h2>
-                                        <p class="price-product-before">
-                                            19,800đ</p>
-                                        <span
-                                            class="price-product-discount">-20%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-8.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 1153</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Acrylic Markers/ Bút
-                                            sơn/
-                                            Bút lông 12/24/36 màu ThiênLong
-                                            Colokit
-                                            -
-                                            Màu sắc tươi
-                                            sáng, Không thấm qua mặt giấy
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">71,610₫</h2>
-                                        <p class="price-product-before">
-                                            52,800đ</p>
-                                        <span
-                                            class="price-product-discount">-30%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </div>
-                        <div class="list-product-list1"><a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-9.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 657</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Bộ 8 Màu nước Thiên
-                                            Long
-                                            Colokit WACO-C06/DO - Phiên bản
-                                            Nobita
-                                            Và
-                                            Câu Chuyện Thế
-                                            Giới Trong Tranh 2025
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">19,000₫</h2>
-                                        <p class="price-product-before">
-                                            38,000đ</p>
-                                        <span
-                                            class="price-product-discount">-50%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </div>
-                        <div class="list-product-list1"> <a
-                                href="ChiTietSanPham.jsp">
-                                <img src="./assets/images/logo/mythuat-10.jpg"
-                                    alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                        class="list-product-list1-content-socials">
-                                        <div
-                                            class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
-                                        <div
-                                            class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                bán 398</span></div>
-                                    </div>
-                                    <div
-                                        class="list-product-list1-content-description">
-                                        <p class="content">Bộ 12 Màu nước Thiên
-                                            Long
-                                            Colokit WACO-C002/DO - Phiên bản
-                                            Nobita
-                                            Và
-                                            Câu Chuyện Thế
-                                            Giới Trong Tranh 2025
-                                        </p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                            class="price-product-after">23,950₫</h2>
-                                        <p class="price-product-before">
-                                            47,900đ</p>
-                                        <span
-                                            class="price-product-discount">-50%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button class="btn-xemchitiet">
-                                                    <i
-                                                        class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
-                        </div>
-                    </a>
+                        </c:forEach>
+                    </div>
+
 
                 </div>
                 <div class="section-but-button">
