@@ -912,7 +912,7 @@
                     <div class="list-product">
                         <c:forEach var="p" items="${productsCat1}">
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp?id=${p.id}">
+                                <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
                                     <img src="${p.thumbnail}" alt="${p.name}">
                                     <div class="list-product-list1-content">
                                         <div class="list-product-list1-content-socials">
@@ -950,7 +950,7 @@
                         </span>
 
                                             <div class="button">
-                                                <a href="ChiTietSanPham.jsp?id=${p.id}">
+                                                <a href="ProductDetails.jsp?id=${p.id}">
                                                     <button class="btn-xemchitiet">
                                                         <i class="fa-solid fa-eye"></i>
                                                         Xem chi tiết
@@ -983,7 +983,7 @@
                     <div class="list-product">
                         <c:forEach var="p" items="${productsCat2}">
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp?id=${p.id}">
+                                <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
                                     <img src="${p.thumbnail}" alt="${p.name}">
                                     <div class="list-product-list1-content">
                                         <div class="list-product-list1-content-socials">
@@ -1018,7 +1018,7 @@
                             </span>
 
                                             <div class="button">
-                                                <a href="ChiTietSanPham.jsp?id=${p.id}">
+                                                <a href="ProductDetails.jsp?id=${p.id}">
                                                     <button class="btn-xemchitiet">
                                                         <i class="fa-solid fa-eye"></i>
                                                         Xem chi tiết

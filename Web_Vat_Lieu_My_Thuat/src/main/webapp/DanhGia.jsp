@@ -632,7 +632,7 @@
         <div class="breadcrumb">
             <a href="index.jsp">Trang chủ</a>
             <span>/</span>
-            <a href="ChiTietSanPham.jsp">Bút Lông Màu</a>
+            <a href="ProductDetails.jsp">Bút Lông Màu</a>
             <span>/</span>
             <span>Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable - Phiên
                 bản Demon Slayer</span>
