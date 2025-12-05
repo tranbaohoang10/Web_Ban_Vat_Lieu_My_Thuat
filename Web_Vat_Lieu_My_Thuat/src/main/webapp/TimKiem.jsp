@@ -1255,7 +1255,7 @@
                         <h2 class="header">Mỹ Thuật</h2>
                         <div class="list-product">
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp">
+                                <a href="ProductDetails.jsp">
                                     <img src="./assets/images/logo/list1-1.jpg"
                                         alt>
                                     <div class="list-product-list1-content">
@@ -1292,7 +1292,7 @@
                                             <span
                                                 class="price-product-discount">-15%</span>
                                             <div class="button">
-                                                <a href="ChiTietSanPham.jsp">
+                                                <a href="ProductDetails.jsp">
                                                     <button
                                                         class="btn-xemchitiet">
                                                         <i
@@ -1307,7 +1307,7 @@
 
                             </div>
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp">
+                                <a href="ProductDetails.jsp">
                                     <img src="./assets/images/logo/list1-2.jpg"
                                         alt>
                                     <div class="list-product-list1-content">
@@ -1355,7 +1355,7 @@
 
                             </div>
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp">
+                                <a href="ProductDetails.jsp">
                                     <img src="./assets/images/logo/list1-3.jpg"
                                         alt>
                                     <div class="list-product-list1-content">
@@ -1405,7 +1405,7 @@
 
                             </div>
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp"><img
+                                <a href="ProductDetails.jsp"><img
                                         src="./assets/images/logo/list1-4.jpg"
                                         alt>
                                     <div class="list-product-list1-content">
@@ -1454,7 +1454,7 @@
 
                             </div>
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp">
+                                <a href="ProductDetails.jsp">
                                     <img src="./assets/images/logo/list1-5.jpg"
                                         alt>
                                     <div class="list-product-list1-content">
@@ -1505,7 +1505,7 @@
 
                             </div>
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp">
+                                <a href="ProductDetails.jsp">
                                     <img src="./assets/images/logo/list1-6.jpg"
                                         alt>
                                     <div class="list-product-list1-content">
@@ -1554,7 +1554,7 @@
 
                             </div>
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp">
+                                <a href="ProductDetails.jsp">
                                     <img src="./assets/images/logo/list1-7.jpg"
                                         alt>
                                     <div class="list-product-list1-content">
@@ -1602,7 +1602,7 @@
 
                             </div>
                             <div class="list-product-list1">
-                                <a href="ChiTietSanPham.jsp">
+                                <a href="ProductDetails.jsp">
                                     <img src="./assets/images/logo/list1-8.jpg"
                                         alt>
                                     <div class="list-product-list1-content">

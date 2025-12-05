@@ -14,108 +14,120 @@ public class Product implements Serializable {
     private int soldQuantity;
     private String status;
     private Timestamp createAt;
+    private String brand;
 
     public Product() {
     }
 
-    public Product(int id, String name, double price, int discountDefault, int categoryId, String thumbnail, int quantityStock, int soldQuantity, String status, Timestamp createAt) {
-        this.id = id;
+    public Product(String name, int id, double price, int categoryId, int discountDefault, String thumbnail, int quantityStock, int soldQuantity, String status, Timestamp createAt, String brand) {
         this.name = name;
+        this.id = id;
         this.price = price;
-        this.discountDefault = discountDefault;
         this.categoryId = categoryId;
+        this.discountDefault = discountDefault;
         this.thumbnail = thumbnail;
         this.quantityStock = quantityStock;
         this.soldQuantity = soldQuantity;
         this.status = status;
         this.createAt = createAt;
+        this.brand = brand;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getDiscountDefault() {
-        return discountDefault;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public int getQuantityStock() {
-        return quantityStock;
-    }
-
-    public int getSoldQuantity() {
-        return soldQuantity;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getDiscountDefault() {
+        return discountDefault;
     }
 
     public void setDiscountDefault(int discountDefault) {
         this.discountDefault = discountDefault;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
     }
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 
+    public int getQuantityStock() {
+        return quantityStock;
+    }
+
     public void setQuantityStock(int quantityStock) {
         this.quantityStock = quantityStock;
+    }
+
+    public int getSoldQuantity() {
+        return soldQuantity;
     }
 
     public void setSoldQuantity(int soldQuantity) {
         this.soldQuantity = soldQuantity;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Timestamp getCreateAt() {
+        return createAt;
     }
 
     public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
     }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
     public double getPriceAfterDiscount() { // tính giá bán (giá gốc sau khi giảm)
         return price * (100.0 - discountDefault) / 100.0;
     }
     public boolean isOutOfStock() {
         return quantityStock <= 0;
     }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -127,10 +139,9 @@ public class Product implements Serializable {
                 ", thumbnail='" + thumbnail + '\'' +
                 ", quantityStock=" + quantityStock +
                 ", soldQuantity=" + soldQuantity +
-                ", status=" + status +
+                ", status='" + status + '\'' +
                 ", createAt=" + createAt +
+                ", brand='" + brand + '\'' +
                 '}';
     }
-
-
 }

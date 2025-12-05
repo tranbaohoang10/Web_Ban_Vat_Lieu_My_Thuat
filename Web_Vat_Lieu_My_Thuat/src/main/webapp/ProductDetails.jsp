@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1427,16 +1429,27 @@
     <!-- Product Detail -->
     <div class="product-detail-container">
         <div class="product-detail">
-            <!-- Product Images -->
+
+            <!-- CỘT 1: HÌNH ẢNH SẢN PHẨM -->
             <div class="product-images">
-                <!-- Main Image -->
+                <!-- Ảnh chính -->
                 <div class="product-main-image">
-                    <img src="./assets/images/logo/list1-1.jpg"
-                         alt="Bút Lông Thiên Long Demon Slayer"
-                         id="mainProductImage">
+                    <c:choose>
+                        <c:when test="${not empty subimagesList}">
+                            <img src="${subimagesList[0].image}"
+                                 alt="${product.name}"
+                                 id="mainProductImage">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="./assets/images/logo/list1-1.jpg"
+                                 alt="${product.name}"
+                                 id="mainProductImage">
+                        </c:otherwise>
+                    </c:choose>
+
                     <div class="discount-badge">
                         <div>Tiết kiệm</div>
-                        <div style="font-size: 1rem;">15%</div>
+                        <div style="font-size: 1rem;">${product.discountDefault}%</div>
                     </div>
 
                     <a href="javascript:void(0)" id="prevImageBtn"
@@ -1447,71 +1460,74 @@
 
                 <!-- Thumbnail Gallery -->
                 <div class="thumbnail-gallery">
-                    <div class="thumbnail-container"
-                         id="thumbnailContainer">
-                        <div class="thumbnail-item active" id="thumb-1"
-                             data-index="0">
-                            <img src="./assets/images/logo/list1-1.jpg"
-                                 alt="Ảnh 1">
-                        </div>
-                        <div class="thumbnail-item" id="thumb-2"
-                             data-index="1">
-                            <img src="./assets/images/logo/list1-1.jpg"
-                                 alt="Ảnh 2">
-                        </div>
-                        <div class="thumbnail-item" id="thumb-3"
-                             data-index="2">
-                            <img
-                                    src="./assets/images/logo/list1-1-cont.png"
-                                    alt="Ảnh 3">
-                        </div>
+                    <div class="thumbnail-container" id="thumbnailContainer">
+                        <c:choose>
+                            <c:when test="${not empty subimagesList}">
+                                <c:forEach var="img" items="${subimagesList}" varStatus="st">
+                                    <div class="thumbnail-item ${st.first ? 'active' : ''}"
+                                         data-index="${st.index}">
+                                        <img src="${img.image}"
+                                             alt="Ảnh phụ ${st.index + 1}">
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="thumbnail-item active" data-index="0">
+                                    <img src="./assets/images/logo/list1-1.jpg" alt="Ảnh 1">
+                                </div>
+                                <div class="thumbnail-item" data-index="1">
+                                    <img src="./assets/images/logo/list1-1.jpg" alt="Ảnh 2">
+                                </div>
+                                <div class="thumbnail-item" data-index="2">
+                                    <img src="./assets/images/logo/list1-1-cont.png" alt="Ảnh 3">
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
-            </div>
+            </div> <!-- /product-images -->
 
-            <!-- Product Info -->
+            <!-- CỘT 2: THÔNG TIN SẢN PHẨM -->
             <div class="product-info">
-                <h1 class="product-title">Bút Lông Thiên Long 48/60
-                    Màu
-                    Fiber Pen Washable - Phiên bản Demon Slayer
-                </h1>
+                <h1 class="product-title">${product.name}</h1>
 
                 <div class="product-meta">
                     <div class="product-meta-item">
-                            <span class="product-meta-label">Thương
-                                hiệu:</span>
-                        <span class="product-meta-value"><a
-                                href="#">Colokit</a></span>
+                        <span class="product-meta-label">Thương hiệu:</span>
+                        <span class="product-meta-value">
+                        <a href="#">${product.brand}</a>
+                    </span>
                     </div>
                     <div class="product-meta-item">
-                            <span class="product-meta-label">Tình
-                                trạng:</span>
-                        <span class="product-meta-value"
-                              style="color: #10b981;">Còn hàng</span>
+                        <span class="product-meta-label">Tình trạng:</span>
+                        <span class="product-meta-value" style="color:#10b981;">
+                            ${product.status}
+                        </span>
                     </div>
                     <div class="product-meta-item">
-                            <span class="product-meta-label">Mã sản
-                                phẩm:</span>
-                        <span class="product-meta-value">50016740</span>
+                        <span class="product-meta-label">Mã sản phẩm:</span>
+                        <span class="product-meta-value">${product.id}</span>
                     </div>
                 </div>
 
                 <div class="product-price-section">
                     <div class="product-price">
-                        <span class="price-current">168,300₫</span>
-                        <span class="price-original">198,000₫</span>
+                    <span class="price-current">
+                        ${product.priceAfterDiscount}₫
+                    </span>
+                        <span class="price-original">
+                        ${product.price}₫
+                    </span>
                     </div>
                 </div>
 
                 <div class="quantity-section">
                     <div class="variant-label">Số lượng:</div>
                     <div class="quantity-controls">
-                        <button class="quantity-btn"
-                                onclick="decreaseQuantity()">-</button>
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
                         <input type="number" class="quantity-input"
                                value="1" min="1" id="quantity">
-                        <button class="quantity-btn"
-                                onclick="increaseQuantity()">+</button>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
                     </div>
                 </div>
 
@@ -1525,72 +1541,70 @@
                         MUA NGAY
                     </a>
                 </div>
+            </div> <!-- /product-info -->
 
-            </div>
+        </div> <!-- /product-detail -->
+    </div> <!-- /product-detail-container -->
 
-        </div>
-        <div class="section-but">
+    <div class="section-but">
             <div class="container">
                 <div class="section-but-header">
                     <h2>SẢN PHẨM CÙNG LOẠI</h2>
-
                 </div>
+
                 <div class="section-but-content">
                     <div class="list-product">
-                        <div class="list-product-list1"><a
-                                href="ChiTietSanPham.html">
-                            <img
-                                    src="./assets/images/logo/mythuat-1.jpg"
-                                    alt>
-                            <div class="list-product-list1-content">
-                                <div
-                                        class="list-product-list1-content-socials">
-                                    <div
-                                            class="list-product-list1-content-socials-1"><i
-                                            class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                    </div>
-                                    <div
-                                            class="list-product-list1-content-socials-2"><i
-                                            class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                    bán
-                                                    6</span></div>
-                                </div>
-                                <div
-                                        class="list-product-list1-content-description">
-                                    <p class="content">Bút Lông Thiên
-                                        Long 48/60 Màu Fiber Pen
-                                        Washable - Phiên bản Demon
-                                        Slayer
-                                    </p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <span>(0)</span>
-                                    </div>
-                                    <h2
-                                            class="price-product-after">178,200₫</h2>
-                                    <p class="price-product-before">
-                                        198,000đ</p>
-                                    <span
-                                            class="price-product-discount">-10%</span>
-                                    <div class="button">
-                                        <a href="ChiTietSanPham.html">
-                                            <button
-                                                    class="btn-xemchitiet">
-                                                <i
-                                                        class="fa-solid fa-eye"></i>
-                                                Xem chi tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        <c:forEach var="rp" items="${relatedProducts}">
+                            <div class="list-product-list1">
+                                <a href="${pageContext.request.contextPath}/DetailsProductController?id=${rp.id}">
+                                    <img src="${rp.thumbnail}" alt="${rp.name}">
+                                    <div class="list-product-list1-content">
+                                        <div class="list-product-list1-content-socials">
+                                            <div class="list-product-list1-content-socials-1">
+                                                <i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                                            </div>
+                                            <div class="list-product-list1-content-socials-2">
+                                                <i class="fa-solid fa-arrow-up-right-dots"></i>
+                                                <span>Đã bán ${rp.soldQuantity}</span>
+                                            </div>
+                                        </div>
+                                        <div class="list-product-list1-content-description">
+                                            <p class="content">${rp.name}</p>
 
-                        </div>
+                                            <div class="star">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <span>(0)</span>
+                                            </div>
+
+                                            <h2 class="price-product-after">
+                                                <fmt:formatNumber value="${rp.priceAfterDiscount}" type="number" groupingUsed="true"/>₫
+                                            </h2>
+                                            <p class="price-product-before">
+                                                <fmt:formatNumber value="${rp.price}" type="number" groupingUsed="true"/>đ
+                                            </p>
+                                            <span class="price-product-discount">
+                                        -${rp.discountDefault}%
+                                    </span>
+
+                                            <div class="button">
+                                                <button class="btn-xemchitiet">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                    Xem chi tiết
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:forEach>
+
+                        <c:if test="${empty relatedProducts}">
+                            <p>Không có sản phẩm cùng loại.</p>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -1626,50 +1640,43 @@
 
             </div>
         </div>
-        <div class="product_content alpha bg-while">
-
-            <div class="content_name ">
-                <h3>Thông số kĩ thuật</h3>
-            </div>
-            <div class="content_blog " id="content_blog">
-
-                <div class="content_blog-item">
-
-                    <div class="item-main">
-                        <ul>
-                            <li>
-                                <h3>Thương hiệu : </h3>
-                                <p>Colokit</p>
-                            </li>
-                            <li>
-                                <h3>Kích thước bút: </h3>
-                                <p>140.6 mm</p>
-                            </li>
-                            <li>
-                                <h3>Tiêu chuẩn : </h3>
-                                <p>TCCS 005: 2011/TL-BLM; châu
-                                    Âu EN
-                                    71/3</p>
-                            </li>
-                            <li>
-                                <h3>Sản xuất : </h3>
-                                <p>Việt Nam</p>
-                            </li>
-                            <li>
-                                <h3>Khuyến cáo : </h3>
-                                <p>Tránh nguồn nhiệt, hóa chất.
-                                    Không
-                                    thích hợp cho trẻ dưới 3
-                                    tuổi.</p>
-                            </li>
-                        </ul>
-                    </div>
-
+            <div class="product_content alpha bg-while">
+                <div class="content_name">
+                    <h3>Thông số kĩ thuật</h3>
                 </div>
 
-            </div>
+                <div class="content_blog" id="content_blog">
+                    <div class="content_blog-item">
+                        <div class="item-main">
+                            <c:if test="${not empty specificationList}">
+                                <c:set var="spec" value="${specificationList[0]}"/>
+                                <ul>
+                                    <li>
+                                        <h3>Kích thước bút:</h3>
+                                        <p>${spec.size}</p>
+                                    </li>
+                                    <li>
+                                        <h3>Tiêu chuẩn :</h3>
+                                        <p>${spec.standard}</p>
+                                    </li>
+                                    <li>
+                                        <h3>Sản xuất :</h3>
+                                        <p>${spec.madeIn}</p>
+                                    </li>
+                                    <li>
+                                        <h3>Khuyến cáo :</h3>
+                                        <p>${spec.warning}</p>
+                                    </li>
+                                </ul>
+                            </c:if>
 
-        </div>
+                            <c:if test="${empty specificationList}">
+                                <p>Chưa có thông số kỹ thuật cho sản phẩm này.</p>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <div class="product_rate alpha bg-while  magin-bottom">
 
             <a class="btn_view buy_now" href="DanhGia.html">

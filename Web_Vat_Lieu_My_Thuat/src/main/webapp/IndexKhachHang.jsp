@@ -921,7 +921,7 @@
         <!--  -->
         <div class="section-but-content">
           <div class="list-product">
-            <div class="list-product-list1"><a href="ChiTietSanPham.jsp">
+            <div class="list-product-list1"><a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-1.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -948,7 +948,7 @@
                     <p class="price-product-before"> 198,000đ</p>
                     <span class="price-product-discount">-10%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -963,7 +963,7 @@
 
             <!--  -->
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-2.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -990,7 +990,7 @@
                     <p class="price-product-before"> 101,000đ</p>
                     <span class="price-product-discount">-45%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1003,7 +1003,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-3.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1032,7 +1032,7 @@
                     <p class="price-product-before"> 65,000đ</p>
                     <span class="price-product-discount">-35%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1045,7 +1045,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-4.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1073,7 +1073,7 @@
                     <p class="price-product-before"> 38,800đ</p>
                     <span class="price-product-discount">-20%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1086,7 +1086,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-5.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1114,7 +1114,7 @@
                     <p class="price-product-before"> 39,600đ</p>
                     <span class="price-product-discount">-20%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1127,7 +1127,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-6.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1155,7 +1155,7 @@
                     <p class="price-product-before"> 60,000đ</p>
                     <span class="price-product-discount">-25%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1167,7 +1167,7 @@
               </a>
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-7.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1196,7 +1196,7 @@
                     <p class="price-product-before"> 19,800đ</p>
                     <span class="price-product-discount">-20%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1208,7 +1208,7 @@
               </a>
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-8.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1237,7 +1237,7 @@
                     <p class="price-product-before"> 52,800đ</p>
                     <span class="price-product-discount">-30%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1250,7 +1250,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-9.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1278,7 +1278,7 @@
                     <p class="price-product-before"> 38,000đ</p>
                     <span class="price-product-discount">-50%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1291,7 +1291,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/mythuat-10.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1319,7 +1319,7 @@
                     <p class="price-product-before"> 47,900đ</p>
                     <span class="price-product-discount">-50%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1349,7 +1349,7 @@
         <div class="section-but-content">
           <div class="list-product">
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp"><img
+              <a href="ProductDetails.jsp"><img
                   src="./assets/images/logo/combo1.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1375,7 +1375,7 @@
                     <p class="price-product-before"> 145,000đ</p>
                     <span class="price-product-discount">-35%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1386,7 +1386,7 @@
                 </div></a>
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo2.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1412,7 +1412,7 @@
                     <p class="price-product-before"> 256,000đ</p>
                     <span class="price-product-discount">-41%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1450,7 +1450,7 @@
                     <p class="price-product-before"> 256,000đ</p>
                     <span class="price-product-discount">-41%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1463,7 +1463,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo4.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1490,7 +1490,7 @@
                     <p class="price-product-before"> 233,000đ</p>
                     <span class="price-product-discount">-29%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1502,7 +1502,7 @@
 
             </div>
             <div class="list-product-list1">
-              <a href="ChiTietSanPham.jsp">
+              <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo5.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1528,7 +1528,7 @@
                     <p class="price-product-before"> 180,000đ</p>
                     <span class="price-product-discount">-25%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1540,7 +1540,7 @@
               </a>
 
             </div>
-            <div class="list-product-list1"> <a href="ChiTietSanPham.jsp">
+            <div class="list-product-list1"> <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo6.png" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1566,7 +1566,7 @@
                     <p class="price-product-before"> 179,000đ</p>
                     <span class="price-product-discount">-25%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1578,7 +1578,7 @@
               </a>
 
             </div>
-            <div class="list-product-list1"> <a href="ChiTietSanPham.jsp">
+            <div class="list-product-list1"> <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo7.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1606,7 +1606,7 @@
                     <p class="price-product-before"> 240,800đ</p>
                     <span class="price-product-discount">-23%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1618,7 +1618,7 @@
               </a>
 
             </div>
-            <div class="list-product-list1"> <a href="ChiTietSanPham.jsp">
+            <div class="list-product-list1"> <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo8.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1644,7 +1644,7 @@
                     <p class="price-product-before"> 253,000đ</p>
                     <span class="price-product-discount">-25%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1656,7 +1656,7 @@
               </a>
 
             </div>
-            <div class="list-product-list1"> <a href="ChiTietSanPham.jsp">
+            <div class="list-product-list1"> <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo9.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1684,7 +1684,7 @@
                     <p class="price-product-before"> 253,000đ</p>
                     <span class="price-product-discount">-25%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
@@ -1696,7 +1696,7 @@
               </a>
 
             </div>
-            <div class="list-product-list1"> <a href="ChiTietSanPham.jsp">
+            <div class="list-product-list1"> <a href="ProductDetails.jsp">
                 <img src="./assets/images/logo/combo10.jpg" alt>
                 <div class="list-product-list1-content">
                   <div class="list-product-list1-content-socials">
@@ -1722,7 +1722,7 @@
                     <p class="price-product-before"> 165,000đ</p>
                     <span class="price-product-discount">-10%</span>
                     <div class="button">
-                      <a href="ChiTietSanPham.jsp">
+                      <a href="ProductDetails.jsp">
                         <button class="btn-xemchitiet">
                           <i class="fa-solid fa-eye"></i>
                           Xem chi tiết
