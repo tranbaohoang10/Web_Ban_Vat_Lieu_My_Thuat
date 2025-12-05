@@ -841,10 +841,7 @@
                         </div>
                         <div class="info-mithuat-description-second">
                             <a href>Acrylic Marker - Bút sơn</a>
-                            <a href>Màu sáp, màu sáp dầu</a>
-                            <a href>Bút vẽ kỹ thuật</a>
-                            <a href>Sáp nặn</a>
-                            <a href>Combo mỹ thuật</a>
+
                         </div>
                         <div class="info-mithuat-description-img">
                             <img
@@ -858,9 +855,9 @@
         <!-- End section info mithuat -->
         <!-- Begin slider show -->
         <div class="w3-content w3-display-container">
-            <img class="mySlides" src="./assets/images/logo/banner-1.webp">
-            <img class="mySlides" src="./assets/images/logo/banner-2.webp">
-            <img class="mySlides" src="./assets/images/logo/banner-3.webp">
+            <c:forEach var ="slider" items="${sliders}">
+                <a href="${pageContext.request.contextPath}/${slider.linkTo}"> <img class="mySlides" src="${slider.thumbnail}"></a>
+            </c:forEach>
 
             <div class="w3-left" onclick="plusDivs(-1)">&#10094;</div>
             <div class="w3-right" onclick="plusDivs(1)">&#10095;</div>
@@ -967,8 +964,11 @@
 
                 </div>
                 <div class="section-but-button">
-                    <a class="button" href="TimKiem.jsp">Xem tất cả<i
-                            class="fa-solid fa-angle-right"></i></a>
+                    <a class="button"
+                       href="${pageContext.request.contextPath}/category?categoryId=${cat1.id}">
+                        Xem tất cả <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
                 </div>
             </div>
         </div>
@@ -1033,7 +1033,8 @@
                     </div>
 
                     <div class="section-but-button">
-                        <a class="button" href="TimKiem.jsp">
+                        <a class="button"
+                           href="${pageContext.request.contextPath}/category?categoryId=${cat2.id}">
                             Xem tất cả <i class="fa-solid fa-angle-right"></i>
                         </a>
                     </div>

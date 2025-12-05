@@ -5,10 +5,13 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.mythuatshop.Model.Category;
 import vn.edu.nlu.fit.mythuatshop.Model.Product;
+import vn.edu.nlu.fit.mythuatshop.Model.SliderShow;
 import vn.edu.nlu.fit.mythuatshop.Service.CategoryService;
 import vn.edu.nlu.fit.mythuatshop.Service.ProductService;
+import vn.edu.nlu.fit.mythuatshop.Service.SliderShowService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "HomeController", value = "/home")
@@ -19,12 +22,14 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CategoryService categoryService = new CategoryService();
         ProductService productService = new ProductService();
+        SliderShowService sliderShowService = new SliderShowService();
         List<Category> categories = categoryService.getAllcategories();
         Category cat1 = null;
         Category cat2 = null;
         if (categories.size() > 0) cat1 = categories.get(0);
         if (categories.size() > 1) cat2 = categories.get(1);
-        List<Product> productsCat1 = (cat1 != null)
+        List<Product> productsCat1;
+        productsCat1 = (cat1 != null)
                 ? productService.getAllProductsByCategoryId(cat1.getId())
                 : List.of();
 
@@ -33,6 +38,9 @@ public class HomeController extends HttpServlet {
                 : List.of();
         List<Product> products = productService.getAllProducts();
 
+        List<SliderShow> sliderShows = sliderShowService.getSliderShow();
+        request.setAttribute("sliders", sliderShows);
+        request.setAttribute("categories", categories);
         request.setAttribute("cat1", cat1);
         request.setAttribute("cat2", cat2);
         request.setAttribute("productsCat1", productsCat1);

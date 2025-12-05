@@ -44,4 +44,13 @@ public class ProductDao {
                 "WHERE id = :productId ";
         return jdbi.withHandle(h -> h.createQuery(sql).bind("productId",productId).mapToBean(Product.class).findOne().orElse(null));
     }
+    public List<Product> findByCategoryIdNoLimit(int categoryId) {
+        String sql = "SELECT id, name, price, discountDefault, categoryId, " +
+                "thumbnail, quantityStock, soldQuantity, status, createAt " +
+                "FROM Products " +
+                "WHERE  categoryId = :categoryId "+
+                "ORDER BY soldQuantity DESC ;";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql).bind("categoryId",categoryId).mapToBean(Product.class).list());
+    }
     }
