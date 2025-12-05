@@ -1616,6 +1616,7 @@
             <div class="policy_list">
                 <div class="policy_detail">
                     <img
+
                             src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
                             alt>
                     <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất
