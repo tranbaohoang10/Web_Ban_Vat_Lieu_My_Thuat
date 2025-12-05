@@ -846,10 +846,10 @@
         <div class="main">
             <div class="container">
                 <h4>Đăng Nhập</h4>
-                <form action="IndexKhachHang.jsp" class="form-login">
+                <form action="${pageContext.request.contextPath}/login" method="post" class="form-login">
                     <div class="form-1">
                         <label for="email"> Email*</label>
-                        <input type="email" name placeholder="Nhập Email"
+                        <input type="email" name="email" placeholder="Nhập Email"
                             required
                             id="email">
                         <span id="email-error"
@@ -857,9 +857,10 @@
                     </div>
                     <div class="form-1">
                         <label for="password"> Mật Khẩu*</label>
-                        <input type="password" name placeholder="Nhập mật khẩu"
+                        <input type="password" name = "password" placeholder="Nhập mật khẩu"
                             required id="password">
                     </div>
+                    <p style = "color: red; margin-top:8px"> ${error}</p>
 
                     <div class="forgot-password">
                         <p>Quên mật khẩu? Nhấn vào <a
