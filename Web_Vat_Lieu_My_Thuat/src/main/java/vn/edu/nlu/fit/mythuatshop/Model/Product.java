@@ -12,13 +12,13 @@ public class Product implements Serializable {
     private String thumbnail;
     private int quantityStock;
     private int soldQuantity;
-    private int status;
+    private String status;
     private Timestamp createAt;
 
     public Product() {
     }
 
-    public Product(int id, String name, double price, int discountDefault, int categoryId, String thumbnail, int quantityStock, int soldQuantity, int status, Timestamp createAt) {
+    public Product(int id, String name, double price, int discountDefault, int categoryId, String thumbnail, int quantityStock, int soldQuantity, String status, Timestamp createAt) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -63,7 +63,7 @@ public class Product implements Serializable {
         return soldQuantity;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -103,7 +103,7 @@ public class Product implements Serializable {
         this.soldQuantity = soldQuantity;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

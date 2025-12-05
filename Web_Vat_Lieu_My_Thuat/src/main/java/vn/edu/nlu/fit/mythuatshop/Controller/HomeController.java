@@ -13,22 +13,30 @@ import java.util.List;
 
 @WebServlet(name = "HomeController", value = "/home")
 public class HomeController extends HttpServlet {
-    private CategoryService categoryService;
-    private ProductService productService;
 
-    @Override
-    public void init() throws ServletException {
-        categoryService = new CategoryService();
-        productService = new ProductService();
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CategoryService categoryService = new CategoryService();
+        ProductService productService = new ProductService();
         List<Category> categories = categoryService.getAllcategories();
+        Category cat1 = null;
+        Category cat2 = null;
+        if (categories.size() > 0) cat1 = categories.get(0);
+        if (categories.size() > 1) cat2 = categories.get(1);
+        List<Product> productsCat1 = (cat1 != null)
+                ? productService.getAllProductsByCategoryId(cat1.getId())
+                : List.of();
+
+        List<Product> productsCat2 = (cat2 != null)
+                ? productService.getAllProductsByCategoryId(cat2.getId())
+                : List.of();
         List<Product> products = productService.getAllProducts();
 
-        request.setAttribute("categories", categories);
-        request.setAttribute("products", products);
+        request.setAttribute("cat1", cat1);
+        request.setAttribute("cat2", cat2);
+        request.setAttribute("productsCat1", productsCat1);
+        request.setAttribute("productsCat2", productsCat2);
 
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);

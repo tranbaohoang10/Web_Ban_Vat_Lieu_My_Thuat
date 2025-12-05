@@ -18,7 +18,7 @@ public class JDBIConnector {
     }
     public static void Connect() {
         MysqlDataSource ds = new MysqlDataSource();
-        String url = "jdbc:mysql://localhost:3306/web_my_thuat";
+        String url = "jdbc:mysql://localhost:3306/mythuat";
         ds.setUrl(url);
         ds.setUser("root");
         ds.setPassword("");
@@ -34,7 +34,7 @@ public class JDBIConnector {
     public static void main(String[] args) {
         int id=1;
         List<Category> categories = JDBIConnector.getJdbi().withHandle(h->{
-            return h.createQuery("select * from category where id =?").bind(0,id).mapToBean(Category.class).list();
+            return h.createQuery("select * from categories where id =?").bind(0,id).mapToBean(Category.class).list();
 
         });
         System.out.println(categories);

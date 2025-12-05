@@ -11,11 +11,21 @@ public class CategoryDao {
         jdbi = JDBIConnector.getJdbi();
     }
     public List<Category> findAll(){
-        String sql = "SELECT id, categoryName, thumbnail FROM category";
+        String sql = "SELECT id, categoryName, thumbnail FROM categories";
         return jdbi.withHandle(h->
             h.createQuery(sql).mapToBean(Category.class).list()
         );
 
+    }
+    public Category findById(int id) {
+        String sql = "SELECT id, categoryName, thumbnail FROM categories WHERE id = :id";
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("id", id)
+                        .mapToBean(Category.class)
+                        .findOne()
+                        .orElse(null)
+        );
     }
 
 //    static void main() {
