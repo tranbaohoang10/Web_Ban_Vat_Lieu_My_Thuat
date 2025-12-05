@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Chi tiết sản phẩm</title>
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    </head>
-    <style>
+</head>
+<style>
     .container {
         width: 1200px;
         margin: auto;
@@ -351,7 +351,7 @@
         padding-top: 100px;
     }
 </style>
-    <style>
+<style>
     /* ========== BREADCRUMB STYLES ========== */
     .breadcrumb {
         background-color: #f0f4f8;
@@ -1041,15 +1041,15 @@
         font-size: 1rem;
     }
     .link {
-    display: flex;           
-    align-items: center;
-    text-decoration: none;   
-    color: inherit;         
-}
-.btn-buy-now {
-     text-decoration: none;
-    color: #fff;  
-}
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+    }
+    .btn-buy-now {
+        text-decoration: none;
+        color: #fff;
+    }
 
     /* Responsive Design */
     @media (max-width: 992px) {
@@ -1146,242 +1146,537 @@
             flex-direction: column;
         }
     }
+    .section-but {
+        margin-bottom: 100px;
+        margin-top: 100px;
+
+    }
+
+    .section-but .container {
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        min-width: 1400px;
+    }
+
+    .section-but img {
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+        border-radius: 15px;
+
+    }
+
+    .section-but .section-but-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .section-but .section-but-header h2 {
+        font-size: 20px;
+        color: #17479D;
+    }
+
+    .section-but .section-but-header .list-type a {
+        display: inline-block;
+        padding: 8px 20px;
+        text-decoration: none;
+        color: black;
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        margin-left: 5px;
+    }
+
+    .section-but .section-but-header .list-type a:nth-child(1) {
+        text-decoration: none;
+        color: #17479D;
+        border: 1px solid #17479D;
+    }
+
+    .section-but .section-but-header .list-type a:last-child {
+
+        margin-right: 3px;
+    }
+
+    .section-but .list-product {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    .section-but .list-product .list-product-list1 {
+        border-radius: 15px;
+        background-color: #F8FAFF;
+        border: 1px solid #D7E5FF;
+        width: calc(20% - 18px);
+        cursor: pointer;
+    }
+
+    .section-but .list-product .list-product-list1 img {
+        border-radius: 15px;
+        width: 100%;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content-socials {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content {
+        padding: 0 15px 15px;
+        text-align: center;
+    }
+
+    /* chu y */
+    .section-but .list-product .list-product-list1 .list-product-list1-content .content {
+        width: 200px;
+        white-space: nowrap;
+        /* không cho xuống dòng */
+        overflow: hidden;
+        /* ẩn phần bị tràn */
+        text-overflow: ellipsis;
+        /* thêm dấu … */
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-1 {
+        width: 60px;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 30px;
+        /* height: 30px; */
+        /* padding: 5px; */
+        background-color: #FFE0E2;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-1 i {
+        color: #ED1C24;
+        font-size: 10px;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-1 span {
+        /* display: inline-block; */
+        color: #ED1C24;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 5px;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-2 {
+        width: 100px;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 30px;
+        /* height: 30px; */
+        background-color: #E0EBFF;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-2 i {
+        color: #268EF8;
+        font-size: 10px;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-2 span {
+        color: #268EF8;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 5px;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description p {
+        font-size: 14px;
+        color: black;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .star i {
+        color: #F3C63F
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .star span {
+        color: #F3C63F;
+        margin-left: 10px;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .price-product-after {
+        color: #268EF8;
+        font-weight: 600;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .price-product-before {
+        color: #ccc;
+        font-weight: 600;
+        text-decoration: line-through;
+        display: inline-block;
+        margin: 0;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .price-product-discount {
+        color: #ED1C24;
+        font-weight: 600;
+        margin-left: 5px;
+        width: 60px;
+        border-radius: 20px;
+        text-align: center;
+        line-height: 30px;
+        /* height: 30px; */
+        /* padding: 5px; */
+        display: inline-block;
+        background-color: #FFE0E2;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .button {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .button .btn-xemchitiet {
+        min-width: 64%;
+        padding: 10px 0;
+        background-color: transparent;
+        border: 1px solid #268EF8;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .button .btn-xemchitiet {
+        color: #268EF8;
+    }
+
+    .section-but .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .button .btn-xemchitiet:hover {
+        background-color: #268EF8;
+        color: white;
+    }
+
+    .section-but .section-but-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-but .section-but-button .button {
+        background-color: #17479D;
+        border: none;
+        padding: 15px 15px;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    a{
+        text-decoration: none;
+    }
+
+    .section-but .section-but-button .button:hover {
+        opacity: 0.9;
+    }
 </style>
 
-    <body>
-        <header id="header-trang-chu" class="trang-chu">
-            <div class="logo-trang-chu">
+<body>
+<header id="header-trang-chu" class="trang-chu">
+    <div class="logo-trang-chu">
 
-                <a href="index.jsp">
+        <a href="index.html">
 
-                    <img src="./assets/images/logo/logo.png" alt>
-                </a>
-            </div>
-            <form action class="tim-kiem-san-pham">
-                <input type="text" name placeholder="Tìm kiếm sản phẩm...">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </form>
-            <div class="header-contact">
-                <i class="fa-solid fa-phone"></i>
-                <div class="contact">
-                    <div class="contact-phone-number">1900 866 819</div>
-                    <div class="contact-phone-help">Hỗ trợ khách hàng</div>
-                </div>
-            </div>
-            <a href="DangNhap.jsp" class="link header-dangnhap-dangki">
-                <i class="fa-solid fa-user"></i>
-                <div class="dangnhap-dangki">
-                    <div class="dangnhap">Đăng nhập</div>
-                    <div class="dangki">Đăng kí</div>
-                </div>
-            </a>
-
-        </div>
-        <a href="GioHang.jsp" class="link header-giohang" id="cartIcon"
-           data-count="0">
-            <i class="fa-solid fa-bag-shopping"></i>
+            <img src="./assets/images/logo/logo.png" alt>
         </a>
+    </div>
+    <form action class="tim-kiem-san-pham">
+        <input type="text" name placeholder="Tìm kiếm sản phẩm...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </form>
+    <div class="header-contact">
+        <i class="fa-solid fa-phone"></i>
+        <div class="contact">
+            <div class="contact-phone-number">1900 866 819</div>
+            <div class="contact-phone-help">Hỗ trợ khách hàng</div>
+        </div>
+    </div>
+    <a href="DangNhap.html" class="link header-dangnhap-dangki">
+        <i class="fa-solid fa-user"></i>
+        <div class="dangnhap-dangki">
+            <div class="dangnhap">Đăng nhập</div>
+            <div class="dangki">Đăng kí</div>
+        </div>
+    </a>
 
-    </header>
-    <nav>
-        <!-- Breadcrumb -->
-        <div class="breadcrumb">
-            <a href="index.jsp">Trang chủ</a>
-            <span>/</span>
-            <a href="ti">Bút Lông Màu</a>
-            <span>/</span>
-            <span>Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable -
+    </div>
+    <a href="GioHang.html" class="link header-giohang" id="cartIcon"
+       data-count="0">
+        <i class="fa-solid fa-bag-shopping"></i>
+    </a>
+
+</header>
+<nav>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span>/</span>
+        <a href="ti">Bút Lông Màu</a>
+        <span>/</span>
+        <span>Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable -
                 Phiên
                 bản Demon Slayer</span>
-        </div>
+    </div>
 
-        <!-- Product Detail -->
-        <div class="product-detail-container">
-            <div class="product-detail">
-                <!-- Product Images -->
-                <div class="product-images">
-                    <!-- Main Image -->
-                    <div class="product-main-image">
-                        <img src="./assets/images/logo/list1-1.jpg"
-                            alt="Bút Lông Thiên Long Demon Slayer"
-                            id="mainProductImage">
-                        <div class="discount-badge">
-                            <div>Tiết kiệm</div>
-                            <div style="font-size: 1rem;">15%</div>
-                        </div>
-
-                        <a href="javascript:void(0)" id="prevImageBtn"
-                            class="main-image-nav main-image-prev">&lt;</a>
-                        <a href="javascript:void(0)" id="nextImageBtn"
-                            class="main-image-nav main-image-next">&gt;</a>
+    <!-- Product Detail -->
+    <div class="product-detail-container">
+        <div class="product-detail">
+            <!-- Product Images -->
+            <div class="product-images">
+                <!-- Main Image -->
+                <div class="product-main-image">
+                    <img src="./assets/images/logo/list1-1.jpg"
+                         alt="Bút Lông Thiên Long Demon Slayer"
+                         id="mainProductImage">
+                    <div class="discount-badge">
+                        <div>Tiết kiệm</div>
+                        <div style="font-size: 1rem;">15%</div>
                     </div>
 
-                    <!-- Thumbnail Gallery -->
-                    <div class="thumbnail-gallery">
-                        <div class="thumbnail-container"
-                            id="thumbnailContainer">
-                            <div class="thumbnail-item active" id="thumb-1"
-                                data-index="0">
-                                <img src="./assets/images/logo/list1-1.jpg"
-                                    alt="Ảnh 1">
-                            </div>
-                            <div class="thumbnail-item" id="thumb-2"
-                                data-index="1">
-                                <img src="./assets/images/logo/list1-1.jpg"
-                                    alt="Ảnh 2">
-                            </div>
-                            <div class="thumbnail-item" id="thumb-3"
-                                data-index="2">
-                                <img
+                    <a href="javascript:void(0)" id="prevImageBtn"
+                       class="main-image-nav main-image-prev">&lt;</a>
+                    <a href="javascript:void(0)" id="nextImageBtn"
+                       class="main-image-nav main-image-next">&gt;</a>
+                </div>
+
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    <div class="thumbnail-container"
+                         id="thumbnailContainer">
+                        <div class="thumbnail-item active" id="thumb-1"
+                             data-index="0">
+                            <img src="./assets/images/logo/list1-1.jpg"
+                                 alt="Ảnh 1">
+                        </div>
+                        <div class="thumbnail-item" id="thumb-2"
+                             data-index="1">
+                            <img src="./assets/images/logo/list1-1.jpg"
+                                 alt="Ảnh 2">
+                        </div>
+                        <div class="thumbnail-item" id="thumb-3"
+                             data-index="2">
+                            <img
                                     src="./assets/images/logo/list1-1-cont.png"
                                     alt="Ảnh 3">
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Product Info -->
-                <div class="product-info">
-                    <h1 class="product-title">Bút Lông Thiên Long 48/60
-                        Màu
-                        Fiber Pen Washable - Phiên bản Demon Slayer
-                    </h1>
+            <!-- Product Info -->
+            <div class="product-info">
+                <h1 class="product-title">Bút Lông Thiên Long 48/60
+                    Màu
+                    Fiber Pen Washable - Phiên bản Demon Slayer
+                </h1>
 
-                    <div class="product-meta">
-                        <div class="product-meta-item">
+                <div class="product-meta">
+                    <div class="product-meta-item">
                             <span class="product-meta-label">Thương
                                 hiệu:</span>
-                            <span class="product-meta-value"><a
-                                    href="#">Colokit</a></span>
-                        </div>
-                        <div class="product-meta-item">
+                        <span class="product-meta-value"><a
+                                href="#">Colokit</a></span>
+                    </div>
+                    <div class="product-meta-item">
                             <span class="product-meta-label">Tình
                                 trạng:</span>
-                            <span class="product-meta-value"
-                                style="color: #10b981;">Còn hàng</span>
-                        </div>
-                        <div class="product-meta-item">
+                        <span class="product-meta-value"
+                              style="color: #10b981;">Còn hàng</span>
+                    </div>
+                    <div class="product-meta-item">
                             <span class="product-meta-label">Mã sản
                                 phẩm:</span>
-                            <span class="product-meta-value">50016740</span>
-                        </div>
+                        <span class="product-meta-value">50016740</span>
                     </div>
+                </div>
 
-                    <div class="product-price-section">
-                        <div class="product-price">
-                            <span class="price-current">168,300₫</span>
-                            <span class="price-original">198,000₫</span>
-                        </div>
+                <div class="product-price-section">
+                    <div class="product-price">
+                        <span class="price-current">168,300₫</span>
+                        <span class="price-original">198,000₫</span>
                     </div>
+                </div>
 
-                    <div class="quantity-section">
-                        <div class="variant-label">Số lượng:</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn"
+                <div class="quantity-section">
+                    <div class="variant-label">Số lượng:</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn"
                                 onclick="decreaseQuantity()">-</button>
-                            <input type="number" class="quantity-input"
-                                value="1" min="1" id="quantity">
-                            <button class="quantity-btn"
+                        <input type="number" class="quantity-input"
+                               value="1" min="1" id="quantity">
+                        <button class="quantity-btn"
                                 onclick="increaseQuantity()">+</button>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="product-actions">
-                        <button class="btn btn-add-cart" id="addToCartBtn">
-                            <i class="fa-solid fa-cart-plus"></i>
-                            THÊM VÀO GIỎ
-                        </button>
+                <div class="product-actions">
+                    <button class="btn btn-add-cart" id="addToCartBtn">
+                        <i class="fa-solid fa-cart-plus"></i>
+                        THÊM VÀO GIỎ
+                    </button>
 
-                        <a href="ThanhToan.jsp" class="btn btn-buy-now link">
-                            MUA NGAY
+                    <a href="ThanhToan.html" class="btn btn-buy-now link">
+                        MUA NGAY
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="section-but">
+            <div class="container">
+                <div class="section-but-header">
+                    <h2>SẢN PHẨM CÙNG LOẠI</h2>
+
+                </div>
+                <div class="section-but-content">
+                    <div class="list-product">
+                        <div class="list-product-list1"><a
+                                href="ChiTietSanPham.html">
+                            <img
+                                    src="./assets/images/logo/mythuat-1.jpg"
+                                    alt>
+                            <div class="list-product-list1-content">
+                                <div
+                                        class="list-product-list1-content-socials">
+                                    <div
+                                            class="list-product-list1-content-socials-1"><i
+                                            class="fa-solid fa-thumbs-up"></i><span>New</span>
+                                    </div>
+                                    <div
+                                            class="list-product-list1-content-socials-2"><i
+                                            class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
+                                                    bán
+                                                    6</span></div>
+                                </div>
+                                <div
+                                        class="list-product-list1-content-description">
+                                    <p class="content">Bút Lông Thiên
+                                        Long 48/60 Màu Fiber Pen
+                                        Washable - Phiên bản Demon
+                                        Slayer
+                                    </p>
+                                    <div class="star">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <span>(0)</span>
+                                    </div>
+                                    <h2
+                                            class="price-product-after">178,200₫</h2>
+                                    <p class="price-product-before">
+                                        198,000đ</p>
+                                    <span
+                                            class="price-product-discount">-10%</span>
+                                    <div class="button">
+                                        <a href="ChiTietSanPham.html">
+                                            <button
+                                                    class="btn-xemchitiet">
+                                                <i
+                                                        class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </a>
-                    </div>
 
-                </div>
-
-            </div>
-            <div class="policy alpha bg-while">
-                <div class="policy_title">
-                    <h2>Thiên Long xin cam kết</h2>
-                </div>
-                <div class="policy_list">
-                    <div class="policy_detail">
-                        <img
-                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
-                            alt>
-                        <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất
-                            liệu
-                            an toàn, bền đẹp.</p>
-                    </div>
-                    <div class="policy_detail">
-                        <img
-                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/icon%20lap%20dat140848.png"
-                            alt>
-                        <p>Giá niêm yết & minh bạch phí Không phụ
-                            phí
-                            ẩn</p>
-                    </div>
-                    <div class="policy_detail">
-                        <img
-                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/Exchange150303.png"
-                            alt>
-                        <p>Quy trình đổi trả nhanh chóng, minh
-                            bạch.</p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="product_content alpha bg-while">
-
-                <div class="content_name ">
-                    <h3>Thông số kĩ thuật</h3>
-                </div>
-                <div class="content_blog " id="content_blog">
-
-                    <div class="content_blog-item">
-
-                        <div class="item-main">
-                            <ul>
-                                <li>
-                                    <h3>Thương hiệu : </h3>
-                                    <p>Colokit</p>
-                                </li>
-                                <li>
-                                    <h3>Kích thước bút: </h3>
-                                    <p>140.6 mm</p>
-                                </li>
-                                <li>
-                                    <h3>Tiêu chuẩn : </h3>
-                                    <p>TCCS 005: 2011/TL-BLM; châu
-                                        Âu EN
-                                        71/3</p>
-                                </li>
-                                <li>
-                                    <h3>Sản xuất : </h3>
-                                    <p>Việt Nam</p>
-                                </li>
-                                <li>
-                                    <h3>Khuyến cáo : </h3>
-                                    <p>Tránh nguồn nhiệt, hóa chất.
-                                        Không
-                                        thích hợp cho trẻ dưới 3
-                                        tuổi.</p>
-                                </li>
-                            </ul>
                         </div>
-
                     </div>
-
                 </div>
-
-            </div>
-            <div class="product_rate alpha bg-while  magin-bottom">
-
-                <a class="btn_view buy_now" href="DanhGia.jsp">
-                    <p>Xem đánh giá</p>
-                </a>
             </div>
         </div>
+        <div class="policy alpha bg-while">
+            <div class="policy_title">
+                <h2>Thiên Long xin cam kết</h2>
+            </div>
+            <div class="policy_list">
+                <div class="policy_detail">
+                    <img
+                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
+                            alt>
+                    <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất
+                        liệu
+                        an toàn, bền đẹp.</p>
+                </div>
+                <div class="policy_detail">
+                    <img
+                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/icon%20lap%20dat140848.png"
+                            alt>
+                    <p>Giá niêm yết & minh bạch phí Không phụ
+                        phí
+                        ẩn</p>
+                </div>
+                <div class="policy_detail">
+                    <img
+                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/Exchange150303.png"
+                            alt>
+                    <p>Quy trình đổi trả nhanh chóng, minh
+                        bạch.</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="product_content alpha bg-while">
+
+            <div class="content_name ">
+                <h3>Thông số kĩ thuật</h3>
+            </div>
+            <div class="content_blog " id="content_blog">
+
+                <div class="content_blog-item">
+
+                    <div class="item-main">
+                        <ul>
+                            <li>
+                                <h3>Thương hiệu : </h3>
+                                <p>Colokit</p>
+                            </li>
+                            <li>
+                                <h3>Kích thước bút: </h3>
+                                <p>140.6 mm</p>
+                            </li>
+                            <li>
+                                <h3>Tiêu chuẩn : </h3>
+                                <p>TCCS 005: 2011/TL-BLM; châu
+                                    Âu EN
+                                    71/3</p>
+                            </li>
+                            <li>
+                                <h3>Sản xuất : </h3>
+                                <p>Việt Nam</p>
+                            </li>
+                            <li>
+                                <h3>Khuyến cáo : </h3>
+                                <p>Tránh nguồn nhiệt, hóa chất.
+                                    Không
+                                    thích hợp cho trẻ dưới 3
+                                    tuổi.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="product_rate alpha bg-while  magin-bottom">
+
+            <a class="btn_view buy_now" href="DanhGia.html">
+                <p>Xem đánh giá</p>
+            </a>
+        </div>
+    </div>
     </div>
 </nav>
 
@@ -1405,8 +1700,8 @@
             <a href>Đăng ký</a>
         </form>
         <img
-            src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
-            alt class="img-footer">
+                src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
+                alt class="img-footer">
     </div>
     <div class="footer-diachi">
         <h2>ĐỊA CHỈ CÔNG TY</h2>
@@ -1417,8 +1712,8 @@
                 Đường Mai Chí Thọ, Phường An Khánh,
                 Thành Phố Hồ Chí Minh, Việt Nam
             </span>
-            <br>
-            <span>
+        <br>
+        <span>
                 Miền Bắc:
                 <p class="footer-diachi-description"> Số 38,
                     đường Gamuda
@@ -1427,16 +1722,16 @@
                     Việt Nam.
                 </span>
 
-                <img src="./assets/images/logo/footer_bct.png" alt
-                    class="img-main">
-            </div>
-            <div class="footer-help">
-                <h2>HỖ TRỢ KHÁCH HÀNG</h2>
-                <span>
+        <img src="./assets/images/logo/footer_bct.png" alt
+             class="img-main">
+    </div>
+    <div class="footer-help">
+        <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+        <span>
                     Hotline:
                     <p class="footer-help-header">1900 866 819
                     </span>
-                    <span>
+        <span>
                         Thứ 2 - Thứ 6 (8h - 17h)
                         salesonline@thienlongvn.com
                         <div class="footer-help-header-list">
@@ -1463,182 +1758,182 @@
                             </a>
                         </div>
                     </span>
-                </div>
-                <div class="footer-information">
-                    <h2>VỀ THIENLONG.VN</h2>
-                    <div class="footer-information-header-list">
-                        <a href="GioiThieu.jsp">
-                            - Giới thiệu
-                        </a>
-                        <a href>
-                            - Dịch vụ in ấn quảng cáo
-                        </a>
-                        <a href>
-                            - Chính sách bảo mật chung
-                        </a>
-                        <a href>
-                            - Chính sách bảo mật thông tin cá
-                            nhân
-                        </a>
-                        <a href>
-                            - Thông tin liên hệ
-                        </a>
-                        <a href>
-                            - Chương trình Affiliate
-                        </a>
-                    </div>
-                    <div class="footer-information-socials">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-            </footer>
-            <!-- su kien nut tang giam so luong -->
-            <script>
-        function increaseQuantity() {
-            const input = document.getElementById("quantity");
-            let value = parseInt(input.value);
-            if (!isNaN(value)) {
-                input.value = value + 1;
-            } else {
-                input.value = 1;
-            }
+    </div>
+    <div class="footer-information">
+        <h2>VỀ THIENLONG.VN</h2>
+        <div class="footer-information-header-list">
+            <a href="GioiThieu.html">
+                - Giới thiệu
+            </a>
+            <a href>
+                - Dịch vụ in ấn quảng cáo
+            </a>
+            <a href>
+                - Chính sách bảo mật chung
+            </a>
+            <a href>
+                - Chính sách bảo mật thông tin cá
+                nhân
+            </a>
+            <a href>
+                - Thông tin liên hệ
+            </a>
+            <a href>
+                - Chương trình Affiliate
+            </a>
+        </div>
+        <div class="footer-information-socials">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+        </div>
+    </div>
+</footer>
+<!-- su kien nut tang giam so luong -->
+<script>
+    function increaseQuantity() {
+        const input = document.getElementById("quantity");
+        let value = parseInt(input.value);
+        if (!isNaN(value)) {
+            input.value = value + 1;
+        } else {
+            input.value = 1;
         }
+    }
 
-        function decreaseQuantity() {
-            const input = document.getElementById("quantity");
-            let value = parseInt(input.value);
-            const min = parseInt(input.min) || 1;
-            if (!isNaN(value) && value > min) {
-                input.value = value - 1;
-            } else {
-                input.value = min;
-            }
+    function decreaseQuantity() {
+        const input = document.getElementById("quantity");
+        let value = parseInt(input.value);
+        const min = parseInt(input.min) || 1;
+        if (!isNaN(value) && value > min) {
+            input.value = value - 1;
+        } else {
+            input.value = min;
         }
-        addToCartBtn = document.getElementById('addToCartBtn');
-        addToCartBtn.addEventListener('click', function () {
-            // Thêm animation cho nút
-            addToCartBtn.classList.add('adding');
+    }
+    addToCartBtn = document.getElementById('addToCartBtn');
+    addToCartBtn.addEventListener('click', function () {
+        // Thêm animation cho nút
+        addToCartBtn.classList.add('adding');
+        setTimeout(() => {
+            addToCartBtn.classList.remove('adding');
+        }, 600);
+
+        showToastNotification();
+
+        const cartIcon = document.getElementById('cartIcon');
+        if (cartIcon) {
+            cartIcon.classList.add('cart-updated');
             setTimeout(() => {
-                addToCartBtn.classList.remove('adding');
+                cartIcon.classList.remove('cart-updated');
             }, 600);
 
-            showToastNotification();
+            // Cập nhật số lượng sản phẩm trong giỏ
+            const currentCount = parseInt(cartIcon.getAttribute('data-count')) || 0;
+            cartIcon.setAttribute('data-count', currentCount + 1);
+        }
+    });
 
-            const cartIcon = document.getElementById('cartIcon');
-            if (cartIcon) {
-                cartIcon.classList.add('cart-updated');
-                setTimeout(() => {
-                    cartIcon.classList.remove('cart-updated');
-                }, 600);
+    function showToastNotification() {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
 
-                // Cập nhật số lượng sản phẩm trong giỏ
-                const currentCount = parseInt(cartIcon.getAttribute('data-count')) || 0;
-                cartIcon.setAttribute('data-count', currentCount + 1);
-            }
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-circle-check';
+        toast.appendChild(icon);
+
+        const toastContent = document.createElement('div');
+        toastContent.className = 'toast-content';
+
+        const toastTitle = document.createElement('div');
+        toastTitle.className = 'toast-title';
+        toastTitle.textContent = 'Thành công!';
+        toastContent.appendChild(toastTitle);
+
+        const toastMessage = document.createElement('div');
+        toastMessage.className = 'toast-message';
+        toastMessage.textContent = 'Đã thêm sản phẩm vào giỏ hàng';
+        toastContent.appendChild(toastMessage);
+
+        toast.appendChild(toastContent);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'toast-close';
+        closeBtn.textContent = '×';
+        toast.appendChild(closeBtn);
+
+        document.body.appendChild(toast);
+
+
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100);
+
+
+        closeBtn.addEventListener('click', () => {
+            hideToast(toast);
         });
 
-        function showToastNotification() {
-            const toast = document.createElement('div');
-            toast.className = 'toast-notification';
+        setTimeout(() => {
+            hideToast(toast);
+        }, 3000);
+    }
+    function hideToast(toast) {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 400);
+    }
 
-            const icon = document.createElement('i');
-            icon.className = 'fa-solid fa-circle-check';
-            toast.appendChild(icon);
+    // su kien chuyen anh san pham
+    document.addEventListener('DOMContentLoaded', function () {
+        const mainImage = document.getElementById('mainProductImage');
+        const thumbnails = document.querySelectorAll('.thumbnail-item');
+        const prevBtn = document.getElementById('prevImageBtn');
+        const nextBtn = document.getElementById('nextImageBtn');
+        let currentIndex = 0;
 
-            const toastContent = document.createElement('div');
-            toastContent.className = 'toast-content';
+        // Ham cap nhat anh chinh va border thumbnail
+        function updateImage(index) {
 
-            const toastTitle = document.createElement('div');
-            toastTitle.className = 'toast-title';
-            toastTitle.textContent = 'Thành công!';
-            toastContent.appendChild(toastTitle);
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
 
-            const toastMessage = document.createElement('div');
-            toastMessage.className = 'toast-message';
-            toastMessage.textContent = 'Đã thêm sản phẩm vào giỏ hàng';
-            toastContent.appendChild(toastMessage);
+            thumbnails[index].classList.add('active');
 
-            toast.appendChild(toastContent);
+            const imgSrc = thumbnails[index].querySelector('img').src;
+            mainImage.src = imgSrc;
 
-            const closeBtn = document.createElement('button');
-            closeBtn.className = 'toast-close';
-            closeBtn.textContent = '×';
-            toast.appendChild(closeBtn);
-
-            document.body.appendChild(toast);
-
-      
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 100);
-
-          
-            closeBtn.addEventListener('click', () => {
-                hideToast(toast);
-            });
-
-            setTimeout(() => {
-                hideToast(toast);
-            }, 3000);
-        }
-          function hideToast(toast) {
-            toast.classList.remove('show');
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 400);
+            currentIndex = index;
         }
 
-        // su kien chuyen anh san pham
-        document.addEventListener('DOMContentLoaded', function () {
-            const mainImage = document.getElementById('mainProductImage');
-            const thumbnails = document.querySelectorAll('.thumbnail-item');
-            const prevBtn = document.getElementById('prevImageBtn');
-            const nextBtn = document.getElementById('nextImageBtn');
-            let currentIndex = 0;
-
-            // Ham cap nhat anh chinh va border thumbnail
-            function updateImage(index) {
-
-                thumbnails.forEach(thumb => thumb.classList.remove('active'));
-
-                thumbnails[index].classList.add('active');
-
-                const imgSrc = thumbnails[index].querySelector('img').src;
-                mainImage.src = imgSrc;
-
-                currentIndex = index;
-            }
-
-            // Xu ly click vao thumbnail
-            thumbnails.forEach((thumb, index) => {
-                thumb.addEventListener('click', function () {
-                    updateImage(index);
-                });
+        // Xu ly click vao thumbnail
+        thumbnails.forEach((thumb, index) => {
+            thumb.addEventListener('click', function () {
+                updateImage(index);
             });
-
-            // Xu ly nut Previous
-            if (prevBtn) {
-                prevBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
-                    updateImage(currentIndex);
-                });
-            }
-
-            // Xu ly nut Next
-            if (nextBtn) {
-                nextBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    currentIndex = (currentIndex + 1) % thumbnails.length;
-                    updateImage(currentIndex);
-                });
-            }
         });
-    </script>
 
-        </body>
+        // Xu ly nut Previous
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+                updateImage(currentIndex);
+            });
+        }
 
-    </html>
+        // Xu ly nut Next
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                currentIndex = (currentIndex + 1) % thumbnails.length;
+                updateImage(currentIndex);
+            });
+        }
+    });
+</script>
+
+</body>
+
+</html>
