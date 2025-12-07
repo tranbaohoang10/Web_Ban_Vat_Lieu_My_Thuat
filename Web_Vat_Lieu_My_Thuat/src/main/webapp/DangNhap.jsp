@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    String ctx = request.getContextPath();
+    String timeout = request.getParameter("timeout");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,6 +194,87 @@
     }
 
     /* End footer */
+
+/*    style session*/
+
+    #sessionModal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        display: none;               /* mặc định ẩn */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    .session-modal-card {
+        background: linear-gradient(135deg, #13438F, #1E76EF);
+        border-radius: 16px;
+        padding: 24px 28px;
+        min-width: 320px;
+        max-width: 420px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        text-align: center;
+        color: #fff;
+        border: 1px solid rgba(245, 223, 77, 0.9);
+        animation: fadeInScale 0.25s ease-out;
+    }
+
+    .session-modal-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: rgba(245, 223, 77, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px auto;
+        color: #F5DF4D;
+        font-size: 26px;
+    }
+
+    .session-modal-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+
+    .session-modal-text {
+        margin: 10px 0 18px 0;
+        font-size: 14px;
+        color: #E5ECFF;
+    }
+
+    .btn-session-close {
+        padding: 8px 20px;
+        border-radius: 999px;
+        border: none;
+        background: #F5DF4D;
+        color: #343A40;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn-session-close i{
+       color: #343A40;
+    }
+
+    .btn-session-close:hover {
+        background: #ffe86f;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-session-close:active {
+        transform: translateY(0);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    }
+
+
+
 </style>
 
 <body>
@@ -240,6 +325,44 @@
         </form>
     </div>
 </div>
+<!-- Modal hết phiên -->
+<div id="sessionModal">
+    <div class="session-modal-card">
+        <div class="session-modal-icon">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <h3 class="session-modal-title">Phiên đăng nhập đã hết hạn</h3>
+        <p class="session-modal-text">
+            Vui lòng đăng nhập lại để tiếp tục sử dụng hệ thống.
+        </p>
+        <button id="closeSessionModal" class="btn-session-close">
+            <i class="fa-solid fa-x"></i> Đóng
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var timeoutFlag = "<%= timeout %>";
+        if (timeoutFlag === "1") {
+            var modal = document.getElementById("sessionModal");
+            var btn = document.getElementById("closeSessionModal");
+            if (modal && btn) {
+                modal.style.display = "flex";
+
+                btn.addEventListener("click", function () {
+
+                    modal.style.display = "none";
+                    var emailInput = document.getElementById("email");
+                    if (emailInput) emailInput.focus();
+                });
+            }
+        }
+    });
+</script>
+
 <%@ include file="Footer.jsp" %>
+
+
 </body>
 </html>

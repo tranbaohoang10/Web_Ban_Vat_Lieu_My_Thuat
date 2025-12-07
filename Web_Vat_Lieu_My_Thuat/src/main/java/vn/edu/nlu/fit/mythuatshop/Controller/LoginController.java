@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
         }
         HttpSession session = req.getSession(true);
         session.setAttribute("authUser", users);
-        session.setMaxInactiveInterval(20);
+        session.setMaxInactiveInterval(30*60);
         resp.sendRedirect(req.getContextPath() + "/home");
     }
 

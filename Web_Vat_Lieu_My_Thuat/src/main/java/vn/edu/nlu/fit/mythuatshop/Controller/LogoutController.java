@@ -9,14 +9,16 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet
+@WebServlet(name = "LogoutController", value = "/logout")
 public class LogoutController extends HttpServlet {
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        if (session != null) session.invalidate();
-            resp.sendRedirect(req.getContextPath() + "/login");
-
+        if (session != null) {
+            session.invalidate();              // xoá session, đăng xuất
+        }
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 }
