@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập</title>
+
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -196,6 +197,8 @@
 <div class="main">
     <div class="container">
         <h4>Đăng Nhập</h4>
+<%--  Them e      --%>
+<%--        <% String e = request.getAttribute("error")== null?" ": request.getAttribute("error")+" ";%>--%>
         <form action="${pageContext.request.contextPath}/login" method="post" class="form-login">
             <div class="form-1">
                 <label for="email"> Email*</label>

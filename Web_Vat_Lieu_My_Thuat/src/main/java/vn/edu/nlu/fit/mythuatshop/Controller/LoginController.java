@@ -27,18 +27,24 @@ public class LoginController extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        Users users = userService.login(email, password);
-        if (users != null) {
-            HttpSession session = req.getSession();
-            session.setAttribute("currentUser", users);
-            resp.sendRedirect("IndexKhachHang.jsp");
+        if(email == null || password == null || email.isBlank() || password.isBlank()){
+            req.setAttribute("error", "Vui lòng nhập email và mật khẩu!");
+            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+            return;
         }
-        else {
-            req.setAttribute("error", "Email hoac mat khau khong dung!");
 
-            RequestDispatcher rd = req.getRequestDispatcher("DangNhap.jsp");
-            rd.forward(req, resp);
+        Users users = userService.login(email, password);
+
+
+        if (users == null) {
+            req.setAttribute("error", "Sai email hoặc mật khẩu");
+            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+            return;
         }
+        HttpSession session = req.getSession(true);
+        session.setAttribute("authUser", users);
+        session.setMaxInactiveInterval(20);
+        resp.sendRedirect(req.getContextPath() + "/home");
     }
 
     @Override
@@ -46,4 +52,6 @@ public class LoginController extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher("DangNhap.jsp");
         rd.forward(req, resp);
     }
+
+
 }
