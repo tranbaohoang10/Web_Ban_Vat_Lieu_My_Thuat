@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,348 +12,16 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 </head>
+
 <style>
     .container {
         width: 1200px;
         margin: auto;
     }
 
-    /* Begin header */
-    #header-trang-chu {
-        background-color: var(--color-main);
-        display: flex;
-        align-items: center;
-        position: fixed;
-        z-index: 999;
-        width: 100%;
-    }
-
-    #header-trang-chu .logo-trang-chu {
-        margin-left: 50px;
-        margin-right: 50px;
-        margin-top: 25px;
-        margin-bottom: 25px;
-    }
-
-    #header-trang-chu .logo-trang-chu img {
-        background-color: transparent;
-        width: 200px;
-        height: 100%;
-    }
-
-    #header-trang-chu .tim-kiem-san-pham {
-        position: relative;
-    }
-
-    #header-trang-chu .tim-kiem-san-pham input {
-        padding: 10px 15px;
-        width: 600px;
-        border-radius: 10px;
-        border: none;
-    }
-
-    #header-trang-chu .tim-kiem-san-pham {
-        display: flex;
-    }
-
-    #header-trang-chu .tim-kiem-san-pham i {
-        position: absolute;
-        right: 0;
-        width: 50px;
-        height: 100%;
-        background-color: #0b234d;
-        line-height: 40px;
-        cursor: pointer;
-        color: white;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-
-    #header-trang-chu .header-contact {
-        display: flex;
-        align-items: center;
-    }
-
-    #header-trang-chu .header-contact i {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #0b234d;
-        line-height: 30px;
-        color: white;
-    }
-
-    #header-trang-chu .header-contact {
-        margin-left: 100px;
-        margin-right: 50px;
-        cursor: pointer;
-    }
-
-    #header-trang-chu .header-contact .contact {
-        margin-left: 15px;
-    }
-
-    #header-trang-chu .header-contact .contact .contact-phone-number {
-        color: white;
-        font-weight: 600;
-        font-size: 18px;
-    }
-
-    #header-trang-chu .header-contact .contact .contact-phone-help {
-        color: white;
-        font-size: 16px;
-    }
-
-    #header-trang-chu .header-dangnhap-dangki {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    }
-
-    #header-trang-chu .header-dangnhap-dangki i {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #0b234d;
-        line-height: 30px;
-        color: white;
-    }
-
-    #header-trang-chu .header-dangnhap-dangki {
-        margin-right: 50px;
-    }
-
-    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
-        margin-left: 15px;
-    }
-
-    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
-        color: white;
-        font-weight: 600;
-        font-size: 18px;
-    }
-
-    #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
-        color: white;
-        font-size: 16px;
-    }
-
-    #header-trang-chu .header-giohang {
-        font-size: 25px;
-        color: white;
-        position: relative;
-        cursor: pointer;
-    }
-
-    #header-trang-chu .header-giohang::after {
-        display: inline-flex;
-        content: attr(data-count);
-        width: 20px;
-        height: 20px;
-        left: 20px;
-        bottom: 15px;
-        justify-content: center;
-        align-items: center;
-        font-size: 15px;
-        background-color: red;
-        position: absolute;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-    }
-
-    /* Animation khi cập nhật giỏ hàng */
-    #header-trang-chu .header-giohang.cart-updated::after {
-        animation: cartCountPulse 0.6s ease;
-    }
-
-    @keyframes cartCountPulse {
-        0% {
-            transform: scale(1);
-            background-color: red;
-        }
-        50% {
-            transform: scale(1.4);
-            background-color: #10b981;
-        }
-        100% {
-            transform: scale(1);
-            background-color: red;
-        }
-    }
-
-    /* End header */
-    /* Begin footer */
-    #footer-trang-chu {
-        display: flex;
-        background-color: #17479d;
-        border-top-left-radius: 70px;
-        border-top-right-radius: 70px;
-        gap: 30px;
-        align-items: center;
-        justify-content: space-around;
-        position: relative;
-    }
-
-    #footer-trang-chu .footer-title {
-        text-align: justify;
-        margin-left: 30px;
-    }
-
-    #footer-trang-chu .footer-title .img-main {
-        background-color: transparent;
-        width: 400px;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-header {
-        color: #fbe263;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-description {
-        color: white;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-form {
-        position: relative;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-form input {
-        padding: 10px 15px;
-        border-radius: 10px;
-        width: 300px;
-        border: none;
-    }
-
-    #footer-trang-chu .footer-title .footer-title-form a {
-        position: absolute;
-        display: inline-flex;
-        width: 100px;
-        height: 36px;
-        background-color: #0b234d;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        top: 0;
-        right: 69px;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-title .img-footer {
-        width: 250px;
-        margin-top: 15px;
-        cursor: pointer;
-        margin-bottom: 50px;
-    }
-
-    #footer-trang-chu .footer-diachi {
-        width: 25%;
-    }
-
-    #footer-trang-chu .footer-diachi h2 {
-        font-size: 20px;
-        color: #fbe263;
-        margin: 0;
-    }
-
-    #footer-trang-chu .footer-diachi span {
-        color: #fbe263;
-        display: block;
-        padding-top: 15px;
-    }
-
-    #footer-trang-chu .footer-diachi .footer-diachi-header {
-        display: inline;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-diachi .footer-diachi-description {
-        display: inline;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-diachi .img-main {
-        display: block;
-        margin-top: 20px;
-    }
-
-    #footer-trang-chu .footer-help h2 {
-        font-size: 20px;
-        color: #fbe263;
-        margin: 0;
-    }
-
-    #footer-trang-chu .footer-help span {
-        display: block;
-        color: #fbe263;
-        padding-top: 15px;
-    }
-
-    #footer-trang-chu .footer-help .footer-help-header {
-        display: inline;
-        color: white;
-    }
-
-    #footer-trang-chu .footer-help .footer-help-header-list a {
-        display: block;
-        text-decoration: none;
-        color: white;
-        line-height: 1.4;
-    }
-
-    #footer-trang-chu .footer-diachi .img-main {
-        cursor: pointer;
-    }
-
-    #footer-trang-chu .footer-information h2 {
-        font-size: 20px;
-        color: #fbe263;
-        margin: 0;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-header-list a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        line-height: 1.4;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-socials {
-        padding-top: 35px;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-socials i {
-        width: 50px;
-        height: 50px;
-        background: white;
-        border-radius: 50%;
-        line-height: 50px;
-        font-size: 25px;
-        color: #17479d;
-    }
-
-    #footer-trang-chu .footer-information .footer-information-socials i:nth-child(1) {
-        margin-right: 10px;
-    }
-
-    #footer-trang-chu::after {
-        display: block;
-        position: absolute;
-        content: "2025 © Thienlong.vn - Bản quyền thuộc Tập đoàn Thiên Long";
-        bottom: 0;
-        color: white;
-    }
-
-    /* End footer */
-
-    nav {
-        padding-top: 100px;
-    }
-</style>
-<style>
     /* ========== BREADCRUMB STYLES ========== */
     .breadcrumb {
         background-color: #f0f4f8;
@@ -542,7 +212,6 @@
         height: 100%;
         object-fit: contain;
     }
-
 
 
     /* Product Info */
@@ -1040,12 +709,14 @@
         margin: 0;
         font-size: 1rem;
     }
+
     .link {
         display: flex;
         align-items: center;
         text-decoration: none;
         color: inherit;
     }
+
     .btn-buy-now {
         text-decoration: none;
         color: #fff;
@@ -1146,6 +817,7 @@
             flex-direction: column;
         }
     }
+
     .section-but {
         margin-bottom: 100px;
         margin-top: 100px;
@@ -1368,7 +1040,8 @@
         cursor: pointer;
         font-size: 16px;
     }
-    a{
+
+    a {
         text-decoration: none;
     }
 
@@ -1378,40 +1051,8 @@
 </style>
 
 <body>
-<header id="header-trang-chu" class="trang-chu">
-    <div class="logo-trang-chu">
+<%@ include file="Header.jsp" %>
 
-        <a href="index.html">
-
-            <img src="./assets/images/logo/logo.png" alt>
-        </a>
-    </div>
-    <form action class="tim-kiem-san-pham">
-        <input type="text" name placeholder="Tìm kiếm sản phẩm...">
-        <i class="fa-solid fa-magnifying-glass"></i>
-    </form>
-    <div class="header-contact">
-        <i class="fa-solid fa-phone"></i>
-        <div class="contact">
-            <div class="contact-phone-number">1900 866 819</div>
-            <div class="contact-phone-help">Hỗ trợ khách hàng</div>
-        </div>
-    </div>
-    <a href="DangNhap.html" class="link header-dangnhap-dangki">
-        <i class="fa-solid fa-user"></i>
-        <div class="dangnhap-dangki">
-            <div class="dangnhap">Đăng nhập</div>
-            <div class="dangki">Đăng kí</div>
-        </div>
-    </a>
-
-    </div>
-    <a href="GioHang.html" class="link header-giohang" id="cartIcon"
-       data-count="0">
-        <i class="fa-solid fa-bag-shopping"></i>
-    </a>
-
-</header>
 <nav>
     <!-- Breadcrumb -->
     <div class="breadcrumb">
@@ -1427,16 +1068,27 @@
     <!-- Product Detail -->
     <div class="product-detail-container">
         <div class="product-detail">
-            <!-- Product Images -->
+
+            <!-- CỘT 1: HÌNH ẢNH SẢN PHẨM -->
             <div class="product-images">
-                <!-- Main Image -->
+                <!-- Ảnh chính -->
                 <div class="product-main-image">
-                    <img src="./assets/images/logo/list1-1.jpg"
-                         alt="Bút Lông Thiên Long Demon Slayer"
-                         id="mainProductImage">
+                    <c:choose>
+                        <c:when test="${not empty subimagesList}">
+                            <img src="${subimagesList[0].image}"
+                                 alt="${product.name}"
+                                 id="mainProductImage">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="./assets/images/logo/list1-1.jpg"
+                                 alt="${product.name}"
+                                 id="mainProductImage">
+                        </c:otherwise>
+                    </c:choose>
+
                     <div class="discount-badge">
                         <div>Tiết kiệm</div>
-                        <div style="font-size: 1rem;">15%</div>
+                        <div style="font-size: 1rem;">${product.discountDefault}%</div>
                     </div>
 
                     <a href="javascript:void(0)" id="prevImageBtn"
@@ -1447,71 +1099,74 @@
 
                 <!-- Thumbnail Gallery -->
                 <div class="thumbnail-gallery">
-                    <div class="thumbnail-container"
-                         id="thumbnailContainer">
-                        <div class="thumbnail-item active" id="thumb-1"
-                             data-index="0">
-                            <img src="./assets/images/logo/list1-1.jpg"
-                                 alt="Ảnh 1">
-                        </div>
-                        <div class="thumbnail-item" id="thumb-2"
-                             data-index="1">
-                            <img src="./assets/images/logo/list1-1.jpg"
-                                 alt="Ảnh 2">
-                        </div>
-                        <div class="thumbnail-item" id="thumb-3"
-                             data-index="2">
-                            <img
-                                    src="./assets/images/logo/list1-1-cont.png"
-                                    alt="Ảnh 3">
-                        </div>
+                    <div class="thumbnail-container" id="thumbnailContainer">
+                        <c:choose>
+                            <c:when test="${not empty subimagesList}">
+                                <c:forEach var="img" items="${subimagesList}" varStatus="st">
+                                    <div class="thumbnail-item ${st.first ? 'active' : ''}"
+                                         data-index="${st.index}">
+                                        <img src="${img.image}"
+                                             alt="Ảnh phụ ${st.index + 1}">
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="thumbnail-item active" data-index="0">
+                                    <img src="./assets/images/logo/list1-1.jpg" alt="Ảnh 1">
+                                </div>
+                                <div class="thumbnail-item" data-index="1">
+                                    <img src="./assets/images/logo/list1-1.jpg" alt="Ảnh 2">
+                                </div>
+                                <div class="thumbnail-item" data-index="2">
+                                    <img src="./assets/images/logo/list1-1-cont.png" alt="Ảnh 3">
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
-            </div>
+            </div> <!-- /product-images -->
 
-            <!-- Product Info -->
+            <!-- CỘT 2: THÔNG TIN SẢN PHẨM -->
             <div class="product-info">
-                <h1 class="product-title">Bút Lông Thiên Long 48/60
-                    Màu
-                    Fiber Pen Washable - Phiên bản Demon Slayer
-                </h1>
+                <h1 class="product-title">${product.name}</h1>
 
                 <div class="product-meta">
                     <div class="product-meta-item">
-                            <span class="product-meta-label">Thương
-                                hiệu:</span>
-                        <span class="product-meta-value"><a
-                                href="#">Colokit</a></span>
+                        <span class="product-meta-label">Thương hiệu:</span>
+                        <span class="product-meta-value">
+                        <a href="#">${product.brand}</a>
+                    </span>
                     </div>
                     <div class="product-meta-item">
-                            <span class="product-meta-label">Tình
-                                trạng:</span>
-                        <span class="product-meta-value"
-                              style="color: #10b981;">Còn hàng</span>
+                        <span class="product-meta-label">Tình trạng:</span>
+                        <span class="product-meta-value" style="color:#10b981;">
+                            ${product.status}
+                        </span>
                     </div>
                     <div class="product-meta-item">
-                            <span class="product-meta-label">Mã sản
-                                phẩm:</span>
-                        <span class="product-meta-value">50016740</span>
+                        <span class="product-meta-label">Mã sản phẩm:</span>
+                        <span class="product-meta-value">${product.id}</span>
                     </div>
                 </div>
 
                 <div class="product-price-section">
                     <div class="product-price">
-                        <span class="price-current">168,300₫</span>
-                        <span class="price-original">198,000₫</span>
+                    <span class="price-current">
+                        ${product.priceAfterDiscount}₫
+                    </span>
+                        <span class="price-original">
+                        ${product.price}₫
+                    </span>
                     </div>
                 </div>
 
                 <div class="quantity-section">
                     <div class="variant-label">Số lượng:</div>
                     <div class="quantity-controls">
-                        <button class="quantity-btn"
-                                onclick="decreaseQuantity()">-</button>
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
                         <input type="number" class="quantity-input"
                                value="1" min="1" id="quantity">
-                        <button class="quantity-btn"
-                                onclick="increaseQuantity()">+</button>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
                     </div>
                 </div>
 
@@ -1525,269 +1180,155 @@
                         MUA NGAY
                     </a>
                 </div>
+            </div> <!-- /product-info -->
 
+        </div> <!-- /product-detail -->
+    </div> <!-- /product-detail-container -->
+
+    <div class="section-but">
+        <div class="container">
+            <div class="section-but-header">
+                <h2>SẢN PHẨM CÙNG LOẠI</h2>
             </div>
 
-        </div>
-        <div class="section-but">
-            <div class="container">
-                <div class="section-but-header">
-                    <h2>SẢN PHẨM CÙNG LOẠI</h2>
+            <div class="section-but-content">
+                <div class="list-product">
+                    <c:forEach var="rp" items="${relatedProducts}">
+                        <div class="list-product-list1">
+                            <a href="${pageContext.request.contextPath}/DetailsProductController?id=${rp.id}">
+                                <img src="${rp.thumbnail}" alt="${rp.name}">
+                                <div class="list-product-list1-content">
+                                    <div class="list-product-list1-content-socials">
+                                        <div class="list-product-list1-content-socials-1">
+                                            <i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                                        </div>
+                                        <div class="list-product-list1-content-socials-2">
+                                            <i class="fa-solid fa-arrow-up-right-dots"></i>
+                                            <span>Đã bán ${rp.soldQuantity}</span>
+                                        </div>
+                                    </div>
+                                    <div class="list-product-list1-content-description">
+                                        <p class="content">${rp.name}</p>
 
-                </div>
-                <div class="section-but-content">
-                    <div class="list-product">
-                        <div class="list-product-list1"><a
-                                href="ChiTietSanPham.html">
-                            <img
-                                    src="./assets/images/logo/mythuat-1.jpg"
-                                    alt>
-                            <div class="list-product-list1-content">
-                                <div
-                                        class="list-product-list1-content-socials">
-                                    <div
-                                            class="list-product-list1-content-socials-1"><i
-                                            class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                    </div>
-                                    <div
-                                            class="list-product-list1-content-socials-2"><i
-                                            class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                    bán
-                                                    6</span></div>
-                                </div>
-                                <div
-                                        class="list-product-list1-content-description">
-                                    <p class="content">Bút Lông Thiên
-                                        Long 48/60 Màu Fiber Pen
-                                        Washable - Phiên bản Demon
-                                        Slayer
-                                    </p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <span>(0)</span>
-                                    </div>
-                                    <h2
-                                            class="price-product-after">178,200₫</h2>
-                                    <p class="price-product-before">
-                                        198,000đ</p>
-                                    <span
-                                            class="price-product-discount">-10%</span>
-                                    <div class="button">
-                                        <a href="ChiTietSanPham.html">
-                                            <button
-                                                    class="btn-xemchitiet">
-                                                <i
-                                                        class="fa-solid fa-eye"></i>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(0)</span>
+                                        </div>
+
+                                        <h2 class="price-product-after">
+                                            <fmt:formatNumber value="${rp.priceAfterDiscount}" type="number"
+                                                              groupingUsed="true"/>₫
+                                        </h2>
+                                        <p class="price-product-before">
+                                            <fmt:formatNumber value="${rp.price}" type="number" groupingUsed="true"/>đ
+                                        </p>
+                                        <span class="price-product-discount">
+                                        -${rp.discountDefault}%
+                                    </span>
+
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
                                                 Xem chi tiết
                                             </button>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-
+                            </a>
                         </div>
-                    </div>
+                    </c:forEach>
+
+                    <c:if test="${empty relatedProducts}">
+                        <p>Không có sản phẩm cùng loại.</p>
+                    </c:if>
                 </div>
             </div>
         </div>
-        <div class="policy alpha bg-while">
-            <div class="policy_title">
-                <h2>Thiên Long xin cam kết</h2>
-            </div>
-            <div class="policy_list">
-                <div class="policy_detail">
-                    <img
-                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
-                            alt>
-                    <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất
-                        liệu
-                        an toàn, bền đẹp.</p>
-                </div>
-                <div class="policy_detail">
-                    <img
-                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/icon%20lap%20dat140848.png"
-                            alt>
-                    <p>Giá niêm yết & minh bạch phí Không phụ
-                        phí
-                        ẩn</p>
-                </div>
-                <div class="policy_detail">
-                    <img
-                            src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/Exchange150303.png"
-                            alt>
-                    <p>Quy trình đổi trả nhanh chóng, minh
-                        bạch.</p>
-                </div>
-
-            </div>
+    </div>
+    <div class="policy alpha bg-while">
+        <div class="policy_title">
+            <h2>Thiên Long xin cam kết</h2>
         </div>
-        <div class="product_content alpha bg-while">
+        <div class="policy_list">
+            <div class="policy_detail">
+                <img
 
-            <div class="content_name ">
-                <h3>Thông số kĩ thuật</h3>
+                        src="https://cdnv2.tgdd.vn/pim/cdn/images/202411/icon%20bao%20hanh173451.png"
+                        alt>
+                <p>Đảm bảo nguồn gốc xuất xứ rõ ràng, chất
+                    liệu
+                    an toàn, bền đẹp.</p>
             </div>
-            <div class="content_blog " id="content_blog">
+            <div class="policy_detail">
+                <img
+                        src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/icon%20lap%20dat140848.png"
+                        alt>
+                <p>Giá niêm yết & minh bạch phí Không phụ
+                    phí
+                    ẩn</p>
+            </div>
+            <div class="policy_detail">
+                <img
+                        src="https://cdnv2.tgdd.vn/pim/cdn/images/202410/Exchange150303.png"
+                        alt>
+                <p>Quy trình đổi trả nhanh chóng, minh
+                    bạch.</p>
+            </div>
 
-                <div class="content_blog-item">
+        </div>
+    </div>
+    <div class="product_content alpha bg-while">
+        <div class="content_name">
+            <h3>Thông số kĩ thuật</h3>
+        </div>
 
-                    <div class="item-main">
+        <div class="content_blog" id="content_blog">
+            <div class="content_blog-item">
+                <div class="item-main">
+                    <c:if test="${not empty specificationList}">
+                        <c:set var="spec" value="${specificationList[0]}"/>
                         <ul>
                             <li>
-                                <h3>Thương hiệu : </h3>
-                                <p>Colokit</p>
+                                <h3>Kích thước bút:</h3>
+                                <p>${spec.size}</p>
                             </li>
                             <li>
-                                <h3>Kích thước bút: </h3>
-                                <p>140.6 mm</p>
+                                <h3>Tiêu chuẩn :</h3>
+                                <p>${spec.standard}</p>
                             </li>
                             <li>
-                                <h3>Tiêu chuẩn : </h3>
-                                <p>TCCS 005: 2011/TL-BLM; châu
-                                    Âu EN
-                                    71/3</p>
+                                <h3>Sản xuất :</h3>
+                                <p>${spec.madeIn}</p>
                             </li>
                             <li>
-                                <h3>Sản xuất : </h3>
-                                <p>Việt Nam</p>
-                            </li>
-                            <li>
-                                <h3>Khuyến cáo : </h3>
-                                <p>Tránh nguồn nhiệt, hóa chất.
-                                    Không
-                                    thích hợp cho trẻ dưới 3
-                                    tuổi.</p>
+                                <h3>Khuyến cáo :</h3>
+                                <p>${spec.warning}</p>
                             </li>
                         </ul>
-                    </div>
+                    </c:if>
 
+                    <c:if test="${empty specificationList}">
+                        <p>Chưa có thông số kỹ thuật cho sản phẩm này.</p>
+                    </c:if>
                 </div>
-
             </div>
-
         </div>
-        <div class="product_rate alpha bg-while  magin-bottom">
+    </div>
+    <div class="product_rate alpha bg-while  magin-bottom">
 
-            <a class="btn_view buy_now" href="DanhGia.html">
-                <p>Xem đánh giá</p>
-            </a>
-        </div>
+        <a class="btn_view buy_now" href="DanhGia.html">
+            <p>Xem đánh giá</p>
+        </a>
+    </div>
     </div>
     </div>
 </nav>
+<%@ include file="Footer.jsp" %>
 
-<footer id="footer-trang-chu">
-    <div class="footer-title">
-        <img src="./assets/images/logo/logo.png" alt class="img-main">
-        <p class="footer-title-header">Thienlong.vn - Website
-            thương mại
-            điện tử thuộc Tập đoàn Thiên Long</p>
-        <p class="footer-title-description">Công ty Cổ Phần Tập
-            Đoàn Thiên
-            Long
-            <br>
-            <br>
-            GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp
-            ngày
-            14/03/2005.
-        </p>
-        <form action class="footer-title-form">
-            <input type="email" placeholder="Nhập địa chỉ email">
-            <a href>Đăng ký</a>
-        </form>
-        <img
-                src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
-                alt class="img-footer">
-    </div>
-    <div class="footer-diachi">
-        <h2>ĐỊA CHỈ CÔNG TY</h2>
-        <span>
-            Head Office:
-            <p class="footer-diachi-header"> Tầng 10, Sofic
-                Tower, Số 10
-                Đường Mai Chí Thọ, Phường An Khánh,
-                Thành Phố Hồ Chí Minh, Việt Nam
-            </span>
-        <br>
-        <span>
-                Miền Bắc:
-                <p class="footer-diachi-description"> Số 38,
-                    đường Gamuda
-                    Gardens 2-5, Khu đô thị mới C2 - Gamuda
-                    Gardens, Phường Trần Phú, Thành phố Hà Nội,
-                    Việt Nam.
-                </span>
-
-        <img src="./assets/images/logo/footer_bct.png" alt
-             class="img-main">
-    </div>
-    <div class="footer-help">
-        <h2>HỖ TRỢ KHÁCH HÀNG</h2>
-        <span>
-                    Hotline:
-                    <p class="footer-help-header">1900 866 819
-                    </span>
-        <span>
-                        Thứ 2 - Thứ 6 (8h - 17h)
-                        salesonline@thienlongvn.com
-                        <div class="footer-help-header-list">
-                            <a href>
-                                - Hướng dẫn mua hàng
-                            </a>
-                            <a href>
-                                - Hướng dẫn thanh toán
-                            </a>
-                            <a href>
-                                - Chính sách giao hàng
-                            </a>
-                            <a href>
-                                - Chính sách đổi trả & hoàn tiền
-                            </a>
-                            <a href>
-                                - Khách hàng thân thiết
-                            </a>
-                            <a href>
-                                - Khách hàng ưu tiên
-                            </a>
-                            <a href>
-                                - Phản ánh chất lượng sản phẩm
-                            </a>
-                        </div>
-                    </span>
-    </div>
-    <div class="footer-information">
-        <h2>VỀ THIENLONG.VN</h2>
-        <div class="footer-information-header-list">
-            <a href="GioiThieu.html">
-                - Giới thiệu
-            </a>
-            <a href>
-                - Dịch vụ in ấn quảng cáo
-            </a>
-            <a href>
-                - Chính sách bảo mật chung
-            </a>
-            <a href>
-                - Chính sách bảo mật thông tin cá
-                nhân
-            </a>
-            <a href>
-                - Thông tin liên hệ
-            </a>
-            <a href>
-                - Chương trình Affiliate
-            </a>
-        </div>
-        <div class="footer-information-socials">
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-youtube"></i>
-        </div>
-    </div>
-</footer>
 <!-- su kien nut tang giam so luong -->
 <script>
     function increaseQuantity() {
@@ -1810,6 +1351,7 @@
             input.value = min;
         }
     }
+
     addToCartBtn = document.getElementById('addToCartBtn');
     addToCartBtn.addEventListener('click', function () {
         // Thêm animation cho nút
@@ -1877,6 +1419,7 @@
             hideToast(toast);
         }, 3000);
     }
+
     function hideToast(toast) {
         toast.classList.remove('show');
         setTimeout(() => {

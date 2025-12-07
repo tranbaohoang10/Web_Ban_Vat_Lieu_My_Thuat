@@ -8,6 +8,7 @@ import java.util.List;
 public class CategoryDao {
     private final Jdbi jdbi;
     public CategoryDao() {
+
         jdbi = JDBIConnector.getJdbi();
     }
     public List<Category> findAll(){
