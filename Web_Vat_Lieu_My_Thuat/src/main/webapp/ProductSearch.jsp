@@ -274,6 +274,50 @@
         color: white;
     }
 
+    .search-sort {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 10px 30px 20px;
+        gap: 12px;
+    }
+
+    .search-sort-label {
+        font-weight: 600;
+        margin-right: 8px;
+    }
+
+    .search-sort-tabs {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 14px;
+    }
+
+    .sort-option {
+        position: relative;
+        cursor: pointer;
+        padding-bottom: 4px;
+        color: #333;
+    }
+
+    /* Gạch chân + màu khi được chọn */
+    .sort-option.active {
+        color: #17479D;
+        font-weight: 600;
+    }
+
+    .sort-option.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: #17479D;
+        border-radius: 999px;
+    }
+
     /* End section-main */
 
 </style>
@@ -291,13 +335,58 @@
 <!-- Begin section main -->
 <div id="section-main">
     <div class="container">
-        <%@ include file="Menu.jsp" %>
+
         <div class="section-main-content">
-            <div class="section-main-content-image">
-                <img src="${category.thumbnail}" alt="${categoty.categotyName}">
-            </div>
+
             <div class="section-main-content-list">
-                <h2 class="header">${category.categoryName}</h2>
+                <h2 class="header">Kết quả tìm kiếm cho: "<c:out value="${keyword}"/>"</h2>
+
+                <c:if test="${empty products}">
+                    <p>Không tìm thấy sản phẩm nào.</p>
+                </c:if>
+
+                <c:if test="${not empty products}">
+                <div class="search-sort">
+                    <span class="search-sort-label">Sắp xếp theo:</span>
+
+                    <form id="filterForm"
+                          action="${pageContext.request.contextPath}/search"
+                          method="get">
+
+                        <!-- giữ lại keyword -->
+                        <input type="hidden" name="keyword" value="${keyword}"/>
+
+                        <!-- sort hiện tại -->
+                        <input type="hidden" name="sort" id="sortInput"
+                               value="${empty param.sort ? 'soldDesc' : param.sort}"/>
+
+                        <div class="search-sort-tabs">
+                <span class="sort-option
+                      <c:if test='${param.sort == "soldDesc" || empty param.sort}'>active</c:if>"
+                      data-sort="soldDesc">
+                    Bán chạy
+                </span>
+
+                            <span class="sort-option
+                      <c:if test='${param.sort == "newest"}'>active</c:if>"
+                                  data-sort="newest">
+                    Sản phẩm mới
+                </span>
+
+                            <span class="sort-option
+                      <c:if test='${param.sort == "priceAsc"}'>active</c:if>"
+                                  data-sort="priceAsc">
+                    Giá tăng dần
+                </span>
+
+                            <span class="sort-option
+                      <c:if test='${param.sort == "priceDesc"}'>active</c:if>"
+                                  data-sort="priceDesc">
+                    Giá giảm dần
+                </span>
+                        </div>
+                    </form>
+                </div>
                 <div class="list-product" id="productList">
                     <%@ include file="ProductList.jsp" %>
                 </div>
@@ -314,6 +403,7 @@
 
             </div>
         </div>
+        </c:if>
     </div>
 </div>
 <!-- End section main -->
@@ -324,17 +414,14 @@
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('filterForm');
         const productList = document.getElementById('productList');
+        const sortInput = document.getElementById('sortInput');
+        const sortOptions = document.querySelectorAll('.sort-option');
 
         if (!form || !productList) return;
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault(); // chặn submit bình thường (không reload trang)
-            submitFilter();
-        });
-
         function submitFilter() {
             const formData = new FormData(form);
-            formData.append('ajax', '1'); // báo cho server biết đây là AJAX
+            formData.append('ajax', '1');
 
             const params = new URLSearchParams(formData);
 
@@ -346,15 +433,30 @@
             })
                 .then(response => response.text())
                 .then(html => {
-                    // thay toàn bộ danh sách sản phẩm
                     productList.innerHTML = html;
                 })
                 .catch(err => {
                     console.error('Lỗi khi lọc sản phẩm:', err);
                 });
         }
+
+        // Click vào từng tab sort
+        sortOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                // đổi highlight
+                sortOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+
+                const sortValue = this.getAttribute('data-sort');
+                sortInput.value = sortValue;
+
+                // gọi AJAX
+                submitFilter();
+            });
+        });
     });
 </script>
+
 
 </body>
 
