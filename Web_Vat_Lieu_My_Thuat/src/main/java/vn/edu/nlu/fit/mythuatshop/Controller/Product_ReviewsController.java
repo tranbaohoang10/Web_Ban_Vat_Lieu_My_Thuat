@@ -51,10 +51,57 @@ public class Product_ReviewsController extends HttpServlet {
         request.setAttribute("reviewCount", reviewCount);
         request.getRequestDispatcher("ProductReviews.jsp").forward(request, response);
     }
-
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Users currentUser = (session != null) ? (Users) session.getAttribute("currentUser") : null;
 
+        if (currentUser == null) {
+            // Chưa đăng nhập → bắt đăng nhập trước khi đánh giá
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        try {
+            // Lấy dữ liệu từ form
+            String productIdStr = request.getParameter("productID");
+            String ratingStr = request.getParameter("rating");
+            String comment = request.getParameter("comment");
+
+            if (productIdStr == null || ratingStr == null) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing productID or rating");
+                return;
+            }
+
+            int productID = Integer.parseInt(productIdStr);
+            int rating    = Integer.parseInt(ratingStr);
+
+
+            if (rating < 1 || rating > 5) {
+                rating = 5;
+            }
+
+            //Tạo đối tượng Product_Review
+            Product_Review review = new Product_Review();
+            review.setProductID(productID);
+            review.setUserID(currentUser.getId()); // lấy id từ user đang đăng nhập
+            review.setRating(rating);
+            review.setComment(comment != null ? comment.trim() : "");
+
+            // 4. Gọi service để lưu DB
+            reviewService.addReview(review);
+
+            // 5. Redirect về lại trang review của sản phẩm đó
+            response.sendRedirect(
+                    request.getContextPath() + "/Product_ReviewsController?id=" + productID
+            );
+
+        } catch (NumberFormatException e) {
+            // Sai định dạng số
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid productID or rating");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error when saving review");
+        }
     }
 }
