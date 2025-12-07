@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
         if (users != null) {
             HttpSession session = req.getSession();
             session.setAttribute("currentUser", users);
-            resp.sendRedirect("IndexKhachHang.jsp");
+            resp.sendRedirect("home");
         }
         else {
             req.setAttribute("error", "Email hoac mat khau khong dung!");

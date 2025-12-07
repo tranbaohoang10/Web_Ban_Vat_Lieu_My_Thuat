@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     /* Begin header */
     #header-trang-chu {
@@ -116,12 +117,20 @@
 
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
         margin-left: 15px;
+        max-width: 100px;
+        overflow: hidden;
     }
 
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
         color: white;
         font-weight: 600;
         font-size: 18px;
+
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
@@ -171,7 +180,9 @@
             background-color: red;
         }
     }
-
+    a{
+        text-decoration: none;
+    }
     /* End header */
 </style>
 <header id="header-trang-chu" class="trang-chu">
@@ -199,14 +210,34 @@
             <div class="contact-phone-help">Hỗ trợ khách hàng</div>
         </div>
     </div>
-    <a href="DangNhap.html" class="link header-dangnhap-dangki">
-        <i class="fa-solid fa-user"></i>
-        <div class="dangnhap-dangki">
-            <div class="dangnhap">Đăng nhập</div>
-            <div class="dangki">Đăng kí</div>
-        </div>
-    </a>
+    <c:choose>
+        <%-- Đã đăng nhập --%>
+        <c:when test="${not empty sessionScope.currentUser}">
+            <div class="header-dangnhap-dangki">
+                <i class="fa-solid fa-user"></i>
+                <div class="dangnhap-dangki">
+                    <!-- đổi 'fullName' cho đúng với field trong Users (name, username, ten, ...) -->
+                    <div class="dangnhap">Hi, ${sessionScope.currentUser.fullName}</div>
+                    <div class="dangki">
+                        <a href="${pageContext.request.contextPath}/logout" style="color: white;">
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </c:when>
 
+        <%-- Chưa đăng nhập --%>
+        <c:otherwise>
+            <a href="login" class="link header-dangnhap-dangki">
+                <i class="fa-solid fa-user"></i>
+                <div class="dangnhap-dangki">
+                    <div class="dangnhap">Đăng nhập</div>
+                    <div class="dangki">Đăng kí</div>
+                </div>
+            </a>
+        </c:otherwise>
+    </c:choose>
     <a href="GioHang.html" class="link header-giohang" id="cartIcon"
        data-count="0">
         <i class="fa-solid fa-bag-shopping"></i>
