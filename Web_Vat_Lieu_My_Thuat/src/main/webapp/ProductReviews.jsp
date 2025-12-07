@@ -1,22 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đánh giá</title>
+    <title>Đánh giá sản phẩm</title>
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
 </head>
+
 <style>
     .container {
         width: 1200px;
         margin: auto;
     }
+    a{ text-decoration: none; }
 
     /* content review */
     .breadcrumb {
@@ -48,7 +52,6 @@
         background-color: white;
     }
 
-
     .filter-section {
         margin-bottom: 20px;
     }
@@ -63,7 +66,6 @@
         display: flex;
         gap: 10px;
         margin-bottom: 10px;
-
     }
 
     .filter-btn {
@@ -106,7 +108,7 @@
 
     .rating {
         color: #ff9800;
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .timestamp {
@@ -114,7 +116,6 @@
         font-size: 13px;
         color: #666;
     }
-
 
     .star-rating {
         display: flex;
@@ -132,7 +133,6 @@
         transition: 0.3s;
     }
 
-
     .star-rating label:is(:hover, :has(~ :hover)) i {
         transform: scale(1.35);
         color: #fffdba;
@@ -142,7 +142,6 @@
         color: rgb(245, 245, 74);
         text-shadow: 0 0 2px #ffffff, 0 0 10px #ffee58;
     }
-
 
     .area_submit {
         display: flex;
@@ -154,6 +153,11 @@
         margin-top: 25px;
         font-size: 16px;
         padding: 10px 10px;
+        background-color: #2659F3;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
     .form_review {
@@ -166,27 +170,12 @@
         height: 100px;
     }
 
-    .content {
-        border-right: 1px #ece5e5 solid;
-
-    }
-
-    .content h4 {
-        margin: 1rem 0;
-        font-size: 1.8rem;
-    }
-
     .form {
-
         padding: 20px;
         border-radius: 8px;
     }
 
-    textarea:focus-visible {
-        outline: 2px solid #b2d2f4;
-        border: 1px solid #b2d2f4;
-    }
-
+    textarea:focus-visible,
     input:focus-visible {
         outline: 2px solid #b2d2f4;
         border: 1px solid #b2d2f4;
@@ -203,18 +192,11 @@
         font-size: 1rem;
     }
 
-
     .form-group {
         display: flex;
         gap: 1rem;
         flex: 1;
         margin-bottom: 1rem;
-    }
-
-    .gender {
-        display: flex;
-        gap: 1rem;
-
     }
 
     .form-group > * {
@@ -228,63 +210,6 @@
         border-radius: 4px;
         font-size: 14px;
     }
-
-    label {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .btn_writeReview {
-        background-color: #2659F3;
-        color: #fff;
-        border: none;
-        padding: 0.7rem 1.2rem;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
-    }
-
-
-    .sidebar {
-
-        padding: 1.4rem;
-    }
-
-    .sidebar h3 {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-
-    .sidebar ul li {
-        margin-bottom: 1rem;
-    }
-
-    .sidebar ul li a {
-        text-decoration: none;
-        color: #007bff;
-        font-size: 1rem;
-        font-weight: bold;
-
-    }
-
-    .sidebar ul li a:hover {
-        text-decoration: underline;
-    }
-
-    /* Hiệu ứng nhảy nhẹ khi chọn sao */
-    @keyframes jump {
-
-        0%,
-        50% {
-            transform: translateY(0) scale(1.35);
-        }
-
-        100% {
-            transform: translateY(-15%) scale(1.35);
-        }
-    }
 </style>
 
 <body>
@@ -293,87 +218,112 @@
 <nav>
     <!-- Breadcrumb -->
     <div class="breadcrumb">
-        <a href="index.jsp">Trang chủ</a>
+        <a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a>
         <span>/</span>
-        <a href="ProductDetails.jsp">Bút Lông Màu</a>
+        <a href="${pageContext.request.contextPath}/DetailsProductController?id=${product.id}">
+            ${product.name}
+        </a>
         <span>/</span>
-        <span>Bút Lông Thiên Long 48/60 Màu Fiber Pen Washable - Phiên
-                bản Demon Slayer</span>
+        <span>Đánh giá sản phẩm</span>
     </div>
-    <div class="review-container  bg-while">
-        <h2>Đánh giá sản phẩm</h2>
 
+    <!-- KHỐI ĐÁNH GIÁ TỔNG QUAN + FORM GỬI ĐÁNH GIÁ -->
+    <div class="review-container bg-while">
+        <h2>Đánh giá sản phẩm: ${product.name}</h2>
+
+        <!-- Điểm trung bình + số lượng đánh giá -->
+        <c:if test="${reviewCount > 0}">
+            <p>
+                Trung bình:
+                <strong>
+                    <fmt:formatNumber value="${avgRating}" minFractionDigits="1" maxFractionDigits="1"/>
+                </strong>
+                / 5 (từ ${reviewCount} đánh giá)
+            </p>
+        </c:if>
+        <c:if test="${reviewCount == 0}">
+            <p>Chưa có đánh giá nào cho sản phẩm này. Hãy là người đầu tiên đánh giá!</p>
+        </c:if>
+
+        <!-- FORM gửi đánh giá -->
         <div class="reviews-section">
-            <p class="reviews_star">
+            <form class="form" action="${pageContext.request.contextPath}/Product_ReviewsController" method="post">
+                <!-- Gửi kèm productID -->
+                <input type="hidden" name="productID" value="${product.id}"/>
+
+                <!-- Chọn số sao -->
+                <p class="reviews_star">
                     <span class="star-rating">
                         <input type="radio" name="rating" id="rate-0" value="0" checked style="display: none;">
-                        <label for="rate-1" style="--i:1"><i class="fa-solid fa-star"></i></label>
+                        <label for="rate-1"><i class="fa-solid fa-star"></i></label>
                         <input type="radio" name="rating" id="rate-1" value="1">
-                        <label for="rate-2" style="--i:2"><i class="fa-solid fa-star"></i></label>
+                        <label for="rate-2"><i class="fa-solid fa-star"></i></label>
                         <input type="radio" name="rating" id="rate-2" value="2">
-                        <label for="rate-3" style="--i:3"><i class="fa-solid fa-star"></i></label>
+                        <label for="rate-3"><i class="fa-solid fa-star"></i></label>
                         <input type="radio" name="rating" id="rate-3" value="3">
-                        <label for="rate-4" style="--i:4"><i class="fa-solid fa-star"></i></label>
+                        <label for="rate-4"><i class="fa-solid fa-star"></i></label>
                         <input type="radio" name="rating" id="rate-4" value="4">
-                        <label for="rate-5" style="--i:5"><i class="fa-solid fa-star"></i></label>
+                        <label for="rate-5"><i class="fa-solid fa-star"></i></label>
                         <input type="radio" name="rating" id="rate-5" value="5">
                     </span>
-            </p>
-            <div class="reviews_detail">
+                </p>
 
+                <!-- Thông tin người đánh giá + nội dung -->
                 <div class="form-group form_review">
-                    <input type="text" class="infor_contact" placeholder="Họ và tên">
-                    <input type="number" class="infor_contact" placeholder="Số điện thoại">
+                    <input type="text" name="fullName" class="infor_contact" placeholder="Họ và tên">
+                    <input type="text" name="phone" class="infor_contact" placeholder="Số điện thoại">
                 </div>
-                <textarea class="area_review" placeholder="Nhập nội dung"></textarea>
+
+                <textarea class="area_review" name="comment" placeholder="Nhập nội dung đánh giá"></textarea>
+
                 <div class="area_submit">
-                    <button class="btn_writeReview">Gửi đánh giá</button>
+                    <button type="submit" class="btn_writeReview">Gửi đánh giá</button>
                 </div>
-
-            </div>
-
-
+            </form>
         </div>
     </div>
+
+    <!-- KHỐI HIỂN THỊ DANH SÁCH ĐÁNH GIÁ -->
+
     <div class="review-container bg-while">
         <div class="filter-section">
-            <h2>Lọc đánh giá</h2>
-            <div class="filter-options">
-                <button class="filter-btn active">Tất cả</button>
-                <button class="filter-btn">5 ★</i></button>
-                <button class="filter-btn">4 ★</i></button>
-                <button class="filter-btn">3 ★</i></button>
-                <button class="filter-btn">2 ★</i></button>
-                <button class="filter-btn">1 ★</i></button>
-            </div>
-            <label>
-                <input type="checkbox"/>
-                Có hình ảnh (20)
-            </label>
+            <h2>
+                Đánh giá cho: ${product.name}
+                (<span>${reviewCount}</span> đánh giá,
+                trung bình <span>${avgRating}</span> ★)
+            </h2>
+            <!-- phần filter button giữ nguyên hoặc làm sau -->
         </div>
 
         <div class="reviews-section">
-            <div class="review">
-                <h3>Bảo Hoàng</h3>
-                <div class="rating">★★★★★</div>
-                <p>Màu đẹp lắm! Cho Shop 5 sao</p>
+            <c:if test="${empty reviews}">
+                <p>Chưa có đánh giá nào cho sản phẩm này.</p>
+            </c:if>
 
-                <p class="timestamp">Đã dùng khoảng 1 ngày</p>
-            </div>
+            <c:forEach var="rv" items="${reviews}">
+                <div class="review">
+                    <h3>Người dùng ${rv.username}</h3>
 
-            <div class="review">
-                <h3>Đăng Hậu</h3>
-                <div class="rating">★★★★</div>
-                <p>Giao hàng nhanh chóng, giá cả hợp lý, OK!</p>
-                <p class="timestamp">Đã dùng khoảng 2 tuần</p>
-            </div>
+                    <div class="rating">
+                        <c:forEach var="i" begin="1" end="5">
+                            <c:choose>
+                                <c:when test="${i <= rv.rating}">★</c:when>
+                                <c:otherwise>☆</c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </div>
 
+                    <p>${rv.comment}</p>
+
+                    <p class="timestamp">
+                        <fmt:formatDate value="${rv.createAt}" pattern="dd/MM/yyyy HH:mm" />
+                    </p>
+                </div>
+            </c:forEach>
         </div>
     </div>
-
-
 </nav>
+
 <%@ include file="Footer.jsp" %>
 </body>
-
 </html>

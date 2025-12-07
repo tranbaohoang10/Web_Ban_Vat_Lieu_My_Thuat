@@ -22,36 +22,33 @@ public class LoginController extends HttpServlet {
         userService = new UserService();
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+   @Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    String email = req.getParameter("email");
+    String password = req.getParameter("password");
 
-        if(email == null || password == null || email.isBlank() || password.isBlank()){
-            req.setAttribute("error", "Vui lòng nhập email và mật khẩu!");
-            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
-            return;
-        }
-
-        Users users = userService.login(email, password);
-
-
-        if (users == null) {
-            req.setAttribute("error", "Sai email hoặc mật khẩu");
-            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
-            return;
-        }
-        HttpSession session = req.getSession(true);
-        session.setAttribute("authUser", users);
-        session.setMaxInactiveInterval(30*60);
-        resp.sendRedirect(req.getContextPath() + "/home");
+    // 1. Validate rỗng (giữ của nhánh Login-register)
+    if (email == null || password == null || email.isBlank() || password.isBlank()) {
+        req.setAttribute("error", "Vui lòng nhập email và mật khẩu!");
+        req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+        return;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("DangNhap.jsp");
-        rd.forward(req, resp);
+    // 2. Gọi login 1 lần
+    Users users = userService.login(email, password);
+
+    // 3. Sai tài khoản/mật khẩu
+    if (users == null) {
+        req.setAttribute("error", "Sai email hoặc mật khẩu");
+        req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+        return;
     }
 
+    // 4. Đúng -> lưu vào session với tên currentUser (đúng với Header.jsp của bạn)
+    HttpSession session = req.getSession(true);
+    session.setAttribute("currentUser", users);
+    session.setMaxInactiveInterval(30 * 60); // 30 phút
 
+    // 5. Redirect về home
+    resp.sendRedirect(req.getContextPath() + "/home");
 }
