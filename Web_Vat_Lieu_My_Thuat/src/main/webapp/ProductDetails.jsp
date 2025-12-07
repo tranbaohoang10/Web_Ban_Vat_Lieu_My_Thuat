@@ -1320,7 +1320,7 @@
     </div>
     <div class="product_rate alpha bg-while  magin-bottom">
 
-        <a class="btn_view buy_now" href="DanhGia.html">
+        <a class="btn_view buy_now" href="${pageContext.request.contextPath}/Product_ReviewsController?id=${product.id}">
             <p>Xem đánh giá</p>
         </a>
     </div>

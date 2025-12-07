@@ -500,7 +500,7 @@
                 <span class="total">Tổng cộng:
                   <strong>382,100₫</strong></span>
                         <div class="order-buttons">
-                            <a href="DanhGia.jsp" class="btn-review">Đánh giá</a>
+                            <a href="ProductReviews.jsp" class="btn-review">Đánh giá</a>
                             <button class="btn-cancel">Hủy đơn</button>
                         </div>
                     </div>
@@ -534,7 +534,7 @@
                 <span class="total">Tổng cộng:
                   <strong>31,080₫</strong></span>
                         <div class="order-buttons">
-                            <a href="DanhGia.jsp" class="btn-review">Đánh giá</a>
+                            <a href="ProductReviews.jsp" class="btn-review">Đánh giá</a>
                             <button class="btn-cancel">Xác nhận</button>
                         </div>
                     </div>
