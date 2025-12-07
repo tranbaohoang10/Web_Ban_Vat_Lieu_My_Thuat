@@ -1152,10 +1152,10 @@
                 <div class="product-price-section">
                     <div class="product-price">
                     <span class="price-current">
-                        ${product.priceAfterDiscount}₫
+                        <fmt:formatNumber value="${product.priceAfterDiscount}" type="number"/>₫
                     </span>
                         <span class="price-original">
-                        ${product.price}₫
+                            <fmt:formatNumber value="${product.price}" type="number"/>₫
                     </span>
                     </div>
                 </div>
@@ -1220,11 +1220,11 @@
                                         </div>
 
                                         <h2 class="price-product-after">
-                                            <fmt:formatNumber value="${rp.priceAfterDiscount}" type="number"
-                                                              groupingUsed="true"/>₫
+                                            <fmt:formatNumber value="${rp.priceAfterDiscount}" type="number"/>₫
+
                                         </h2>
                                         <p class="price-product-before">
-                                            <fmt:formatNumber value="${rp.price}" type="number" groupingUsed="true"/>đ
+                                            <fmt:formatNumber value="${rp.price}" type="number"/>₫
                                         </p>
                                         <span class="price-product-discount">
                                         -${rp.discountDefault}%

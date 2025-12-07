@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -297,56 +298,8 @@
             </div>
             <div class="section-main-content-list">
                 <h2 class="header">${category.categoryName}</h2>
-                <div class="list-product">
-                    <c:forEach var="p" items="${products}">
-                        <div class="list-product-list1">
-                            <a href="ChiTietSanPham.jsp">
-                                <img src="${p.thumbnail}"
-                                     alt>
-                                <div class="list-product-list1-content">
-                                    <div
-                                            class="list-product-list1-content-socials">
-                                        <div
-                                                class="list-product-list1-content-socials-1"><i
-                                                class="fa-solid fa-thumbs-up"></i><span>New</span></div>
-                                        <div
-                                                class="list-product-list1-content-socials-2"><i
-                                                class="fa-solid fa-arrow-up-right-dots"></i><span>Đã
-                                                    bán ${p.soldQuantity}</span></div>
-                                    </div>
-                                    <div
-                                            class="list-product-list1-content-description">
-                                        <p class="content">${p.name}</p>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>(0)</span>
-                                        </div>
-                                        <h2
-                                                class="price-product-after">${p.priceAfterDiscount}₫</h2>
-                                        <p class="price-product-before">
-                                                ${p.price}đ</p>
-                                        <span
-                                                class="price-product-discount">-${p.discountDefault}%</span>
-                                        <div class="button">
-                                            <a href="ChiTietSanPham.jsp">
-                                                <button
-                                                        class="btn-xemchitiet">
-                                                    <i
-                                                            class="fa-solid fa-eye"></i>
-                                                    Xem chi tiết
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </div>
-                    </c:forEach>
+                <div class="list-product" id="productList">
+                    <%@ include file="ProductList.jsp" %>
                 </div>
 
             </div>
@@ -367,6 +320,42 @@
 
 <!-- Begin footer-->
 <%@ include file="Footer.jsp" %>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('filterForm');
+        const productList = document.getElementById('productList');
+
+        if (!form || !productList) return;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // chặn submit bình thường (không reload trang)
+            submitFilter();
+        });
+
+        function submitFilter() {
+            const formData = new FormData(form);
+            formData.append('ajax', '1'); // báo cho server biết đây là AJAX
+
+            const params = new URLSearchParams(formData);
+
+            fetch(form.action + '?' + params.toString(), {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => response.text())
+                .then(html => {
+                    // thay toàn bộ danh sách sản phẩm
+                    productList.innerHTML = html;
+                })
+                .catch(err => {
+                    console.error('Lỗi khi lọc sản phẩm:', err);
+                });
+        }
+    });
+</script>
+
 </body>
 
 </html>
