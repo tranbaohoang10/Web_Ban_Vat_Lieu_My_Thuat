@@ -40,6 +40,7 @@ public class AuthFilter implements Filter {
 
         boolean isPublic =
                 path.equals("/") ||
+                        path.startsWith("/home") ||
                         path.startsWith("/login") ||
                         path.startsWith("/logout") ||
                         path.startsWith("/register") ||
@@ -51,7 +52,7 @@ public class AuthFilter implements Filter {
                         path.endsWith(".ico");
 
         HttpSession session = req.getSession(false);
-        Object authUser = (session == null) ? null : session.getAttribute("authUser");
+        Object authUser = (session == null) ? null : session.getAttribute("currentUser");
 
         // Xác định session đã hết hạn hay chưa
         boolean hadSessionID    = req.getRequestedSessionId() != null;
