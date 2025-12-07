@@ -25,6 +25,7 @@
 
     #header-trang-chu .tim-kiem-san-pham {
         position: relative;
+        display: flex;
     }
 
     #header-trang-chu .tim-kiem-san-pham input {
@@ -34,22 +35,30 @@
         border: none;
     }
 
-    #header-trang-chu .tim-kiem-san-pham {
-        display: flex;
-    }
-
-    #header-trang-chu .tim-kiem-san-pham i {
+    /* NÚT KÍNH LÚP */
+    #header-trang-chu .tim-kiem-san-pham .btn-search {
         position: absolute;
         right: 0;
+        top: 0;
         width: 50px;
         height: 100%;
         background-color: #0b234d;
-        line-height: 40px;
+        border: none;
         cursor: pointer;
-        color: white;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
+    /* Icon bên trong */
+    #header-trang-chu .tim-kiem-san-pham .btn-search i {
+        color: white;
+        font-size: 16px;
+    }
+
 
     #header-trang-chu .header-contact {
         display: flex;
@@ -173,9 +182,15 @@
             <img src="./assets/images/logo/logo.png" alt>
         </a>
     </div>
-    <form action class="tim-kiem-san-pham">
-        <input type="text" name placeholder="Tìm kiếm sản phẩm...">
-        <i class="fa-solid fa-magnifying-glass"></i>
+    <form action="${pageContext.request.contextPath}/search"
+          method="get"
+          class="tim-kiem-san-pham">
+        <input type="text"
+               name="keyword"
+               placeholder="Tìm kiếm sản phẩm...">
+        <button type="submit" class="btn-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
     </form>
     <div class="header-contact">
         <i class="fa-solid fa-phone"></i>
@@ -192,7 +207,6 @@
         </div>
     </a>
 
-    </div>
     <a href="GioHang.html" class="link header-giohang" id="cartIcon"
        data-count="0">
         <i class="fa-solid fa-bag-shopping"></i>

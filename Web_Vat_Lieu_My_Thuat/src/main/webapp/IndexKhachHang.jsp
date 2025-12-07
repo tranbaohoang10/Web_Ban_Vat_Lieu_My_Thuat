@@ -1334,7 +1334,7 @@
 
         </div>
         <div class="section-but-button">
-          <a class="button" href="TimKiem.jsp">Xem tất cả <i
+          <a class="button" href="ProductSearch.jsp">Xem tất cả <i
               class="fa-solid fa-angle-right"></i></a>
 
         </div>
@@ -1737,7 +1737,7 @@
 
         </div>
         <div class="section-but-button">
-          <a class="button" href="TimKiem.jsp">Xem tất cả <i
+          <a class="button" href="ProductSearch.jsp">Xem tất cả <i
               class="fa-solid fa-angle-right"></i></a>
 
         </div>

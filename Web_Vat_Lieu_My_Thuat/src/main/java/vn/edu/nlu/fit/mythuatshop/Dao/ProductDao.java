@@ -59,6 +59,7 @@ public class ProductDao {
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql).bind("categoryId", categoryId).mapToBean(Product.class).list());
     }
+
     public List<Product> findByCategoryWithFilter(int categoryId,
                                                   Double minPrice,
                                                   Double maxPrice,
@@ -100,13 +101,46 @@ public class ProductDao {
             return query.mapToBean(Product.class).list();
         });
     }
-    public List<Product> getProductFilter(String productName ) {
+
+    public List<Product> getProductSearch(String productName) {
         String sql = "SELECT id, name, price, discountDefault, categoryId, " +
                 "thumbnail, quantityStock, soldQuantity, status, createAt " +
                 "FROM Products " +
-                "WHERE  name = :productName " ;
+                "WHERE name LIKE CONCAT('%', :productName, '%')";
 
-        return jdbi.withHandle(handle ->handle.createQuery(sql).bind("productName", productName).mapToBean(Product.class).list());
+        return jdbi.withHandle(handle -> handle.createQuery(sql).bind("productName", productName).mapToBean(Product.class).list());
+    }
+
+    public List<Product> getProductSearch(String productName, String sort) {
+        StringBuilder sql = new StringBuilder(
+                "SELECT id, name, price, discountDefault, categoryId, " +
+                        "thumbnail, quantityStock, soldQuantity, status, createAt " +
+                        "FROM Products " +
+                        "WHERE name LIKE CONCAT('%', :productName, '%') "
+        );
+
+        switch (sort) {
+            case "priceAsc":
+                sql.append(" ORDER BY price * (100.0 - discountDefault) / 100.0 ASC");
+                break;
+            case "priceDesc":
+                sql.append(" ORDER BY price * (100.0 - discountDefault) / 100.0 DESC");
+                break;
+            case "newest":
+                sql.append(" ORDER BY createAt DESC");
+                break;
+            case "soldDesc":
+            default:
+                sql.append(" ORDER BY soldQuantity DESC");
+                break;
+        }
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql.toString())
+                        .bind("productName", productName)
+                        .mapToBean(Product.class)
+                        .list()
+        );
     }
 
 }

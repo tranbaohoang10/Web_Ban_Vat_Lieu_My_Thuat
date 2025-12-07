@@ -4,7 +4,7 @@
 
 <c:forEach var="p" items="${products}">
     <div class="list-product-list1">
-        <a href="ChiTietSanPham.jsp">
+        <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
             <img src="${p.thumbnail}" alt="">
             <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">

@@ -27,7 +27,17 @@ public class ProductService {
     public List<Product> getProductsByCategoryWithFilter(int categoryId, Double minPrice, Double maxPrice, String sort) {
         return productDao.findByCategoryWithFilter(categoryId, minPrice, maxPrice, sort);
     }
-    public List<Product> getProductFilter(String productName){
-        return productDao.getProductFilter(productName);
+    public List<Product> getProductSearch(String productName){
+        if(productName==null){
+            productName="";
+        }
+        return productDao.getProductSearch(productName);
     }
+    public List<Product> getProductSearch(String productName,String sort){
+        if(productName==null){
+            productName="";
+        }
+        return productDao.getProductSearch(productName,sort);
+    }
+
 }
