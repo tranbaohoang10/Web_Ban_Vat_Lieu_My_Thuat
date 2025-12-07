@@ -27,23 +27,34 @@ public class LoginController extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+        // 1. Validate rỗng (giữ của nhánh Login-register)
+        if (email == null || password == null || email.isBlank() || password.isBlank()) {
+            req.setAttribute("error", "Vui lòng nhập email và mật khẩu!");
+            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+            return;
+        }
+
+        // 2. Gọi login 1 lần
         Users users = userService.login(email, password);
-        if (users != null) {
-            HttpSession session = req.getSession();
-            session.setAttribute("currentUser", users);
-            resp.sendRedirect("IndexKhachHang.jsp");
-        }
-        else {
-            req.setAttribute("error", "Email hoac mat khau khong dung!");
 
-            RequestDispatcher rd = req.getRequestDispatcher("DangNhap.jsp");
-            rd.forward(req, resp);
+        // 3. Sai tài khoản/mật khẩu
+        if (users == null) {
+            req.setAttribute("error", "Sai email hoặc mật khẩu");
+            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+            return;
         }
+
+        // 4. Đúng -> lưu vào session với tên currentUser (đúng với Header.jsp của bạn)
+        HttpSession session = req.getSession(true);
+        session.setAttribute("currentUser", users);
+        session.setMaxInactiveInterval(30 * 60); // 30 phút
+
+        // 5. Redirect về home
+        resp.sendRedirect(req.getContextPath() + "/home");
     }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("DangNhap.jsp");
-        rd.forward(req, resp);
+        // Hiển thị trang đăng nhập
+        req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
     }
 }

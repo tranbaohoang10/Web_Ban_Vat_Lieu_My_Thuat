@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     /* Begin header */
     #header-trang-chu {
@@ -25,6 +26,7 @@
 
     #header-trang-chu .tim-kiem-san-pham {
         position: relative;
+        display: flex;
     }
 
     #header-trang-chu .tim-kiem-san-pham input {
@@ -34,22 +36,30 @@
         border: none;
     }
 
-    #header-trang-chu .tim-kiem-san-pham {
-        display: flex;
-    }
-
-    #header-trang-chu .tim-kiem-san-pham i {
+    /* NÚT KÍNH LÚP */
+    #header-trang-chu .tim-kiem-san-pham .btn-search {
         position: absolute;
         right: 0;
+        top: 0;
         width: 50px;
         height: 100%;
         background-color: #0b234d;
-        line-height: 40px;
+        border: none;
         cursor: pointer;
-        color: white;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
+    /* Icon bên trong */
+    #header-trang-chu .tim-kiem-san-pham .btn-search i {
+        color: white;
+        font-size: 16px;
+    }
+
 
     #header-trang-chu .header-contact {
         display: flex;
@@ -107,12 +117,20 @@
 
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
         margin-left: 15px;
+        max-width: 100px;
+        overflow: hidden;
     }
 
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
         color: white;
         font-weight: 600;
         font-size: 18px;
+
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangki {
@@ -162,7 +180,9 @@
             background-color: red;
         }
     }
-
+    a{
+        text-decoration: none;
+    }
     /* End header */
 </style>
 <header id="header-trang-chu" class="trang-chu">
@@ -173,9 +193,15 @@
             <img src="./assets/images/logo/logo.png" alt>
         </a>
     </div>
-    <form action class="tim-kiem-san-pham">
-        <input type="text" name placeholder="Tìm kiếm sản phẩm...">
-        <i class="fa-solid fa-magnifying-glass"></i>
+    <form action="${pageContext.request.contextPath}/search"
+          method="get"
+          class="tim-kiem-san-pham">
+        <input type="text"
+               name="keyword"
+               placeholder="Tìm kiếm sản phẩm...">
+        <button type="submit" class="btn-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
     </form>
     <div class="header-contact">
         <i class="fa-solid fa-phone"></i>
@@ -184,15 +210,34 @@
             <div class="contact-phone-help">Hỗ trợ khách hàng</div>
         </div>
     </div>
-    <a href="DangNhap.html" class="link header-dangnhap-dangki">
-        <i class="fa-solid fa-user"></i>
-        <div class="dangnhap-dangki">
-            <div class="dangnhap">Đăng nhập</div>
-            <div class="dangki">Đăng kí</div>
-        </div>
-    </a>
+    <c:choose>
+        <%-- Đã đăng nhập --%>
+        <c:when test="${not empty sessionScope.currentUser}">
+            <div class="header-dangnhap-dangki">
+                <i class="fa-solid fa-user"></i>
+                <div class="dangnhap-dangki">
+                    <!-- đổi 'fullName' cho đúng với field trong Users (name, username, ten, ...) -->
+                    <div class="dangnhap">Hi, ${sessionScope.currentUser.fullName}</div>
+                    <div class="dangki">
+                        <a href="${pageContext.request.contextPath}/logout" style="color: white;">
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </c:when>
 
-    </div>
+        <%-- Chưa đăng nhập --%>
+        <c:otherwise>
+            <a href="login" class="link header-dangnhap-dangki">
+                <i class="fa-solid fa-user"></i>
+                <div class="dangnhap-dangki">
+                    <div class="dangnhap">Đăng nhập</div>
+                    <div class="dangki">Đăng kí</div>
+                </div>
+            </a>
+        </c:otherwise>
+    </c:choose>
     <a href="GioHang.html" class="link header-giohang" id="cartIcon"
        data-count="0">
         <i class="fa-solid fa-bag-shopping"></i>
