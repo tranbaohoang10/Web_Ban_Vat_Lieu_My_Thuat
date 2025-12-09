@@ -61,22 +61,19 @@
 
 
     #section-main .section-main-content {
-        width: 85%;
-        /* padding: 15px; */
-
-
+        width: 100%;
+        padding: 0 30px;
     }
 
 
     #section-main .section-main-content .section-main-content-image img {
-        width: calc(100% - 60px);
+        width: 100%;
         margin-top: 30px;
-        margin-left: 30px;
         border-radius: 20px;
     }
 
     #section-main .section-main-content .section-main-content-list {
-        margin-left: 30px;
+        /* margin được xử lý bởi padding của parent */
     }
 
     #section-main .section-main-content .section-main-content-list .list-product {
@@ -90,13 +87,17 @@
         border-radius: 15px;
         background-color: #F8FAFF;
         border: 1px solid #D7E5FF;
-        width: calc(25% - 20px);
+        width: calc(25% - 17px);
         cursor: pointer;
+        display: flex;
+        flex-direction: column;
     }
 
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 img {
         border-radius: 15px;
         width: 100%;
+        height: 250px;
+        object-fit: cover;
     }
 
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content-socials {
@@ -110,6 +111,10 @@
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content {
         padding: 0 15px 15px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-between;
     }
 
     /* chu y */
@@ -242,7 +247,6 @@
         align-items: center;
         justify-content: end;
         margin-bottom: 30px;
-        margin-right: 15px;
         margin-top: 30px;
     }
 
@@ -278,7 +282,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin: 10px 30px 20px;
+        margin: 10px 0 20px;
         gap: 12px;
     }
 
@@ -358,12 +362,18 @@
 
                         <!-- sort hiện tại -->
                         <input type="hidden" name="sort" id="sortInput"
-                               value="${empty param.sort ? 'soldDesc' : param.sort}"/>
+                               value="${param.sort}"/>
 
                         <div class="search-sort-tabs">
                 <span class="sort-option
-                      <c:if test='${param.sort == "soldDesc" || empty param.sort}'>active</c:if>"
-                      data-sort="soldDesc">
+                      <c:if test='${empty param.sort}'>active</c:if>"
+                      data-sort="">
+                    Tất cả
+                </span>
+
+                            <span class="sort-option
+                      <c:if test='${param.sort == "soldDesc"}'>active</c:if>"
+                                  data-sort="soldDesc">
                     Bán chạy
                 </span>
 

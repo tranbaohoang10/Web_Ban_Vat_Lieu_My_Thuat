@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        // 4. Đúng -> lưu vào session với tên currentUser (đúng với Header.jsp của bạn)
+        // 4. Đúng -> lưu vào session với tên currentUser
         HttpSession session = req.getSession(true);
         session.setAttribute("currentUser", users);
         session.setMaxInactiveInterval(30 * 60); // 30 phút
