@@ -240,8 +240,10 @@
             </a>
         </c:otherwise>
     </c:choose>
-    <a href="GioHang.html" class="link header-giohang" id="cartIcon"
-        data-count="0">
+    <a href="${pageContext.request.contextPath}/Cart.jsp"
+       class="link header-giohang"
+       id="cartIcon"
+       data-count="${empty sessionScope.cartCount ? 0 : sessionScope.cartCount}">
         <i class="fa-solid fa-bag-shopping"></i>
     </a>
 

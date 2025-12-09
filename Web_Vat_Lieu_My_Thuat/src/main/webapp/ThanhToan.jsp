@@ -572,7 +572,7 @@
 
 <nav>
     <div class="breadcrumb">
-        <a href="GioHang.jsp">Giỏ hàng</a>
+        <a href="Cart.jsp">Giỏ hàng</a>
         <span>/</span>
         <span>Thông tin giao hàng</span>
     </div>

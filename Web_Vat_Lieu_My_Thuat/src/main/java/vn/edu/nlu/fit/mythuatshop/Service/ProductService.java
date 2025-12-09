@@ -39,5 +39,7 @@ public class ProductService {
         }
         return productDao.getProductSearch(productName,sort);
     }
-
+    public Product getProductById(int productId) {
+        return productDao.findByProductId(productId);
+    }
 }

@@ -1160,26 +1160,35 @@
                     </div>
                 </div>
 
-                <div class="quantity-section">
-                    <div class="variant-label">Số lượng:</div>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
-                        <input type="number" class="quantity-input"
-                               value="1" min="1" id="quantity">
-                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                <form action="${pageContext.request.contextPath}/AddToCartController?action=add"
+                      method="post" id="addToCartForm">
+
+                    <!-- truyền id sản phẩm cho controller -->
+                    <input type="hidden" name="productId" value="${product.id}"/>
+
+                    <div class="quantity-section">
+                        <div class="variant-label">Số lượng:</div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <!-- QUAN TRỌNG: thêm name="quantity" -->
+                            <input type="number" class="quantity-input"
+                                   id="quantity" name="quantity"
+                                   value="1" min="1">
+                            <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="product-actions">
-                    <button class="btn btn-add-cart" id="addToCartBtn">
-                        <i class="fa-solid fa-cart-plus"></i>
-                        THÊM VÀO GIỎ
-                    </button>
+                    <div class="product-actions">
+                        <button type="submit" class="btn btn-add-cart" id="addToCartBtn">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            THÊM VÀO GIỎ
+                        </button>
 
-                    <a href="ThanhToan.html" class="btn btn-buy-now link">
-                        MUA NGAY
-                    </a>
-                </div>
+                        <a href="ThanhToan.html" class="btn btn-buy-now link">
+                            MUA NGAY
+                        </a>
+                    </div>
+                </form>
             </div> <!-- /product-info -->
 
         </div> <!-- /product-detail -->
@@ -1195,7 +1204,7 @@
                 <div class="list-product">
                     <c:forEach var="p" items="${relatedProducts}">
                         <div class="list-product-list1">
-                            <a href="${pageContext.request.contextPath}/DetailsProductController?id=${rp.id}">
+                            <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
                                 <img src="${p.thumbnail}" alt="${p.name}">
                                 <div class="list-product-list1-content">
                                     <div class="list-product-list1-content-socials">
@@ -1353,25 +1362,31 @@
 
     addToCartBtn = document.getElementById('addToCartBtn');
     addToCartBtn.addEventListener('click', function () {
-        // Thêm animation cho nút
+        // animation cho nút
         addToCartBtn.classList.add('adding');
         setTimeout(() => {
             addToCartBtn.classList.remove('adding');
         }, 600);
 
-        showToastNotification();
+        // Lấy số lượng user chọn
+        const qtyInput = document.getElementById('quantity');
+        const qty = parseInt(qtyInput.value) || 1;
 
         const cartIcon = document.getElementById('cartIcon');
         if (cartIcon) {
             cartIcon.classList.add('cart-updated');
+
+            // cập nhật tạm thời số lượng hiển thị ở header (client-side)
+            const currentCount = parseInt(cartIcon.getAttribute('data-count')) || 0;
+            cartIcon.setAttribute('data-count', currentCount + qty);
+
             setTimeout(() => {
                 cartIcon.classList.remove('cart-updated');
             }, 600);
-
-            // Cập nhật số lượng sản phẩm trong giỏ
-            const currentCount = parseInt(cartIcon.getAttribute('data-count')) || 0;
-            cartIcon.setAttribute('data-count', currentCount + 1);
         }
+
+        showToastNotification();
+
     });
 
     function showToastNotification() {
