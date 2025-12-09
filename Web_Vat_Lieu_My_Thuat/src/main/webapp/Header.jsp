@@ -188,17 +188,17 @@
 <header id="header-trang-chu" class="trang-chu">
     <div class="logo-trang-chu">
 
-        <a href="index.html">
+        <a href="${pageContext.request.contextPath}/home">
 
             <img src="./assets/images/logo/logo.png" alt>
         </a>
     </div>
     <form action="${pageContext.request.contextPath}/search"
-          method="get"
-          class="tim-kiem-san-pham">
+        method="get"
+        class="tim-kiem-san-pham">
         <input type="text"
-               name="keyword"
-               placeholder="Tìm kiếm sản phẩm...">
+            name="keyword"
+            placeholder="Tìm kiếm sản phẩm...">
         <button type="submit" class="btn-search">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -217,9 +217,11 @@
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
                     <!-- đổi 'fullName' cho đúng với field trong Users (name, username, ten, ...) -->
-                    <div class="dangnhap">Hi, ${sessionScope.currentUser.fullName}</div>
+                    <div class="dangnhap">Hi,
+                        ${sessionScope.currentUser.fullName}</div>
                     <div class="dangki">
-                        <a href="${pageContext.request.contextPath}/logout" style="color: white;">
+                        <a href="${pageContext.request.contextPath}/logout"
+                            style="color: white;">
                             Đăng xuất
                         </a>
                     </div>
@@ -239,7 +241,7 @@
         </c:otherwise>
     </c:choose>
     <a href="GioHang.html" class="link header-giohang" id="cartIcon"
-       data-count="0">
+        data-count="0">
         <i class="fa-solid fa-bag-shopping"></i>
     </a>
 

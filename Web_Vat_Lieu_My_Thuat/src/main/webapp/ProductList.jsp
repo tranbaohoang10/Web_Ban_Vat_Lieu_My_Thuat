@@ -9,7 +9,7 @@
             <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                     <div class="list-product-list1-content-socials-1">
-                        <i class="fa-solid fa-thumbs-up"></i><span>New</span>
+                        <%@ include file="BadgeType.jsp" %>
                     </div>
                     <div class="list-product-list1-content-socials-2">
                         <i class="fa-solid fa-arrow-up-right-dots"></i>
@@ -36,7 +36,7 @@
                         -${p.discountDefault}%
                     </span>
                     <div class="button">
-                        <a href="ChiTietSanPham.jsp">
+                        <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
                             <button class="btn-xemchitiet">
                                 <i class="fa-solid fa-eye"></i>
                                 Xem chi tiết
