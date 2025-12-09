@@ -13,4 +13,18 @@ public class UserService {
     public Users login(String email, String password) {
         return userDao.findByEmailAndPassword(email, password);
     }
+    public boolean register(String fullName, String email, String phoneNumber, String password) {
+        if(userDao.findByEmail(email)!=null){
+            return false;
+        }
+        Users user = new Users();
+        user.setFullName(fullName);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhoneNumber(phoneNumber);
+        user.setRole("USER");
+
+        int row =   userDao.insertUser(user);
+        return row>0;
+    }
 }

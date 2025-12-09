@@ -228,14 +228,23 @@
         </c:when>
 
         <%-- Chưa đăng nhập --%>
+<%--        <c:otherwise>--%>
+<%--            <a href="login" class="link header-dangnhap-dangki">--%>
+<%--                <i class="fa-solid fa-user"></i>--%>
+<%--                <div class="dangnhap-dangki">--%>
+<%--                    <div class="dangnhap">Đăng nhập</div>--%>
+<%--                    <div class="dangki">Đăng kí</div>--%>
+<%--                </div>--%>
+<%--            </a>--%>
+<%--        </c:otherwise>--%>
         <c:otherwise>
-            <a href="login" class="link header-dangnhap-dangki">
+            <div class="link header-dangnhap-dangki">
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
-                    <div class="dangnhap">Đăng nhập</div>
-                    <div class="dangki">Đăng kí</div>
+                    <a href="login" class="dangnhap">Đăng nhập</a>
+                    <a href="register" class="dangki">Đăng kí</a>
                 </div>
-            </a>
+            </div>
         </c:otherwise>
     </c:choose>
     <a href="GioHang.html" class="link header-giohang" id="cartIcon"

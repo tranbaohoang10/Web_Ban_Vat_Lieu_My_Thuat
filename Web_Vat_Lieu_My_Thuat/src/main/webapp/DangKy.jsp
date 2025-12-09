@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -209,7 +210,8 @@
     <div class="container">
         <h2>Đăng Ký</h2>
 
-        <form action class="infor">
+
+        <form action = "${pageContext.request.contextPath}/register" method="post" class="infor">
             <div class="tt-chitiet" style="grid-column: span 2;">
                 <label for="Ho">Họ và Tên:</label>
                 <input type="text" id="Ho" name="fullName"
@@ -237,6 +239,9 @@
                        placeholder="Mật khẩu" required>
                 <i class="hide-display" id="togglePassword"
                    style="position:absolute; right:10px; top:38px; cursor:pointer;"></i>
+                <c:if test="${not empty error}">
+                <p style="color: red;padding : 10px" >${error}</p>
+            </c:if>
             </div>
 
             <button type="submit" class="btn-DangKy"
@@ -259,17 +264,17 @@
     </div>
 </div>
 <%@ include file="Footer.jsp" %>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('.infor');
+<%--<script>--%>
+<%--    document.addEventListener('DOMContentLoaded', function () {--%>
+<%--        const form = document.querySelector('.infor');--%>
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+<%--        form.addEventListener('submit', function (e) {--%>
+<%--            e.preventDefault();--%>
 
-            alert('Đăng ký thành công!');
-        });
-    });
-</script>
+<%--            alert('Đăng ký thành công!');--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 </body>
 
 </html>
