@@ -352,6 +352,7 @@
     }
 
 
+
     /* End section main */
 </style>
 
@@ -426,9 +427,9 @@
                                     <img src="${p.thumbnail}" alt="${p.name}">
                                     <div class="list-product-list1-content">
                                         <div class="list-product-list1-content-socials">
-                                            <div class="list-product-list1-content-socials-1">
-                                                <i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                            </div>
+                                            <%@ include file="BadgeType.jsp" %>
+
+
                                             <div class="list-product-list1-content-socials-2">
                                                 <i class="fa-solid fa-arrow-up-right-dots"></i>
                                                 <span>Đã bán ${p.soldQuantity}</span>
@@ -498,9 +499,8 @@
                                     <img src="${p.thumbnail}" alt="${p.name}">
                                     <div class="list-product-list1-content">
                                         <div class="list-product-list1-content-socials">
-                                            <div class="list-product-list1-content-socials-1">
-                                                <i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                            </div>
+                                            <%@ include file="BadgeType.jsp" %>
+
                                             <div class="list-product-list1-content-socials-2">
                                                 <i class="fa-solid fa-arrow-up-right-dots"></i>
                                                 <span>Đã bán ${p.soldQuantity}</span>

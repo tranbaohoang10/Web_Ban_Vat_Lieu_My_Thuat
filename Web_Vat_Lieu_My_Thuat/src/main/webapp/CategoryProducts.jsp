@@ -273,6 +273,9 @@
         background-color: #2659F3;
         color: white;
     }
+    .category-title {
+        text-transform: uppercase;
+    }
 
     /* End section-main */
 
@@ -297,7 +300,7 @@
                 <img src="${category.thumbnail}" alt="${categoty.categotyName}">
             </div>
             <div class="section-main-content-list">
-                <h2 class="header">${category.categoryName}</h2>
+                <h2 class="header category-title ">${category.categoryName}</h2>
                 <div class="list-product" id="productList">
                     <%@ include file="ProductList.jsp" %>
                 </div>

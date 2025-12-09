@@ -127,6 +127,23 @@ public class Product implements Serializable {
     public boolean isOutOfStock() {
         return quantityStock <= 0;
     }
+    public String getBadgeType() {
+        if (discountDefault > 0) {
+            return "SALE";
+        }
+        if (soldQuantity > 50) {
+            return "HOT";
+        }
+        if (createAt != null) {
+            long now = System.currentTimeMillis();
+            long diff = now - createAt.getTime(); // millis
+            long days = diff / (1000L * 60 * 60 * 24);
+            if (days <= 30) {
+                return "NEW";
+            }
+        }
+        return "";
+    }
 
     @Override
     public String toString() {

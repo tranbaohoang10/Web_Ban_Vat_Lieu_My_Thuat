@@ -1193,22 +1193,21 @@
 
             <div class="section-but-content">
                 <div class="list-product">
-                    <c:forEach var="rp" items="${relatedProducts}">
+                    <c:forEach var="p" items="${relatedProducts}">
                         <div class="list-product-list1">
                             <a href="${pageContext.request.contextPath}/DetailsProductController?id=${rp.id}">
-                                <img src="${rp.thumbnail}" alt="${rp.name}">
+                                <img src="${p.thumbnail}" alt="${p.name}">
                                 <div class="list-product-list1-content">
                                     <div class="list-product-list1-content-socials">
-                                        <div class="list-product-list1-content-socials-1">
-                                            <i class="fa-solid fa-thumbs-up"></i><span>New</span>
-                                        </div>
+                                        <%@ include file="BadgeType.jsp" %>
+
                                         <div class="list-product-list1-content-socials-2">
                                             <i class="fa-solid fa-arrow-up-right-dots"></i>
-                                            <span>Đã bán ${rp.soldQuantity}</span>
+                                            <span>Đã bán ${p.soldQuantity}</span>
                                         </div>
                                     </div>
                                     <div class="list-product-list1-content-description">
-                                        <p class="content">${rp.name}</p>
+                                        <p class="content">${p.name}</p>
 
                                         <div class="star">
                                             <i class="fa-solid fa-star"></i>
@@ -1220,14 +1219,14 @@
                                         </div>
 
                                         <h2 class="price-product-after">
-                                            <fmt:formatNumber value="${rp.priceAfterDiscount}" type="number"/>₫
+                                            <fmt:formatNumber value="${p.priceAfterDiscount}" type="number"/>₫
 
                                         </h2>
                                         <p class="price-product-before">
-                                            <fmt:formatNumber value="${rp.price}" type="number"/>₫
+                                            <fmt:formatNumber value="${p.price}" type="number"/>₫
                                         </p>
                                         <span class="price-product-discount">
-                                        -${rp.discountDefault}%
+                                        -${p.discountDefault}%
                                     </span>
 
                                         <div class="button">
