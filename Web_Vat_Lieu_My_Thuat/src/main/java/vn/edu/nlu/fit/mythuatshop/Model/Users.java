@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.mythuatshop.Model;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Users {
     private int id;
@@ -8,11 +9,13 @@ public class Users {
     private String email;
     private String password;
     private String phoneNumber;
-    private LocalDateTime dob;
+    private LocalDate dob;
     private String address;
     private String role;
     private LocalDateTime createAt;
-    public Users() {};
+
+
+    ;
 
     public int getId() {
         return id;
@@ -54,11 +57,11 @@ public class Users {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDateTime getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(LocalDateTime dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 

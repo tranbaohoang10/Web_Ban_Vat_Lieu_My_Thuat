@@ -310,7 +310,7 @@
             </button>
 
             <div class="chuataikhoan">
-                Bạn chưa có tài khoản <a href="DangKy.jsp"
+                Bạn chưa có tài khoản <a href= "${pageContext.request.contextPath}/register"
                                          class="link-dki">Đăng ký tại đây</a>
             </div>
 
