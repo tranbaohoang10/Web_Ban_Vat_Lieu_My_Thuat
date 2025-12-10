@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List,java.util.ArrayList" %>
 <%@ page import="vn.edu.nlu.fit.mythuatshop.Model.Users" %>
+<%@ page import="vn.edu.nlu.fit.mythuatshop.Model.Cart" %>
 <%@ page import="vn.edu.nlu.fit.mythuatshop.Model.CartItem" %>
 <%@ page import="vn.edu.nlu.fit.mythuatshop.Model.Product" %>
 <%@ page import="vn.edu.nlu.fit.mythuatshop.Service.ProductService" %>
@@ -26,13 +27,13 @@
     }
 
     // 2. Lấy giỏ hàng từ session
-    List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+    Cart cart = (Cart) session.getAttribute("cart");
     if (cart == null) {
-        cart = new ArrayList<>();
+        cart = new Cart();
     }
 
-    // 3. Đếm số lượng sản phẩm + chuẩn bị tính tổng tiền
-    int totalQuantity = cart.size();   // số loại sản phẩm
+    // 3. Đếm tổng số lượng sản phẩm
+    int totalQuantity = cart.getTotalQuantity();
     long totalAmount = 0;
 
     ProductService productService = new ProductService();
@@ -115,10 +116,20 @@
     }
 
     .item-grid {
-        display: flex;
-        grid-template-columns: 84px 1fr auto auto;
+        display: grid;
+        grid-template-columns: auto 80px 1fr auto auto;
         align-items: center;
-        gap: 14px;
+        gap: 16px;
+    }
+
+    .product-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .product-info {
+        flex: 1;
+        min-width: 0;
     }
 
     .thumb {
@@ -190,13 +201,38 @@
         border-left: 1px solid #e5e7eb;
     }
 
+    .qty-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .qty-btn:hover {
+        background: #f3f4f6;
+        border-color: #2659F3;
+        color: #2659F3;
+    }
+
     .price {
         font-weight: 600;
         color: #ef4444;
         font-size: 18px;
+        min-width: 120px;
+        text-align: right;
     }
 
-    .summary .head {
+    .qty-wrap {
+        position: relative;
+        display: inline-block;
+        margin-left: auto;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -254,6 +290,7 @@
     .qty-wrap {
         position: relative;
         display: inline-block;
+        margin-left: auto;
     }
 
     .Xoa-sp {
@@ -275,6 +312,25 @@
         z-index: 2;
     }
 
+    .qty-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .qty-btn:hover {
+        background: #f3f4f6;
+        border-color: #2659F3;
+        color: #2659F3;
+    }
 
     /* từ sửa sau */
     html,
@@ -298,8 +354,28 @@
     /* end style shopping cart */
 </style>
 <script>
+    function increaseQty(productId) {
+        const input = document.getElementById('qty-' + productId);
+        let currentQty = parseInt(input.value, 10);
+        if (isNaN(currentQty)) currentQty = 0;
+        currentQty++;
+        input.value = currentQty;
+        updateCartItem(productId, currentQty);
+    }
+
+    function decreaseQty(productId) {
+        const input = document.getElementById('qty-' + productId);
+        let currentQty = parseInt(input.value, 10);
+        if (isNaN(currentQty)) currentQty = 1;
+        if (currentQty > 1) {
+            currentQty--;
+            input.value = currentQty;
+            updateCartItem(productId, currentQty);
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
-        const updateUrl = '<%=request.getContextPath()%>/AddToCartController?action=ajaxUpdate';
+        const updateUrl = '<%=request.getContextPath()%>/AddToCart?action=ajaxUpdate';
 
         const qtyInputs = document.querySelectorAll('.qty-input');
 
@@ -314,51 +390,57 @@
                 updateCartItem(productId, quantity);
             });
         });
-
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('vi-VN').format(value) + 'đ';
-        }
-
-        function updateCartItem(productId, quantity) {
-            const params =
-                'productId=' + encodeURIComponent(productId) +
-                '&quantity=' + encodeURIComponent(quantity);
-
-            fetch(updateUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                },
-                body: params
-            })
-                .then(resp => resp.json())
-                .then(data => {
-                    if (!data.success) {
-                        console.error('Update cart failed');
-                        return;
-                    }
-
-                    // cập nhật thành tiền từng dòng
-                    const subSpan = document.getElementById('subtotal-' + productId);
-                    if (subSpan) {
-                        subSpan.textContent = formatCurrency(data.itemSubtotal);
-                    }
-
-                    // cập nhật tổng tiền
-                    const totalSpan = document.querySelector('.thanh-tien');
-                    if (totalSpan) {
-                        totalSpan.textContent = formatCurrency(data.totalAmount);
-                    }
-
-                    // cập nhật số trên icon giỏ hàng
-                    const cartIcon = document.getElementById('cartIcon');
-                    if (cartIcon) {
-                        cartIcon.setAttribute('data-count', data.cartCount);
-                    }
-                })
-                .catch(err => console.error(err));
-        }
     });
+
+    function formatCurrency(value) {
+        return new Intl.NumberFormat('vi-VN').format(value) + 'đ';
+    }
+
+    function updateCartItem(productId, quantity) {
+        const updateUrl = '<%=request.getContextPath()%>/AddToCart?action=ajaxUpdate';
+        const params =
+            'productId=' + encodeURIComponent(productId) +
+            '&quantity=' + encodeURIComponent(quantity);
+
+        fetch(updateUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: params
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (!data.success) {
+                    console.error('Update cart failed');
+                    return;
+                }
+
+                // cập nhật thành tiền từng dòng
+                const subSpan = document.getElementById('subtotal-' + productId);
+                if (subSpan) {
+                    subSpan.textContent = formatCurrency(data.itemSubtotal);
+                }
+
+                // cập nhật tổng tiền
+                const totalSpan = document.querySelector('.thanh-tien');
+                if (totalSpan) {
+                    totalSpan.textContent = formatCurrency(data.totalAmount);
+                }
+
+                // cập nhật số trên icon giỏ hàng
+                const cartIcon = document.getElementById('cartIcon');
+                if (cartIcon) {
+                    cartIcon.setAttribute('data-count', data.cartCount);
+                }
+                // cập nhật tổng sản phẩm sản phẩm
+                const cartTotalQty = document.getElementById('cart-total-quantity');
+                if (cartTotalQty) {
+                    cartTotalQty.textContent = data.cartCount;
+                }
+            })
+            .catch(err => console.error(err));
+    }
 </script>
 
 <body>
@@ -372,20 +454,25 @@
             <div class="card-body">
                 <h2 class="card-title">Giỏ hàng của bạn</h2>
                 <p class="subtle">
-                    Bạn đang có <%= totalQuantity %> sản phẩm trong giỏ hàng
+                    Bạn đang có <span id="cart-total-quantity"><%=
+                totalQuantity %></span> sản phẩm trong giỏ
+                    hàng
                 </p>
                 <div class="divider"></div>
 
-                <form action="${pageContext.request.contextPath}/AddToCartController?action=update" method="post">
+                <form
+                        action="${pageContext.request.contextPath}/AddToCart?action=update"
+                        method="post">
                     <div class="cart-list">
                         <%
-                            if (cart.isEmpty()) {
+                            if (cart.cartSize() == 0) {
                         %>
                         <p>Giỏ hàng của bạn đang trống.</p>
                         <%
                         } else {
-                            for (CartItem item : cart) {
-                                Product p = productService.getProductById(item.getProductId());
+                            for (CartItem item : cart.getCarts().values()) {
+                                Product p =
+                                        productService.getProductById(item.getProductId());
                                 if (p == null) continue;
 
                                 int qty = item.getQuantity();
@@ -398,40 +485,66 @@
                             <div class="item">
                                 <div class="item-grid">
                                     <div class="select-product">
-                                        <input type="checkbox" checked/>
+                                        <input type="checkbox"
+                                               checked/>
                                     </div>
 
                                     <div class="thumb">
-                                        <img src="<%= p.getThumbnail() %>" alt="<%= p.getName() %>"/>
+                                        <img
+                                                src="<%= p.getThumbnail() %>"
+                                                alt="<%= p.getName() %>"/>
                                     </div>
 
-                                    <div>
-                                        <div class="meta-title"><%= p.getName() %></div>
-                                        <div class="muted">Mã SP: <%= p.getId() %></div>
+                                    <div class="product-info">
+                                        <div class="meta-title"><%=
+                                        p.getName() %>
+                                        </div>
+                                        <div class="muted">Mã SP: <%=
+                                        p.getId() %>
+                                        </div>
                                     </div>
 
                                     <div class="price">
-    <span class="price-value"
-          id="subtotal-<%= p.getId() %>">
-        <%= String.format("%,d₫", subTotal) %>
-    </span>
+                                                <span class="price-value"
+                                                      id="subtotal-<%= p.getId() %>">
+                                                    <%= String.format("%,d₫",
+                                                            subTotal) %>
+                                                </span>
                                     </div>
 
                                     <div class="qty-wrap">
                                         <!-- nút Xóa -->
                                         <a class="Xoa-sp"
-                                           href="${pageContext.request.contextPath}/AddToCartController?action=remove&productId=<%= p.getId() %>"
+                                           href="${pageContext.request.contextPath}/AddToCart?action=remove&productId=<%= p.getId() %>"
                                            aria-label="Xóa sản phẩm">
-                                            <i class="fa-solid fa-xmark"></i>
+                                            <i
+                                                    class="fa-solid fa-xmark"></i>
                                         </a>
 
-                                        <input type="hidden" name="productId" value="<%= p.getId() %>"/>
+                                        <input type="hidden"
+                                               name="productId"
+                                               value="<%= p.getId() %>"/>
                                         <div class="qty">
+                                            <button type="button"
+                                                    class="qty-btn"
+                                                    onclick="decreaseQty(<%= p.getId() %>)">
+                                                <i
+                                                        class="fa-solid fa-minus"></i>
+                                            </button>
                                             <input type="number"
                                                    name="quantity"
-                                                   value="<%= qty %>" min="1"
+                                                   value="<%= qty %>"
+                                                   min="1"
                                                    class="qty-input"
-                                                   data-product-id="<%= p.getId() %>"/>
+                                                   id="qty-<%= p.getId() %>"
+                                                   data-product-id="<%= p.getId() %>"
+                                                   readonly/>
+                                            <button type="button"
+                                                    class="qty-btn"
+                                                    onclick="increaseQty(<%= p.getId() %>)">
+                                                <i
+                                                        class="fa-solid fa-plus"></i>
+                                            </button>
                                         </div>
                                     </div>
 
@@ -463,15 +576,19 @@
                 <div class="tinh-tien">
                     <p>Tổng tiền:</p>
                     <span class="thanh-tien">
-                        <%= String.format("%,dđ", totalAmount) %>
-                    </span>
+                                <%= String.format("%,dđ", totalAmount) %>
+                            </span>
                 </div>
 
-                <p class="muted">Phí vận chuyển sẽ được tính ở trang Thanh toán</p>
-                <p class="muted">Mã giảm giá được nhập ở trang Thanh toán</p>
+                <p class="muted">Phí vận chuyển sẽ được tính ở trang
+                    Thanh toán</p>
+                <p class="muted">Mã giảm giá được nhập ở trang Thanh
+                    toán</p>
 
                 <a href="ThanhToan.jsp">
-                    <button class="btn" <%= cart.isEmpty() ? "disabled" : "" %>>
+                    <button class="btn" <%=cart.cartSize() == 0 ?
+                            "disabled" :
+                            "" %>>
                         Đặt hàng
                     </button>
                 </a>
