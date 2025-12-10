@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -260,21 +261,25 @@
         text-align: center;
         line-height: 35px;
         text-decoration: none;
-        color: #ccc;
+        color: #666;
         border-radius: 50%;
+        transition: all 0.3s ease;
     }
 
-    #section-main .section-main-content .section-main-content-quantity a:nth-child(1) {
+    /* Trang được chọn - class active */
+    #section-main .section-main-content .section-main-content-quantity a.active {
         background-color: #2659F3;
         color: white;
+        border-color: #2659F3;
     }
 
     #section-main .section-main-content .section-main-content-quantity a:hover {
         background-color: #DEE2E6;
+        color: #333;
     }
 
-    #section-main .section-main-content .section-main-content-quantity a:nth-child(1):hover {
-        background-color: #2659F3;
+    #section-main .section-main-content .section-main-content-quantity a.active:hover {
+        background-color: #1a47c9;
         color: white;
     }
 
@@ -343,7 +348,16 @@
         <div class="section-main-content">
 
             <div class="section-main-content-list">
-                <h2 class="header">Kết quả tìm kiếm cho: "<c:out value="${keyword}"/>"</h2>
+                <h2 class="header">
+                    <c:choose>
+                        <c:when test="${totalProducts > 0}">
+                            Có ${totalProducts} kết quả tìm kiếm cho: "<c:out value="${keyword}"/>"
+                        </c:when>
+                        <c:otherwise>
+                            Kết quả tìm kiếm cho: "<c:out value="${keyword}"/>"
+                        </c:otherwise>
+                    </c:choose>
+                </h2>
 
                 <c:if test="${empty products}">
                     <p>Không tìm thấy sản phẩm nào.</p>
@@ -403,14 +417,15 @@
 
             </div>
             <div class="section-main-content-quantity">
-                <a href>1</a>
-                <a href>2</a>
-                <a href>3</a>
-                <a href>...</a>
-                <a href>9</a>
-                <a href><i class="fa-solid fa-angle-right"></i></a>
-                <a href><i class="fa-solid fa-angles-right"></i></a>
-
+                <c:if test="${totalPages > 1}">
+                    <c:forEach var="p" begin="1" end="${totalPages}">
+                        <a href="#" 
+                           class="page-link ${p == currentPage ? 'active' : ''}"
+                           data-page="${p}">
+                                ${p}
+                        </a>
+                    </c:forEach>
+                </c:if>
             </div>
         </div>
         </c:if>
@@ -463,6 +478,50 @@
                 // gọi AJAX
                 submitFilter();
             });
+        });
+
+        // Click vào phân trang
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('page-link')) {
+                e.preventDefault();
+                
+                const page = e.target.getAttribute('data-page');
+                const keyword = document.querySelector('input[name="keyword"]').value;
+                const sort = sortInput.value;
+                
+                // Gọi AJAX với page mới
+                const params = new URLSearchParams({
+                    keyword: keyword,
+                    sort: sort || '',
+                    page: page,
+                    ajax: '1'
+                });
+                
+                fetch('${pageContext.request.contextPath}/search?' + params.toString(), {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    productList.innerHTML = html;
+                    
+                    // Cập nhật active cho pagination
+                    document.querySelectorAll('.page-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('data-page') === page) {
+                            link.classList.add('active');
+                        }
+                    });
+                    
+                    // Scroll lên top của product list
+                    productList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                })
+                .catch(err => {
+                    console.error('Lỗi khi chuyển trang:', err);
+                });
+            }
         });
     });
 </script>
