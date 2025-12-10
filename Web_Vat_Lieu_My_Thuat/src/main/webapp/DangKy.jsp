@@ -175,10 +175,6 @@
         margin-left: 140px;
     }
 
-    /* .btn-fb{
-        background-color: #49669C;
-
-    } */
     .btn-dang-nhap-tt i {
         font-size: 16px;
     }
@@ -186,19 +182,19 @@
     .text-login {
         margin-top: 16px;
         text-align: center;
-        color: #ffffff; /* màu chữ “Bạn đã có tài khoản” */
+        color: #ffffff;
         font-size: 16px;
     }
 
     /* Style riêng cho link Đăng nhập */
     .text-login a {
-        color: #FFD700; /* màu vàng giống theme */
-        text-decoration: none; /* bỏ gạch chân */
+        color: #FFD700;
+        text-decoration: none;
         font-weight: 500;
     }
 
     .text-login a:hover {
-        text-decoration: underline; /* nếu muốn hover có gạch chân */
+        text-decoration: underline;
     }
 
 
@@ -229,7 +225,7 @@
 
             <div class="tt-chitiet">
                 <label for="sdt">Số điện thoại:</label>
-                <input type="text" id="sdt" name="phone"
+                <input type="text" id="sdt" name="phoneNumber"
                        placeholder="Số điện thoại">
             </div>
 
@@ -265,17 +261,7 @@
     </div>
 </div>
 <%@ include file="Footer.jsp" %>
-<%--<script>--%>
-<%--    document.addEventListener('DOMContentLoaded', function () {--%>
-<%--        const form = document.querySelector('.infor');--%>
 
-<%--        form.addEventListener('submit', function (e) {--%>
-<%--            e.preventDefault();--%>
-
-<%--            alert('Đăng ký thành công!');--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const params = new URLSearchParams(window.location.search);

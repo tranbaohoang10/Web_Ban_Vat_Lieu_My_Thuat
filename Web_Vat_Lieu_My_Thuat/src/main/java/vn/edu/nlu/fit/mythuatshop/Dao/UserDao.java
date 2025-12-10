@@ -47,7 +47,8 @@ public class UserDao {
                 handle.createUpdate(sql)
                         .bind("fullName", user.getFullName())
                         .bind("phoneNumber", user.getPhoneNumber())
-                        .bind("dob", user.getDob())       // có thể là java.sql.Date / Timestamp
+                        .bind("dob", user.getDob() != null ? java.sql.Date.valueOf(user.getDob()) : null)
+                        // có thể là java.sql.Date / Timestamp
                         .bind("address", user.getAddress())
                         .bind("id", user.getId())
                         .execute()

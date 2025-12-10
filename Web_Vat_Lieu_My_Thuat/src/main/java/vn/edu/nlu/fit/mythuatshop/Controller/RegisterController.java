@@ -34,9 +34,9 @@ public class RegisterController extends HttpServlet {
       String email = req.getParameter("email");
       String password = req.getParameter("password");
       String phoneNumber = req.getParameter("phoneNumber");
-//      String address = req.getParameter("address");
+      String address = req.getParameter("address");
 
-      boolean success = userService.register(fullName, email, phoneNumber, password);
+      boolean success = userService.register(fullName, email, phoneNumber, password, address);
       if(!success){
           req.setAttribute("error", "Email đã được sử dụng, vui lòng nhập email khác!");
           req.getRequestDispatcher("DangKy.jsp").forward(req,resp);

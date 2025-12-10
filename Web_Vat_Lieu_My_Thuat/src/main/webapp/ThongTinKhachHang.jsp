@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +15,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -350,12 +354,12 @@
 <div class="section-main-ca-nhan">
     <div class="container">
         <div class="canhan">
+
             <div class="tongquan-canhan">
                 <div class="logo-name">
-                    HT
+                    ${fn:toUpperCase(fn:substring(sessionScope.currentUser.fullName, 0, 1))}
                 </div>
-                <p class="name-full">Xin chào, <span class="span">Hoàng
-            Trần</span></p>
+                <p class="name-full">Xin chào, ${sessionScope.currentUser.fullName}</p>
                 <div class="list-canhan">
                     <a href><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
                     <a href="LichSuMuaHang.jsp"><i class="fa-solid fa-box-open"></i>
@@ -393,23 +397,27 @@
                     <input type="text" id="diachi" name="address"
                            value="${sessionScope.currentUser.address}">
                     <br>
-
-                    <c:if test="${not empty success}">
-                        <div class="alert alert-success">
-                            ✔ ${success}
-                        </div>
-                    </c:if>
-                    <c:if test="${not empty error}">
-                        <div class="alert alert-error">
-                            ✖ ${error}
-                        </div>
-                    </c:if>
                     <input type="submit" value="Cập nhật thông tin" class="button">
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get("success") === "true") {
+            Swal.fire({
+                icon: 'success',
+                title: 'Cập nhật thông tin thành công!',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    });
+</script>
+
 <!-- End section main -->
 <%@ include file="Footer.jsp" %>
 </body>

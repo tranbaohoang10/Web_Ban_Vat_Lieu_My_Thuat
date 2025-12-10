@@ -26,7 +26,7 @@ public class UserService {
        return user;
     }
 
-    public boolean register(String fullName, String email, String phoneNumber, String password) {
+    public boolean register(String fullName, String email, String phoneNumber, String password, String address) {
         if(userDao.findByEmail(email)!=null){
             return false;
         }
@@ -56,8 +56,7 @@ public class UserService {
 
         if(dobStr!=null && !dobStr.isEmpty()){
             LocalDate ld = LocalDate.parse(dobStr);
-            LocalDateTime dob = ld.atStartOfDay();
-            user.setDob(dob);
+            user.setDob(ld);
         }
         int row = userDao.updateUser(user);
         return row>0;
