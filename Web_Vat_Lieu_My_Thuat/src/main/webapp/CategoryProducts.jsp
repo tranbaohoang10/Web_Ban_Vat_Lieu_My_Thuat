@@ -12,7 +12,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
     .container {
@@ -237,42 +237,6 @@
         color: white;
     }
 
-    #section-main .section-main-content .section-main-content-quantity {
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        margin-bottom: 30px;
-        margin-right: 15px;
-        margin-top: 30px;
-    }
-
-    #section-main .section-main-content .section-main-content-quantity a {
-        display: inline-block;
-        width: 35px;
-        height: 35px;
-        background-color: transparent;
-        border: 1px solid #ddd;
-        margin: 10px;
-        text-align: center;
-        line-height: 35px;
-        text-decoration: none;
-        color: #ccc;
-        border-radius: 50%;
-    }
-
-    #section-main .section-main-content .section-main-content-quantity a:nth-child(1) {
-        background-color: #2659F3;
-        color: white;
-    }
-
-    #section-main .section-main-content .section-main-content-quantity a:hover {
-        background-color: #DEE2E6;
-    }
-
-    #section-main .section-main-content .section-main-content-quantity a:nth-child(1):hover {
-        background-color: #2659F3;
-        color: white;
-    }
     .category-title {
         text-transform: uppercase;
     }
@@ -297,25 +261,19 @@
         <%@ include file="Menu.jsp" %>
         <div class="section-main-content">
             <div class="section-main-content-image">
-                <img src="${category.thumbnail}" alt="${categoty.categotyName}">
+                <img src="${category.thumbnail}"
+                     alt="${categoty.categotyName}">
             </div>
             <div class="section-main-content-list">
-                <h2 class="header category-title ">${category.categoryName}</h2>
+                <h2
+                        class="header category-title ">${category.categoryName}</h2>
                 <div class="list-product" id="productList">
                     <%@ include file="ProductList.jsp" %>
                 </div>
 
             </div>
-            <div class="section-main-content-quantity">
-                <a href>1</a>
-                <a href>2</a>
-                <a href>3</a>
-                <a href>...</a>
-                <a href>9</a>
-                <a href><i class="fa-solid fa-angle-right"></i></a>
-                <a href><i class="fa-solid fa-angles-right"></i></a>
+            <%@ include file="Pagination.jsp" %>
 
-            </div>
         </div>
     </div>
 </div>
@@ -323,6 +281,12 @@
 
 <!-- Begin footer-->
 <%@ include file="Footer.jsp" %>
+
+<script>
+    // Đặt URL cho pagination script
+    const paginationUrl = '${pageContext.request.contextPath}/category';
+</script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('filterForm');
@@ -351,6 +315,10 @@
                 .then(html => {
                     // thay toàn bộ danh sách sản phẩm
                     productList.innerHTML = html;
+
+                    // Cập nhật URL để giữ filter state (không reload trang)
+                    const newUrl = form.action + '?' + new URLSearchParams(formData).toString();
+                    window.history.pushState({}, '', newUrl);
                 })
                 .catch(err => {
                     console.error('Lỗi khi lọc sản phẩm:', err);
@@ -358,7 +326,7 @@
         }
     });
 </script>
-
+<%@ include file="PaginationScript.jsp" %>
 </body>
 
 </html>
