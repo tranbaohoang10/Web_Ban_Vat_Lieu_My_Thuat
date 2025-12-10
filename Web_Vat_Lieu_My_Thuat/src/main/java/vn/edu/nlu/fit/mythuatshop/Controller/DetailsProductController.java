@@ -15,6 +15,20 @@ import java.util.List;
 public class DetailsProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idStr = request.getParameter("id");
+        if (idStr == null || idStr.isBlank()) {
+            // id không hợp lệ -> cho về home hoặc 404
+            response.sendRedirect(request.getContextPath() + "/home");
+            return;
+        }
+
+        int id;
+        try {
+            id = Integer.parseInt(idStr);
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/home");
+            return;
+        }
         String idUrl = request.getParameter("id");
         if (idUrl == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing product id");

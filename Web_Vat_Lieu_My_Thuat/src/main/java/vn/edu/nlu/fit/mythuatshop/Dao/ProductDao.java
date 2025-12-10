@@ -5,7 +5,7 @@ import vn.edu.nlu.fit.mythuatshop.Model.Product;
 
 import java.util.List;
 
-public class ProductDao {
+public class  ProductDao {
     private final Jdbi jdbi;
 
     public ProductDao() {

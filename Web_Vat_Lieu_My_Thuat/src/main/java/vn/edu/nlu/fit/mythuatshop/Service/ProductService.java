@@ -58,5 +58,7 @@ public class ProductService {
     public int countProductSearch(String productName) {
         return productDao.countProductSearch(productName);
     }
-
+    public Product getProductById(int productId) {
+        return productDao.findByProductId(productId);
+    }
 }

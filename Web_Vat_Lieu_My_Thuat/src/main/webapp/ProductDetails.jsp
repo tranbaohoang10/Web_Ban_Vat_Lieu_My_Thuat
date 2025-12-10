@@ -1160,26 +1160,35 @@
                     </div>
                 </div>
 
-                <div class="quantity-section">
-                    <div class="variant-label">Số lượng:</div>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
-                        <input type="number" class="quantity-input"
-                               value="1" min="1" id="quantity">
-                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                <form action="${pageContext.request.contextPath}/AddToCart?action=add"
+                      method="post" id="addToCartForm">
+
+                    <!-- truyền id sản phẩm cho controller -->
+                    <input type="hidden" name="productId" value="${product.id}"/>
+
+                    <div class="quantity-section">
+                        <div class="variant-label">Số lượng:</div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <!-- QUAN TRỌNG: thêm name="quantity" -->
+                            <input type="number" class="quantity-input"
+                                   id="quantity" name="quantity"
+                                   value="1" min="1">
+                            <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="product-actions">
-                    <button class="btn btn-add-cart" id="addToCartBtn">
-                        <i class="fa-solid fa-cart-plus"></i>
-                        THÊM VÀO GIỎ
-                    </button>
+                    <div class="product-actions">
+                        <button type="submit" class="btn btn-add-cart" id="addToCartBtn">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            THÊM VÀO GIỎ
+                        </button>
 
-                    <a href="ThanhToan.html" class="btn btn-buy-now link">
-                        MUA NGAY
-                    </a>
-                </div>
+                        <a href="ThanhToan.html" class="btn btn-buy-now link">
+                            MUA NGAY
+                        </a>
+                    </div>
+                </form>
             </div> <!-- /product-info -->
 
         </div> <!-- /product-detail -->
@@ -1195,7 +1204,7 @@
                 <div class="list-product">
                     <c:forEach var="p" items="${relatedProducts}">
                         <div class="list-product-list1">
-                            <a href="${pageContext.request.contextPath}/DetailsProductController?id=${rp.id}">
+                            <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
                                 <img src="${p.thumbnail}" alt="${p.name}">
                                 <div class="list-product-list1-content">
                                     <div class="list-product-list1-content-socials">
@@ -1351,28 +1360,68 @@
         }
     }
 
+    const addToCartForm = document.getElementById('addToCartForm');
     addToCartBtn = document.getElementById('addToCartBtn');
-    addToCartBtn.addEventListener('click', function () {
-        // Thêm animation cho nút
+    
+    addToCartForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Ngăn form submit mặc định
+        
+        // animation cho nút
         addToCartBtn.classList.add('adding');
-        setTimeout(() => {
+        addToCartBtn.disabled = true;
+
+        // Lấy số lượng user chọn
+        const qtyInput = document.getElementById('quantity');
+        const qty = parseInt(qtyInput.value) || 1;
+        const productId = document.querySelector('input[name="productId"]').value;
+
+        // Gửi AJAX request
+        fetch('${pageContext.request.contextPath}/AddToCart?action=add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'productId=' + productId + '&quantity=' + qty
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Cập nhật số lượng giỏ hàng trên header
+            updateCartCount(qty);
+            
+            // Hiển thị thông báo thành công
+            showToastNotification();
+            
+            // Reset animation
+            setTimeout(() => {
+                addToCartBtn.classList.remove('adding');
+                addToCartBtn.disabled = false;
+            }, 600);
+        })
+        .catch(error => {
+            console.error('Error:', error);
             addToCartBtn.classList.remove('adding');
-        }, 600);
+            addToCartBtn.disabled = false;
+            alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng');
+        });
+    });
 
-        showToastNotification();
-
+    function updateCartCount(addedQty) {
         const cartIcon = document.getElementById('cartIcon');
         if (cartIcon) {
+            // Lấy số lượng hiện tại từ badge
+            const currentCount = parseInt(cartIcon.getAttribute('data-count') || 0);
+            const newCount = currentCount + addedQty;
+            
+            // Cập nhật badge
+            cartIcon.setAttribute('data-count', newCount);
+            
+            // Animation
             cartIcon.classList.add('cart-updated');
             setTimeout(() => {
                 cartIcon.classList.remove('cart-updated');
             }, 600);
-
-            // Cập nhật số lượng sản phẩm trong giỏ
-            const currentCount = parseInt(cartIcon.getAttribute('data-count')) || 0;
-            cartIcon.setAttribute('data-count', currentCount + 1);
         }
-    });
+    }
 
     function showToastNotification() {
         const toast = document.createElement('div');
@@ -1416,7 +1465,7 @@
 
         setTimeout(() => {
             hideToast(toast);
-        }, 3000);
+        }, 5000);
     }
 
     function hideToast(toast) {
