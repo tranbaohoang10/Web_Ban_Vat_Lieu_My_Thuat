@@ -217,8 +217,9 @@
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
                     <!-- đổi 'fullName' cho đúng với field trong Users (name, username, ten, ...) -->
-                    <div class="dangnhap">Hi,
-                        ${sessionScope.currentUser.fullName}</div>
+                    <a href="${pageContext.request.contextPath}/profile" class="dangnhap">
+                        Hi, ${sessionScope.currentUser.fullName}
+                    </a>
                     <div class="dangki">
                         <a href="${pageContext.request.contextPath}/logout"
                             style="color: white;">
@@ -230,18 +231,29 @@
         </c:when>
 
         <%-- Chưa đăng nhập --%>
+<%--        <c:otherwise>--%>
+<%--            <a href="login" class="link header-dangnhap-dangki">--%>
+<%--                <i class="fa-solid fa-user"></i>--%>
+<%--                <div class="dangnhap-dangki">--%>
+<%--                    <div class="dangnhap">Đăng nhập</div>--%>
+<%--                    <div class="dangki">Đăng kí</div>--%>
+<%--                </div>--%>
+<%--            </a>--%>
+<%--        </c:otherwise>--%>
         <c:otherwise>
-            <a href="login" class="link header-dangnhap-dangki">
+            <div class="link header-dangnhap-dangki">
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
-                    <div class="dangnhap">Đăng nhập</div>
-                    <div class="dangki">Đăng kí</div>
+                    <a href="login" class="dangnhap">Đăng nhập</a>
+                    <a href="register" class="dangki">Đăng kí</a>
                 </div>
-            </a>
+            </div>
         </c:otherwise>
     </c:choose>
-    <a href="GioHang.html" class="link header-giohang" id="cartIcon"
-        data-count="0">
+    <a href="${pageContext.request.contextPath}/Cart.jsp"
+       class="link header-giohang"
+       id="cartIcon"
+       data-count="${empty sessionScope.cartCount ? 0 : sessionScope.cartCount}">
         <i class="fa-solid fa-bag-shopping"></i>
     </a>
 

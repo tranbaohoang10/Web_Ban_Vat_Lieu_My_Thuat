@@ -17,14 +17,26 @@ import java.util.List;
 @WebServlet(name = "CategoryProductsController", value = "/category")
 public class CategoryProductsController extends HttpServlet {
 
-
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         CategoryService categoryService = new CategoryService();
         ProductService productService = new ProductService();
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         String priceRange = request.getParameter("priceRange");
         String sort = request.getParameter("sort");
+
+        // Phân trang
+        int pageSize = 8;
+        int page = 1;
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch (Exception ignored) {
+        }
+        if (page < 1)
+            page = 1;
+        int offset = (page - 1) * pageSize;
+
         Double minPrice = null;
         Double maxPrice = null;
         if (priceRange != null) {
@@ -55,10 +67,16 @@ public class CategoryProductsController extends HttpServlet {
         }
 
         Category category = categoryService.getCategoryById(categoryId);
-        List<Product> products =
-                productService.getProductsByCategoryWithFilter(categoryId, minPrice, maxPrice, sort);
+        int totalProducts = productService.countProductsByCategory(categoryId, minPrice, maxPrice);
+        int totalPages = (int) Math.ceil(totalProducts * 1.0 / pageSize);
+
+        List<Product> products = productService.getProductsByCategoryWithFilter(categoryId, minPrice, maxPrice, sort,
+                offset, pageSize);
         request.setAttribute("category", category);
         request.setAttribute("products", products);
+        request.setAttribute("totalProducts", totalProducts);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("currentPage", page);
 
         boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"))
                 || "1".equals(request.getParameter("ajax"));
@@ -71,10 +89,12 @@ public class CategoryProductsController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/CategoryProducts.jsp");
             rd.forward(request, response);
         }
+
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 }

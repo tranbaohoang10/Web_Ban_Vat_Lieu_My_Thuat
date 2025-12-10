@@ -826,7 +826,7 @@
 
       </div>
       <div class=" header-giohang">
-        <a href="GioHang.jsp"><i class="fa-solid fa-bag-shopping"></i></a>
+        <a href="Cart.jsp"><i class="fa-solid fa-bag-shopping"></i></a>
 
       </div>
     </header>

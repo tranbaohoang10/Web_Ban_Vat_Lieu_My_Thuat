@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +12,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <style>
@@ -173,10 +175,6 @@
         margin-left: 140px;
     }
 
-    /* .btn-fb{
-        background-color: #49669C;
-
-    } */
     .btn-dang-nhap-tt i {
         font-size: 16px;
     }
@@ -184,19 +182,19 @@
     .text-login {
         margin-top: 16px;
         text-align: center;
-        color: #ffffff; /* màu chữ “Bạn đã có tài khoản” */
+        color: #ffffff;
         font-size: 16px;
     }
 
     /* Style riêng cho link Đăng nhập */
     .text-login a {
-        color: #FFD700; /* màu vàng giống theme */
-        text-decoration: none; /* bỏ gạch chân */
+        color: #FFD700;
+        text-decoration: none;
         font-weight: 500;
     }
 
     .text-login a:hover {
-        text-decoration: underline; /* nếu muốn hover có gạch chân */
+        text-decoration: underline;
     }
 
 
@@ -209,7 +207,8 @@
     <div class="container">
         <h2>Đăng Ký</h2>
 
-        <form action class="infor">
+
+        <form action = "${pageContext.request.contextPath}/register" method="post" class="infor">
             <div class="tt-chitiet" style="grid-column: span 2;">
                 <label for="Ho">Họ và Tên:</label>
                 <input type="text" id="Ho" name="fullName"
@@ -226,7 +225,7 @@
 
             <div class="tt-chitiet">
                 <label for="sdt">Số điện thoại:</label>
-                <input type="text" id="sdt" name="phone"
+                <input type="text" id="sdt" name="phoneNumber"
                        placeholder="Số điện thoại">
             </div>
 
@@ -237,6 +236,9 @@
                        placeholder="Mật khẩu" required>
                 <i class="hide-display" id="togglePassword"
                    style="position:absolute; right:10px; top:38px; cursor:pointer;"></i>
+                <c:if test="${not empty error}">
+                <p style="color: red;padding : 10px" >${error}</p>
+            </c:if>
             </div>
 
             <button type="submit" class="btn-DangKy"
@@ -259,17 +261,25 @@
     </div>
 </div>
 <%@ include file="Footer.jsp" %>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('.infor');
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+        if (params.get("success") === "true") {
+            Swal.fire({
+                icon: 'success',
+                title: 'Đăng ký thành công!',
 
-            alert('Đăng ký thành công!');
-        });
+                showConfirmButton: false,
+                timer: 2000
+            }).then(() => {
+                window.location.href = 'login';
+            });
+        }
     });
 </script>
+
 </body>
 
 </html>

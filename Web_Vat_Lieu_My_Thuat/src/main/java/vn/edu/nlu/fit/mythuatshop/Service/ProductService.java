@@ -24,20 +24,41 @@ public class ProductService {
         return productDao.findByCategoryId(categoryId);
     }
 
-    public List<Product> getProductsByCategoryWithFilter(int categoryId, Double minPrice, Double maxPrice, String sort) {
+    public List<Product> getProductsByCategoryWithFilter(int categoryId, Double minPrice, Double maxPrice,
+            String sort) {
         return productDao.findByCategoryWithFilter(categoryId, minPrice, maxPrice, sort);
     }
-    public List<Product> getProductSearch(String productName){
-        if(productName==null){
-            productName="";
+
+    public List<Product> getProductsByCategoryWithFilter(int categoryId, Double minPrice, Double maxPrice,
+            String sort, int offset, int limit) {
+        return productDao.findByCategoryWithFilter(categoryId, minPrice, maxPrice, sort, offset, limit);
+    }
+
+    public int countProductsByCategory(int categoryId, Double minPrice, Double maxPrice) {
+        return productDao.countProductsByCategory(categoryId, minPrice, maxPrice);
+    }
+
+    public List<Product> getProductSearch(String productName) {
+        if (productName == null) {
+            productName = "";
         }
         return productDao.getProductSearch(productName);
     }
-    public List<Product> getProductSearch(String productName,String sort){
-        if(productName==null){
-            productName="";
+
+    public List<Product> getProductSearch(String productName, String sort, int offset, int limit) {
+        if (productName == null) {
+            productName = "";
         }
-        return productDao.getProductSearch(productName,sort);
+        if (sort == null || sort.trim().isEmpty()) {
+            sort = "";
+        }
+        return productDao.getProductSearch(productName, sort, offset, limit);
     }
 
+    public int countProductSearch(String productName) {
+        return productDao.countProductSearch(productName);
+    }
+    public Product getProductById(int productId) {
+        return productDao.findByProductId(productId);
+    }
 }
