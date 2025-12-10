@@ -217,8 +217,9 @@
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
                     <!-- đổi 'fullName' cho đúng với field trong Users (name, username, ten, ...) -->
-                    <div class="dangnhap">Hi,
-                        ${sessionScope.currentUser.fullName}</div>
+                    <a href="${pageContext.request.contextPath}/profile" class="dangnhap">
+                        Hi, ${sessionScope.currentUser.fullName}
+                    </a>
                     <div class="dangki">
                         <a href="${pageContext.request.contextPath}/logout"
                             style="color: white;">

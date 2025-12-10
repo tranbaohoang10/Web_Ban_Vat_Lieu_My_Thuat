@@ -42,7 +42,9 @@ public class RegisterController extends HttpServlet {
           req.getRequestDispatcher("DangKy.jsp").forward(req,resp);
           return;
       }
-      resp.sendRedirect(req.getContextPath() + "/login");
+
+            resp.sendRedirect(req.getContextPath() + "/register?success=true");
+
     }
 
 }

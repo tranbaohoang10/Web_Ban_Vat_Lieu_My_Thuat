@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -364,30 +365,45 @@
                 </div>
             </div>
             <div class="thongtin-canhan">
-                <form action>
+                <form action="${pageContext.request.contextPath}/profile" method="post">
                     <h2>Thông tin tài khoản</h2>
                     <label for="hovaten">Họ và tên:</label>
                     <br>
-                    <input type="text" id="hovaten" name="Họ và tên"
-                           value="Trần Bảo Hoàng">
+                    <input type="text" id="hovaten" name="fullName"
+                           value="${sessionScope.currentUser.fullName}">
                     <br>
                     <label for="email">Email:</label>
                     <br>
-                    <input type="email" id="email" name="Email" placeholder="Email">
+                    <input type="email" id="email"
+                           value="${sessionScope.currentUser.email}"
+                           disabled>
                     <br>
                     <label for=" sodienthoai">Số điện thoại:</label>
                     <br>
-                    <input type="text" id="sodienthoai" name="Số điện thoại"
-                           placeholder="Số điện thoại(*)">
+                    <input type="text" id="sodienthoai" name="phoneNumber"
+                           value="${sessionScope.currentUser.phoneNumber}">
                     <br>
                     <label for="ngaysinh">Ngày sinh:</label>
                     <br>
-                    <input type="date" id="ngaysinh" placeholder="Ngày sinh(*)">
+                    <input type="date" id="ngaysinh" name="dob"
+                           value="${dob}">
                     <br>
                     <label for="diachi">Địa chỉ:</label>
                     <br>
-                    <input type="text" id="diachi" placeholder="Địa chỉ(*)">
+                    <input type="text" id="diachi" name="address"
+                           value="${sessionScope.currentUser.address}">
                     <br>
+
+                    <c:if test="${not empty success}">
+                        <div class="alert alert-success">
+                            ✔ ${success}
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-error">
+                            ✖ ${error}
+                        </div>
+                    </c:if>
                     <input type="submit" value="Cập nhật thông tin" class="button">
                 </form>
             </div>
