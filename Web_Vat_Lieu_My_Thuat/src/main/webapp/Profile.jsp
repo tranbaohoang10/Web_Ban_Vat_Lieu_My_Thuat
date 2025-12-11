@@ -15,7 +15,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -231,8 +231,10 @@
         font-size: 18px;
         font-weight: 600;
     }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:first-child {
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:first-child{
+        background-color: #FB9F10;
+    }
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:active{
         background-color: #FB9F10;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -364,8 +366,11 @@
                     <a href><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
                     <a href="LichSuMuaHang.jsp"><i class="fa-solid fa-box-open"></i>
                         Lịch sử mua hàng</a>
-                    <a href="DangNhap.jsp"><i
+                    <a href="ChangePassword.jsp">
+                        <i class="fa-solid fa-rotate"></i> Đổi mật khẩu</a>
+                    <a href="${pageContext.request.contextPath}/logout"><i
                             class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+
                 </div>
             </div>
             <div class="thongtin-canhan">
