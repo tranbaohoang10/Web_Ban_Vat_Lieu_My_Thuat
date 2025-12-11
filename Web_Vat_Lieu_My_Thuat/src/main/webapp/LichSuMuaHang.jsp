@@ -437,7 +437,7 @@
                 <p class="name-full">Xin chào, <span class="span">Hoàng
                 Trần</span></p>
                 <div class="list-canhan">
-                    <a href="ThongTinKhachHang.jsp"><i
+                    <a href="Profile.jsp"><i
                             class="fa-solid fa-user"></i> Thông tin
                         tài
                         khoản</a>
@@ -445,7 +445,9 @@
                         sử
                         mua
                         hàng</a>
-                    <a href="DangNhap.jsp"><i
+                    <a href="${pageContext.request.contextPath}/logout">
+                        <i class="fa-solid fa-rotate"></i> Đổi mật khẩu</a>
+                    <a href="${pageContext.request.contextPath}/logout"><i
                             class="fa-solid fa-right-from-bracket"></i>Đăng
                         xuất</a>
                 </div>

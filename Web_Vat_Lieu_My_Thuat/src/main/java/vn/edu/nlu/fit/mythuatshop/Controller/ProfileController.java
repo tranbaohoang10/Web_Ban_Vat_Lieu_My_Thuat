@@ -42,7 +42,7 @@ public class ProfileController extends HttpServlet {
             req.setAttribute("dob", dobString);
         }
 
-        req.getRequestDispatcher("ThongTinKhachHang.jsp").forward(req, resp);
+        req.getRequestDispatcher("Profile.jsp").forward(req, resp);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ProfileController extends HttpServlet {
         if (!success) {
             req.setAttribute("error", "Cập nhật thông tin thất bại, vui lòng thử lại!");
             req.setAttribute("dob", dob);
-            req.getRequestDispatcher("ThongTinKhachHang.jsp").forward(req, resp);
+            req.getRequestDispatcher("Profile.jsp").forward(req, resp);
             return;
         } else {
             Users updatedUser = userService.getUserById(currentUser.getId());
