@@ -1184,7 +1184,7 @@
                             THÊM VÀO GIỎ
                         </button>
 
-                        <a href="ThanhToan.html" class="btn btn-buy-now link">
+                        <a href="${pageContext.request.contextPath}/checkout" class="btn btn-buy-now link">
                             MUA NGAY
                         </a>
                     </div>
