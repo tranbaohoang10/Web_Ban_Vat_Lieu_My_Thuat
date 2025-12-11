@@ -22,7 +22,7 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("DangKy.jsp").forward(req,resp);
+        req.getRequestDispatcher("Register.jsp").forward(req,resp);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class RegisterController extends HttpServlet {
       boolean success = userService.register(fullName, email, phoneNumber, password, address);
       if(!success){
           req.setAttribute("error", "Email đã được sử dụng, vui lòng nhập email khác!");
-          req.getRequestDispatcher("DangKy.jsp").forward(req,resp);
+          req.getRequestDispatcher("Register.jsp").forward(req,resp);
           return;
       }
 

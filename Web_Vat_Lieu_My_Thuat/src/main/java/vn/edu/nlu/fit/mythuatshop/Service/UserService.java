@@ -61,4 +61,18 @@ public class UserService {
         int row = userDao.updateUser(user);
         return row>0;
     }
+    // Chức năng đổi mật khẩu
+    public boolean changePassword(int userId, String oldPassword, String newPassword) {
+        Users user = userDao.findById(userId);
+        if (user == null) {
+            return false;
+        }
+        String curentHash = user.getPassword();
+        boolean match = BCrypt.checkpw(oldPassword, curentHash);
+        if (!match) {
+            return false;
+        }
+        String newHash = BCrypt.hashpw(newPassword, BCrypt.gensalt(12));
+        return userDao.updatePassword(userId, newHash);
+    }
 }

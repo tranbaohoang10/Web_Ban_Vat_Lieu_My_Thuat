@@ -252,7 +252,7 @@
             <a href>
                 - Chính sách bảo mật thông tin cá nhân
             </a>
-            <a href>
+            <a href ="${pageContext.request.contextPath}/contact">
                 - Thông tin liên hệ
             </a>
             <a href>

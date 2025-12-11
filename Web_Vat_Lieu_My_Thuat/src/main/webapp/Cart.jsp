@@ -340,7 +340,8 @@
             <div class="card-body">
                 <h2 class="card-title">Giỏ hàng của bạn</h2>
                 <p class="subtle">
-                    Bạn đang có <span id="cart-total-quantity">${totalQuantity}</span>
+                    Bạn đang có <span
+                        id="cart-total-quantity">${totalQuantity}</span>
                     sản phẩm trong giỏ hàng
                 </p>
                 <div class="divider"></div>
@@ -355,35 +356,44 @@
                             </c:when>
 
                             <c:otherwise>
-                                <c:forEach var="item" items="${cartItems}">
+                                <c:forEach var="item"
+                                           items="${cartItems}">
                                     <div class="cart-item-card">
                                         <div class="item">
                                             <div class="item-grid">
-                                                <div class="select-product">
-                                                    <input type="checkbox" checked/>
+                                                <div
+                                                        class="select-product">
+                                                    <input
+                                                            type="checkbox"
+                                                            checked/>
                                                 </div>
 
                                                 <div class="thumb">
-                                                    <img src="${item.thumbnail}"
-                                                         alt="${item.name}"/>
+                                                    <img
+                                                            src="${item.thumbnail}"
+                                                            alt="${item.name}"/>
                                                 </div>
 
-                                                <div class="product-info">
-                                                    <div class="meta-title">
+                                                <div
+                                                        class="product-info">
+                                                    <div
+                                                            class="meta-title">
                                                             ${item.name}
                                                     </div>
                                                     <div class="muted">
-                                                        Mã SP: ${item.productId}
+                                                        Mã SP:
+                                                            ${item.productId}
                                                     </div>
                                                 </div>
 
                                                 <div class="price">
-                                                    <span class="price-value"
-                                                          id="subtotal-${item.productId}">
-                                                        <fmt:formatNumber
-                                                                value="${item.priceAfterDiscount * item.quantity}"
-                                                                type="number"/>₫
-                                                    </span>
+                                                            <span
+                                                                    class="price-value"
+                                                                    id="subtotal-${item.productId}">
+                                                                <fmt:formatNumber
+                                                                        value="${item.priceAfterDiscount * item.quantity}"
+                                                                        type="number"/>₫
+                                                            </span>
                                                 </div>
 
                                                 <div class="qty-wrap">
@@ -391,7 +401,8 @@
                                                     <a class="Xoa-sp"
                                                        href="${pageContext.request.contextPath}/AddToCart?action=remove&productId=${item.productId}"
                                                        aria-label="Xóa sản phẩm">
-                                                        <i class="fa-solid fa-xmark"></i>
+                                                        <i
+                                                                class="fa-solid fa-xmark"></i>
                                                     </a>
 
                                                     <input type="hidden"
@@ -399,25 +410,30 @@
                                                            value="${item.productId}"/>
 
                                                     <div class="qty">
-                                                        <button type="button"
+                                                        <button
+                                                                type="button"
                                                                 class="qty-btn"
                                                                 onclick="decreaseQty(${item.productId})">
-                                                            <i class="fa-solid fa-minus"></i>
+                                                            <i
+                                                                    class="fa-solid fa-minus"></i>
                                                         </button>
 
-                                                        <input type="number"
-                                                               name="quantity"
-                                                               value="${item.quantity}"
-                                                               min="1"
-                                                               class="qty-input"
-                                                               id="qty-${item.productId}"
-                                                               data-product-id="${item.productId}"
-                                                               readonly/>
+                                                        <input
+                                                                type="number"
+                                                                name="quantity"
+                                                                value="${item.quantity}"
+                                                                min="1"
+                                                                class="qty-input"
+                                                                id="qty-${item.productId}"
+                                                                data-product-id="${item.productId}"
+                                                                readonly/>
 
-                                                        <button type="button"
+                                                        <button
+                                                                type="button"
                                                                 class="qty-btn"
                                                                 onclick="increaseQty(${item.productId})">
-                                                            <i class="fa-solid fa-plus"></i>
+                                                            <i
+                                                                    class="fa-solid fa-plus"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -448,7 +464,8 @@
                 <div class="tinh-tien">
                     <p>Tổng tiền:</p>
                     <span class="thanh-tien">
-                                <fmt:formatNumber value="${totalAmount}" type="number"/>đ
+                                <fmt:formatNumber value="${totalAmount}"
+                                                  type="number"/>đ
                             </span>
                 </div>
 
@@ -457,13 +474,17 @@
                 <p class="muted">Mã giảm giá được nhập ở trang Thanh
                     toán</p>
 
-                <a href="ThanhToan.jsp">
+                <a href="${pageContext.request.contextPath}/checkout">
                     <c:choose>
                         <c:when test="${cartSize == 0}">
-                            <button class="btn" disabled>Đặt hàng</button>
+                            <button class="btn" disabled>Đặt
+                                hàng
+                            </button>
                         </c:when>
                         <c:otherwise>
-                            <button class="btn">Đặt hàng</button>
+                            <button class="btn" ${cart.cartSize() == 0 ?
+                                    'disabled' : ''}>Đặt hàng
+                            </button>
                         </c:otherwise>
                     </c:choose>
                 </a>
@@ -494,7 +515,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        const updateUrl = '<%=request.getContextPath()%>/AddToCart?action=ajaxUpdate';
+        const updateUrl = '${pageContext.request.contextPath}/AddToCart?action=ajaxUpdate';
 
         const qtyInputs = document.querySelectorAll('.qty-input');
 
@@ -516,7 +537,7 @@
     }
 
     function updateCartItem(productId, quantity) {
-        const updateUrl = '<%=request.getContextPath()%>/AddToCart?action=ajaxUpdate';
+        const updateUrl = '${pageContext.request.contextPath}/AddToCart?action=ajaxUpdate';
         const params =
             'productId=' + encodeURIComponent(productId) +
             '&quantity=' + encodeURIComponent(quantity);

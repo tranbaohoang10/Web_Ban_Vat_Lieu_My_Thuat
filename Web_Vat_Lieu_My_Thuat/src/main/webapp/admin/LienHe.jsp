@@ -434,7 +434,7 @@
                     <a href="LienHe.html" class="active"><i
                             class="fa-solid fa-address-book"></i>Quản lý liên
                         hệ</a>
-                    <a href="../DangNhap.jsp"><i
+                    <a href="../Login.jsp"><i
                             class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất</a>
                 </div>

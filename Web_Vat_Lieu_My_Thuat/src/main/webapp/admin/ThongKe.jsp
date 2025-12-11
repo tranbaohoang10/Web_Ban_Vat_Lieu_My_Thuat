@@ -293,7 +293,7 @@
           khuyến mãi</a>
         <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý Slider Show</a>
         <a href="LienHe.jsp"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
-        <a href="../DangNhap.jsp"><i class="fa-solid fa-right-from-bracket"></i>
+        <a href="../Login.jsp"><i class="fa-solid fa-right-from-bracket"></i>
           Đăng xuất</a>
       </div>
     </div>

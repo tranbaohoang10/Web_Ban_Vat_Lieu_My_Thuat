@@ -83,5 +83,13 @@ public class UserDao {
                         .execute()
         );
     }
-
+    // đổi mật khẩu
+    public boolean updatePassword(int userId, String newHash) {
+        String sql = "UPDATE users SET password = :matkhaumoi WHERE id = :id";
+        int row = jdbi.withHandle(handle ->handle.createUpdate(sql)
+                .bind("matkhaumoi", newHash)
+                .bind("id", userId)
+                .execute());
+        return row > 0;
+    }
 }
