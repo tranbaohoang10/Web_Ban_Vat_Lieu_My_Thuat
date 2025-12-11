@@ -76,5 +76,15 @@ public class Cart {
 
         return total;
     }
+    public double getTotalProductPrice() {
+        double sum = 0;
+        for (CartItem item : carts.values()) {
+            sum += item.totalPriceCartItem();
+        }
+        return sum;
+    }
+    public double getTotalPriceToPay() {
+        return getTotalProductPrice() - discount + fee;
+    }
 
 }
