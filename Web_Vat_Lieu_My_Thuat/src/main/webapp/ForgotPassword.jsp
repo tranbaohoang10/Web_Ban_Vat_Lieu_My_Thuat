@@ -17,7 +17,6 @@
         width: 1200px;
         margin: auto;
     }
-
     /* login */
     .main {
         margin: 0;
@@ -183,16 +182,16 @@
                 <input type="email" name placeholder="Email">
             </div>
 
-            <a href="DangNhap.jsp" class="btn-lay-mk">Lấy lại mật
+            <a href="Login.jsp" class="btn-lay-mk">Lấy lại mật
                 khẩu</a>
 
             <div class="quay-lai-dang-nhap">
-                <a href="DangNhap.jsp" class="link-quay-lai">Quay lại
+                <a href="Login.jsp" class="link-quay-lai">Quay lại
                 </a>
             </div>
 
             <div class="chuataikhoan">
-                Bạn chưa có tài khoản <a href="DangKy.jsp"
+                Bạn chưa có tài khoản <a href="Register.jsp"
                                          class="link-dki">Đăng ký tại đây</a>
             </div>
 

@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet {
         // 1. Validate rỗng (giữ của nhánh Login-register)
         if (email == null || password == null || email.isBlank() || password.isBlank()) {
             req.setAttribute("error", "Vui lòng nhập email và mật khẩu!");
-            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+            req.getRequestDispatcher("Login.jsp").forward(req, resp);
             return;
         }
 
@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
         // 3. Sai tài khoản/mật khẩu
         if (users == null) {
             req.setAttribute("error", "Sai email hoặc mật khẩu");
-            req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+            req.getRequestDispatcher("Login.jsp").forward(req, resp);
             return;
         }
 
@@ -55,6 +55,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Hiển thị trang đăng nhập
-        req.getRequestDispatcher("DangNhap.jsp").forward(req, resp);
+        req.getRequestDispatcher("Login.jsp").forward(req, resp);
     }
 }

@@ -249,7 +249,7 @@
 
         <p class="text-login">
             Bạn đã có tài khoản
-            <a href="DangNhap.jsp">Đăng nhập tại đây</a>
+            <a href="Login.jsp">Đăng nhập tại đây</a>
         </p>
 
         <div class="btn-dang-nhap-tt">

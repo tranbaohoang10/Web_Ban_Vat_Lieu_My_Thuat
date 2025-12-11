@@ -2,20 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin khách hàng</title>
+    <title>Đổi mật khẩu</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -231,13 +230,10 @@
         font-size: 18px;
         font-weight: 600;
     }
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:first-child{
+
+    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:nth-child(3){
         background-color: #FB9F10;
-    }
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:active{
-        background-color: #FB9F10;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+
     }
 
     .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:last-child {
@@ -366,7 +362,7 @@
                     <a href><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
                     <a href="LichSuMuaHang.jsp"><i class="fa-solid fa-box-open"></i>
                         Lịch sử mua hàng</a>
-                    <a href="ChangePassword.jsp">
+                    <a href="${pageContext.request.contextPath}/change-password">
                         <i class="fa-solid fa-rotate"></i> Đổi mật khẩu</a>
                     <a href="${pageContext.request.contextPath}/logout"><i
                             class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
@@ -374,54 +370,46 @@
                 </div>
             </div>
             <div class="thongtin-canhan">
-                <form action="${pageContext.request.contextPath}/profile" method="post">
-                    <h2>Thông tin tài khoản</h2>
-                    <label for="hovaten">Họ và tên:</label>
+                <form action="${pageContext.request.contextPath}/change-password" method="post">
+                    <h2>Đặt lại mật khẩu</h2>
+                    <label for="matkhaucu">Mật khẩu cũ:</label>
                     <br>
-                    <input type="text" id="hovaten" name="fullName"
-                           value="${sessionScope.currentUser.fullName}">
+                    <input type="password" id="matkhaucu" name="matkhaucu">
                     <br>
-                    <label for="email">Email:</label>
+                    <label for="matkhaumoi">Mật khẩu mới:</label>
                     <br>
-                    <input type="email" id="email"
-                           value="${sessionScope.currentUser.email}"
-                           disabled>
+                    <input type="password" id="matkhaumoi" name="matkhaumoi">
                     <br>
-                    <label for=" sodienthoai">Số điện thoại:</label>
-                    <br>
-                    <input type="text" id="sodienthoai" name="phoneNumber"
-                           value="${sessionScope.currentUser.phoneNumber}">
-                    <br>
-                    <label for="ngaysinh">Ngày sinh:</label>
-                    <br>
-                    <input type="date" id="ngaysinh" name="dob"
-                           value="${dob}">
-                    <br>
-                    <label for="diachi">Địa chỉ:</label>
-                    <br>
-                    <input type="text" id="diachi" name="address"
-                           value="${sessionScope.currentUser.address}">
-                    <br>
-                    <input type="submit" value="Cập nhật thông tin" class="button">
+
+                    <input type="submit" value="Thay đổi mật khẩu" class="button">
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const params = new URLSearchParams(window.location.search);
+<c:if test="${not empty error}">
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: '${error}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+</c:if>
 
-        if (params.get("success") === "true") {
-            Swal.fire({
-                icon: 'success',
-                title: 'Cập nhật thông tin thành công!',
-                showConfirmButton: false,
-                timer: 2000
-            });
-        }
-    });
-</script>
+<c:if test="${success == true}">
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Đổi mật khẩu thành công!',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+</c:if>
+
+
 
 <!-- End section main -->
 <%@ include file="Footer.jsp" %>
