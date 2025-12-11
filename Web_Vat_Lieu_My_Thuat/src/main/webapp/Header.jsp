@@ -250,7 +250,7 @@
             </div>
         </c:otherwise>
     </c:choose>
-    <a href="${pageContext.request.contextPath}/Cart.jsp"
+    <a href="${pageContext.request.contextPath}/cart"
        class="link header-giohang"
        id="cartIcon"
        data-count="${empty sessionScope.cartCount ? 0 : sessionScope.cartCount}">

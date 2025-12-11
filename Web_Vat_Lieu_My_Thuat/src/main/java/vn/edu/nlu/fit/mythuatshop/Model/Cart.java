@@ -36,15 +36,16 @@ public class Cart {
         this.discount = discount;
     }
 
-    public void addCartItem(int productId, int quantity) {
+    public void addCartItem(CartItem newItem) {
+        int productId = newItem.getProductId();
         if (carts.containsKey(productId)) {
             CartItem item = carts.get(productId);
-            item.setQuantity(item.getQuantity() + quantity);
+            item.setQuantity(item.getQuantity() + newItem.getQuantity());
         } else {
-            CartItem newItem = new CartItem(productId, quantity);
             carts.put(productId, newItem);
         }
     }
+
 
     public void updateQuantity(int productId, int quantity) {
         if (carts != null && carts.containsKey(productId)) {
