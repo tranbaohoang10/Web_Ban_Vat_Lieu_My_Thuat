@@ -1,8 +1,11 @@
 package vn.edu.nlu.fit.mythuatshop.Controller;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.mythuatshop.Model.Cart;
 import vn.edu.nlu.fit.mythuatshop.Model.CartItem;
 import vn.edu.nlu.fit.mythuatshop.Model.Product;
@@ -36,16 +39,16 @@ public class AddToCartController extends HttpServlet {
         if ("remove".equals(action)) {
             handleRemoveItem(req, resp, session);
         } else {
-            resp.sendRedirect(req.getContextPath() + "/Cart.jsp");
+            resp.sendRedirect(req.getContextPath() + "/cart");
         }
     }
 
     private void handleRemoveItem(HttpServletRequest req, HttpServletResponse resp,
-            HttpSession session) throws IOException {
+                                  HttpSession session) throws IOException {
 
         String pidStr = req.getParameter("productId");
         if (pidStr == null || pidStr.isBlank()) {
-            resp.sendRedirect(req.getContextPath() + "/Cart.jsp");
+            resp.sendRedirect(req.getContextPath() + "/cart");
             return;
         }
 
@@ -56,7 +59,7 @@ public class AddToCartController extends HttpServlet {
         session.setAttribute("cart", cart);
         session.setAttribute("cartCount", cart.getTotalQuantity());
 
-        resp.sendRedirect(req.getContextPath() + "/Cart.jsp");
+        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 
     @Override
@@ -85,7 +88,7 @@ public class AddToCartController extends HttpServlet {
 
     // ========= THÊM 1 SẢN PHẨM =========
     private void handleAddToCart(HttpServletRequest req, HttpServletResponse resp,
-            HttpSession session) throws IOException {
+                                 HttpSession session) throws IOException {
 
         String pidStr = req.getParameter("productId");
         String qtyStr = req.getParameter("quantity");
@@ -99,11 +102,24 @@ public class AddToCartController extends HttpServlet {
 
         int productId = Integer.parseInt(pidStr);
         int quantity = Integer.parseInt(qtyStr);
-        if (quantity <= 0)
-            quantity = 1;
+        if (quantity <= 0) quantity = 1;
 
+        Product p = productService.getProductById(productId);
+        if (p == null) {
+            String ref = req.getHeader("referer");
+            resp.sendRedirect(ref != null ? ref : (req.getContextPath() + "/home"));
+            return;
+        }
         Cart cart = getOrCreateCart(session);
-        cart.addCartItem(productId, quantity);
+        CartItem cartItem = new CartItem(
+                p.getId(),
+                p.getName(),
+                p.getPrice(),
+                p.getDiscountDefault(),
+                p.getThumbnail(),
+                quantity
+        );
+        cart.addCartItem(cartItem);
 
         session.setAttribute("cart", cart);
         session.setAttribute("cartCount", cart.getTotalQuantity());
@@ -120,20 +136,20 @@ public class AddToCartController extends HttpServlet {
         } else {
             // Redirect thông thường
             String referer = req.getHeader("referer");
-            resp.sendRedirect(referer != null ? referer : (req.getContextPath() + "/Cart.jsp"));
+            resp.sendRedirect(referer != null ? referer : (req.getContextPath() + "/cart"));
         }
     }
 
     // ========= UPDATE TOÀN BỘ GIỎ (NẾU CÒN DÙNG FORM) =========
     private void handleUpdateCart(HttpServletRequest req, HttpServletResponse resp,
-            HttpSession session) throws IOException {
+                                  HttpSession session) throws IOException {
 
         String[] productIds = req.getParameterValues("productId");
         String[] quantities = req.getParameterValues("quantity");
 
         if (productIds == null || quantities == null ||
                 productIds.length == 0 || productIds.length != quantities.length) {
-            resp.sendRedirect(req.getContextPath() + "/Cart.jsp");
+            resp.sendRedirect(req.getContextPath() + "/cart");
             return;
         }
 
@@ -141,23 +157,31 @@ public class AddToCartController extends HttpServlet {
         cart.getCarts().clear();
 
         for (int i = 0; i < productIds.length; i++) {
-            int pid = Integer.parseInt(productIds[i]);
-            int qty = Integer.parseInt(quantities[i]);
-            if (qty < 1)
-                qty = 1;
+            int pid,qty;
+            try {
+                pid = Integer.parseInt(productIds[i]);
+                qty = Integer.parseInt(quantities[i]);
+            } catch (NumberFormatException e) {
+                continue;
+            }
 
-            cart.addCartItem(pid, qty);
+            if (qty < 1) qty = 1;
+            Product p = productService.getProductById(pid);
+            if (p == null) continue;
+            CartItem ci = new CartItem(p.getId(), p.getName(), p.getPrice(),
+                    p.getDiscountDefault(), p.getThumbnail(), qty);
+            cart.addCartItem(ci);
         }
 
         session.setAttribute("cart", cart);
         session.setAttribute("cartCount", cart.getTotalQuantity());
 
-        resp.sendRedirect(req.getContextPath() + "/Cart.jsp");
+        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 
     // ========= UPDATE 1 SẢN PHẨM (AJAX) =========
     private void handleAjaxUpdate(HttpServletRequest req, HttpServletResponse resp,
-            HttpSession session) throws IOException {
+                                  HttpSession session) throws IOException {
 
         resp.setContentType("application/json; charset=UTF-8");
 

@@ -1,10 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List,java.util.ArrayList" %>
-<%@ page import="vn.edu.nlu.fit.mythuatshop.Model.Users" %>
-<%@ page import="vn.edu.nlu.fit.mythuatshop.Model.Cart" %>
-<%@ page import="vn.edu.nlu.fit.mythuatshop.Model.CartItem" %>
-<%@ page import="vn.edu.nlu.fit.mythuatshop.Model.Product" %>
-<%@ page import="vn.edu.nlu.fit.mythuatshop.Service.ProductService" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,26 +14,6 @@
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<%
-    // 1. Bắt buộc đăng nhập
-    Users currentUser = (Users) session.getAttribute("currentUser");
-    if (currentUser == null) {
-        response.sendRedirect("login");
-        return;
-    }
-
-    // 2. Lấy giỏ hàng từ session
-    Cart cart = (Cart) session.getAttribute("cart");
-    if (cart == null) {
-        cart = new Cart();
-    }
-
-    // 3. Đếm tổng số lượng sản phẩm
-    int totalQuantity = cart.getTotalQuantity();
-    long totalAmount = 0;
-
-    ProductService productService = new ProductService();
-%>
 <style>
     .container {
         width: 1200px;
@@ -350,9 +326,152 @@
         flex: 1;
     }
 
-
     /* end style shopping cart */
 </style>
+
+<body>
+<%@ include file="Header.jsp" %>
+<!-- Breadcrumb -->
+<div class="breadcrumb">Trang chủ / Giỏ hàng</div>
+<div class="container">
+    <div class="grid">
+        <!-- LEFT: CART -->
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Giỏ hàng của bạn</h2>
+                <p class="subtle">
+                    Bạn đang có <span id="cart-total-quantity">${totalQuantity}</span>
+                    sản phẩm trong giỏ hàng
+                </p>
+                <div class="divider"></div>
+
+                <form
+                        action="${pageContext.request.contextPath}/AddToCart?action=update"
+                        method="post">
+                    <div class="cart-list">
+                        <c:choose>
+                            <c:when test="${empty cartItems}">
+                                <p>Giỏ hàng của bạn đang trống.</p>
+                            </c:when>
+
+                            <c:otherwise>
+                                <c:forEach var="item" items="${cartItems}">
+                                    <div class="cart-item-card">
+                                        <div class="item">
+                                            <div class="item-grid">
+                                                <div class="select-product">
+                                                    <input type="checkbox" checked/>
+                                                </div>
+
+                                                <div class="thumb">
+                                                    <img src="${item.thumbnail}"
+                                                         alt="${item.name}"/>
+                                                </div>
+
+                                                <div class="product-info">
+                                                    <div class="meta-title">
+                                                            ${item.name}
+                                                    </div>
+                                                    <div class="muted">
+                                                        Mã SP: ${item.productId}
+                                                    </div>
+                                                </div>
+
+                                                <div class="price">
+                                                    <span class="price-value"
+                                                          id="subtotal-${item.productId}">
+                                                        <fmt:formatNumber
+                                                                value="${item.priceAfterDiscount * item.quantity}"
+                                                                type="number"/>₫
+                                                    </span>
+                                                </div>
+
+                                                <div class="qty-wrap">
+                                                    <!-- nút Xóa -->
+                                                    <a class="Xoa-sp"
+                                                       href="${pageContext.request.contextPath}/AddToCart?action=remove&productId=${item.productId}"
+                                                       aria-label="Xóa sản phẩm">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </a>
+
+                                                    <input type="hidden"
+                                                           name="productId"
+                                                           value="${item.productId}"/>
+
+                                                    <div class="qty">
+                                                        <button type="button"
+                                                                class="qty-btn"
+                                                                onclick="decreaseQty(${item.productId})">
+                                                            <i class="fa-solid fa-minus"></i>
+                                                        </button>
+
+                                                        <input type="number"
+                                                               name="quantity"
+                                                               value="${item.quantity}"
+                                                               min="1"
+                                                               class="qty-input"
+                                                               id="qty-${item.productId}"
+                                                               data-product-id="${item.productId}"
+                                                               readonly/>
+
+                                                        <button type="button"
+                                                                class="qty-btn"
+                                                                onclick="increaseQty(${item.productId})">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+
+                    <!-- nút cập nhật -->
+                </form>
+            </div>
+        </div>
+
+        <!-- RIGHT: TỔNG TIỀN -->
+        <div class="card summary">
+            <div class="card-body">
+                <div class="head">
+                    <h3 style="margin:0;font-size:28px;font-weight:700">
+                        Thông tin đơn hàng
+                    </h3>
+                </div>
+                <div class="divider"></div>
+
+                <div class="tinh-tien">
+                    <p>Tổng tiền:</p>
+                    <span class="thanh-tien">
+                                <fmt:formatNumber value="${totalAmount}" type="number"/>đ
+                            </span>
+                </div>
+
+                <p class="muted">Phí vận chuyển sẽ được tính ở trang
+                    Thanh toán</p>
+                <p class="muted">Mã giảm giá được nhập ở trang Thanh
+                    toán</p>
+
+                <a href="ThanhToan.jsp">
+                    <c:choose>
+                        <c:when test="${cartSize == 0}">
+                            <button class="btn" disabled>Đặt hàng</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="btn">Đặt hàng</button>
+                        </c:otherwise>
+                    </c:choose>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<%@ include file="Footer.jsp" %>
 <script>
     function increaseQty(productId) {
         const input = document.getElementById('qty-' + productId);
@@ -442,161 +561,6 @@
             .catch(err => console.error(err));
     }
 </script>
-
-<body>
-<%@ include file="Header.jsp" %>
-<!-- Breadcrumb -->
-<div class="breadcrumb">Trang chủ / Giỏ hàng</div>
-<div class="container">
-    <div class="grid">
-        <!-- LEFT: CART -->
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title">Giỏ hàng của bạn</h2>
-                <p class="subtle">
-                    Bạn đang có <span id="cart-total-quantity"><%=
-                totalQuantity %></span> sản phẩm trong giỏ
-                    hàng
-                </p>
-                <div class="divider"></div>
-
-                <form
-                        action="${pageContext.request.contextPath}/AddToCart?action=update"
-                        method="post">
-                    <div class="cart-list">
-                        <%
-                            if (cart.cartSize() == 0) {
-                        %>
-                        <p>Giỏ hàng của bạn đang trống.</p>
-                        <%
-                        } else {
-                            for (CartItem item : cart.getCarts().values()) {
-                                Product p =
-                                        productService.getProductById(item.getProductId());
-                                if (p == null) continue;
-
-                                int qty = item.getQuantity();
-                                long price = (long) p.getPriceAfterDiscount();
-                                long subTotal = price * qty;
-                                totalAmount += subTotal;
-                        %>
-
-                        <div class="cart-item-card">
-                            <div class="item">
-                                <div class="item-grid">
-                                    <div class="select-product">
-                                        <input type="checkbox"
-                                               checked/>
-                                    </div>
-
-                                    <div class="thumb">
-                                        <img
-                                                src="<%= p.getThumbnail() %>"
-                                                alt="<%= p.getName() %>"/>
-                                    </div>
-
-                                    <div class="product-info">
-                                        <div class="meta-title"><%=
-                                        p.getName() %>
-                                        </div>
-                                        <div class="muted">Mã SP: <%=
-                                        p.getId() %>
-                                        </div>
-                                    </div>
-
-                                    <div class="price">
-                                                <span class="price-value"
-                                                      id="subtotal-<%= p.getId() %>">
-                                                    <%= String.format("%,d₫",
-                                                            subTotal) %>
-                                                </span>
-                                    </div>
-
-                                    <div class="qty-wrap">
-                                        <!-- nút Xóa -->
-                                        <a class="Xoa-sp"
-                                           href="${pageContext.request.contextPath}/AddToCart?action=remove&productId=<%= p.getId() %>"
-                                           aria-label="Xóa sản phẩm">
-                                            <i
-                                                    class="fa-solid fa-xmark"></i>
-                                        </a>
-
-                                        <input type="hidden"
-                                               name="productId"
-                                               value="<%= p.getId() %>"/>
-                                        <div class="qty">
-                                            <button type="button"
-                                                    class="qty-btn"
-                                                    onclick="decreaseQty(<%= p.getId() %>)">
-                                                <i
-                                                        class="fa-solid fa-minus"></i>
-                                            </button>
-                                            <input type="number"
-                                                   name="quantity"
-                                                   value="<%= qty %>"
-                                                   min="1"
-                                                   class="qty-input"
-                                                   id="qty-<%= p.getId() %>"
-                                                   data-product-id="<%= p.getId() %>"
-                                                   readonly/>
-                                            <button type="button"
-                                                    class="qty-btn"
-                                                    onclick="increaseQty(<%= p.getId() %>)">
-                                                <i
-                                                        class="fa-solid fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <%
-                                } // end for
-                            } // end else
-                        %>
-                    </div>
-
-                    <!-- nút cập nhật -->
-                </form>
-            </div>
-        </div>
-
-        <!-- RIGHT: TỔNG TIỀN -->
-        <div class="card summary">
-            <div class="card-body">
-                <div class="head">
-                    <h3 style="margin:0;font-size:28px;font-weight:700">
-                        Thông tin đơn hàng
-                    </h3>
-                </div>
-                <div class="divider"></div>
-
-                <div class="tinh-tien">
-                    <p>Tổng tiền:</p>
-                    <span class="thanh-tien">
-                                <%= String.format("%,dđ", totalAmount) %>
-                            </span>
-                </div>
-
-                <p class="muted">Phí vận chuyển sẽ được tính ở trang
-                    Thanh toán</p>
-                <p class="muted">Mã giảm giá được nhập ở trang Thanh
-                    toán</p>
-
-                <a href="ThanhToan.jsp">
-                    <button class="btn" <%=cart.cartSize() == 0 ?
-                            "disabled" :
-                            "" %>>
-                        Đặt hàng
-                    </button>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<%@ include file="Footer.jsp" %>
 </body>
 
 </html>
