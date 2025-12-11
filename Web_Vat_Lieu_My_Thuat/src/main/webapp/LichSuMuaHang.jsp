@@ -437,7 +437,7 @@
                 <p class="name-full">Xin chào, <span class="span">Hoàng
                 Trần</span></p>
                 <div class="list-canhan">
-                    <a href="ThongTinKhachHang.jsp"><i
+                    <a href="Profile.jsp"><i
                             class="fa-solid fa-user"></i> Thông tin
                         tài
                         khoản</a>

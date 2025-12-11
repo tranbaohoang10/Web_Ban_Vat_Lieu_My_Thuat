@@ -817,7 +817,7 @@
         <i class="fa-solid fa-user"></i>
         <div class="dangnhap-dangki">
           <div class="dangnhap">
-            <a class="dangnhap" href="ThongTinKhachHang.jsp">Hi, Hoàng
+            <a class="dangnhap" href="Profile.jsp">Hi, Hoàng
               Trần</a>
           </div>
           <div class="dangki"> <a class="dangki" href="index.jsp">Đăng

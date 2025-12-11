@@ -380,6 +380,10 @@
                     <br>
                     <input type="password" id="matkhaumoi" name="matkhaumoi">
                     <br>
+                    <label for="nhaplaimatkhaumoi">Nhập lại mật khẩu mới:</label>
+                    <br>
+                    <input type="password" id="nhaplaimkmoi" name="nhaplaimkmoi">
+                    <br>
 
                     <input type="submit" value="Thay đổi mật khẩu" class="button">
                 </form>
@@ -408,7 +412,6 @@
         });
     </script>
 </c:if>
-
 
 
 <!-- End section main -->
