@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +13,18 @@
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<style>
 
+<style>
     /* Lien He */
+
+    /* header dính trên cùng */
+    #header-trang-chu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
     .hearder-lienhe {
         background: #DBE8FF;
         color: #17479d;
@@ -22,16 +32,13 @@
         font-size: 16px;
         padding: 12px 40px;
         border-bottom: 1px solid #e5e7eb;
-        margin-top: 100px;
+        margin-top: 100px; /* đúng bằng chiều cao header */
         margin-bottom: 0;
     }
 
-
     .page-contact {
-
-        padding-top: 140px;
+        padding-top: 24px;   /* bớt 140 xuống cho đỡ thừa khoảng trắng */
         padding-bottom: 120px;
-
     }
 
     .container-all {
@@ -42,20 +49,13 @@
         padding: 0 16px;
         border: 1px solid #e8edf3;
         border-radius: 12px;
-
-
     }
 
-    .container-right {
-        flex: 50%;
-        border: none;
-    }
-
+    .container-right,
     .container-left {
         flex: 50%;
         border: none;
     }
-
 
     .contact-meta {
         display: grid;
@@ -76,13 +76,6 @@
         color: #17479d;
         min-width: 18px;
         margin-top: 2px;
-    }
-
-    .contact-grid {
-        display: grid;
-        grid-template-columns: 1.15fr 1fr;
-        gap: 24px;
-        align-items: start;
     }
 
     .card {
@@ -147,20 +140,31 @@
         border: 0;
         border-radius: 12px;
     }
+
+    /* alert thành công */
+    .alert-success {
+        margin-bottom: 12px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: #dcfce7;
+        color: #166534;
+        font-weight: 500;
+    }
 </style>
+
 <body>
 <%@ include file="Header.jsp" %>
 
-<!-- header lien he -->
+<!-- breadcrumb -->
 <div class="hearder-lienhe">Trang chủ / Thông tin liên hệ</div>
 
 <main class="page-contact">
     <div class="container-all">
         <div class="container-left">
-
             <div class="card">
                 <!-- cho do chung voi lien he -->
                 <h1>Thienlong.com - Tập đoàn Thiên Long</h1>
+
                 <div class="contact-meta">
                     <div class="row">
                         <i class="fa-solid fa-location-dot"></i>
@@ -186,37 +190,60 @@
                 </div>
 
                 <div class="form-title">LIÊN HỆ VỚI CHÚNG TÔI</div>
-                <form action="#" method="post">
+
+                <!-- thông báo thành công -->
+                <c:if test="${not empty successMsg}">
+                    <div class="alert-success">
+                            ${successMsg}
+                    </div>
+                </c:if>
+
+                <!-- FORM LIÊN HỆ -->
+                <form action="${pageContext.request.contextPath}/contact"
+                      method="post">
+                    <!-- Họ tên lấy từ session -->
                     <div class="form-group">
                         <input class="form-control" type="text"
-                               name="fullname" placeholder="Họ tên"
-                               required>
+                               name="fullname"
+                               value="${sessionScope.currentUser.fullName}"
+                               placeholder="Họ tên"
+                               readonly>
                     </div>
+
+                    <!-- Email lấy từ session -->
                     <div class="form-group">
                         <input class="form-control" type="email"
-                               name="email" placeholder="Email" required>
+                               name="email"
+                               value="${sessionScope.currentUser.email}"
+                               placeholder="Email"
+                               readonly>
                     </div>
+
+                    <!-- Số điện thoại lấy từ session -->
                     <div class="form-group">
                         <input class="form-control" type="tel"
-                               name="phone" placeholder="Số điện thoại"
-                               required>
+                               name="phone"
+                               value="${sessionScope.currentUser.phoneNumber}"
+                               placeholder="Số điện thoại"
+                               readonly>
                     </div>
+
+                    <!-- Nội dung vẫn cho user nhập -->
                     <div class="form-group">
-                                <textarea class="form-control" name="message"
-                                          placeholder="Nhập nội dung"
-                                          required></textarea>
+             <textarea class="form-control" name="message"
+                  placeholder="Nhập nội dung"
+                  required></textarea>
                     </div>
-                    <button class="btn-lienhe" type="button">Gửi liên hệ
-                        của bạn
+
+                    <button class="btn-lienhe" type="submit">
+                        Gửi liên hệ của bạn
                     </button>
                 </form>
             </div>
-
         </div>
 
-        <!-- map -->
+        <!-- MAP -->
         <div class="container-right">
-
             <div class="card map-card">
                 <iframe
                         src="https://www.google.com/maps?q=10%20Mai%20Chi%20Tho,%20Thu%20Thiem,%20Thu%20Duc,%20Ho%20Chi%20Minh&hl=vi&z=16&output=embed"
@@ -225,18 +252,9 @@
                 </iframe>
             </div>
         </div>
-
     </div>
 </main>
 
 <%@ include file="Footer.jsp" %>
-
-<script>
-    document.querySelector('.btn-lienhe').addEventListener('click', function () {
-        alert('Gửi liên hệ thành công!');
-    });
-</script>
-
 </body>
-
 </html>

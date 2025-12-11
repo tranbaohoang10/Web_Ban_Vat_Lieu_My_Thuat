@@ -364,7 +364,7 @@
                     <a href><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
                     <a href="LichSuMuaHang.jsp"><i class="fa-solid fa-box-open"></i>
                         Lịch sử mua hàng</a>
-                    <a href="DangNhap.jsp"><i
+                    <a href="${pageContext.request.contextPath}/logout"><i
                             class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
                 </div>
             </div>
