@@ -44,6 +44,7 @@ public class AuthFilter implements Filter {
                         path.startsWith("/login") ||
                         path.startsWith("/logout") ||
                         path.startsWith("/register") ||
+                        path.startsWith("/forgotpassword") ||
                         path.startsWith("/assets/") ||
                         path.endsWith(".css") ||
                         path.endsWith(".js") ||

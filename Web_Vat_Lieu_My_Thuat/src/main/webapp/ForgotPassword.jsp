@@ -176,14 +176,16 @@
         <h2>ĐẶT LẠI MẬT KHẨU</h2>
         <p>Chúng tôi sẽ gửi cho bạn một email để kích hoạt việc đặt lại
             mật khẩu</p>
-        <form action class="form-email">
+        <form action = "${pageContext.request.contextPath}/forgotpassword" class="form-email" method="post">
 
             <div class="form-1">
-                <input type="email" name placeholder="Email">
+                <input type="email" name = "email" placeholder="Email" required>
             </div>
 
-            <a href="Login.jsp" class="btn-lay-mk">Lấy lại mật
-                khẩu</a>
+            <p style="color: red; margin-top: 10px">${error}</p>
+            <p style="color: #00ff00; margin-top: 10px">${success}</p>
+
+            <button type="submit" class="btn-lay-mk">Lấy lại mật khẩu</button>
 
             <div class="quay-lai-dang-nhap">
                 <a href="Login.jsp" class="link-quay-lai">Quay lại
@@ -191,7 +193,7 @@
             </div>
 
             <div class="chuataikhoan">
-                Bạn chưa có tài khoản <a href="Register.jsp"
+                Bạn chưa có tài khoản <a href="${pageContext.request.contextPath}/register"
                                          class="link-dki">Đăng ký tại đây</a>
             </div>
 
