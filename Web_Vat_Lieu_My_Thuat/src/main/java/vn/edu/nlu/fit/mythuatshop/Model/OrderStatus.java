@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.mythuatshop.Model;
 
-public class OrderStatus {
+import java.io.Serializable;
+
+public class OrderStatus implements Serializable {
     private int id;
     private String statusName;
 
