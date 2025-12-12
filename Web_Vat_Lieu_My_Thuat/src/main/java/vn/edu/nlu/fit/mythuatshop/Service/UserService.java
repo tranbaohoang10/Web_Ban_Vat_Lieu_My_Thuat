@@ -3,9 +3,11 @@ package vn.edu.nlu.fit.mythuatshop.Service;
 import org.mindrot.jbcrypt.BCrypt;
 import vn.edu.nlu.fit.mythuatshop.Dao.UserDao;
 import vn.edu.nlu.fit.mythuatshop.Model.Users;
+import vn.edu.nlu.fit.mythuatshop.Util.EmailUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 public class UserService {
     private final UserDao userDao;
@@ -74,5 +76,44 @@ public class UserService {
         }
         String newHash = BCrypt.hashpw(newPassword, BCrypt.gensalt(12));
         return userDao.updatePassword(userId, newHash);
+    }
+    // quên mật khẩu
+    public Users getUserByEmail(String email) {
+        return userDao.findByEmailFp(email);
+    }
+    public boolean resetAndSendEmail(String email){
+        email = email.trim();
+        Users user = userDao.findByEmailFp(email);
+        if(user == null) return false;
+
+        String matkhaumoi = generateRandomPassword();
+        String hashed = BCrypt.hashpw(matkhaumoi, BCrypt.gensalt(12));
+
+        int row = userDao.updatePasswordByEmail(email, hashed);
+        if(row <= 0) return false;
+
+        String subject = "Đặt lại mật khẩu cho tài khoản";
+        String nd = "Mật khẩu mới của bạn là: " + matkhaumoi;
+
+        try {
+            System.out.println(">>> START send mail to: " + email);
+            EmailUtil.send(email, subject, nd);
+            System.out.println(">>> SEND MAIL OK to: " + email);
+            return true;
+        } catch (Exception e) {
+            System.out.println(">>> SEND MAIL FAILED to: " + email);
+            e.printStackTrace();   // ⭐ dòng này sẽ cho bạn biết lỗi SMTP/Auth/Port
+            return false;
+        }
+    }
+
+    private String generateRandomPassword() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        Random rnd = new Random();
+        for (int i = 0; i < 8; i++) {
+            sb.append(chars.charAt(rnd.nextInt(chars.length())));
+        }
+        return sb.toString();
     }
 }

@@ -302,7 +302,7 @@
 
             <div class="forgot-password">
                 <p>Quên mật khẩu? Nhấn vào <a
-                        href="ForgotPassword.jsp">đây</a></p>
+                        href="${pageContext.request.contextPath}/forgotpassword">đây</a></p>
             </div>
             <button type="submit"
                     class="btn-login">Đăng

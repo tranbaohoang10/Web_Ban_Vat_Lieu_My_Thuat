@@ -2,25 +2,27 @@ package vn.edu.nlu.fit.mythuatshop.Model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 public class Order implements Serializable {
-        private int id;
-        private int userId;
-        private String fullName;
-        private String email;
-        private String phoneNumber;
-        private String address;
+    private int id;
+    private int userId;
+    private String fullName;
+    private String email;
+    private String phoneNumber;
+    private String address;
 
-        private double totalPrice;
-        private int paymentId;
-        private int orderStatusId;
-        private Integer voucherId;
-        private double discount;
-        private Timestamp createAt;
-        private String note;
-        private List<OrderDetail> items;
+    private double totalPrice;
+    private int paymentId;
+    private int orderStatusId;
+    private Integer voucherId;
+    private double discount;
+    private Timestamp createAt;
+    private String note;
+    private List<OrderDetail> items;
+    private String statusName;
+    private List<OrderItem> viewItems;
+
 
     public Order() {
     }
@@ -132,6 +134,23 @@ public class Order implements Serializable {
     public List<OrderDetail> getItems() {
         return items;
     }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public List<OrderItem> getViewItems() {
+        return viewItems;
+    }
+
+    public void setViewItems(List<OrderItem> viewItems) {
+        this.viewItems = viewItems;
+    }
+
 
     public void setItems(List<OrderDetail> items) {
         this.items = items;

@@ -18,7 +18,7 @@ public class JDBIConnector {
     }
     public static void Connect() {
         MysqlDataSource ds = new MysqlDataSource();
-        String url = "jdbc:mysql://localhost:3306/mythuat";
+        String url = "jdbc:mysql://localhost:3306/Mythuat";
         ds.setUrl(url);
         ds.setUser("root");
         ds.setPassword("");
