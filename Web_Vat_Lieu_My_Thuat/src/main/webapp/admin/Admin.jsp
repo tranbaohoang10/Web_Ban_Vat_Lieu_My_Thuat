@@ -374,7 +374,7 @@
                   <h1>Tổng Quan</h1>
                   <div class="account-admin">
                     <div class="logo-admin">TH</div>
-                    <span title="Admin Trần Bảo Hoàng">Admin Trần Bảo Hoàng</span>
+                    <span>${sessionScope.currentUser.fullName}</span>
                   </div>
                 </div>
                 <div class="total-nguoidung total-box">
