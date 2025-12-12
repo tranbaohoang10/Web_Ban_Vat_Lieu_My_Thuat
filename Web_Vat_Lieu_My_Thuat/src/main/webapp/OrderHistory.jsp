@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,105 +50,6 @@
     }
 
     /* End section-trangchinh-danhmuc-sanpham */
-    /* Begin section-main-ca-nhan */
-    .section-main-ca-nhan {
-        padding-bottom: 20px;
-        padding-top: 20px;
-    }
-
-    .section-main-ca-nhan .container {
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-
-    }
-
-    .section-main-ca-nhan .container .canhan {
-        display: flex;
-        gap: 30px;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        background-color: #F1F1F1;
-        border-radius: 10px;
-        width: 30%;
-        padding: 10px;
-
-        top: 20px;
-        height: fit-content;
-
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .logo-name {
-        width: 80px;
-        height: 80px;
-        background-color: #FB9F10;
-        border-radius: 50%;
-        color: white;
-        font-size: 36px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-        margin-top: 20px;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .name-full {
-        font-size: 18px;
-        font-style: italic;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .name-full .span {
-        color: #2659F3;
-        font-weight: 600;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a {
-        width: calc(100% - 30px);
-        display: block;
-        padding: 15px;
-        background-color: #2659F3;
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:first-child {
-
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a.active {
-        background-color: #FB9F10;
-        transition: all 0.4s;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:last-child {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:hover {
-        background-color: #FB9F10;
-        transition: all 0.4s;
-    }
-
     .section-main-ca-nhan .container .thongtin-canhan {
         flex: 1;
         background-color: #F1F1F1;
@@ -403,6 +305,17 @@
         text-decoration: none;
         color: inherit;
     }
+    .order-status.shipping{
+        color: #1d4ed8;
+        background: #dbeafe;
+        border: 1px solid #93c5fd;
+    }
+
+    .order-status.cancelled{
+        color: #dc2626;
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+    }
 
 
     /* ENd section-main-ca-nhan */
@@ -411,7 +324,6 @@
 <!-- Begin section info mithuat -->
 <div id="section-info-mithuat">
     <div class="container">
-        <%@ include file="CategoryMenu.jsp" %>
     </div>
 </div>
 <!-- End section info mithuat -->
@@ -433,118 +345,102 @@
 <div class="section-main-ca-nhan">
     <div class="container">
         <div class="canhan">
-            <div class="tongquan-canhan">
-                <div class="logo-name">
-                    HT
-                </div>
-                <p class="name-full">Xin chào, <span class="span"></span></p>
-                <div class="list-canhan">
-                    <a href="${pageContext.request.contextPath}/profile"><i
-                            class="fa-solid fa-user"></i> Thông tin
-                        tài
-                        khoản</a>
-                    <a href="${pageContext.request.contextPath}/order-history" class="active">
-                        <i class="fa-solid fa-box-open"></i> Lịch sử mua hàng</a>
-                    <a href="${pageContext.request.contextPath}/change-password">
-                        <i class="fa-solid fa-rotate"></i> Đổi mật khẩu</a>
-                    <a href="${pageContext.request.contextPath}/logout"><i
-                            class="fa-solid fa-right-from-bracket"></i>Đăng xuất
-                    </a>
-                </div>
-            </div>
+            <c:set var="activePage" value="orders" scope="request"/>
+            <%@ include file="AccountSideBar.jsp" %>
             <div class="order-history">
-                <c:set var="st" value="${empty currentStatus ? 'all' : currentStatus}"/>
+                    <c:set var="st" value="${empty currentStatus ? 'all' : currentStatus}"/>
 
-                <div class="order-tabs">
-                    <a href="${pageContext.request.contextPath}/order-history?status=all">
-                        <button class="${st == 'all' ? 'active' : ''}">Tất cả</button>
-                    </a>
-                    <a href="${pageContext.request.contextPath}/order-history?status=pending">
-                        <button class="${st == 'pending' ? 'active' : ''}">Chờ xác nhận</button>
-                    </a>
-                    <a href="${pageContext.request.contextPath}/order-history?status=shipping">
-                        <button class="${st == 'shipping' ? 'active' : ''}">Đang vận chuyển</button>
-                    </a>
-                    <a href="${pageContext.request.contextPath}/order-history?status=completed">
-                        <button class="${st == 'completed' ? 'active' : ''}">Hoàn thành</button>
-                    </a>
-                    <a href="${pageContext.request.contextPath}/order-history?status=cancelled">
-                        <button class="${st == 'cancelled' ? 'active' : ''}">Đã hủy</button>
-                    </a>
-                </div>
-                <c:choose>
-                    <c:when test="${empty orders}">
-                        <p>Bạn chưa có đơn hàng nào.</p>
-                    </c:when>
+                    <div class="order-tabs">
+                        <a href="${pageContext.request.contextPath}/order-history?status=all">
+                            <button class="${st == 'all' ? 'active' : ''}">Tất cả</button>
+                        </a>
 
-                    <c:otherwise>
-                        <c:forEach var="order" items="${orders}">
-                            <div class="order-card">
-                                <div class="order-header">
-                                    <span>Mã đơn: #DH0${order.id}</span>
+                        <a href="${pageContext.request.contextPath}/order-history?status=pending">
+                            <button class="${st == 'pending' ? 'active' : ''}">Chờ xác nhận</button>
+                        </a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=shipping">
+                            <button class="${st == 'shipping' ? 'active' : ''}">Đang vận chuyển</button>
+                        </a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=completed">
+                            <button class="${st == 'completed' ? 'active' : ''}">Hoàn thành</button>
+                        </a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=cancelled">
+                            <button class="${st == 'cancelled' ? 'active' : ''}">Đã hủy</button>
+                        </a>
+                    </div>
+                    <c:choose>
+                        <c:when test="${empty orders}">
+                            <p>Bạn chưa có đơn hàng nào.</p>
+                        </c:when>
 
-                                    <c:choose>
-                                        <c:when test="${order.orderStatusId == 1}">
-                                            <span class="order-status pending">${order.statusName}</span>
-                                        </c:when>
-                                        <c:when test="${order.orderStatusId == 3}">
-                                            <span class="order-status success">${order.statusName}</span>
-                                        </c:when>
-                                        <c:when test="${order.orderStatusId == 4}">
-                                            <span class="order-status cancelled">${order.statusName}</span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <span class="order-status">${order.statusName}</span>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
+                        <c:otherwise>
+                            <c:forEach var="order" items="${orders}">
+                                <div class="order-card">
+                                    <div class="order-header">
+                                        <span>Mã đơn: #DH0${order.id}</span>
 
-                                <div class="order-items">
-                                    <c:forEach var="item" items="${order.viewItems}">
-                                        <div class="order-item">
-                                            <img src="${item.thumbnail}" alt="${item.name}">
-                                            <div class="order-info">
-                                                <p class="order-name">${item.name}</p>
-                                                <p class="order-quantity">Số lượng: ${item.quantity}</p>
+                                        <c:choose>
+                                            <c:when test="${order.orderStatusId == 1}">
+                                                <span class="order-status pending">${order.statusName}</span>
+                                            </c:when>
+                                            <c:when test="${order.orderStatusId == 3}">
+                                                <span class="order-status success">${order.statusName}</span>
+                                            </c:when>
+                                            <c:when test="${order.orderStatusId == 4}">
+                                                <span class="order-status cancelled">${order.statusName}</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="order-status shipping">${order.statusName}</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+
+                                    <div class="order-items">
+                                        <c:forEach var="item" items="${order.viewItems}">
+                                            <div class="order-item">
+                                                <img src="${item.thumbnail}" alt="${item.name}">
+                                                <div class="order-info">
+                                                    <p class="order-name">${item.name}</p>
+                                                    <p class="order-quantity">Số lượng: ${item.quantity}</p>
+                                                </div>
+                                                <div class="order-price">
+                                                    <p>
+                                                        <fmt:formatNumber value="${item.price}" type="number"/>₫
+                                                    </p>
+                                                    <strong>
+                                                        <fmt:formatNumber value="${item.lineTotal}" type="number"/>₫
+                                                    </strong>
+                                                </div>
                                             </div>
-                                            <div class="order-price">
-                                                <p>
-                                                    <fmt:formatNumber value="${item.price}" type="number"/>₫
-                                                </p>
-                                                <strong>
-                                                    <fmt:formatNumber value="${item.lineTotal}" type="number"/>₫
-                                                </strong>
-                                            </div>
+                                        </c:forEach>
+                                    </div>
+
+                                    <div class="order-footer">
+                        <span class="total">Tổng cộng:
+                            <strong>
+                                <fmt:formatNumber value="${order.totalPrice}" type="number"/>₫
+                            </strong>
+                        </span>
+
+                                        <div class="order-buttons">
+                                            <a href="${pageContext.request.contextPath}/order-detail?id=${order.id}"
+                                               class="btn-review">Xem chi tiết</a>
+
+                                            <c:if test="${order.orderStatusId == 1}">
+                                                <a href="${pageContext.request.contextPath}/cancel-order?id=${order.id}"
+                                                   class="btn-cancel">Hủy đơn</a>
+                                            </c:if>
                                         </div>
-                                    </c:forEach>
-                                </div>
-
-                                <div class="order-footer">
-                    <span class="total">Tổng cộng:
-                        <strong>
-                            <fmt:formatNumber value="${order.totalPrice}" type="number"/>₫
-                        </strong>
-                    </span>
-
-                                    <div class="order-buttons">
-                                        <a href="${pageContext.request.contextPath}/order-detail?id=${order.id}"
-                                           class="btn-review">Xem chi tiết</a>
-
-                                        <c:if test="${order.orderStatusId == 1}">
-                                            <a href="${pageContext.request.contextPath}/cancel-order?id=${order.id}"
-                                               class="btn-cancel">Hủy đơn</a>
-                                        </c:if>
                                     </div>
                                 </div>
-                            </div>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
 
 
+                </div>
             </div>
         </div>
-    </div>
 </div>
 </div>
 </div>

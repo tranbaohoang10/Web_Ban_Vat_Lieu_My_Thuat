@@ -155,102 +155,6 @@
     }
 
     /* End section-trangchinh-danhmuc-sanpham */
-    /* Begin section-main-ca-nhan */
-    .section-main-ca-nhan {
-        padding-bottom: 20px;
-        padding-top: 20px;
-    }
-
-    .section-main-ca-nhan .container {
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-
-    }
-
-    .section-main-ca-nhan .container .canhan {
-        display: flex;
-        gap: 30px;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        background-color: #F1F1F1;
-        border-radius: 10px;
-        width: 30%;
-        padding: 10px;
-
-        top: 20px;
-        height: fit-content;
-
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .logo-name {
-        width: 80px;
-        height: 80px;
-        background-color: #FB9F10;
-        border-radius: 50%;
-        color: white;
-        font-size: 36px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-        margin-top: 20px;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .name-full {
-        font-size: 18px;
-        font-style: italic;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .name-full .span {
-        color: #2659F3;
-        font-weight: 600;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a {
-        width: calc(100% - 30px);
-        display: block;
-        padding: 15px;
-        background-color: #2659F3;
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
-    }
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:first-child{
-        background-color: #FB9F10;
-    }
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:active{
-        background-color: #FB9F10;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:last-child {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-
-
-    .section-main-ca-nhan .container .tongquan-canhan .list-canhan a:hover {
-        background-color: #FB9F10;
-        transition: all 0.4s;
-    }
-
     .section-main-ca-nhan .container .thongtin-canhan {
         flex: 1;
         background-color: #F1F1F1;
@@ -306,34 +210,6 @@
 <!-- Begin section info mithuat -->
 <div id="section-info-mithuat">
     <div class="container">
-        <div class="info-mithuat-header">
-            <i class="fa-solid fa-palette"></i>
-            <p class="info-mithuat-header-content">Danh mục</p>
-            <i class="fa-solid fa-angle-down"></i>
-        </div>
-        <div class="hover-block">
-            <div class="info-mithuat-description">
-                <div class="info-mithuat-description-first">
-                    <a href>NEW ARRIVAL</a>
-                    <a href>Fiber Pen - Bút lông Màu</a>
-                    <a href>Bút chì màu</a>
-                    <a href>Màu nước</a>
-                    <a href>Tập vẽ tranh - Tập tô màu</a>
-                </div>
-                <div class="info-mithuat-description-second">
-                    <a href>Acrylic Marker - Bút sơn</a>
-                    <a href>Màu sáp, màu sáp dầu</a>
-                    <a href>Bút vẽ kỹ thuật</a>
-                    <a href>Sáp nặn</a>
-                    <a href>Combo mỹ thuật</a>
-                </div>
-                <div class="info-mithuat-description-img">
-                    <img
-                            src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg"
-                            alt>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <!-- End section info mithuat -->
@@ -357,23 +233,9 @@
     <div class="container">
         <div class="canhan">
 
-            <div class="tongquan-canhan">
-                <div class="logo-name">
-                    ${fn:toUpperCase(fn:substring(sessionScope.currentUser.fullName, 0, 1))}
-                </div>
-                <p class="name-full">Xin chào, ${sessionScope.currentUser.fullName}</p>
-                <div class="list-canhan">
-                    <a href><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
-                    <a href="${pageContext.request.contextPath}/order-history" class="active">
-                    <i class="fa-solid fa-box-open"></i>
-                        Lịch sử mua hàng</a>
-                    <a href="${pageContext.request.contextPath}/change-password">
-                        <i class="fa-solid fa-rotate"></i> Đổi mật khẩu</a>
-                    <a href="${pageContext.request.contextPath}/logout"><i
-                            class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+            <c:set var="activePage" value="profile" scope="request"/>
+            <%@ include file="AccountSideBar.jsp" %>
 
-                </div>
-            </div>
             <div class="thongtin-canhan">
                 <form action="${pageContext.request.contextPath}/profile" method="post">
                     <h2>Thông tin tài khoản</h2>
