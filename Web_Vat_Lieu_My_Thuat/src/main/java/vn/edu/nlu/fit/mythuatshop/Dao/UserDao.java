@@ -9,12 +9,7 @@ public class UserDao {
     public UserDao() {
         this.jdbi = JDBIConnector.getJdbi();
     }
-//    public Users findByEmailAndPassword(String email, String password) {
-//        String sql = "SELECT id, fullName, email, `password`, phoneNumber, dob, address, role, createAt " +
-//                " FROM Users WHERE email = :email AND password = :password";
-//        return jdbi.withHandle(handle -> handle.createQuery(sql).bind("email", email).bind("password", password).mapToBean(Users.class).findOne().orElse(null));
-//
-//    }
+
     // tìm coi email đã tồn tại chưa
     public Users findByEmail(String email) {
         String sql = "SELECT id, fullName, email, `password`, phoneNumber, dob, address, role, createAt " +
@@ -92,4 +87,18 @@ public class UserDao {
                 .execute());
         return row > 0;
     }
+    // quên mật khẩu
+    public Users findByEmailFp(String email){
+        String sql = "SELECT id, fullName, email, password, phoneNumber, dob, address, role, createAt" +
+                " FROM users WHERE email = :email ";
+        return jdbi.withHandle(handle ->handle.createQuery(sql).bind("email", email).mapToBean(Users.class).findOne().orElse(null));
+    }
+    public int updatePasswordByEmail(String email, String matkhaumoi) {
+        String sql = "UPDATE Users SET password = :password WHERE email = :email";
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("password", matkhaumoi)
+                        .bind("email", email)
+                        .execute()
+        );    }
 }
