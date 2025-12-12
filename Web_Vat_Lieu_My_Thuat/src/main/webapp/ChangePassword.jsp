@@ -359,8 +359,10 @@
                 </div>
                 <p class="name-full">Xin chào, ${sessionScope.currentUser.fullName}</p>
                 <div class="list-canhan">
-                    <a href><i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
-                    <a href="LichSuMuaHang.jsp"><i class="fa-solid fa-box-open"></i>
+                    <a href=${pageContext.request.contextPath}/profile>
+                        <i class="fa-solid fa-user"></i> Thông tin tài khoản</a>
+                    <a href="${pageContext.request.contextPath}/order-history">
+                        <i class="fa-solid fa-box-open"></i>
                         Lịch sử mua hàng</a>
                     <a href="${pageContext.request.contextPath}/change-password">
                         <i class="fa-solid fa-rotate"></i> Đổi mật khẩu</a>

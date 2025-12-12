@@ -3,6 +3,9 @@ package vn.edu.nlu.fit.mythuatshop.Dao;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.nlu.fit.mythuatshop.Model.Order;
 import vn.edu.nlu.fit.mythuatshop.Model.OrderDetail;
+import vn.edu.nlu.fit.mythuatshop.Model.OrderItem;
+
+import java.util.List;
 
 public class OrderDao  implements DaoInterface<Order> {
     private final Jdbi jdbi;
@@ -50,6 +53,47 @@ public class OrderDao  implements DaoInterface<Order> {
             // 3. Trả về orderId để hàm insert() nhận được
             return orderId;
         });
+    }
+    public List<Order> findOrdersByUser(int userId, Integer statusId) {
+        String sql =
+                "SELECT o.ID            AS id, " +
+                        "       o.userID        AS userId, " +
+                        "       o.fullName      AS fullName, " +
+                        "       o.email         AS email, " +
+                        "       o.phoneNumber   AS phoneNumber, " +
+                        "       o.address       AS address, " +
+                        "       o.totalPrice    AS totalPrice, " +
+                        "       o.paymentID     AS paymentId, " +
+                        "       o.orderStatusID AS orderStatusId, " +
+                        "       o.voucherID     AS voucherId, " +
+                        "       o.discount      AS discount, " +
+                        "       o.createAt      AS createAt, " +
+                        "       o.note          AS note, " +
+                        "       os.statusName   AS statusName " +
+                        "FROM Orders o " +
+                        "JOIN Order_Statuses os ON os.ID = o.orderStatusID " +
+                        "WHERE o.userID = :userId " +"AND o.orderStatusID = :statusId";
+        return jdbi.withHandle(handle ->
+           handle.createQuery(sql).bind("userId",userId).bind("statusId",statusId).
+                   mapToBean(Order.class).list());
+    }
+    public List<OrderItem> findOrderItemsView(int orderId) {
+        String sql =
+                "SELECT d.productID AS productId, " +
+                        "       p.name      AS name, " +
+                        "       p.thumbnail AS thumbnail, " +
+                        "       d.quantity  AS quantity, " +
+                        "       d.price     AS price " +
+                        "FROM Order_Details d " +
+                        "JOIN Products p ON p.ID = d.productID " +
+                        "WHERE d.orderID = :orderId";
+
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("orderId", orderId)
+                        .mapToBean(OrderItem.class)
+                        .list()
+        );
     }
 
     @Override

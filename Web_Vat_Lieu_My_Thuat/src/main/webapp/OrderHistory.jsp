@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -434,113 +437,111 @@
                 <div class="logo-name">
                     HT
                 </div>
-                <p class="name-full">Xin chào, <span class="span">Hoàng
-                Trần</span></p>
+                <p class="name-full">Xin chào, <span class="span"></span></p>
                 <div class="list-canhan">
-                    <a href="Profile.jsp"><i
+                    <a href="${pageContext.request.contextPath}/profile"><i
                             class="fa-solid fa-user"></i> Thông tin
                         tài
                         khoản</a>
-                    <a href class="active"><i class="fa-solid fa-box-open"></i> Lịch
-                        sử
-                        mua
-                        hàng</a>
-                    <a href="${pageContext.request.contextPath}/logout">
+                    <a href="${pageContext.request.contextPath}/order-history" class="active">
+                        <i class="fa-solid fa-box-open"></i> Lịch sử mua hàng</a>
+                    <a href="${pageContext.request.contextPath}/change-password">
                         <i class="fa-solid fa-rotate"></i> Đổi mật khẩu</a>
                     <a href="${pageContext.request.contextPath}/logout"><i
-                            class="fa-solid fa-right-from-bracket"></i>Đăng
-                        xuất</a>
+                            class="fa-solid fa-right-from-bracket"></i>Đăng xuất
+                    </a>
                 </div>
             </div>
             <div class="order-history">
+                <c:set var="st" value="${empty currentStatus ? 'all' : currentStatus}"/>
+
                 <div class="order-tabs">
-                    <button class="active">Tất cả</button>
-                    <button>Chờ xác nhận</button>
-                    <button>Hoàn thành</button>
-                    <button>Đã hủy</button>
+                    <a href="${pageContext.request.contextPath}/order-history?status=all">
+                        <button class="${st == 'all' ? 'active' : ''}">Tất cả</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order-history?status=pending">
+                        <button class="${st == 'pending' ? 'active' : ''}">Chờ xác nhận</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order-history?status=shipping">
+                        <button class="${st == 'shipping' ? 'active' : ''}">Đang vận chuyển</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order-history?status=completed">
+                        <button class="${st == 'completed' ? 'active' : ''}">Hoàn thành</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order-history?status=cancelled">
+                        <button class="${st == 'cancelled' ? 'active' : ''}">Đã hủy</button>
+                    </a>
                 </div>
+                <c:choose>
+                    <c:when test="${empty orders}">
+                        <p>Bạn chưa có đơn hàng nào.</p>
+                    </c:when>
 
-                <!-- Đơn hàng 1 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <span>Mã đơn: #DH001</span>
-                        <span class="order-status pending">Chờ xác
-                  nhận</span>
-                    </div>
+                    <c:otherwise>
+                        <c:forEach var="order" items="${orders}">
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <span>Mã đơn: #DH0${order.id}</span>
 
-                    <div class="order-items">
-                        <div class="order-item">
-                            <img src="./assets/images/logo/list1-1.jpg" alt="Sản phẩm 1">
-                            <div class="order-info">
-                                <p class="order-name">Bút Lông Thiên
-                                    Long Fiber Pen Washable - Demon</p>
-                                <p class="order-quantity">Số lượng:
-                                    2</p>
+                                    <c:choose>
+                                        <c:when test="${order.orderStatusId == 1}">
+                                            <span class="order-status pending">${order.statusName}</span>
+                                        </c:when>
+                                        <c:when test="${order.orderStatusId == 3}">
+                                            <span class="order-status success">${order.statusName}</span>
+                                        </c:when>
+                                        <c:when test="${order.orderStatusId == 4}">
+                                            <span class="order-status cancelled">${order.statusName}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="order-status">${order.statusName}</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="order-items">
+                                    <c:forEach var="item" items="${order.viewItems}">
+                                        <div class="order-item">
+                                            <img src="${item.thumbnail}" alt="${item.name}">
+                                            <div class="order-info">
+                                                <p class="order-name">${item.name}</p>
+                                                <p class="order-quantity">Số lượng: ${item.quantity}</p>
+                                            </div>
+                                            <div class="order-price">
+                                                <p>
+                                                    <fmt:formatNumber value="${item.price}" type="number"/>₫
+                                                </p>
+                                                <strong>
+                                                    <fmt:formatNumber value="${item.lineTotal}" type="number"/>₫
+                                                </strong>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+
+                                <div class="order-footer">
+                    <span class="total">Tổng cộng:
+                        <strong>
+                            <fmt:formatNumber value="${order.totalPrice}" type="number"/>₫
+                        </strong>
+                    </span>
+
+                                    <div class="order-buttons">
+                                        <a href="${pageContext.request.contextPath}/order-detail?id=${order.id}"
+                                           class="btn-review">Xem chi tiết</a>
+
+                                        <c:if test="${order.orderStatusId == 1}">
+                                            <a href="${pageContext.request.contextPath}/cancel-order?id=${order.id}"
+                                               class="btn-cancel">Hủy đơn</a>
+                                        </c:if>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="order-price">
-                                <p>168,300₫</p>
-                                <strong>336,600₫</strong>
-                            </div>
-                        </div>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
 
-                        <div class="order-item">
-                            <img src="./assets/images/logo/list1-3.jpg" alt="Sản phẩm 2">
-                            <div class="order-info">
-                                <p class="order-name">Bút lông hiên Long
-                                    Colokit - Màu sắc tươi sáng</p>
-                                <p class="order-quantity">Số lượng:
-                                    1</p>
-                            </div>
-                            <div class="order-price">
-                                <p>45,500₫</p>
-                                <strong>45,500₫</strong>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="order-footer">
-                <span class="total">Tổng cộng:
-                  <strong>382,100₫</strong></span>
-                        <div class="order-buttons">
-                            <a href="ProductReviews.jsp" class="btn-review">Đánh giá</a>
-                            <button class="btn-cancel">Hủy đơn</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Đơn hàng 2 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <span>Mã đơn: #DH002</span>
-                        <span class="order-status success">Hoàn
-                  tất</span>
-                    </div>
-
-                    <div class="order-items">
-                        <div class="order-item">
-                            <img src="./assets/images/logo/list1-4.jpg" alt="Sản phẩm 3">
-                            <div class="order-info">
-                                <p class="order-name">Màu nước 8 màu
-                                    Thiên Long Colokit WACO-C06/AK</p>
-                                <p class="order-quantity">Số lượng:
-                                    1</p>
-                            </div>
-                            <div class="order-price">
-                                <p>31,080₫</p>
-                                <strong>31,080₫</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="order-footer">
-                <span class="total">Tổng cộng:
-                  <strong>31,080₫</strong></span>
-                        <div class="order-buttons">
-                            <a href="ProductReviews.jsp" class="btn-review">Đánh giá</a>
-                            <button class="btn-cancel">Xác nhận</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
