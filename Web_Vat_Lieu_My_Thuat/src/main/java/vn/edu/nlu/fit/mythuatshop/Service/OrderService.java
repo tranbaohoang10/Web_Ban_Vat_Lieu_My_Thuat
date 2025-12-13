@@ -93,4 +93,12 @@ public class OrderService {
             default -> null;
         };
     }
+    public Order getOrderDetail(int userId, int orderId) {
+        Order order = orderDao.findOrderHeaderByIdAndUser(orderId, userId);
+        if (order == null) return null;
+
+        order.setViewItems(orderDao.findOrderItemsView(orderId));
+        return order;
+    }
+
 }

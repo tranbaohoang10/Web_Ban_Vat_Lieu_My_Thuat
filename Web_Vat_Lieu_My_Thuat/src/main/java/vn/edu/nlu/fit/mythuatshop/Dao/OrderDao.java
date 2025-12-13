@@ -113,6 +113,39 @@ public class OrderDao implements DaoInterface<Order> {
                         .list()
         );
     }
+    public Order findOrderHeaderByIdAndUser(int orderId, int userId) {
+            String sql ="SELECT o.ID            AS id, " +
+                        "       o.userID        AS userId, " +
+                        "       o.fullName      AS fullName, " +
+                        "       o.email         AS email, " +
+                        "       o.phoneNumber   AS phoneNumber, " +
+                        "       o.address       AS address, " +
+                        "       o.totalPrice    AS totalPrice, " +
+                        "       o.paymentID     AS paymentId, " +
+                        "       o.orderStatusID AS orderStatusId, " +
+                        "       o.voucherID     AS voucherId, " +
+                        "       o.discount      AS discount, " +
+                        "       o.createAt      AS createAt, " +
+                        "       o.note          AS note, " +
+                        "       os.statusName   AS statusName, " +
+                        "       p.paymentName   AS paymentName " +
+                        "FROM Orders o " +
+                        "JOIN Order_Statuses os ON os.ID = o.orderStatusID " +
+                        "JOIN payments p ON p.ID = o.paymentID " +
+                        "WHERE o.ID = :orderId AND o.userID = :userId";
+
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("orderId", orderId)
+                        .bind("userId", userId)
+                        .mapToBean(Order.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+
+
+
 
     @Override
     public int update(Order order) {
