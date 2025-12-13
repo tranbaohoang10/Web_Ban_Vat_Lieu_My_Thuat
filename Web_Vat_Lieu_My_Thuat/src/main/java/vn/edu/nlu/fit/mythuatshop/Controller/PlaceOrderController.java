@@ -32,7 +32,7 @@ public class PlaceOrderController extends HttpServlet {
         }
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null || cart.cartSize() == 0) {
-            resp.sendRedirect("Cart.jsp");
+            resp.sendRedirect("/Cart.jsp");
             return;
         }
         req.setCharacterEncoding("UTF-8");
@@ -50,7 +50,6 @@ public class PlaceOrderController extends HttpServlet {
             // Xóa giỏ hàng sau khi đặt hàng thành công
             session.removeAttribute("cart");
             session.setAttribute("cartCount", 0);
-            // Gửi sang trang ThanhToanThanhCong
             req.setAttribute("order", order);
             req.getRequestDispatcher("/PaymentSuccess.jsp").forward(req, resp);
 

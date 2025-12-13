@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.mythuatshop.Dao.OrderDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.OrderStatusDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.PaymentDao;
 import vn.edu.nlu.fit.mythuatshop.Model.*;
+import vn.edu.nlu.fit.mythuatshop.Util.EmailUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +65,21 @@ public class OrderService {
         int newId = orderDao.insert(order);
         if (newId > 0) {
             order.setId(newId);
+            try {
+                String subject = "Xác nhận đơn hàng #DH" + newId;
+                String html = buildOrderEmailHtml(order, cart, paymentName);
+                EmailUtil.sendHtml(order.getEmail(), subject, html);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
             return order;
         }
         return null;
 
     }
+
+
 
     public List<Order> getOrderHistory(int userId, String status) {
         Integer statusId = mapStatusToId(status);
@@ -100,5 +111,57 @@ public class OrderService {
         order.setViewItems(orderDao.findOrderItemsView(orderId));
         return order;
     }
+    private String buildOrderEmailHtml(Order order, Cart cart, String paymentName) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<h2>Thiên Long - Xác nhận đơn hàng</h2>");
+        sb.append("<p>Chào ").append(escape(order.getFullName())).append(",</p>");
+
+        sb.append("<p>");
+        sb.append("Mã đơn hàng: <b>#").append(order.getId()).append("</b><br/>");
+        sb.append("SĐT: ").append(escape(order.getPhoneNumber())).append("<br/>");
+        sb.append("Địa chỉ: ").append(escape(order.getAddress())).append("<br/>");
+        sb.append("Thanh toán: ").append(escape(paymentName)).append("<br/>");
+        sb.append("</p>");
+
+        if (order.getNote() != null && !order.getNote().trim().isEmpty()) {
+            sb.append("<p>Ghi chú: ").append(escape(order.getNote())).append("</p>");
+        }
+
+        sb.append("<p><b>Danh sách sản phẩm:</b></p>");
+        sb.append("<ul>");
+        for (CartItem item : cart.getCarts().values()) {
+            sb.append("<li>")
+                    .append("SP #").append(item.getProductId())
+                    .append(" - SL: ").append(item.getQuantity())
+                    .append(" - Giá: ").append(formatVnd(item.getPriceAfterDiscount()))
+                    .append("</li>");
+        }
+        sb.append("</ul>");
+
+        sb.append("<p>");
+        sb.append("Giảm giá: <b>").append(formatVnd(order.getDiscount())).append("</b><br/>");
+        sb.append("Tổng thanh toán: <b>").append(formatVnd(order.getTotalPrice())).append("</b>");
+        sb.append("</p>");
+
+        sb.append("<p>Cảm ơn bạn đã mua hàng tại Thiên Long!</p>");
+
+        return sb.toString();
+    }
+
+    private String formatVnd(double value) {
+        long v = Math.round(value);
+        return String.format("%,d", v).replace(',', '.') + " đ";
+    }
+
+    private String escape(String s) {
+        if (s == null) return "";
+        return s.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
+    }
+
 
 }
