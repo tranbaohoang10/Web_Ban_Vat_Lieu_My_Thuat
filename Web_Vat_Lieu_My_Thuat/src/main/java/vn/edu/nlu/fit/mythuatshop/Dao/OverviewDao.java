@@ -113,7 +113,6 @@ public class OverviewDao {
             ORDER BY soldQty DESC
             LIMIT :limit
         """;
-
         return jdbi.withHandle(h ->
                 h.createQuery(sql)
                         .bind("limit", limit)

@@ -51,7 +51,6 @@ public class AuthFilter implements Filter {
                         path.endsWith(".png") || path.endsWith(".jpg") ||
                         path.endsWith(".jpeg") || path.endsWith(".gif") ||
                         path.endsWith(".ico");
-
         HttpSession session = req.getSession(false);
         Object authUser = (session == null) ? null : session.getAttribute("currentUser");
 
