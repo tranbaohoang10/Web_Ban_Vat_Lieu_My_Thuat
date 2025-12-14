@@ -21,10 +21,19 @@ public class Order implements Serializable {
     private String note;
     private List<OrderDetail> items;
     private String statusName;
+    private String paymentName;
     private List<OrderItem> viewItems;
 
 
     public Order() {
+    }
+
+    public String getPaymentName() {
+        return paymentName;
+    }
+
+    public void setPaymentName(String paymentName) {
+        this.paymentName = paymentName;
     }
 
     public int getId() {

@@ -117,7 +117,7 @@
 <div class="info-mithuat-header">
     <i class="fa-solid fa-palette"></i>
     <p class="info-mithuat-header-content"><a
-            href="ProductSearch.jsp">Danh
+            href="#">Danh
         mục</a></p>
     <i class="fa-solid fa-angle-down"></i>
 </div>

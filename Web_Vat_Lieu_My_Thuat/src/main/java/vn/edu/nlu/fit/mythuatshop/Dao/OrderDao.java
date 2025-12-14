@@ -9,6 +9,8 @@ import java.util.List;
 
 public class OrderDao implements DaoInterface<Order> {
     private final Jdbi jdbi;
+    private final ProductDao productDao = new ProductDao();
+
 
     public OrderDao() {
         this.jdbi = JDBIConnector.getJdbi();
@@ -49,8 +51,15 @@ public class OrderDao implements DaoInterface<Order> {
                         .bind("price", d.getPrice())
                         .execute();
             }
-
-            // 3. Trả về orderId để hàm insert() nhận được
+            //3.  Update tồn kho + số bán
+            for (OrderDetail d : order.getItems()) {
+                int affected = productDao.updateStockAndSold(handle, d.getProductId(), d.getQuantity());
+                if (affected == 0) {
+                    // Không đủ hàng ->  rollback toàn bộ
+                    throw new IllegalStateException("Không đủ tồn kho cho productID=" + d.getProductId());
+                }
+            }
+            // 4. Trả về orderId để hàm insert() nhận được
             return orderId;
         });
     }
@@ -113,6 +122,39 @@ public class OrderDao implements DaoInterface<Order> {
                         .list()
         );
     }
+    public Order findOrderHeaderByIdAndUser(int orderId, int userId) {
+            String sql ="SELECT o.ID            AS id, " +
+                        "       o.userID        AS userId, " +
+                        "       o.fullName      AS fullName, " +
+                        "       o.email         AS email, " +
+                        "       o.phoneNumber   AS phoneNumber, " +
+                        "       o.address       AS address, " +
+                        "       o.totalPrice    AS totalPrice, " +
+                        "       o.paymentID     AS paymentId, " +
+                        "       o.orderStatusID AS orderStatusId, " +
+                        "       o.voucherID     AS voucherId, " +
+                        "       o.discount      AS discount, " +
+                        "       o.createAt      AS createAt, " +
+                        "       o.note          AS note, " +
+                        "       os.statusName   AS statusName, " +
+                        "       p.paymentName   AS paymentName " +
+                        "FROM Orders o " +
+                        "JOIN Order_Statuses os ON os.ID = o.orderStatusID " +
+                        "JOIN payments p ON p.ID = o.paymentID " +
+                        "WHERE o.ID = :orderId AND o.userID = :userId";
+
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("orderId", orderId)
+                        .bind("userId", userId)
+                        .mapToBean(Order.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+
+
+
 
     @Override
     public int update(Order order) {
