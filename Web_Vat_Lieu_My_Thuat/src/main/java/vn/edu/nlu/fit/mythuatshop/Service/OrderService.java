@@ -23,9 +23,11 @@ public class OrderService {
 
     public Order createOrder(Users user, Cart cart, String fullName, String email, String phone,
                              String address, String note, String paymentName, Integer voucherId) {
-        if (user == null || cart == null || cart.cartSize() == 0) {
-            return null;
-        }
+
+        if (user == null || cart == null || cart.cartSize() == 0) return null;
+
+        boolean isVnpay = "VNPAY".equalsIgnoreCase(paymentName);
+
         Order order = new Order();
         order.setUserId(user.getId());
         order.setFullName(fullName);
@@ -33,51 +35,75 @@ public class OrderService {
         order.setPhoneNumber(phone);
         order.setAddress(address);
         order.setNote(note);
-        //Lấy paymentID từ bảng Payments dựa vào paymentName
-        Payment payment = paymentDao.findByName(paymentName);
-        if (payment == null) {
-            payment = paymentDao.findByName("COD");
-        }
-        order.setPaymentId(payment.getId());
-        OrderStatus status = orderStatusDao.findByName("Đang xử lý");
-        if (status != null) {
-            order.setOrderStatusId(status.getId());
-        } else {
-            order.setOrderStatusId(1);
 
-        }
+        // paymentID
+        Payment payment = paymentDao.findByName(paymentName);
+        if (payment == null) payment = paymentDao.findByName("COD");
+        order.setPaymentId(payment.getId());
+
+        OrderStatus status = isVnpay
+                ? orderStatusDao.findByName("Chờ thanh toán")
+                : orderStatusDao.findByName("Đang xử lý");
+
+        order.setOrderStatusId(status != null ? status.getId() : 1);
+
         order.setDiscount(cart.getDiscount());
         order.setVoucherId(voucherId);
-
-        double totalToPay = cart.getTotalPriceToPay();
-        order.setTotalPrice(totalToPay);
+        order.setTotalPrice(cart.getTotalPriceToPay());
 
         List<OrderDetail> details = new ArrayList<>();
         for (CartItem item : cart.getCarts().values()) {
             OrderDetail d = new OrderDetail();
             d.setProductId(item.getProductId());
             d.setQuantity(item.getQuantity());
-            d.setPrice(item.getPriceAfterDiscount()); // giá 1 sản phẩm đã trừ discountDefault
+            d.setPrice(item.getPriceAfterDiscount());
             details.add(d);
         }
         order.setItems(details);
-        //Gọi Dao để insert vào DB (Orders + Order_Details)
-        int newId = orderDao.insert(order);
-        if (newId > 0) {
+
+        try {
+            // COD: trừ kho ngay | VNPAY: chưa trừ kho
+            int newId = orderDao.insert(order, !isVnpay);
+            if (newId <= 0) return null;
+
             order.setId(newId);
-            try {
-                String subject = "Xác nhận đơn hàng #DH" + newId;
-                String html = buildOrderEmailHtml(order, cart, paymentName);
-                EmailUtil.sendHtml(order.getEmail(), subject, html);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+
+            //  Chỉ gửi mail ngay cho COD
+            if (!isVnpay) {
+                try {
+                    String subject = "Xác nhận đơn hàng #DH" + newId;
+                    String html = buildOrderEmailHtml(order, cart, paymentName);
+                    EmailUtil.sendHtml(order.getEmail(), subject, html);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
 
             return order;
-        }
-        return null;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+    public Order confirmVnpayPaid(int orderId, long amountVnd) {
+        try {
+            return orderDao.confirmVnpayPaid(orderId, amountVnd);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void markVnpayFailed(int orderId) {
+        try {
+            orderDao.markVnpayFailed(orderId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 
