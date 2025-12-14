@@ -4,19 +4,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quên mật khẩu</title>
-        <link rel="stylesheet" href="./assets/css/style.css">
+        <title>Liên hệ</title>
+        <link rel="stylesheet" href="UI/assets/css/style.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
             integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <style>
-    .container {
-        width: 1200px;
-        margin: auto;
-    }
-
     /* Begin header */
     #header-trang-chu {
         background-color: var(--color-main);
@@ -195,10 +190,11 @@
     }
 
     #footer-trang-chu .footer-title .footer-title-form input {
-        padding: 10px 15px;
+        padding: 10px 10px;
         border-radius: 10px;
-        width: 300px;
+        width: 200px;
         border: none;
+
     }
 
     #footer-trang-chu .footer-title .footer-title-form a {
@@ -468,153 +464,143 @@
         border-radius: 50%;
     }
 
-    /* login */
+    /* Lien He */
 
-    .main {
-        margin: 0;
-        padding: 0;
+    .hearder-lienhe {
+        background: #DBE8FF;
+        color: #17479d;
+        font-weight: 500;
+        font-size: 16px;
+        padding: 12px 40px;
+        border-bottom: 1px solid #e5e7eb;
+        margin-top: 100px;
+        margin-bottom: 0;
+    }
+
+
+    .page-contact {
+
+        padding-top: 140px;
+        padding-bottom: 120px;
+
+    }
+
+    .container-all {
+        max-width: 1200px;
+        margin: 0 auto;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        /* background-color: #1E76EF; */
-        background: linear-gradient(to left, #2659F3, #09BCE4);
-
+        gap: 24px;
+        padding: 0 16px;
+        border: 1px solid #e8edf3;
+        border-radius: 12px;
+        
 
     }
 
-    .container {
-        background-color: rgba(0, 0, 0, 0.4);
-        padding: 45px 45px;
-        box-sizing: border-box;
-        overflow: hidden;
-        position: relative;
-        transition: 0.5s ease;
-        flex-wrap: wrap;
-        border-radius: 10px;
-        width: 460px;
-        height: 480px;
-
-    }
-
-    h2 {
-        color: white;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        font-weight: 700;
-
-    }
-
-    p {
-        color: white;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .form-email .form-1 input{
-        width: 100%;
+    .container-right {
+        flex: 50%;
         border: none;
-        padding: 8px;
-        border-bottom: 1px solid #ccc;
-        outline: none;
-        font-size: 14px;
-        background: none;
-        color: white;
+    }
+
+    .container-left {
+        flex: 50%;
+        border: none;
+    }
+
+
+    .contact-meta {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-bottom: 16px;
+        color: #273142;
+    }
+
+    .contact-meta .row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        line-height: 1.5;
+    }
+
+    .contact-meta i {
+        color: #17479d;
+        min-width: 18px;
+        margin-top: 2px;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 24px;
+        align-items: start;
+    }
+
+    .card {
+        padding: 18px;
+        padding-top: 20px;
+    }
+
+    .form-title {
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #0b234d;
+        letter-spacing: .2px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 36px;
+        border: 1px solid #d7dee8;
         border-radius: 8px;
-        padding: 10px;
-        transition: border-color 0.3s;
+        padding: 6px 5px;
+        font-size: 15px;
+        outline: none;
+        background: #fff;
     }
 
-    .form-email .form-1 input::placeholder {
-        color: #ccc5c5;
+    .form-control:focus {
+        border-color: #17479d;
+        box-shadow: 0 0 0 3px rgba(23, 71, 157, .12);
     }
 
-
-    .forgot-password {
-        text-align: center;
-        margin-bottom: 20px;
-
+    textarea.form-control {
+        height: 160px;
+        resize: vertical;
     }
 
-    .forgot-password a {
-        color: #ffc107;
-        text-decoration: none;
-
-    }
-
-    .forgot-password a:hover {
-        color: #6C785B;
-    }
-
-    .btn-lay-mk {
-        width: 100%;
-        background-color: #F5DF4D;
-        padding: 10px;
+    .btn-lienhe {
+        background: #17479d;
+        color: #fff;
         border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 5px;
-        margin-top: 15px;
-        color: #343A40;
-        font-size: 1rem;
-        font-weight: bold;
-    }
-    .btn-lay-mk:hover {
-        transform: scale(1.05);
-    }
-    .quay-lai-dang-nhap {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-    .link-quay-lai {
-        color: white;
-        text-decoration: none;
-        text-align: center;
-    }
-    .link-quay-lai:hover {
-        color: #6C785B;
-    }
-
-    .link-dki {
-        color: #FFC107;
-        text-decoration: none;
-    }
-
-    .link-dki:hover {
-        color: #6C785B;
-    }
-
-   
-
-    .btn-gg {
-        background-color: #DE3F32;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        padding-left: 50px;
-        padding-right: 50px;
-        margin-top: 10px;
+        border-radius: 28px;
+        padding: 12px 20px;
+        font-weight: 600;
         cursor: pointer;
         width: 100%;
     }
 
-    
-
-    .btn-login-gg i {
-        margin-right: 8px;
+    .btn-lienhe:hover {
+        background: #0c357c;
     }
 
-    p {
-        color: white;
+    .map-card {
+        padding-top: 50px;
     }
 
-    .chuataikhoan {
-        color: white;
-        text-align: center;
+    .map-card iframe {
+        width: 100%;
+        height: 520px;
+        border: 0;
+        border-radius: 12px;
     }
+
+
+
 
     /* Begin footer */
     #footer-trang-chu {
@@ -653,7 +639,7 @@
     #footer-trang-chu .footer-title .footer-title-form input {
         padding: 10px 15px;
         border-radius: 10px;
-        width: 300px;
+        width: 100px;
         border: none;
 
     }
@@ -784,13 +770,6 @@
         bottom: 0;
         color: white;
     }
-    .btn-lay-mk{
-    display: flex;           
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;   
-    color: inherit;  
-    }
 
     /* End footer */
 </style>
@@ -798,8 +777,8 @@
     <body>
         <header id="header-trang-chu" class="trang-chu">
             <div class="logo-trang-chu">
-                <a href="TrangChinhChu.html">
-                    <img src="./assets/images/logo/logo.png" alt>
+                <a href="index.html">
+                    <img src="UI/assets/images/logo/logo.png" alt>
                 </a>
             </div>
             <form action class="tim-kiem-san-pham">
@@ -826,44 +805,86 @@
             </div>
         </header>
 
-        <div class="main">
-            <div class="container">
-                <h2>ĐẶT LẠI MẬT KHẨU</h2>
-                <p>Chúng tôi sẽ gửi cho bạn một email để kích hoạt việc đặt lại
-                    mật khẩu</p>
-                <form action class="form-email">
+        <!-- header lien he -->
+        <div class="hearder-lienhe">Trang chủ / Thông tin liên hệ</div>
 
-                    <div class="form-1">
-                        <input type="email" name placeholder="Email">
+        <main class="page-contact">
+            <div class="container-all">
+                <div class="container-left">
+
+                    <div class="card">
+                        <!-- cho do chung voi lien he -->
+                        <h1>Thienlong.com - Tập đoàn Thiên Long</h1>
+                        <div class="contact-meta">
+                            <div class="row">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    Địa chỉ: Tầng 2, Chung cư An Bình, Đường Lê
+                                    Trọng Tấn, Phường An Bình, TX.Dĩ An, Tỉnh
+                                    Bình Dương, Việt Nam
+                                </div>
+                            </div>
+                            <div class="row">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>Số điện thoại: 0369897344</div>
+                            </div>
+                            <div class="row">
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    Email:
+                                    <a href="mailto:BaOngNau@gmail.com.vn">
+                                        BaOngNau@gmail.com.vn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-title">LIÊN HỆ VỚI CHÚNG TÔI</div>
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text"
+                                    name="fullname" placeholder="Họ tên"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="email"
+                                    name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="tel"
+                                    name="phone" placeholder="Số điện thoại"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message"
+                                    placeholder="Nhập nội dung"
+                                    required></textarea>
+                            </div>
+                            <button class="btn-lienhe" type="button">Gửi liên hệ
+                                của bạn</button>
+                        </form>
                     </div>
 
-                    <a href="DangNhap.html" class="btn-lay-mk">Lấy lại mật
-                        khẩu</a>
+                </div>
 
-                    <div class="quay-lai-dang-nhap">
-                        <a href="DangNhap.html" class="link-quay-lai">Quay lại
-                        </a>
+                <!-- map -->
+                <div class="container-right">
+
+                    <div class="card map-card">
+                        <iframe
+                            src="https://www.google.com/maps?q=10%20Mai%20Chi%20Tho,%20Thu%20Thiem,%20Thu%20Duc,%20Ho%20Chi%20Minh&hl=vi&z=16&output=embed"
+                            allowfullscreen loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
+                </div>
 
-                    <div class="chuataikhoan">
-                        Bạn chưa có tài khoản <a href="DangKy.html"
-                            class="link-dki">Đăng ký tại đây</a>
-                    </div>
-
-                    <div class="btn-login-gg">
-
-                        <button class="btn-gg"><i
-                                class="fa-brands fa-google"></i>Google</button>
-
-                    </div>
-
-                </form>
             </div>
-        </div>
+        </main>
 
         <footer id="footer-trang-chu">
             <div class="footer-title">
-                <img src="./assets/images/logo/logo.png" alt class="img-main">
+                <img src="UI/assets/images/logo/logo.png" alt class="img-main">
                 <p class="footer-title-header">Thienlong.vn - Website thương mại
                     điện tử thuộc Tập đoàn Thiên Long</p>
                 <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn
@@ -878,7 +899,7 @@
                     <a href>Đăng ký</a>
                 </form>
                 <img
-                    src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
+                    src="UI/assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
                     alt class="img-footer">
             </div>
             <div class="footer-diachi">
@@ -898,8 +919,8 @@
                             Nam.
                         </span>
 
-                        <img src="./assets/images/logo/footer_bct.png" alt
-                            class="img-main">
+                        <img src="UI/assets/images/logo/footer_bct.png" alt
+                             class="img-main">
                     </div>
                     <div class="footer-help">
                         <h2>HỖ TRỢ KHÁCH HÀNG</h2>
@@ -950,7 +971,7 @@
                                 <a href>
                                     - Chính sách bảo mật thông tin cá nhân
                                 </a>
-                                <a href>
+                                <a href="LienHe.html">
                                     - Thông tin liên hệ
                                 </a>
                                 <a href>
@@ -963,6 +984,11 @@
                             </div>
                         </div>
                     </footer>
+                    <script>
+    document.querySelector('.btn-lienhe').addEventListener('click', function () {
+        alert('Gửi liên hệ thành công!');
+    });
+</script>
 
                 </body>
 

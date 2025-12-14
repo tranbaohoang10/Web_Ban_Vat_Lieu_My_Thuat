@@ -4,15 +4,36 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.*;
 
 public class ConfigVNPay {
-    public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://localhost:8080/mythuat_shop_war_exploded/vnpay-return";
-    public static String vnp_TmnCode = "LVH04YZC";
-    public static String secretKey  = "5LAD7DEN6V60107DPCNVOBHR06UC3T52";
+    public static String vnp_TmnCode;
+    public static String secretKey;
+    public static String vnp_PayUrl;
+    public static String vnp_ReturnUrl;
+
+    static {
+        try (InputStream is = ConfigVNPay.class.getClassLoader().getResourceAsStream("vnpay.properties")) {
+            if (is == null) {
+                throw new RuntimeException("Không tìm thấy vnpay.properties trong classpath (src/main/resources).");
+            }
+            Properties p = new Properties();
+            p.load(is);
+
+            vnp_TmnCode   = p.getProperty("vnp.tmnCode");
+            secretKey     = p.getProperty("vnp.hashSecret");
+            vnp_PayUrl    = p.getProperty("vnp.payUrl");
+            vnp_ReturnUrl = p.getProperty("vnp.returnUrl");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Không load được vnpay.properties", e);
+        }
+    }
+
+
 
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 

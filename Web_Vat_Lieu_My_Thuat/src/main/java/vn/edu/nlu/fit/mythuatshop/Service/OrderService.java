@@ -22,9 +22,10 @@ public class OrderService {
     }
 
     public Order createOrder(Users user, Cart cart, String fullName, String email, String phone,
-                             String address, String note, String paymentName, Integer voucherId) {
+            String address, String note, String paymentName, Integer voucherId) {
 
-        if (user == null || cart == null || cart.cartSize() == 0) return null;
+        if (user == null || cart == null || cart.cartSize() == 0)
+            return null;
 
         boolean isVnpay = "VNPAY".equalsIgnoreCase(paymentName);
 
@@ -38,7 +39,8 @@ public class OrderService {
 
         // paymentID
         Payment payment = paymentDao.findByName(paymentName);
-        if (payment == null) payment = paymentDao.findByName("COD");
+        if (payment == null)
+            payment = paymentDao.findByName("COD");
         order.setPaymentId(payment.getId());
 
         OrderStatus status = isVnpay
@@ -64,11 +66,12 @@ public class OrderService {
         try {
             // COD: trừ kho ngay | VNPAY: chưa trừ kho
             int newId = orderDao.insert(order, !isVnpay);
-            if (newId <= 0) return null;
+            if (newId <= 0)
+                return null;
 
             order.setId(newId);
 
-            //  Chỉ gửi mail ngay cho COD
+            // Chỉ gửi mail ngay cho COD
             if (!isVnpay) {
                 try {
                     String subject = "Xác nhận đơn hàng #DH" + newId;
@@ -86,9 +89,21 @@ public class OrderService {
             return null;
         }
     }
+
     public Order confirmVnpayPaid(int orderId, long amountVnd) {
         try {
-            return orderDao.confirmVnpayPaid(orderId, amountVnd);
+            Order order = orderDao.confirmVnpayPaid(orderId, amountVnd);
+            if (order != null) {
+                // Gửi email xác nhận sau khi thanh toán VNPAY thành công
+                try {
+                    String subject = "Xác nhận đơn hàng #DH" + orderId;
+                    String html = buildVnpayOrderEmailHtml(order);
+                    EmailUtil.sendHtml(order.getEmail(), subject, html);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            return order;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -102,10 +117,6 @@ public class OrderService {
             e.printStackTrace();
         }
     }
-
-
-
-
 
     public List<Order> getOrderHistory(int userId, String status) {
         Integer statusId = mapStatusToId(status);
@@ -130,13 +141,16 @@ public class OrderService {
             default -> null;
         };
     }
+
     public Order getOrderDetail(int userId, int orderId) {
         Order order = orderDao.findOrderHeaderByIdAndUser(orderId, userId);
-        if (order == null) return null;
+        if (order == null)
+            return null;
 
         order.setViewItems(orderDao.findOrderItemsView(orderId));
         return order;
     }
+
     private String buildOrderEmailHtml(Order order, Cart cart, String paymentName) {
         StringBuilder sb = new StringBuilder();
 
@@ -175,19 +189,59 @@ public class OrderService {
         return sb.toString();
     }
 
+    private String buildVnpayOrderEmailHtml(Order order) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<h2>Thiên Long - Xác nhận đơn hàng</h2>");
+        sb.append("<p>Chào ").append(escape(order.getFullName())).append(",</p>");
+
+        sb.append("<p>");
+        sb.append("Mã đơn hàng: <b>#DH").append(order.getId()).append("</b><br/>");
+        sb.append("SĐT: ").append(escape(order.getPhoneNumber())).append("<br/>");
+        sb.append("Địa chỉ: ").append(escape(order.getAddress())).append("<br/>");
+        sb.append("Thanh toán: <b>VNPAY</b> - Đã thanh toán thành công<br/>");
+        sb.append("</p>");
+
+        if (order.getNote() != null && !order.getNote().trim().isEmpty()) {
+            sb.append("<p>Ghi chú: ").append(escape(order.getNote())).append("</p>");
+        }
+
+        sb.append("<p><b>Danh sách sản phẩm:</b></p>");
+        sb.append("<ul>");
+        if (order.getItems() != null) {
+            for (OrderDetail item : order.getItems()) {
+                sb.append("<li>")
+                        .append("SP #").append(item.getProductId())
+                        .append(" - SL: ").append(item.getQuantity())
+                        .append(" - Giá: ").append(formatVnd(item.getPrice()))
+                        .append("</li>");
+            }
+        }
+        sb.append("</ul>");
+
+        sb.append("<p>");
+        sb.append("Giảm giá: <b>").append(formatVnd(order.getDiscount())).append("</b><br/>");
+        sb.append("Tổng thanh toán: <b>").append(formatVnd(order.getTotalPrice())).append("</b>");
+        sb.append("</p>");
+
+        sb.append("<p>Cảm ơn bạn đã mua hàng tại Thiên Long!</p>");
+
+        return sb.toString();
+    }
+
     private String formatVnd(double value) {
         long v = Math.round(value);
         return String.format("%,d", v).replace(',', '.') + " đ";
     }
 
     private String escape(String s) {
-        if (s == null) return "";
+        if (s == null)
+            return "";
         return s.replace("&", "&amp;")
                 .replace("<", "&lt;")
                 .replace(">", "&gt;")
                 .replace("\"", "&quot;")
                 .replace("'", "&#39;");
     }
-
 
 }

@@ -67,23 +67,40 @@ public class VnpayService {
 
 
     public boolean verifyReturn(HttpServletRequest req) {
-        String vnp_SecureHash = req.getParameter("vnp_SecureHash");
-        if (vnp_SecureHash == null || vnp_SecureHash.isEmpty()) return false;
+        String secureHash = req.getParameter("vnp_SecureHash");
+        if (secureHash == null || secureHash.isEmpty()) return false;
 
         Map<String, String> fields = new HashMap<>();
-        Enumeration<String> params = req.getParameterNames();
+        Enumeration<String> en = req.getParameterNames();
 
-        while (params.hasMoreElements()) {
-            String name = params.nextElement();
-            if (name.startsWith("vnp_")) {
-                if ("vnp_SecureHash".equals(name) || "vnp_SecureHashType".equals(name)) continue;
-                String value = req.getParameter(name);
-                if (value != null && !value.isEmpty()) fields.put(name, value);
+        while (en.hasMoreElements()) {
+            String name = en.nextElement();
+            if (name.startsWith("vnp_")
+                    && !name.equals("vnp_SecureHash")
+                    && !name.equals("vnp_SecureHashType")) {
+                String value = req.getParameter(name); // đã decode
+                if (value != null && !value.isEmpty()) {
+                    fields.put(name, value);
+                }
             }
         }
 
-        String signValue = ConfigVNPay.hashAllFields(fields);
-        return signValue != null && signValue.equalsIgnoreCase(vnp_SecureHash);
+        List<String> keys = new ArrayList<>(fields.keySet());
+        Collections.sort(keys);
+
+        StringBuilder hashData = new StringBuilder();
+        for (int i = 0; i < keys.size(); i++) {
+            String k = keys.get(i);
+            String v = fields.get(k);
+
+            String encodedV = java.net.URLEncoder.encode(v, java.nio.charset.StandardCharsets.UTF_8);
+
+            hashData.append(k).append("=").append(encodedV);
+            if (i < keys.size() - 1) hashData.append("&");
+        }
+
+        String signValue = ConfigVNPay.hmacSHA512(ConfigVNPay.secretKey, hashData.toString());
+        return signValue != null && signValue.equalsIgnoreCase(secureHash);
     }
 
     private String nowyyyyMMddHHmmss() {
