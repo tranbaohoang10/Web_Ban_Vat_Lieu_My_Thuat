@@ -1,12 +1,14 @@
 package vn.edu.nlu.fit.mythuatshop.Dao;
 
+import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.nlu.fit.mythuatshop.Model.Product;
 
 import java.util.List;
 
-public class  ProductDao {
+public class ProductDao {
     private final Jdbi jdbi;
+
 
     public ProductDao() {
         jdbi = JDBIConnector.getJdbi();
@@ -61,9 +63,9 @@ public class  ProductDao {
     }
 
     public List<Product> findByCategoryWithFilter(int categoryId,
-            Double minPrice,
-            Double maxPrice,
-            String sort) {
+                                                  Double minPrice,
+                                                  Double maxPrice,
+                                                  String sort) {
 
         StringBuilder sql = new StringBuilder(
                 "SELECT * FROM products WHERE categoryId = :categoryId ");
@@ -102,11 +104,11 @@ public class  ProductDao {
     }
 
     public List<Product> findByCategoryWithFilter(int categoryId,
-            Double minPrice,
-            Double maxPrice,
-            String sort,
-            int offset,
-            int limit) {
+                                                  Double minPrice,
+                                                  Double maxPrice,
+                                                  String sort,
+                                                  int offset,
+                                                  int limit) {
 
         StringBuilder sql = new StringBuilder(
                 "SELECT * FROM products WHERE categoryId = :categoryId ");
@@ -226,6 +228,20 @@ public class  ProductDao {
                 .bind("productName", productName)
                 .mapTo(Integer.class)
                 .one());
+    }
+
+    public int updateStockAndSold(Handle handle, int productId, int qty) {
+        String sql = """
+                    UPDATE products
+                    SET quantityStock = quantityStock - :qty,
+                        soldQuantity = soldQuantity + :qty
+                    WHERE ID = :pid
+                      AND quantityStock >= :qty
+                """;
+        return handle.createUpdate(sql)
+                .bind("pid", productId)
+                .bind("qty", qty)
+                .execute();
     }
 
 }

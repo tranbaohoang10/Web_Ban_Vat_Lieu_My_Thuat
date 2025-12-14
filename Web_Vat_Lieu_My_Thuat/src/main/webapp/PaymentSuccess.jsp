@@ -99,7 +99,7 @@
         <div class="success-text">
             <h2>Thanh toán thành công!</h2>
             <p>Cảm ơn bạn đã mua sản phẩm của chúng tôi</p>
-            <a href="index.jsp" class="btn-home">
+            <a href="${pageContext.request.contextPath}/home" class="btn-home">
                 <i class="fa-solid fa-house"></i> Về trang chủ
             </a>
         </div>
