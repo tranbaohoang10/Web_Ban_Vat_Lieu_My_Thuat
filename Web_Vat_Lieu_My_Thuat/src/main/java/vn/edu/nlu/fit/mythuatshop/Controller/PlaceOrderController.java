@@ -10,6 +10,7 @@ import vn.edu.nlu.fit.mythuatshop.Model.Cart;
 import vn.edu.nlu.fit.mythuatshop.Model.Order;
 import vn.edu.nlu.fit.mythuatshop.Model.Users;
 import vn.edu.nlu.fit.mythuatshop.Service.OrderService;
+import vn.edu.nlu.fit.mythuatshop.Service.VnpayService;
 
 import java.io.IOException;
 
@@ -23,6 +24,7 @@ public class PlaceOrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         OrderService orderService = new OrderService();
+        VnpayService vnpayService = new VnpayService();
 
         HttpSession session = req.getSession();
         Users currentUser = (Users) session.getAttribute("currentUser");
@@ -30,11 +32,13 @@ public class PlaceOrderController extends HttpServlet {
             resp.sendRedirect("login");
             return;
         }
+
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null || cart.cartSize() == 0) {
-            resp.sendRedirect("/Cart.jsp");
+            resp.sendRedirect("Cart.jsp");
             return;
         }
+
         req.setCharacterEncoding("UTF-8");
         String fullName = req.getParameter("fullName");
         String email = req.getParameter("email");
@@ -42,20 +46,28 @@ public class PlaceOrderController extends HttpServlet {
         String address = req.getParameter("address");
         String note = req.getParameter("note");
         String paymentName = req.getParameter("payment");
-        // voucher chưa làm để tạm là null
         Integer voucherId = null;
+
         Order order = orderService.createOrder(currentUser, cart, fullName, email, phone,
                 address, note, paymentName, voucherId);
-        if (order != null) {
-            // Xóa giỏ hàng sau khi đặt hàng thành công
-            session.removeAttribute("cart");
-            session.setAttribute("cartCount", 0);
-            req.setAttribute("order", order);
-            req.getRequestDispatcher("/PaymentSuccess.jsp").forward(req, resp);
 
-        }else {
+        if (order == null) {
             req.setAttribute("errorMessage", "Đặt hàng thất bại, vui lòng thử lại.");
             req.getRequestDispatcher("/InfoPayment.jsp").forward(req, resp);
+            return;
         }
+
+        //  Nếu là VNPAY -> redirect sang VNPAY, chưa xóa cart
+        if ("VNPAY".equalsIgnoreCase(paymentName)) {
+            String paymentUrl = vnpayService.buildPaymentUrl(req, order);
+            resp.sendRedirect(paymentUrl);
+            return;
+        }
+        session.removeAttribute("cart");
+        session.setAttribute("cartCount", 0);
+        session.setAttribute("paidOrder", order);
+        resp.sendRedirect(req.getContextPath() + "/payment-success");
+        return;
     }
+
 }
