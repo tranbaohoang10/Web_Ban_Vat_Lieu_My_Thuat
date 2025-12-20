@@ -150,6 +150,10 @@ public class OrderService {
         order.setViewItems(orderDao.findOrderItemsView(orderId));
         return order;
     }
+    public boolean cancelOrder(int userId, int orderId) {
+        return orderDao.cancelOrder(orderId, userId);
+    }
+
 
     private String buildOrderEmailHtml(Order order, Cart cart, String paymentName) {
         StringBuilder sb = new StringBuilder();

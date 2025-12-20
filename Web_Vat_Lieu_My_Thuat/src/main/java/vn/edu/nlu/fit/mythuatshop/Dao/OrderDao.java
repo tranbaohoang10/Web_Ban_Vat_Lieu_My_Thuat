@@ -20,7 +20,7 @@ public class OrderDao implements DaoInterface<Order> {
         // inTransaction sẽ mở transaction, chạy lambda, rồi commit/rollback
         return jdbi.inTransaction(handle -> {
             // 1. Insert vào Orders, lấy ID sinh ra
-            String sql="INSERT INTO Orders (userID, fullName, email, phoneNumber, address, " +
+            String sql = "INSERT INTO Orders (userID, fullName, email, phoneNumber, address, " +
                     " totalPrice, paymentID, orderStatusID, voucherID, discount, note) " +
                     "VALUES (:userID, :fullName, :email, :phoneNumber, :address, " +
                     " :totalPrice, :paymentID, :orderStatusID, :voucherID, :discount, :note)";
@@ -65,14 +65,15 @@ public class OrderDao implements DaoInterface<Order> {
             return orderId;
         });
     }
+
     public Order confirmVnpayPaid(int orderId, long amountVnd) {
         return jdbi.inTransaction(handle -> {
-            String sql ="""
-                SELECT ID, userID, fullName, email, phoneNumber, address,
-                       totalPrice, paymentID, orderStatusID, voucherID, discount, note
-                FROM Orders
-                WHERE ID = :id
-            """;
+            String sql = """
+                        SELECT ID, userID, fullName, email, phoneNumber, address,
+                               totalPrice, paymentID, orderStatusID, voucherID, discount, note
+                        FROM Orders
+                        WHERE ID = :id
+                    """;
             // 1) Lấy order (để check tồn tại + lấy email gửi mail sau)
             Order order = handle.createQuery(sql)
                     .bind("id", orderId)
@@ -108,10 +109,10 @@ public class OrderDao implements DaoInterface<Order> {
 
             // 3) Lấy Order_Details
             List<OrderDetail> details = handle.createQuery("""
-                SELECT productID, quantity, price
-                FROM Order_Details
-                WHERE orderID = :oid
-            """)
+                                SELECT productID, quantity, price
+                                FROM Order_Details
+                                WHERE orderID = :oid
+                            """)
                     .bind("oid", orderId)
                     .map((rs, ctx) -> {
                         OrderDetail d = new OrderDetail();
@@ -133,12 +134,12 @@ public class OrderDao implements DaoInterface<Order> {
             // 5) Update status -> "Đang xử lý"
             // (lấy id status bằng subquery theo tên)
             handle.createUpdate("""
-                UPDATE Orders
-                SET orderStatusID = (
-                    SELECT ID FROM Order_Statuses WHERE statusName = 'Đang xử lý' LIMIT 1
-                )
-                WHERE ID = :id
-            """)
+                                UPDATE Orders
+                                SET orderStatusID = (
+                                    SELECT ID FROM Order_Statuses WHERE statusName = 'Đang xử lý' LIMIT 1
+                                )
+                                WHERE ID = :id
+                            """)
                     .bind("id", orderId)
                     .execute();
 
@@ -149,13 +150,13 @@ public class OrderDao implements DaoInterface<Order> {
     }
 
     public void markVnpayFailed(int orderId) {
-        String sql="""
-            UPDATE Orders
-            SET orderStatusID = (
-                SELECT ID FROM Order_Statuses WHERE statusName = 'Thanh toán thất bại' LIMIT 1
-            )
-            WHERE ID = :id
-        """;
+        String sql = """
+                    UPDATE Orders
+                    SET orderStatusID = (
+                        SELECT ID FROM Order_Statuses WHERE statusName = 'Thanh toán thất bại' LIMIT 1
+                    )
+                    WHERE ID = :id
+                """;
         jdbi.useHandle(handle -> handle.createUpdate(sql)
                 .bind("id", orderId)
                 .execute()
@@ -253,6 +254,25 @@ public class OrderDao implements DaoInterface<Order> {
         );
     }
 
+    public boolean cancelOrder(int orderId, int userId) {
+        String sql = """
+                    UPDATE Orders
+                    SET orderStatusID = 4
+                    WHERE ID = :orderId
+                      AND userID = :userId
+                      AND orderStatusID = 1
+                """;
+
+        int affected = jdbi.withHandle(h ->
+                h.createUpdate(sql)
+                        .bind("orderId", orderId)
+                        .bind("userId", userId)
+                        .execute()
+        );
+
+        return affected == 1;
+    }
+
 
     @Override
     public int insert(Order order) {
@@ -273,6 +293,7 @@ public class OrderDao implements DaoInterface<Order> {
     public Order findByName(String name) {
         return null;
     }
+
 }
 
 
