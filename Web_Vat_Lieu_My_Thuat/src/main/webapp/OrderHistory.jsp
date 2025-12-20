@@ -305,13 +305,14 @@
         text-decoration: none;
         color: inherit;
     }
-    .order-status.shipping{
+
+    .order-status.shipping {
         color: #1d4ed8;
         background: #dbeafe;
         border: 1px solid #93c5fd;
     }
 
-    .order-status.cancelled{
+    .order-status.cancelled {
         color: #dc2626;
         background: #fee2e2;
         border: 1px solid #fca5a5;
@@ -348,99 +349,103 @@
             <c:set var="activePage" value="orders" scope="request"/>
             <%@ include file="AccountSideBar.jsp" %>
             <div class="order-history">
-                    <c:set var="st" value="${empty currentStatus ? 'all' : currentStatus}"/>
+                <c:set var="st" value="${empty currentStatus ? 'all' : currentStatus}"/>
 
-                    <div class="order-tabs">
-                        <a href="${pageContext.request.contextPath}/order-history?status=all">
-                            <button class="${st == 'all' ? 'active' : ''}">Tất cả</button>
-                        </a>
+                <div class="order-tabs">
+                    <a href="${pageContext.request.contextPath}/order-history?status=all">
+                        <button class="${st == 'all' ? 'active' : ''}">Tất cả</button>
+                    </a>
 
-                        <a href="${pageContext.request.contextPath}/order-history?status=pending">
-                            <button class="${st == 'pending' ? 'active' : ''}">Chờ xác nhận</button>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/order-history?status=shipping">
-                            <button class="${st == 'shipping' ? 'active' : ''}">Đang vận chuyển</button>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/order-history?status=completed">
-                            <button class="${st == 'completed' ? 'active' : ''}">Hoàn thành</button>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/order-history?status=cancelled">
-                            <button class="${st == 'cancelled' ? 'active' : ''}">Đã hủy</button>
-                        </a>
-                    </div>
-                    <c:choose>
-                        <c:when test="${empty orders}">
-                            <p>Bạn chưa có đơn hàng nào.</p>
-                        </c:when>
+                    <a href="${pageContext.request.contextPath}/order-history?status=pending">
+                        <button class="${st == 'pending' ? 'active' : ''}">Chờ xác nhận</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order-history?status=shipping">
+                        <button class="${st == 'shipping' ? 'active' : ''}">Đang vận chuyển</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order-history?status=completed">
+                        <button class="${st == 'completed' ? 'active' : ''}">Hoàn thành</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order-history?status=cancelled">
+                        <button class="${st == 'cancelled' ? 'active' : ''}">Đã hủy</button>
+                    </a>
+                </div>
+                <c:choose>
+                    <c:when test="${empty orders}">
+                        <p>Bạn chưa có đơn hàng nào.</p>
+                    </c:when>
 
-                        <c:otherwise>
-                            <c:forEach var="order" items="${orders}">
-                                <div class="order-card">
-                                    <div class="order-header">
-                                        <span>Mã đơn: #DH0${order.id}</span>
+                    <c:otherwise>
+                        <c:forEach var="order" items="${orders}">
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <span>Mã đơn: #DH0${order.id}</span>
 
-                                        <c:choose>
-                                            <c:when test="${order.orderStatusId == 1}">
-                                                <span class="order-status pending">${order.statusName}</span>
-                                            </c:when>
-                                            <c:when test="${order.orderStatusId == 3}">
-                                                <span class="order-status success">${order.statusName}</span>
-                                            </c:when>
-                                            <c:when test="${order.orderStatusId == 4}">
-                                                <span class="order-status cancelled">${order.statusName}</span>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <span class="order-status shipping">${order.statusName}</span>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
+                                    <c:choose>
+                                        <c:when test="${order.orderStatusId == 1}">
+                                            <span class="order-status pending">${order.statusName}</span>
+                                        </c:when>
+                                        <c:when test="${order.orderStatusId == 3}">
+                                            <span class="order-status success">${order.statusName}</span>
+                                        </c:when>
+                                        <c:when test="${order.orderStatusId == 4}">
+                                            <span class="order-status cancelled">${order.statusName}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="order-status shipping">${order.statusName}</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
 
-                                    <div class="order-items">
-                                        <c:forEach var="item" items="${order.viewItems}">
-                                            <div class="order-item">
-                                                <img src="${item.thumbnail}" alt="${item.name}">
-                                                <div class="order-info">
-                                                    <p class="order-name">${item.name}</p>
-                                                    <p class="order-quantity">Số lượng: ${item.quantity}</p>
-                                                </div>
-                                                <div class="order-price">
-                                                    <p>
-                                                        <fmt:formatNumber value="${item.price}" type="number"/>₫
-                                                    </p>
-                                                    <strong>
-                                                        <fmt:formatNumber value="${item.lineTotal}" type="number"/>₫
-                                                    </strong>
-                                                </div>
+                                <div class="order-items">
+                                    <c:forEach var="item" items="${order.viewItems}">
+                                        <div class="order-item">
+                                            <img src="${item.thumbnail}" alt="${item.name}">
+                                            <div class="order-info">
+                                                <p class="order-name">${item.name}</p>
+                                                <p class="order-quantity">Số lượng: ${item.quantity}</p>
                                             </div>
-                                        </c:forEach>
-                                    </div>
+                                            <div class="order-price">
+                                                <p>
+                                                    <fmt:formatNumber value="${item.price}" type="number"/>₫
+                                                </p>
+                                                <strong>
+                                                    <fmt:formatNumber value="${item.lineTotal}" type="number"/>₫
+                                                </strong>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
 
-                                    <div class="order-footer">
+                                <div class="order-footer">
                         <span class="total">Tổng cộng:
                             <strong>
                                 <fmt:formatNumber value="${order.totalPrice}" type="number"/>₫
                             </strong>
                         </span>
 
-                                        <div class="order-buttons">
-                                            <a href="${pageContext.request.contextPath}/order-detail?id=${order.id}"
-                                               class="btn-review">Xem chi tiết</a>
+                                    <div class="order-buttons">
+                                        <a href="${pageContext.request.contextPath}/order-detail?id=${order.id}"
+                                           class="btn-review">Xem chi tiết</a>
 
-                                            <c:if test="${order.orderStatusId == 1}">
-                                                <a href="${pageContext.request.contextPath}/cancel-order?id=${order.id}"
-                                                   class="btn-cancel">Hủy đơn</a>
-                                            </c:if>
-                                        </div>
+                                        <c:if test="${order.orderStatusId == 1}">
+                                            <a href="${pageContext.request.contextPath}/cancel-order?id=${order.id}"
+                                               class="btn-cancel"
+                                               onclick="return confirm('Bạn có chắc muốn hủy đơn #DH0${order.id} không?');">
+                                                Hủy đơn
+                                            </a>
+                                        </c:if>
+
                                     </div>
                                 </div>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
+                            </div>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
 
 
-                </div>
             </div>
         </div>
+    </div>
 </div>
 </div>
 </div>
