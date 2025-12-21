@@ -1,47 +1,45 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.kotlin
+# ===== Build output =====
+**/target/
+**/out/
+*.war
+*.log
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# ===== Env / secrets (local only) =====
+.env
+*.env
+secret.properties
+application.properties
+
+# (Nên commit file mẫu thay vì file thật)
+# application.example.properties (KHÔNG ignore)
+
+# ===== IntelliJ IDEA =====
+.idea/
 *.iml
+*.iws
 *.ipr
 
-### Eclipse ###
+# ===== Eclipse =====
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
-.sts4-cache
+.sts4-cache/
 
-### NetBeans ###
+# ===== NetBeans =====
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+# ===== VS Code =====
 .vscode/
 
-### Mac OS ###
+# ===== macOS =====
 .DS_Store
-# IntelliJ IDEA
-.idea/
-*.iml
 
-# Build output
-out/
-target/
-*.war
+# ===== Kotlin =====
+.kotlin
