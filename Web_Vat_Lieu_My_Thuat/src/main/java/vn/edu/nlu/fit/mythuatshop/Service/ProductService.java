@@ -61,4 +61,16 @@ public class ProductService {
     public Product getProductById(int productId) {
         return productDao.findByProductId(productId);
     }
+    public int create(Product p) {
+        return productDao.insertReturnId(p);
+    }
+
+    public int update(Product p) {
+        return productDao.update(p);
+    }
+
+    public int delete(int id) {
+        return productDao.deleteById(id);
+    }
+
 }
