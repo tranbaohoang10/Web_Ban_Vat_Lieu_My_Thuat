@@ -286,7 +286,7 @@
     <div class="footer-information">
         <h2>VỀ THIENLONG.VN</h2>
         <div class="footer-information-header-list">
-            <a href="GioiThieu.jsp">
+            <a href="IntroductionPage.jsp">
                 - Giới thiệu
             </a>
             <a href>

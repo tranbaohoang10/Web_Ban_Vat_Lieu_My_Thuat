@@ -58,8 +58,14 @@ public class LoginController extends HttpServlet {
             session.setAttribute("cart", cart);
             session.setAttribute("cartCount", 0);
         }
-        // 5. Redirect về home
-        resp.sendRedirect(req.getContextPath() + "/home");
+        // 5. Redirect theo role
+        String role = users.getRole(); // DB: 'user' hoặc 'ADMIN'
+
+        if (role != null && role.equalsIgnoreCase("ADMIN")) {
+            resp.sendRedirect(req.getContextPath() + "/admin/overview"); // đi qua controller admin
+        } else {
+            resp.sendRedirect(req.getContextPath() + "/home");
+        }
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

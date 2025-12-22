@@ -5,7 +5,6 @@ import vn.edu.nlu.fit.mythuatshop.Dao.OrderStatusDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.PaymentDao;
 import vn.edu.nlu.fit.mythuatshop.Model.*;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +68,29 @@ public class OrderService {
         }
         return null;
 
+    }
+
+    public List<Order> getOrderHistory(int userId, String status) {
+        Integer statusId = mapStatusToId(status);
+
+        List<Order> orders = orderDao.findOrdersByUser(userId, statusId);
+        for (Order o : orders) {
+            List<OrderItem> items = orderDao.findOrderItemsView(o.getId());
+            o.setViewItems(items);
+        }
+        return orders;
+    }
+
+    private Integer mapStatusToId(String status) {
+        if (status == null || status.isBlank() || "all".equalsIgnoreCase(status)) {
+            return null;
+        }
+        return switch (status.toLowerCase()) {
+            case "pending" -> 1;
+            case "shipping" -> 2;
+            case "completed" -> 3;
+            case "cancelled" -> 4;
+            default -> null;
+        };
     }
 }
