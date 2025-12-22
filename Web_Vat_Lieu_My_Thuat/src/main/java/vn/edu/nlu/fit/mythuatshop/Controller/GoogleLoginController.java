@@ -14,7 +14,8 @@ import vn.edu.nlu.fit.mythuatshop.Util.Env;
 public class GoogleLoginController extends HttpServlet {
 
 
-    private static final String CLIENT_ID = "client_id";
+    private static final String CLIENT_ID = Env.require("GOOGLE_CLIENT_ID");
+    private static final String REDIRECT_URI = Env.require("GOOGLE_REDIRECT_URI");
     private static final String SCOPE = "openid email profile";
 
     @Override
@@ -31,7 +32,7 @@ public class GoogleLoginController extends HttpServlet {
         String url =
                 "https://accounts.google.com/o/oauth2/v2/auth"
                         + "?client_id=" + enc(CLIENT_ID)
-                        + "&redirect_uri=" + enc(redirectUri)
+                        + "&redirect_uri=" + enc(REDIRECT_URI)
                         + "&response_type=code"
                         + "&scope=" + enc(SCOPE)
                         + "&state=" + enc(state)

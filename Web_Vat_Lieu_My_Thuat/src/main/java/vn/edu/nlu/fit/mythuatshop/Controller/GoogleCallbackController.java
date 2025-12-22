@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import vn.edu.nlu.fit.mythuatshop.Model.Users;
 import vn.edu.nlu.fit.mythuatshop.Service.UserService;
+import vn.edu.nlu.fit.mythuatshop.Util.Env;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -16,8 +17,10 @@ import java.nio.charset.StandardCharsets;
 @WebServlet(name = "GoogleCallbackController", value = "/oauth2/callback/google")
 public class GoogleCallbackController extends HttpServlet {
 
-    private static final String CLIENT_ID = "client_id";
-    private static final String CLIENT_SECRET = "client_secret";
+    private static final String CLIENT_ID = Env.require("GOOGLE_CLIENT_ID");
+    private static final String CLIENT_SECRET = Env.require("GOOGLE_CLIENT_SECRET");
+    private static final String REDIRECT_URI = Env.require("GOOGLE_REDIRECT_URI");
+
 
     private UserService userService;
 
@@ -78,7 +81,7 @@ public class GoogleCallbackController extends HttpServlet {
                 "code=" + enc(code)
                         + "&client_id=" + enc(CLIENT_ID)
                         + "&client_secret=" + enc(CLIENT_SECRET )
-                        + "&redirect_uri=" + enc(redirectUri)
+                        + "&redirect_uri=" + enc(REDIRECT_URI)
                         + "&grant_type=authorization_code";
 
         try (OutputStream os = con.getOutputStream()) {
