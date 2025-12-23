@@ -9,6 +9,7 @@
         position: fixed;
         z-index: 999;
         width: 100%;
+        top: 0;
     }
 
     #header-trang-chu .logo-trang-chu {
@@ -216,7 +217,7 @@
             <div class="header-dangnhap-dangki">
                 <i class="fa-solid fa-user"></i>
                 <div class="dangnhap-dangki">
-                    <!-- đổi 'fullName' cho đúng với field trong Users (name, username, ten, ...) -->
+                    <!-- đổi 'fullName' cho đúng với #field trong Users (name, username, ten, ...) -->
                     <a href="${pageContext.request.contextPath}/profile" class="dangnhap">
                         Hi, ${sessionScope.currentUser.fullName}
                     </a>
