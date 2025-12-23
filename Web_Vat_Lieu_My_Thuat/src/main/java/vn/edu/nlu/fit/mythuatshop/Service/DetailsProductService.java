@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.mythuatshop.Dao.ProductDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.SpecificationsDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.SubImagesDao;
 import vn.edu.nlu.fit.mythuatshop.Model.Product;
+import vn.edu.nlu.fit.mythuatshop.Model.ProductCard;
 import vn.edu.nlu.fit.mythuatshop.Model.Specification;
 import vn.edu.nlu.fit.mythuatshop.Model.Subimages;
 
@@ -13,6 +14,8 @@ public class DetailsProductService {
     private SpecificationsDao  specificationsDao;
     private SubImagesDao subImagesDao;
     private ProductDao productDao;
+    private final ProductCardService cardService = new ProductCardService();
+
     public DetailsProductService(){
         specificationsDao = new SpecificationsDao();
         subImagesDao = new SubImagesDao();
@@ -33,11 +36,10 @@ public class DetailsProductService {
         return subImagesDao.findByProductId(productId);
     }
     // mới: lấy danh sách sản phẩm cùng loại
-    public List<Product> getRelatedProducts(Product p){
-        List<Product> list = productDao.findByCategoryIdTop5(p.getCategoryId());
-        // bỏ chính sản phẩm đang xem ra
-        return list.stream()
-                .filter(pr -> pr.getId() != p.getId())
+    public List<ProductCard> getRelatedProductCards(Product p){
+        if (p == null) return List.of();
+        return cardService.topByCategory(p.getCategoryId(), 6).stream()
+                .filter(x -> x.getId() != p.getId())
                 .toList();
     }
 }

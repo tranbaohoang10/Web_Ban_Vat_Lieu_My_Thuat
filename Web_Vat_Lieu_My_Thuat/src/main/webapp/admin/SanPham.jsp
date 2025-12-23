@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
   <!DOCTYPE html>
   <html lang="en">
 
@@ -382,7 +384,7 @@
             Slider Show</a>
           <a href="LienHe.jsp"><i class="fa-solid fa-address-book"></i>Quản lý
             liên hệ</a>
-          <a href="../Login.jsp"><i class="fa-solid fa-right-from-bracket"></i>
+          <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i>
             Đăng xuất</a>
         </div>
       </div>
@@ -412,96 +414,46 @@
               </thead>
 
               <tbody>
+              <c:forEach var="p" items="${products}" varStatus="st">
                 <tr>
-                  <td>1</td>
-                  <td>SP01</td>
-                  <td>Bút Lông Thiên Long</td>
-                  <td>Bút lông màu</td>
-                  <td>168,300</td>
-                  <td>14-11-2025</td>
-                  <td>100</td>
+                  <td>${st.index + 1}</td>
+                  <td>${p.id}</td>
+                  <td>${p.name}</td>
                   <td>
-                    <button class="chinhsua-sanpham">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="xoa-sanpham">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
+                    <c:forEach var="c" items="${categories}">
+                      <c:if test="${c.id == p.categoryId}">${c.categoryName}</c:if>
+                    </c:forEach>
                   </td>
-                </tr>
-
-                <tr>
-                  <td>2</td>
-                  <td>SP02</td>
-                  <td>Bút sáp 12/18 màu Thiên Long</td>
-                  <td>Bút sáp màu</td>
-                  <td>11,800</td>
-                  <td>14-11-2025</td>
-                  <td>100</td>
-                  <td><button class="chinhsua-sanpham">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="xoa-sanpham">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>3</td>
-                  <td>SP03</td>
-                  <td>Bút lông 12 màu Fiber Pen Thiên Long Colokit</td>
-                  <td>Bút lông màu</td>
-                  <td>21,780</td>
-                  <td>14-11-2025</td>
-                  <td>100</td>
-                  <td><button class="chinhsua-sanpham">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="xoa-sanpham">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>4</td>
-                  <td>SP04</td>
-                  <td>Acrylic Markers/ Bút sơn/ Bút lông ThiênLong Colokit</td>
-                  <td>Bút lông màu</td>
-                  <td>45,500</td>
-                  <td>14-11-2025</td>
-                  <td>100</td>
-                  <td><button class="chinhsua-sanpham">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="xoa-sanpham">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>5</td>
-                  <td>SP05</td>
-                  <td>Bộ màu Gouache dạng tuýp 12ml Thiên Long Colokit</td>
-                  <td>Màu nước</td>
-                  <td>80,800</td>
-                  <td>14-11-2025</td>
-                  <td>100</td>
+                  <td>${p.price}</td>
+                  <td>${p.createAt}</td>
+                  <td>${p.quantityStock}</td>
                   <td>
-                    <button class="chinhsua-sanpham" data-id="SP01" data-name="Bút Lông Thiên Long"
-                      data-category="CAT01" data-price="168300" data-brand="Thiên Long" data-size="12 màu"
-                      data-madein="Việt Nam" data-warning="Không nuốt" data-thumbnail="images/sp01.jpg"
-                      data-subimgs='["images/sp01_1.jpg","images/sp01_2.jpg"]' data-discountprice='10'>
+                    <button class="chinhsua-sanpham"
+                            data-id="${p.id}"
+                            data-name="${p.name}"
+                            data-categoryid="${p.categoryId}"
+                            data-price="${p.price}"
+                            data-discount="${p.discountDefault}"
+                            data-quantity="${p.quantityStock}"
+                            data-brand="${p.brand}"
+                            data-thumbnail="${p.thumbnail}">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button class="xoa-sanpham">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
+
+                    <form action="${pageContext.request.contextPath}/admin/products"
+                          method="post" style="display:inline">
+                      <input type="hidden" name="action" value="delete">
+                      <input type="hidden" name="id" value="${p.id}">
+                      <button class="xoa-sanpham" type="submit"
+                              onclick="return confirm('Xóa sản phẩm này?')">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </form>
                   </td>
                 </tr>
+              </c:forEach>
               </tbody>
+
             </table>
             <div class="pagination">
               <a href="#" class="page-link">Trước</a>
@@ -516,148 +468,139 @@
       <!-- FORM THÊM SẢN PHẨM -->
       <div id="modal-add" class="modal">
         <div class="modal-content">
-          <h2>Thêm sản phẩm</h2>
+          <h2 id="modalTitle">Thêm sản phẩm</h2>
 
-          <div class="form-row">
+          <form id="productForm"
+                action="${pageContext.request.contextPath}/admin/products"
+                method="post"
+                enctype="multipart/form-data">
 
-            <!-- ================= LEFT COLUMN ================= -->
-            <div class="form-left">
+            <input type="hidden" name="action" id="action" value="create">
+            <input type="hidden" name="id" id="dbId" value=""> // value được lấy từ dbId.value ở js
 
-              <label>Mã danh mục</label>
-              <input type="text" id="categoryID" placeholder="VD: CAT01">
+            <div class="form-row">
+              <div class="form-left">
 
-              <label>Mã sản phẩm</label>
-              <input type="text" id="productID" placeholder="VD: SP01">
+                <label>Danh mục</label>
+                <select id="categoryID" name="categoryId" style="width:100%; padding:8px; margin-top:4px;">
+                  <c:forEach var="c" items="${categories}">
+                    <option value="${c.id}">${c.categoryName}</option>
+                  </c:forEach>
+                </select>
 
-              <label>Tên sản phẩm</label>
-              <input type="text" id="name" placeholder="Tên sản phẩm">
+                <label>Tên sản phẩm</label>
+                <input type="text" id="name" name="name" required>
 
-              <label>Ảnh chính</label>
-              <input type="file" id="thumbnail-main" accept="image/*">
-              <img id="previewImg-main" src style="width:120px; display:none; margin-top: 10px;">
-              <button type="button" id="removeImgBtn-main" style="
-          background:#DC3545;
-          color:white;
-          padding:5px 10px;
-          border:none;
-          border-radius:5px;
-          margin-top:8px;
-          cursor:pointer;
-          display:none;
-        ">Xóa ảnh</button>
+                <label>Ảnh chính</label>
+                <input type="file" id="thumbnail-main" name="thumbnailMain" accept="image/*">
+                <img id="previewImg-main" style="width:120px; display:none; margin-top: 10px;">
+                <button type="button" id="removeImgBtn-main" style="display:none;">Xóa ảnh</button>
 
-              <label>Ảnh phụ</label>
-              <input type="file" id="thumbnail-sub" multiple accept="image/*">
+                <label>Ảnh phụ</label>
+                <input type="file" id="thumbnail-sub" name="thumbnailSubs" multiple accept="image/*">
 
-              <div id="sub-image-preview" style="
-          display:flex;
-          flex-wrap:wrap;
-          gap:10px;
-          margin-top:10px;
-        "></div>
-              <label>Giảm giá(%)</label>
-              <input type="number" id="discountDefault" placeholder="VD: 10">
+                <div id="sub-image-preview" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;"></div>
 
-              <label>Giá bán</label>
-              <input type="number" id="price" placeholder="VD: 150000">
-              <label>Số lượng sản phẩm</label>
-              <input type="number" id="quantity" placeholder="VD: 100">
+                <label>Giảm giá(%)</label>
+                <input type="number" id="discountDefault" name="discountDefault" value="0" min="0" max="100">
+
+                <label>Giá bán</label>
+                <input type="number" id="price" name="price" required min="0">
+
+                <label>Số lượng sản phẩm</label>
+                <input type="number" id="quantity" name="quantityStock" required min="0">
+              </div>
+
+              <div class="form-right">
+                <label>Thương hiệu</label>
+                <input type="text" id="brand" name="brand">
+
+                <label>Kích thước</label>
+                <input type="text" id="size" name="size">
+
+                <label>Xuất xứ</label>
+                <input type="text" id="madeIn" name="madeIn">
+
+                <label>Cảnh báo an toàn</label>
+                <input type="text" id="warning" name="warning">
+              </div>
             </div>
 
-            <!-- ================= RIGHT COLUMN ================= -->
-            <div class="form-right">
-
-              <label>Thương hiệu</label>
-              <input type="text" id="brand" placeholder="VD: Coolkit">
-
-              <label>Kích thước</label>
-              <input type="text" id="size" placeholder="VD: 12 màu / 20cm">
-
-              <label>Xuất xứ</label>
-              <input type="text" id="madeIn" placeholder="VD: Việt Nam">
-
-              <label>Cảnh báo an toàn</label>
-              <input type="text" id="warning" placeholder="VD: Tránh xa tầm tay trẻ em">
-
+            <div class="modal-buttons">
+              <button id="btn-save" type="submit">Lưu</button>
+              <button id="btn-close" type="button">Hủy</button>
             </div>
-
-          </div>
-
-          <div class="modal-buttons">
-            <button id="btn-save">Lưu</button>
-            <button id="btn-close">Hủy</button>
-          </div>
-
+          </form>
         </div>
       </div>
+
 
     </div>
     <script>
       const modal = document.getElementById("modal-add");
+      const form = document.getElementById("productForm");
       const btnAdd = document.querySelector(".them-sanpham");
       const btnClose = document.getElementById("btn-close");
+      const modalTitle = document.getElementById("modalTitle");
 
+      const actionInput = document.getElementById("action");
+      const dbId = document.getElementById("dbId");
 
+      const categoryID = document.getElementById("categoryID");
+      const nameInput = document.getElementById("name");
+      const discountInput = document.getElementById("discountDefault");
+      const priceInput = document.getElementById("price");
+      const qtyInput = document.getElementById("quantity");
+      const brandInput = document.getElementById("brand");
+      const sizeInput = document.getElementById("size");
+      const madeInInput = document.getElementById("madeIn");
+      const warningInput = document.getElementById("warning");
 
-      // THUMBNAIL MAIN
+      // main preview
       const thumbnailInput = document.getElementById("thumbnail-main");
       const previewImg = document.getElementById("previewImg-main");
       const removeImgBtn = document.getElementById("removeImgBtn-main");
 
-      // THUMBNAIL SUB
+      // sub preview (UI only)
       const thumbnailSub = document.getElementById("thumbnail-sub");
-      const labelSub = thumbnailSub.previousElementSibling;
       const subPreviewContainer = document.getElementById("sub-image-preview");
+      let subImages = [];
 
-      let subImages = []; // danh sách ảnh phụ (UI)
-
-      // ===============================
-      //      MỞ FORM THÊM SẢN PHẨM
-      // ===============================
-      btnAdd.addEventListener("click", () => {
-
+      function openModal() {
         modal.style.display = "flex";
         modal.style.gap = "20px";
+      }
+      function closeModal() {
+        modal.style.display = "none";
+      }
 
-        // Reset form
-        document.querySelectorAll("#modal-add input").forEach(i => i.value = "");
-        document.getElementById("productID").disabled = false;
-        document.getElementById("categoryID").disabled = false;
-        // Reset ảnh chính
-        previewImg.src = "";
+      // CREATE
+      btnAdd.addEventListener("click", () => {
+        modalTitle.innerText = "Thêm sản phẩm";
+        actionInput.value = "create";
+        dbId.value = "";
+
+        form.reset();
         previewImg.style.display = "none";
         removeImgBtn.style.display = "none";
 
-        // Reset ảnh phụ
         subImages = [];
-        renderSubImages();
+        subPreviewContainer.innerHTML = "";
 
-        // Hiện ảnh phụ
         thumbnailSub.style.display = "block";
-        labelSub.style.display = "block";
         subPreviewContainer.style.display = "flex";
+
+        openModal();
       });
 
-      // ===============================
-      //           ĐÓNG FORM
-      // ===============================
-      btnClose.addEventListener("click", () => {
-        modal.style.display = "none";
-      });
+      btnClose.addEventListener("click", closeModal);
+      window.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
 
-      window.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none";
-      });
-
-
-      // ===============================
-      //     ẢNH CHÍNH — PREVIEW
-      // ===============================
+      // MAIN PREVIEW
       thumbnailInput.addEventListener("change", function () {
         const file = this.files[0];
         if (file) {
-          const url = URL.createObjectURL(file);
-          previewImg.src = url;
+          previewImg.src = URL.createObjectURL(file);
           previewImg.style.display = "block";
           removeImgBtn.style.display = "inline-block";
         }
@@ -670,38 +613,25 @@
         removeImgBtn.style.display = "none";
       });
 
-
-      // ===============================
-      //       ẢNH PHỤ — PREVIEW
-      // ===============================
+      // SUB PREVIEW (optional)
       thumbnailSub.addEventListener("change", function () {
         const files = Array.from(this.files);
-
-        files.forEach(file => {
-          const url = URL.createObjectURL(file);
-          subImages.push({ file, url });
-        });
-
+        files.forEach(file => subImages.push({ file, url: URL.createObjectURL(file) }));
         renderSubImages();
-        thumbnailSub.value = "";
       });
 
       function renderSubImages() {
         subPreviewContainer.innerHTML = "";
-
         subImages.forEach((imgObj, index) => {
           const box = document.createElement("div");
           box.className = "sub-img-box";
-
           const img = document.createElement("img");
           img.src = imgObj.url;
 
           const btn = document.createElement("button");
+          btn.type = "button";
           btn.innerHTML = "×";
-          btn.onclick = () => {
-            subImages.splice(index, 1);
-            renderSubImages();
-          };
+          btn.onclick = () => { subImages.splice(index, 1); renderSubImages(); };
 
           box.appendChild(img);
           box.appendChild(btn);
@@ -709,67 +639,45 @@
         });
       }
 
+      // EDIT
+      document.querySelectorAll(".chinhsua-sanpham").forEach(btn => {
+        btn.addEventListener("click", () => {
+          modalTitle.innerText = "Cập nhật sản phẩm";
+          actionInput.value = "update";
 
-      // ===============================
-      //     CHỈNH SỬA SẢN PHẨM
-      // ===============================
-      const editButtons = document.querySelectorAll(".chinhsua-sanpham");
+          dbId.value = btn.dataset.id;
+          nameInput.value = btn.dataset.name || "";
+          categoryID.value = btn.dataset.categoryid || "";
+          priceInput.value = btn.dataset.price || 0;
+          discountInput.value = btn.dataset.discount || 0;
+          qtyInput.value = btn.dataset.quantity || 0;
+          brandInput.value = btn.dataset.brand || "";
 
-      editButtons.forEach(btn => {
-        btn.addEventListener("click", function () {
-          modal.style.display = "flex";
+          // nếu bạn có data-size/madein/warning thì set tiếp
+          sizeInput.value = btn.dataset.size || "";
+          madeInInput.value = btn.dataset.madein || "";
+          warningInput.value = btn.dataset.warning || "";
 
-          // ẨN ảnh phụ trong chế độ edit
-          thumbnailSub.style.display = "none";
-          labelSub.style.display = "none";
-          subPreviewContainer.style.display = "none";
-
-          // Lấy dữ liệu từ data-attribute
-          // const id = btn.getAttribute("data-id");
-          // const name = btn.getAttribute("data-name");
-          // const category = btn.getAttribute("data-category");
-          // const price = btn.getAttribute("data-price");
-          // const brand = btn.getAttribute("data-brand");
-          // const size = btn.getAttribute("data-size");
-          // const madeIn = btn.getAttribute("data-madein");
-          // const warning = btn.getAttribute("data-warning");
-          // const discount = btn.getAttribute("data-discountprice");
-          // const thumbnail = btn.getAttribute("data-thumbnail");
-
-          let subimgs = [];
-          try {
-            subimgs = JSON.parse(btn.getAttribute("data-subimgs"));
-          } catch { subimgs = []; }
-
-          // Gán vào form
-          document.getElementById("productID").value = 'SP01';
-          document.getElementById("productID").disabled = true;
-          document.getElementById("name").value = 'Bút Lông Thiên Long';
-          document.getElementById("categoryID").value = 'CAT01';
-          document.getElementById("categoryID").disabled = true;
-          document.getElementById("discountDefault").value = '10';
-          document.getElementById("price").value = '168300';
-          document.getElementById("quantity").value = '100';
-          document.getElementById("brand").value = 'Thiên Long';
-          document.getElementById("size").value = '12 màu';
-          document.getElementById("madeIn").value = 'Việt Nam';
-          document.getElementById("warning").value = 'Tránh xa tầm tay trẻ em';
-
-          // Ảnh chính
-          if (thumbnail) {
-            previewImg.src = thumbnail;
+          // ảnh chính (chỉ preview URL cũ)
+          const thumb = btn.dataset.thumbnail;
+          if (thumb) {
+            previewImg.src = thumb;
             previewImg.style.display = "block";
             removeImgBtn.style.display = "inline-block";
+          } else {
+            previewImg.style.display = "none";
+            removeImgBtn.style.display = "none";
           }
 
-          // Ảnh phụ (không hiển thị vì đang sửa)
-          subImages = [];
-          subimgs.forEach(imgURL => {
-            subImages.push({ file: null, url: imgURL });
-          });
+          // update: thường ẩn ảnh phụ (đỡ phức tạp)
+          thumbnailSub.style.display = "none";
+          subPreviewContainer.style.display = "none";
+
+          openModal();
         });
       });
     </script>
+
   </body>
 
   </html>

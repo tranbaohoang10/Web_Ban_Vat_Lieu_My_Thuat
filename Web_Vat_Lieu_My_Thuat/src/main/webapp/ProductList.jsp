@@ -19,12 +19,24 @@
                 <div class="list-product-list1-content-description">
                     <p class="content">${p.name}</p>
                     <div class="star">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <span>(0)</span>
+                        <!-- full stars -->
+                        <c:forEach var="i" begin="1" end="${p.fullStarCount}">
+                            <i class="fa-solid fa-star"></i>
+                        </c:forEach>
+
+                        <!-- half star -->
+                        <c:if test="${p.halfStar}">
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </c:if>
+
+                        <!-- empty stars -->
+                        <c:forEach var="i" begin="1" end="${p.emptyStarCount}">
+                            <i class="fa-regular fa-star"></i>
+                        </c:forEach>
+
+                        <span>
+        (<fmt:formatNumber value="${p.avgRating}" maxFractionDigits="1" />)
+    </span>
                     </div>
                     <h2 class="price-product-after">
                         <fmt:formatNumber value="${p.priceAfterDiscount}" type="number"/>₫

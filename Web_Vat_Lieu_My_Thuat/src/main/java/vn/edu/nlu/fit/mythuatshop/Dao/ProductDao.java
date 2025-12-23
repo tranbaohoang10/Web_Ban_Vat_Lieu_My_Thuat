@@ -1,12 +1,14 @@
 package vn.edu.nlu.fit.mythuatshop.Dao;
 
+import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.nlu.fit.mythuatshop.Model.Product;
 
 import java.util.List;
 
-public class  ProductDao {
+public class ProductDao {
     private final Jdbi jdbi;
+
 
     public ProductDao() {
         jdbi = JDBIConnector.getJdbi();
@@ -14,10 +16,11 @@ public class  ProductDao {
 
     public List<Product> findAll() {
         String sql = "SELECT id, name, price, discountDefault, categoryId, " +
-                "thumbnail, quantityStock, soldQuantity, status, createAt " +
-                "FROM Products ";
+                "thumbnail, quantityStock, soldQuantity, status, createAt, brand " +
+                "FROM Products";
         return jdbi.withHandle(handle -> handle.createQuery(sql).mapToBean(Product.class).list());
     }
+
 
     public List<Product> findByCategoryId(int categoryId) {
         String sql = "SELECT id, name, price, discountDefault, categoryId, " +
@@ -61,9 +64,9 @@ public class  ProductDao {
     }
 
     public List<Product> findByCategoryWithFilter(int categoryId,
-            Double minPrice,
-            Double maxPrice,
-            String sort) {
+                                                  Double minPrice,
+                                                  Double maxPrice,
+                                                  String sort) {
 
         StringBuilder sql = new StringBuilder(
                 "SELECT * FROM products WHERE categoryId = :categoryId ");
@@ -102,11 +105,11 @@ public class  ProductDao {
     }
 
     public List<Product> findByCategoryWithFilter(int categoryId,
-            Double minPrice,
-            Double maxPrice,
-            String sort,
-            int offset,
-            int limit) {
+                                                  Double minPrice,
+                                                  Double maxPrice,
+                                                  String sort,
+                                                  int offset,
+                                                  int limit) {
 
         StringBuilder sql = new StringBuilder(
                 "SELECT * FROM products WHERE categoryId = :categoryId ");
@@ -226,6 +229,77 @@ public class  ProductDao {
                 .bind("productName", productName)
                 .mapTo(Integer.class)
                 .one());
+    }
+
+    public int updateStockAndSold(Handle handle, int productId, int qty) {
+        String sql = """
+                    UPDATE products
+                    SET quantityStock = quantityStock - :qty,
+                        soldQuantity = soldQuantity + :qty
+                    WHERE ID = :pid
+                      AND quantityStock >= :qty
+                """;
+        return handle.createUpdate(sql)
+                .bind("pid", productId)
+                .bind("qty", qty)
+                .execute();
+    }
+    public int insertReturnId(Product p) {
+        String sql = """
+        INSERT INTO Products(name, price, discountDefault, categoryID, thumbnail,
+                             quantityStock, soldQuantity, status, createAt, brand)
+        VALUES (:name, :price, :discountDefault, :categoryID, :thumbnail,
+                :quantityStock, :soldQuantity, :status, :createAt, :brand)
+    """;
+
+        return jdbi.withHandle(h ->
+                h.createUpdate(sql)
+                        .bind("name", p.getName())
+                        .bind("price", p.getPrice())
+                        .bind("discountDefault", p.getDiscountDefault())
+                        .bind("categoryID", p.getCategoryId())
+                        .bind("thumbnail", p.getThumbnail())
+                        .bind("quantityStock", p.getQuantityStock())
+                        .bind("soldQuantity", p.getSoldQuantity())
+                        .bind("status", p.getStatus())
+                        .bind("createAt", p.getCreateAt())
+                        .bind("brand", p.getBrand())
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
+    public int update(Product p) {
+        String sql = """
+        UPDATE Products
+        SET name = :name,
+            price = :price,
+            discountDefault = :discountDefault,
+            categoryID = :categoryID,
+            thumbnail = :thumbnail,
+            quantityStock = :quantityStock,
+            brand = :brand
+        WHERE id = :id
+    """;
+
+        return jdbi.withHandle(h ->
+                h.createUpdate(sql)
+                        .bind("id", p.getId())
+                        .bind("name", p.getName())
+                        .bind("price", p.getPrice())
+                        .bind("discountDefault", p.getDiscountDefault())
+                        .bind("categoryID", p.getCategoryId())
+                        .bind("thumbnail", p.getThumbnail())
+                        .bind("quantityStock", p.getQuantityStock())
+                        .bind("brand", p.getBrand())
+                        .execute()
+        );
+    }
+
+    public int deleteById(int id) {
+        String sql = "DELETE FROM Products WHERE id = :id";
+        return jdbi.withHandle(h -> h.createUpdate(sql).bind("id", id).execute());
     }
 
 }

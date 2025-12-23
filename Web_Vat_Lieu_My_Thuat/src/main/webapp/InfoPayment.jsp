@@ -629,16 +629,6 @@
                                         placeholder="Ghi chú đơn hàng..."></textarea>
                                 </div>
 
-                                <div class="export-bill">
-                                    <div class="check-export">
-                                        <input type="checkbox"
-                                            id="check-form-export">
-                                        <label for="check-form-export"
-                                            class="label1">Xuất hoá đơn cho đơn
-                                            hàng</label>
-                                    </div>
-                                </div>
-
                                 <!-- Payment Method -->
                                 <div class="payment-method">
                                     <h4 class="payment-title">Phương thức thanh

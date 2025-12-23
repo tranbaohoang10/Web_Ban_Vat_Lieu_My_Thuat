@@ -427,7 +427,7 @@
                     <a href="LienHe.html.html"><i
                             class="fa-solid fa-address-book"></i>Quản lý liên
                         hệ</a>
-                    <a href="../Login.jsp"><i
+                    <a href="${pageContext.request.contextPath}/logout"><i
                             class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất</a>
                 </div>
