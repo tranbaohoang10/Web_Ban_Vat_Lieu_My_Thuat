@@ -55,3 +55,4 @@ target/
 #vnpay
 src/main/resources/vnpay.properties
 Web_Vat_Lieu_My_Thuat/src/main/resources/vnpay.properties
+.env
