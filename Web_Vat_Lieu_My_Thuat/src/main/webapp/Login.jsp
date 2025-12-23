@@ -316,9 +316,11 @@
 
             <div class="btn-login-gg">
 
-                <button class="btn-gg"><i
-                        class="fa-brands fa-google"></i>Google
-                </button>
+                <a class="btn-gg" href="${pageContext.request.contextPath}/oauth2/google"
+                   style="text-align: center"><i
+                        class="fa-brands fa-google"></i>
+                    Google
+                </a>
 
             </div>
 

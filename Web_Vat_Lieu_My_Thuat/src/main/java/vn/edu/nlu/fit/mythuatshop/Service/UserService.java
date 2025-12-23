@@ -8,6 +8,7 @@ import vn.edu.nlu.fit.mythuatshop.Util.EmailUtil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.UUID;
 
 public class UserService {
     private final UserDao userDao;
@@ -116,4 +117,48 @@ public class UserService {
         }
         return sb.toString();
     }
+    // chức năng đăng nhập bằng gg
+    public Users findByEmailForGG(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    public Users registerGoogleUser(String name, String email) {
+        String randomPassword = UUID.randomUUID().toString();
+        String hashed = BCrypt.hashpw(randomPassword, BCrypt.gensalt(12));
+
+        Users user = new Users();
+        user.setFullName(name);
+        user.setEmail(email);
+        user.setPassword(hashed);
+        user.setRole("user");
+
+        userDao.insertUser(user);
+        return userDao.findByEmail(email);
+    }
+
+    public void registerGoogleUserSafe(String name, String email) {
+        // nếu email đã tồn tại thì thôi
+        if (userDao.findByEmail(email) != null) return;
+
+        Users user = new Users();
+        user.setFullName(name != null && !name.isBlank() ? name : "Google User");
+        user.setEmail(email);
+
+        // password vẫn cần (nếu DB NOT NULL). Tạo random + hash.
+        // Nếu project bạn đang dùng BCrypt (org.mindrot.jbcrypt.BCrypt) thì dùng như dưới:
+        String raw = java.util.UUID.randomUUID().toString();
+        String hashed = org.mindrot.jbcrypt.BCrypt.hashpw(raw, org.mindrot.jbcrypt.BCrypt.gensalt());
+        user.setPassword(hashed);
+
+        // tránh lỗi NOT NULL
+        user.setPhoneNumber("");
+        user.setAddress("");
+
+        // đồng nhất role (bạn đang dùng "USER" ở các chỗ khác)
+        user.setRole("USER");
+
+        userDao.insertUser(user);
+    }
+
+
 }

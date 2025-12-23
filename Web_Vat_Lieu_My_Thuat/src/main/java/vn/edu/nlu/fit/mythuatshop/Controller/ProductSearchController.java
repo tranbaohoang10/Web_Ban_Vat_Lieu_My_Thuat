@@ -6,8 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import vn.edu.nlu.fit.mythuatshop.Model.Product;
-import vn.edu.nlu.fit.mythuatshop.Service.ProductService;
+import vn.edu.nlu.fit.mythuatshop.Model.ProductCard;
+import vn.edu.nlu.fit.mythuatshop.Service.ProductCardService;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,29 +18,29 @@ public class ProductSearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductService productService = new ProductService();
+
         String keyword = request.getParameter("keyword");
         String sort = request.getParameter("sort");
 
-        // Xử lý null/empty cho keyword
-        if (keyword == null) {
-            keyword = "";
-        }
+        if (keyword == null) keyword = "";
+        if (sort == null) sort = ""; // hoặc default bạn muốn
 
-        List<Product> products;
         // phân trang
         int pageSize = 8;
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
-        } catch (Exception ignored) {
-        }
-        if (page < 1)
-            page = 1;
+        } catch (Exception ignored) {}
+        if (page < 1) page = 1;
+
         int offset = (page - 1) * pageSize;
-        int totalProducts = productService.countProductSearch(keyword);
+
+        ProductCardService cardService = new ProductCardService();
+
+        int totalProducts = cardService.countSearch(keyword);
         int totalPages = (int) Math.ceil(totalProducts * 1.0 / pageSize);
-        products = productService.getProductSearch(keyword, sort, offset, pageSize);
+
+        List<ProductCard> products = cardService.search(keyword, sort, offset, pageSize);
 
         request.setAttribute("keyword", keyword);
         request.setAttribute("products", products);
@@ -48,17 +48,14 @@ public class ProductSearchController extends HttpServlet {
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("totalProducts", totalProducts);
         request.setAttribute("sort", sort);
+
         boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"))
                 || "1".equals(request.getParameter("ajax"));
 
-        if (isAjax) {
-            RequestDispatcher rd = request.getRequestDispatcher("/ProductList.jsp");
-            rd.forward(request, response);
-        } else {
-
-            RequestDispatcher rd = request.getRequestDispatcher("/ProductSearch.jsp");
-            rd.forward(request, response);
-        }
+        RequestDispatcher rd = request.getRequestDispatcher(
+                isAjax ? "/ProductList.jsp" : "/ProductSearch.jsp"
+        );
+        rd.forward(request, response);
     }
 
     @Override

@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.mythuatshop.Model.Product;
+import vn.edu.nlu.fit.mythuatshop.Model.ProductCard;
 import vn.edu.nlu.fit.mythuatshop.Model.Specification;
 import vn.edu.nlu.fit.mythuatshop.Model.Subimages;
 import vn.edu.nlu.fit.mythuatshop.Service.DetailsProductService;
@@ -43,7 +44,7 @@ public class DetailsProductController extends HttpServlet {
         }
       List<Specification> specificationList = service.getSpecifications(productId);
         List<Subimages> subimagesList = service.getSubImages(productId);
-        List<Product> relatedProducts = service.getRelatedProducts(p);
+        List<ProductCard> relatedProducts = service.getRelatedProductCards(p);
         request.setAttribute("product", p);
         request.setAttribute("specificationList", specificationList);
         request.setAttribute("subimagesList", subimagesList);

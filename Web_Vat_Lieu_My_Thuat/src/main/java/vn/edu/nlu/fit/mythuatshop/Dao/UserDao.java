@@ -18,8 +18,8 @@ public class UserDao {
     }
     // thêm user mới dô db
     public int insertUser(Users user) {
-        String sql = "INSERT INTO users (fullName, email, `password`, phoneNumber, address, role, createAt) " +
-                " VALUES (:fullName, :email, :password, :phoneNumber, :address, :role, CURRENT_TIMESTAMP())";
+        String sql = "INSERT INTO users (fullName, email, password, phoneNumber, address, role, createAt) " +
+                "VALUES (:fullName, :email, :password, :phoneNumber, :address, :role, CURRENT_TIMESTAMP())";
         return jdbi.withHandle(handle -> handle.createUpdate(sql)
                 .bind("fullName", user.getFullName())
                 .bind("email", user.getEmail())
@@ -101,4 +101,6 @@ public class UserDao {
                         .bind("email", email)
                         .execute()
         );    }
+
+
 }

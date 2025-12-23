@@ -25,4 +25,19 @@ public class SubImagesDao {
                         .list()
         );
     }
+    public int insert(int productId, String image) {
+        String sql = "INSERT INTO subimages(productID, image) VALUES (:productId, :image)";
+        return jdbi.withHandle(h -> h.createUpdate(sql)
+                .bind("productId", productId)
+                .bind("image", image)
+                .execute());
+    }
+
+    public int deleteByProductId(int productId) {
+        String sql = "DELETE FROM subimages WHERE productID = :productId";
+        return jdbi.withHandle(h -> h.createUpdate(sql)
+                .bind("productId", productId)
+                .execute());
+    }
+
 }

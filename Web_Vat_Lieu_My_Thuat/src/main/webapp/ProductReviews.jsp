@@ -270,8 +270,8 @@
 
                 <!-- Thông tin người đánh giá + nội dung -->
                 <div class="form-group form_review">
-                    <input type="text" name="fullName" class="infor_contact" placeholder="Họ và tên">
-                    <input type="text" name="phone" class="infor_contact" placeholder="Số điện thoại">
+                    <input type="text" name="fullName" class="infor_contact" value="${sessionScope.currentUser.fullName}" placeholder="Họ và tên">
+                    <input type="text" name="phone" class="infor_contact" value="${sessionScope.currentUser.phoneNumber}" placeholder="Số điện thoại">
                 </div>
 
                 <textarea class="area_review" name="comment" placeholder="Nhập nội dung đánh giá"></textarea>

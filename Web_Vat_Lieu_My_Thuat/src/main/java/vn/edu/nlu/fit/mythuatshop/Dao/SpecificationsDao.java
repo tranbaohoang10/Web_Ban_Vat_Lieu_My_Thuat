@@ -28,4 +28,40 @@ public class SpecificationsDao {
                         .list()
         );
     }
+    public int upsert(int productId, String size, String standard, String madeIn, String warning) {
+        // nếu có thì update
+        String updateSql = """
+        UPDATE specifications
+        SET Size = :size,
+            Standard = :standard,
+            MadeIn = :madeIn,
+            Warning = :warning
+        WHERE productID = :productId
+    """;
+
+        int updated = jdbi.withHandle(h -> h.createUpdate(updateSql)
+                .bind("productId", productId)
+                .bind("size", size)
+                .bind("standard", standard)
+                .bind("madeIn", madeIn)
+                .bind("warning", warning)
+                .execute());
+
+        if (updated > 0) return updated;
+
+        // nếu chưa có thì insert
+        String insertSql = """
+        INSERT INTO specifications(productID, Size, Standard, MadeIn, Warning)
+        VALUES (:productId, :size, :standard, :madeIn, :warning)
+    """;
+
+        return jdbi.withHandle(h -> h.createUpdate(insertSql)
+                .bind("productId", productId)
+                .bind("size", size)
+                .bind("standard", standard)
+                .bind("madeIn", madeIn)
+                .bind("warning", warning)
+                .execute());
+    }
+
 }
