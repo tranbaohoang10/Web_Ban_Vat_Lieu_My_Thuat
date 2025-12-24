@@ -471,7 +471,7 @@
             kê</a>
           <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh
             mục</a>
-          <a href="SanPham.jsp"><i class="fa-solid fa-palette"></i>Quản
+          <a href="${pageContext.request.contextPath}/admin/products"><i class="fa-solid fa-palette"></i>Quản
             lý sản phẩm</a>
           <a href="Nguoidung.html" class="active"><i
               class="fa-solid fa-person"></i>Quản

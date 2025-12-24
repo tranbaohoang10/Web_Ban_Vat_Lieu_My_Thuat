@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
@@ -285,7 +287,20 @@
                     <c:forEach var="item" items="${order.viewItems}">
                         <div class="od-item">
                             <div class="od-thumb">
-                                <img src="${item.thumbnail}" alt="${item.name}">
+                                <c:set var="odThumbUrl" value="${item.thumbnail}" />
+                                <c:if test="${not empty odThumbUrl and not fn:startsWith(odThumbUrl,'http') and not fn:startsWith(odThumbUrl, pageContext.request.contextPath)}">
+                                    <c:choose>
+                                        <c:when test="${fn:startsWith(odThumbUrl,'/')}">
+                                            <c:set var="odThumbUrl" value="${pageContext.request.contextPath}${odThumbUrl}" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:set var="odThumbUrl" value="${pageContext.request.contextPath}/${odThumbUrl}" />
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
+
+                                <img src="${odThumbUrl}" alt="${item.name}">
+
                             </div>
 
                             <div class="od-info">

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -261,8 +262,21 @@
         <%@ include file="Menu.jsp" %>
         <div class="section-main-content">
             <div class="section-main-content-image">
-                <img src="${category.thumbnail}"
-                     alt="${categoty.categotyName}">
+                <c:set var="catThumbUrl" value="${category.thumbnail}" />
+                <c:if test="${not empty catThumbUrl and not fn:startsWith(catThumbUrl,'http') and not fn:startsWith(catThumbUrl, pageContext.request.contextPath)}">
+                    <c:choose>
+                        <c:when test="${fn:startsWith(catThumbUrl,'/')}">
+                            <c:set var="catThumbUrl" value="${pageContext.request.contextPath}${catThumbUrl}" />
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="catThumbUrl" value="${pageContext.request.contextPath}/${catThumbUrl}" />
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+
+                <img src="${catThumbUrl}"
+                     alt="${category.categoryName}">
+
             </div>
             <div class="section-main-content-list">
                 <h2
