@@ -172,8 +172,19 @@
 
     .btn-gg {
         background-color: #DE3F32;
-        margin-left: 140px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        padding-left: 80px;
+        padding-right: 80px;
+        margin-left: 27%;
+
+        /*margin-top: 10px;*/
+        cursor: pointer;
+
     }
+
 
     .btn-dang-nhap-tt i {
         font-size: 16px;
@@ -225,15 +236,25 @@
 
             <div class="tt-chitiet">
                 <label for="sdt">Số điện thoại:</label>
-                <input type="text" id="sdt" name="phoneNumber"
-                       placeholder="Số điện thoại">
+                <input type="tel" id="sdt" name="phoneNumber"
+                       required maxlength = "10"
+                       placeholder="Số điện thoại"
+                       pattern = "^0\d{9}$"
+                       title = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0">
+                       <span id="phonerror" style="color: #FFD700; font-size: 14px;"></span>
+
             </div>
 
             <div class="tt-chitiet"
                  style="grid-column: span 2; position: relative;">
                 <label for="Mk">Mật khẩu:</label>
                 <input type="password" id="Mk" name="password"
-                       placeholder="Mật khẩu" required>
+                       placeholder="Mật khẩu" required
+                        minlength="12"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{12,}$"
+                       title="Mật khẩu có ít nhất 12 kí tự gồm chữ hoa, chữ thường và các kí tự đặc biệt."  >
+                       <span id="pwerror" style="color: #FFD700; font-size: 14px;"></span>
+
                 <i class="hide-display" id="togglePassword"
                    style="position:absolute; right:10px; top:38px; cursor:pointer;"></i>
                 <c:if test="${not empty error}">
@@ -253,11 +274,14 @@
         </p>
 
         <div class="btn-dang-nhap-tt">
-            <button class="btn-gg"><i
-                    class="fa-brands fa-google"></i>Google
-            </button>
-
+            <a class="btn-gg"
+               href="${pageContext.request.contextPath}/oauth2/google"
+               style="text-align: center">
+                <i class="fa-brands fa-google"></i>
+                Google
+            </a>
         </div>
+
     </div>
 </div>
 <%@ include file="Footer.jsp" %>
@@ -279,6 +303,44 @@
         }
     });
 </script>
+<%--check sdt--%>
+<script>
+    const phoneInput = document.getElementById("sdt");
+    const phoneError = document.getElementById("phonerror");
+
+    phoneInput.addEventListener("input", () => {
+        // chỉ cho nhập số
+        phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+
+        const ok = /^0\d{9}$/.test(phoneInput.value);
+        phoneError.textContent = ok || phoneInput.value.length === 0
+            ? ""
+            : "SĐT không hợp lệ (vd: 0912345678)";
+    });
+</script>
+<%--check mk--%>
+
+<script>
+    const passInput = document.getElementById("Mk");
+    const passError = document.getElementById("pwerror");
+
+    passInput.addEventListener("input", () => {
+        const pass = passInput.value;
+
+        const okLength = pass.length >= 12;
+        const okLower  = /[a-z]/.test(pass);
+        const okUpper  = /[A-Z]/.test(pass);
+        const okSpecial = /[^A-Za-z0-9]/.test(pass);
+
+        if (okLength && okLower && okUpper && okSpecial) {
+            passError.textContent = "";
+        } else {
+            passError.textContent =
+                "Mật khẩu >= 12 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt.";
+        }
+    });
+</script>
+
 
 </body>
 
