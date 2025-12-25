@@ -24,6 +24,20 @@ public class VoucherDao {
                         .orElse(null)
         );
     }
+
+    public boolean increaseUsed(int voucherId) {
+        String sql = "UPDATE Vouchers " +
+                "SET quantityUsed = quantityUsed + 1 " +
+                "WHERE ID = :id " +
+                "  AND isActive = 1 " +
+                "  AND quantityUsed < quantity " +
+                "  AND NOW() BETWEEN startDate AND endDate";
+
+        int updated = jdbi.withHandle(h ->
+                h.createUpdate(sql).bind("id", voucherId).execute()
+        );
+        return updated > 0;
+    }
 }
 
 

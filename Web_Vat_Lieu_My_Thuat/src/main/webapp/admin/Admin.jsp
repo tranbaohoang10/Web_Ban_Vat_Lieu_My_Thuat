@@ -347,7 +347,7 @@
               <a href="${pageContext.request.contextPath}/admin/overview" class="active"><i
                   class="fa-solid fa-house"></i>
                 Tổng quan</a>
-              <a href="ThongKe.jsp"><i class="fa-solid fa-chart-line"></i>Thống
+              <a href="${pageContext.request.contextPath}/admin/statistics"><i class="fa-solid fa-chart-line"></i>Thống
                 kê</a>
               <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh
                 mục</a>
@@ -361,7 +361,7 @@
                 khuyến mãi</a>
               <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý
                 Slider Show</a>
-              <a href="LienHe.jsp"><i class="fa-solid fa-address-book"></i>Quản lý
+              <a href="Contact.jsp"><i class="fa-solid fa-address-book"></i>Quản lý
                 liên hệ</a>
               <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i>
                 Đăng xuất</a>

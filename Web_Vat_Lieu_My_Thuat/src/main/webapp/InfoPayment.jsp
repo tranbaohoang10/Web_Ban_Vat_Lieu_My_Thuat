@@ -558,6 +558,23 @@
         }
     }
 
+    #voucherMsg {
+        margin-top: 6px;
+        font-size: 14px;
+    }
+
+    #voucherMsg.success {
+        color: #16a34a;
+    }
+
+    #voucherMsg.error {
+        color: #dc2626;
+    }
+
+    #voucherMsg.loading {
+        color: #6b7280;
+    }
+
 
 </style>
 
@@ -796,14 +813,19 @@
                         body: body.toString(),
                         credentials: "same-origin"
                     });
-
+                    voucherMsg.classList.remove("success", "error", "loading");
+                    voucherMsg.classList.add("loading");
+                    voucherMsg.textContent = "Đang áp dụng...";
                     const json = await res.json();
+                    voucherMsg.classList.remove("success", "error", "loading");
+
 
                     if (!json.success) {
+                        voucherMsg.classList.add("error");
                         voucherMsg.textContent = json.message || "Áp dụng thất bại";
                         return;
                     }
-
+                    voucherMsg.classList.add("success");
                     voucherMsg.textContent = json.message || "Áp dụng thành công";
                     if (discountValue) discountValue.textContent = vnd(json.discount);
                     if (totalPayText) totalPayText.textContent = vnd(json.totalToPay);
