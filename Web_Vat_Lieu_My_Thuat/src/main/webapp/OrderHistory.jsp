@@ -399,7 +399,19 @@
                                 <div class="order-items">
                                     <c:forEach var="item" items="${order.viewItems}">
                                         <div class="order-item">
-                                            <img src="${item.thumbnail}" alt="${item.name}">
+                                            <c:set var="hisThumbUrl" value="${item.thumbnail}" />
+                                            <c:if test="${not empty hisThumbUrl and not fn:startsWith(hisThumbUrl,'http') and not fn:startsWith(hisThumbUrl, pageContext.request.contextPath)}">
+                                                <c:choose>
+                                                    <c:when test="${fn:startsWith(hisThumbUrl,'/')}">
+                                                        <c:set var="hisThumbUrl" value="${pageContext.request.contextPath}${hisThumbUrl}" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:set var="hisThumbUrl" value="${pageContext.request.contextPath}/${hisThumbUrl}" />
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:if>
+
+                                            <img src="${hisThumbUrl}" alt="${item.name}">
                                             <div class="order-info">
                                                 <p class="order-name">${item.name}</p>
                                                 <p class="order-quantity">Số lượng: ${item.quantity}</p>

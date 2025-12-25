@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -674,6 +676,41 @@
                                                 alt="VNPay">
                                         <span>Thanh toán qua
                                                     VNPay</span>
+                        <div class="order-summary">
+                            <h4 class="cart-title">Giỏ hàng</h4>
+
+                            <div class="cart-items">
+                                <!-- Product 1 -->
+                                <c:forEach var="item"
+                                    items="${sessionScope.cart.carts.values()}">
+                                    <div class="cart-item">
+                                        <div class="item-image">
+                                            <c:set var="ckThumbUrl" value="${item.thumbnail}" />
+                                            <c:if test="${not empty ckThumbUrl and not fn:startsWith(ckThumbUrl,'http') and not fn:startsWith(ckThumbUrl, pageContext.request.contextPath)}">
+                                                <c:choose>
+                                                    <c:when test="${fn:startsWith(ckThumbUrl,'/')}">
+                                                        <c:set var="ckThumbUrl" value="${pageContext.request.contextPath}${ckThumbUrl}" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:set var="ckThumbUrl" value="${pageContext.request.contextPath}/${ckThumbUrl}" />
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:if>
+
+                                            <img src="${ckThumbUrl}" alt="${item.name}">
+
+                                            <span
+                                                class="item-quantity">${item.quantity}</span>
+                                        </div>
+                                        <div class="item-details">
+                                            <h5
+                                                class="item-name">${item.name}</h5>
+                                            <p class="item-price">
+                                                <fmt:formatNumber
+                                                    value="${item.priceAfterDiscount * item.quantity}"
+                                                    type="number" />₫
+                                            </p>
+                                        </div>
                                     </div>
                                 </label>
                             </div>
@@ -686,29 +723,6 @@
                     </form>
                 </div>
 
-                <div class="order-summary">
-                    <h4 class="cart-title">Giỏ hàng</h4>
-
-                    <div class="cart-items">
-                        <!-- Product 1 -->
-                        <c:forEach var="item"
-                                   items="${sessionScope.cart.carts.values()}">
-                            <div class="cart-item">
-                                <div class="item-image">
-                                    <img src="${item.thumbnail}"
-                                         alt="${item.name}">
-                                    <span
-                                            class="item-quantity">${item.quantity}</span>
-                                </div>
-                                <div class="item-details">
-                                    <h5
-                                            class="item-name">${item.name}</h5>
-                                    <p class="item-price">
-                                        <fmt:formatNumber
-                                                value="${item.priceAfterDiscount * item.quantity}"
-                                                type="number"/>₫
-                                    </p>
-                                </div>
                             </div>
                         </c:forEach>
                     </div>

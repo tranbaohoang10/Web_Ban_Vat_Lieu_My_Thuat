@@ -1,0 +1,32 @@
+enabled: true
+serveStaticResources: true
+csrfProtection: false
+
+accessControl:
+  - role: "*"
+    resourceType: "*"
+    folder: "/"
+    FOLDER_VIEW: true
+    FOLDER_CREATE: true
+    FOLDER_RENAME: true
+    FOLDER_DELETE: true
+    FILE_VIEW: true
+    FILE_CREATE: true
+    FILE_RENAME: true
+    FILE_DELETE: true
+    IMAGE_RESIZE: true
+    IMAGE_RESIZE_CUSTOM: true
+
+backends:
+  - name: default
+    adapter: local
+    root: "H:/Web_Ban_Vat_Lieu_My_Thuat/Web_Vat_Lieu_My_Thuat/src/main/webapp/assets/images/product"
+    baseUrl: "/assets/images/product/"
+
+resourceTypes:
+  - name: Images
+    backend: default
+    directory: ""
+    allowedExtensions: "jpg,jpeg,png,gif,webp,bmp"
+    deniedExtensions: ""
+    maxSize: 0

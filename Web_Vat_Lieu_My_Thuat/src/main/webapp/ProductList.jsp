@@ -1,11 +1,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <c:forEach var="p" items="${products}">
     <div class="list-product-list1">
         <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
-            <img src="${p.thumbnail}" alt="">
+            <c:set var="imgUrl" value="${p.thumbnail}" />
+            <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
+                <c:choose>
+                    <c:when test="${fn:startsWith(imgUrl,'/')}">
+                        <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
+            <img src="${imgUrl}" alt="All Products">
+
             <div class="list-product-list1-content">
                 <div class="list-product-list1-content-socials">
                     <div class="list-product-list1-content-socials-1">
