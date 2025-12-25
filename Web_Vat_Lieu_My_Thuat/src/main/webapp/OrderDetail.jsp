@@ -234,106 +234,67 @@
 
 <body>
 <%@ include file="Header.jsp" %>
-<div class="page-offset">
 
+<div class="page-offset">
     <div class="container order-detail-wrap">
         <div class="order-detail-card">
 
-            <h2 class="order-detail-title">Chi tiết đơn hàng
-                #DH0${order.id}</h2>
+            <h2 class="order-detail-title">Chi tiết đơn hàng #DH0${order.id}</h2>
 
             <div class="order-meta">
                 <p>
                     <b>Trạng thái:</b>
                     <c:choose>
                         <c:when test="${order.orderStatusId == 1}">
-                                    <span
-                                            class="status-badge st-pending">${order.statusName}</span>
+                            <span class="status-badge st-pending">${order.statusName}</span>
                         </c:when>
                         <c:when test="${order.orderStatusId == 2}">
-                                    <span
-                                            class="status-badge st-shipping">${order.statusName}</span>
+                            <span class="status-badge st-shipping">${order.statusName}</span>
                         </c:when>
                         <c:when test="${order.orderStatusId == 3}">
-                                    <span
-                                            class="status-badge st-completed">${order.statusName}</span>
+                            <span class="status-badge st-completed">${order.statusName}</span>
                         </c:when>
                         <c:when test="${order.orderStatusId == 4}">
-                                    <span
-                                            class="status-badge st-cancelled">${order.statusName}</span>
+                            <span class="status-badge st-cancelled">${order.statusName}</span>
                         </c:when>
                         <c:otherwise>
-                                    <span
-                                            class="status-badge">${order.statusName}</span>
+                            <span class="status-badge">${order.statusName}</span>
                         </c:otherwise>
                     </c:choose>
                 </p>
 
-                <p><b>Ngày đặt:</b>
-                    <fmt:formatDate value="${order.createAt}"
-                                    pattern="dd/MM/yyyy HH:mm"/>
+                <p>
+                    <b>Ngày đặt:</b>
+                    <fmt:formatDate value="${order.createAt}" pattern="dd/MM/yyyy HH:mm"/>
                 </p>
 
-                <p><b>Người nhận:</b> ${order.fullName} </p>
-                <p><b>Số điện thoại:</b> ${order.phoneNumber} </p>
+                <p><b>Người nhận:</b> ${order.fullName}</p>
+                <p><b>Số điện thoại:</b> ${order.phoneNumber}</p>
                 <p><b>Địa chỉ:</b> ${order.address}</p>
-                <p><b>Phương thức thanh toán:</b>
-                    ${order.paymentName}</p>
+                <p><b>Phương thức thanh toán:</b> ${order.paymentName}</p>
+
                 <c:if test="${not empty order.note}">
                     <p><b>Ghi chú:</b> ${order.note}</p>
                 </c:if>
             </div>
 
-                    <div class="order-items-title">Sản phẩm</div>
+            <div class="order-items-title">Sản phẩm</div>
 
-                    <c:forEach var="item" items="${order.viewItems}">
-                        <div class="od-item">
-                            <div class="od-thumb">
-                                <c:set var="odThumbUrl" value="${item.thumbnail}" />
-                                <c:if test="${not empty odThumbUrl and not fn:startsWith(odThumbUrl,'http') and not fn:startsWith(odThumbUrl, pageContext.request.contextPath)}">
-                                    <c:choose>
-                                        <c:when test="${fn:startsWith(odThumbUrl,'/')}">
-                                            <c:set var="odThumbUrl" value="${pageContext.request.contextPath}${odThumbUrl}" />
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:set var="odThumbUrl" value="${pageContext.request.contextPath}/${odThumbUrl}" />
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:if>
-
-                                <img src="${odThumbUrl}" alt="${item.name}">
-
-                            </div>
-
-                            <div class="od-info">
-                                <p class="od-name">${item.name}</p>
-                                <p class="od-qty">Số lượng: ${item.quantity}</p>
-                            </div>
-
-                            <div class="od-price">
-                                <div class="od-unit">
-                                    <fmt:formatNumber value="${item.price}"
-                                        type="number" />₫
-                                </div>
-                                <div class="od-line">
-                                    <fmt:formatNumber value="${item.lineTotal}"
-                                        type="number" />₫
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-
-                    <div class="od-summary">
-                        <p>Giảm giá:
-                            <b><fmt:formatNumber value="${order.discount}"
-                                    type="number" />₫</b>
-                        </p>
-                        <p>Tổng cộng:
-                            <span class="od-total">
-                                <fmt:formatNumber value="${order.totalPrice}"
-                                    type="number" />₫
-                            </span>
-                        </p>
+            <c:forEach var="item" items="${order.viewItems}">
+                <div class="od-item">
+                    <div class="od-thumb">
+                        <c:set var="odThumbUrl" value="${item.thumbnail}"/>
+                        <c:if test="${not empty odThumbUrl and not fn:startsWith(odThumbUrl,'http') and not fn:startsWith(odThumbUrl, pageContext.request.contextPath)}">
+                            <c:choose>
+                                <c:when test="${fn:startsWith(odThumbUrl,'/')}">
+                                    <c:set var="odThumbUrl" value="${pageContext.request.contextPath}${odThumbUrl}"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:set var="odThumbUrl" value="${pageContext.request.contextPath}/${odThumbUrl}"/>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
+                        <img src="${odThumbUrl}" alt="${item.name}">
                     </div>
 
                     <div class="od-info">
@@ -343,12 +304,10 @@
 
                     <div class="od-price">
                         <div class="od-unit">
-                            <fmt:formatNumber value="${item.price}"
-                                              type="number"/>₫
+                            <fmt:formatNumber value="${item.price}" type="number"/>₫
                         </div>
                         <div class="od-line">
-                            <fmt:formatNumber value="${item.lineTotal}"
-                                              type="number"/>₫
+                            <fmt:formatNumber value="${item.lineTotal}" type="number"/>₫
                         </div>
                     </div>
                 </div>
@@ -361,35 +320,32 @@
                 <p>Phí vận chuyển:
                     <b><fmt:formatNumber value="${order.shippingFee}" type="number"/>₫</b>
                 </p>
-
                 <p>Tổng cộng:
                     <span class="od-total">
                         <fmt:formatNumber value="${order.totalPrice}" type="number"/>₫
-                            </span>
+                    </span>
                 </p>
             </div>
 
             <div class="od-actions">
                 <a class="od-btn od-btn-back"
-                   href="${pageContext.request.contextPath}/order-history?status=all">Quay
-                    lại</a>
+                   href="${pageContext.request.contextPath}/order-history?status=all">Quay lại</a>
 
                 <c:if test="${order.orderStatusId == 1}">
                     <a class="od-btn od-btn-cancel"
-                       href="${pageContext.request.contextPath}/cancel-order?id=${order.id}">Hủy
-                        đơn</a>
+                       href="${pageContext.request.contextPath}/cancel-order?id=${order.id}">Hủy đơn</a>
                 </c:if>
 
                 <c:if test="${order.orderStatusId == 3}">
                     <a class="od-btn od-btn-review"
-                       href="${pageContext.request.contextPath}/review?orderId=${order.id}">Đánh
-                        giá</a>
+                       href="${pageContext.request.contextPath}/review?orderId=${order.id}">Đánh giá</a>
                 </c:if>
             </div>
 
         </div>
     </div>
 </div>
+
 <%@ include file="Footer.jsp" %>
 </body>
 </html>

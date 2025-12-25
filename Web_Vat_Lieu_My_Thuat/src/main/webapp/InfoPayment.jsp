@@ -568,364 +568,386 @@
     <div class="main">
         <nav>
             <div class="breadcrumb">
-                <a href="Cart.jsp">Giỏ hàng</a>
+                <a href="${pageContext.request.contextPath}/cart">Giỏ hàng</a>
                 <span>/</span>
                 <span>Thông tin giao hàng</span>
             </div>
 
-            <div class="checkout-container">
-                <!-- Left Column - Shipping Info -->
-                <div class="form-infor-checkout">
-                    <h4 class="infor-delivery-label">Thông tin giao
-                        hàng</h4>
+            <form action="${pageContext.request.contextPath}/place-order" method="post">
+                <div class="checkout-container">
 
-                    <form
-                            action="${pageContext.request.contextPath}/place-order"
-                            method="post">
+                    <!-- LEFT -->
+                    <div class="form-infor-checkout">
+                        <h4>Thông tin giao hàng</h4>
+
                         <div class="input-group">
                             <label for="fullname">Họ và tên</label>
-                            <input type="text" class="form-input-item"
-                                   id="fullname" placeholder="Họ và tên"
-                                   name="fullName"
-                                   value="${sessionScope.currentUser.fullName}"
-                                   required>
+                            <input type="text" class="form-input-item" id="fullname" name="fullName"
+                                   placeholder="Họ và tên"
+                                   value="${sessionScope.currentUser.fullName}" required>
                         </div>
+
                         <div class="row">
                             <div class="input-group col-md-6">
                                 <label for="email">Email</label>
-                                <input type="email"
-                                       class="form-input-item"
-                                       id="email" name="email"
+                                <input type="email" class="form-input-item" id="email" name="email"
                                        placeholder="Email"
-                                       value="${sessionScope.currentUser.email}"
-                                       required>
+                                       value="${sessionScope.currentUser.email}" required>
                                 <span id="error_email"></span>
                             </div>
                             <div class="input-group col-md-6">
                                 <label for="phone">Số điện thoại</label>
-                                <input type="text" name="phone"
-                                       class="form-input-item"
-                                       id="phone"
+                                <input type="text" class="form-input-item" id="phone" name="phone"
                                        placeholder="Số điện thoại"
-                                       value="${sessionScope.currentUser.phoneNumber}"
-                                       required>
+                                       value="${sessionScope.currentUser.phoneNumber}" required>
                                 <span id="error_phone"></span>
                             </div>
                         </div>
+
+                        <!-- nếu bạn cần submit về server thì thêm name -->
                         <div class="input-group">
                             <label for="provinceSelect">Tỉnh/Thành</label>
-                            <select id="provinceSelect" class="form-input-item">
+                            <select id="provinceSelect" name="provinceId" class="form-input-item">
                                 <option value="">-- Chọn tỉnh/thành --</option>
                             </select>
                         </div>
 
                         <div class="input-group">
                             <label for="districtSelect">Quận/Huyện</label>
-                            <select id="districtSelect" class="form-input-item" disabled>
+                            <select id="districtSelect" name="districtId" class="form-input-item" disabled>
                                 <option value="">-- Chọn quận/huyện --</option>
                             </select>
                         </div>
 
                         <div class="input-group">
                             <label for="wardSelect">Phường/Xã</label>
-                            <select id="wardSelect" class="form-input-item" disabled>
+                            <select id="wardSelect" name="wardCode" class="form-input-item" disabled>
                                 <option value="">-- Chọn phường/xã --</option>
                             </select>
                         </div>
+
                         <div class="input-group">
                             <label for="address">Địa chỉ</label>
-                            <input type="text" class="form-input-item"
-                                   id="address" name="address"
+                            <input type="text" class="form-input-item" id="address" name="address"
                                    placeholder="Địa chỉ"
-                                   value="${sessionScope.currentUser.address}"
-                                   required>
+                                   value="${sessionScope.currentUser.address}" required>
                         </div>
 
                         <div class="note">
-                            <label for="content-notes" class="bold">Ghi
-                                chú đơn
-                                hàng</label>
-                            <textarea class="form-control"
-                                      id="content-notes" name="note"
-                                      rows="5"
+                            <label for="content-notes">Ghi chú đơn hàng</label>
+                            <textarea class="form-control" id="content-notes" name="note" rows="5"
                                       placeholder="Ghi chú đơn hàng..."></textarea>
                         </div>
 
-                        <!-- Payment Method -->
                         <div class="payment-method">
-                            <h4 class="payment-title">Phương thức thanh
-                                toán</h4>
+                            <h4 class="payment-title">Phương thức thanh toán</h4>
                             <div class="payment-options">
+
                                 <label class="payment-option">
-                                    <input type="radio" name="payment"
-                                           value="COD" checked>
+                                    <input type="radio" name="payment" value="COD" checked>
                                     <div class="payment-content">
-                                        <img
-                                                src="./assets/images/logo/cod.svg"
-                                                alt="COD">
-                                        <span>Thanh toán khi nhận
-                                                    hàng</span>
+                                        <img src="${pageContext.request.contextPath}/assets/images/logo/cod.svg" alt="COD">
+                                        <span>Thanh toán khi nhận hàng</span>
                                     </div>
                                 </label>
+
                                 <label class="payment-option">
-                                    <input type="radio" name="payment"
-                                           value="VNPAY">
+                                    <input type="radio" name="payment" value="VNPAY">
                                     <div class="payment-content">
-                                        <img
-                                                src="./assets/images/logo/OIP.webp"
-                                                alt="VNPay">
-                                        <span>Thanh toán qua
-                                                    VNPay</span>
-                        <div class="order-summary">
-                            <h4 class="cart-title">Giỏ hàng</h4>
-
-                            <div class="cart-items">
-                                <!-- Product 1 -->
-                                <c:forEach var="item"
-                                    items="${sessionScope.cart.carts.values()}">
-                                    <div class="cart-item">
-                                        <div class="item-image">
-                                            <c:set var="ckThumbUrl" value="${item.thumbnail}" />
-                                            <c:if test="${not empty ckThumbUrl and not fn:startsWith(ckThumbUrl,'http') and not fn:startsWith(ckThumbUrl, pageContext.request.contextPath)}">
-                                                <c:choose>
-                                                    <c:when test="${fn:startsWith(ckThumbUrl,'/')}">
-                                                        <c:set var="ckThumbUrl" value="${pageContext.request.contextPath}${ckThumbUrl}" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <c:set var="ckThumbUrl" value="${pageContext.request.contextPath}/${ckThumbUrl}" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:if>
-
-                                            <img src="${ckThumbUrl}" alt="${item.name}">
-
-                                            <span
-                                                class="item-quantity">${item.quantity}</span>
-                                        </div>
-                                        <div class="item-details">
-                                            <h5
-                                                class="item-name">${item.name}</h5>
-                                            <p class="item-price">
-                                                <fmt:formatNumber
-                                                    value="${item.priceAfterDiscount * item.quantity}"
-                                                    type="number" />₫
-                                            </p>
-                                        </div>
+                                        <img src="${pageContext.request.contextPath}/assets/images/logo/OIP.webp" alt="VNPay">
+                                        <span>Thanh toán qua VNPay</span>
                                     </div>
                                 </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-continue">Thanh
-                            toán
-                            ngay
-                        </button>
-
-                    </form>
-                </div>
 
                             </div>
-                        </c:forEach>
-                    </div>
-
-                    <div class="discount-section">
-                        <div class="discount-input-group">
-                            <input id="voucherCode" type="text"
-                                   placeholder="Mã giảm giá">
-                            <button id="btnApplyVoucher" type="button" class="btn-apply">Sử dụng</button>
-                        </div>
-                        <div id="voucherMsg" style="margin-top:6px; font-size:14px;"></div>
-                    </div>
-
-                    <!-- Price Summary -->
-                    <div class="price-summary">
-                        <div class="price-row">
-                            <span>Tạm tính</span>
-                            <span>
-                                        <fmt:formatNumber
-                                                value="${sessionScope.cart.totalProductPrice}"
-                                                type="number"/>₫
-                                    </span>
-                        </div>
-
-                        <div class="price-row">
-                            <span id="discountText">Giảm giá</span>
-                            <span>
-                                        <fmt:formatNumber
-                                                value="${sessionScope.cart.discount}"
-                                                type="number"/>₫
-
-                                    </span>
-                        </div>
-                        <div class="price-row">
-                            <span>Phí vận chuyển</span>
-                            <span id="shippingFeeText">
-             <fmt:formatNumber value="${sessionScope.cart.fee}" type="number"/>₫
-                        </span>
-
-                        </div>
-                        <div class="price-row total">
-                            <span>Tổng cộng</span>
-                            <span id="totalPayText" class="total-amount">
-                         <fmt:formatNumber value="${sessionScope.cart.totalPriceToPay}" type="number"/>₫
-                        </span>
-
                         </div>
                     </div>
+
+                    <!-- RIGHT -->
+                    <div class="order-summary">
+                        <h4 class="cart-title">Giỏ hàng</h4>
+
+                        <div class="cart-items">
+                            <c:forEach var="item" items="${sessionScope.cart.carts.values()}">
+                                <div class="cart-item">
+                                    <div class="item-image">
+                                        <c:set var="ckThumbUrl" value="${item.thumbnail}" />
+                                        <c:if test="${not empty ckThumbUrl and not fn:startsWith(ckThumbUrl,'http') and not fn:startsWith(ckThumbUrl, pageContext.request.contextPath)}">
+                                            <c:choose>
+                                                <c:when test="${fn:startsWith(ckThumbUrl,'/')}">
+                                                    <c:set var="ckThumbUrl" value="${pageContext.request.contextPath}${ckThumbUrl}" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set var="ckThumbUrl" value="${pageContext.request.contextPath}/${ckThumbUrl}" />
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:if>
+
+                                        <img src="${ckThumbUrl}" alt="${item.name}">
+                                        <span class="item-quantity">${item.quantity}</span>
+                                    </div>
+
+                                    <div class="item-details">
+                                        <h5 class="item-name">${item.name}</h5>
+                                        <p class="item-price">
+                                            <fmt:formatNumber value="${item.priceAfterDiscount * item.quantity}" type="number"/>₫
+                                        </p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+
+                        <div class="discount-section">
+                            <div class="discount-input-group">
+                                <input id="voucherCode" type="text" placeholder="Mã giảm giá">
+                                <button id="btnApplyVoucher" type="button" class="btn-apply">Sử dụng</button>
+                            </div>
+                            <div id="voucherMsg" style="margin-top:6px; font-size:14px;"></div>
+                        </div>
+
+                        <div class="price-summary">
+                            <div class="price-row">
+                                <span>Tạm tính</span>
+                                <span>
+                                    <fmt:formatNumber value="${sessionScope.cart.totalProductPrice}" type="number"/>₫
+                                </span>
+                            </div>
+
+                            <div class="price-row">
+                                <span>Giảm giá</span>
+                                <span id="discountValue">
+                                    <fmt:formatNumber value="${sessionScope.cart.discount}" type="number"/>₫
+                                </span>
+                            </div>
+
+                            <div class="price-row">
+                                <span>Phí vận chuyển</span>
+                                <span id="shippingFeeText">
+                                    <fmt:formatNumber value="${sessionScope.cart.fee}" type="number"/>₫
+                                </span>
+                            </div>
+
+                            <div class="price-row total">
+                                <span>Tổng cộng</span>
+                                <span id="totalPayText" class="total-amount">
+                                    <fmt:formatNumber value="${sessionScope.cart.totalPriceToPay}" type="number"/>₫
+                                </span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-continue">Thanh toán ngay</button>
+                    </div>
+
                 </div>
-            </div>
+            </form>
+
         </nav>
     </div>
 </div>
 
 <%@ include file="Footer.jsp" %>
+
 <script>
-    const ctx = "<%=request.getContextPath()%>";
+    (() => {
+        // ====== CONFIG ======
+        const CTX = "<%=request.getContextPath()%>";
 
-    const voucherCodeEl = document.getElementById("voucherCode");
-    const btnApplyVoucher = document.getElementById("btnApplyVoucher");
-    const voucherMsg = document.getElementById("voucherMsg");
+        // ====== HELPERS ======
+        const $ = (id) => document.getElementById(id);
 
-    const discountText = document.getElementById("discountText");
-    const totalPayText = document.getElementById("totalPayText");
+        function vnd(n) {
+            n = Math.round(Number(n) || 0);
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₫";
+        }
 
-    function vnd(n) {
-        n = Math.round(Number(n) || 0);
-        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
-    }
+        // ====== ELEMENTS ======
+        // Voucher
+        const voucherCodeEl = $("voucherCode");
+        const btnApplyVoucher = $("btnApplyVoucher");
+        const voucherMsg = $("voucherMsg");
+        const discountValue = $("discountValue"); // span hiển thị giảm giá
+        const totalPayText = $("totalPayText");
 
-    btnApplyVoucher.addEventListener("click", async () => {
-        const code = (voucherCodeEl.value || "").trim();
-        voucherMsg.textContent = "Đang áp dụng...";
+        // GHN
+        const provinceSelect = $("provinceSelect");
+        const districtSelect = $("districtSelect");
+        const wardSelect = $("wardSelect");
+        const shippingFeeText = $("shippingFeeText");
 
-        const body = new URLSearchParams();
-        body.append("code", code);
-
-        const res = await fetch(ctx + "/voucher/apply", {
-            method: "POST",
-            headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
-            body: body.toString(),
-            credentials: "same-origin"
-        });
-
-        const json = await res.json();
-
-        if (!json.success) {
-            voucherMsg.textContent = json.message || "Áp dụng thất bại";
+        // Nếu thiếu element nào => tránh crash
+        if (!provinceSelect || !districtSelect || !wardSelect) {
+            console.warn("Missing select elements for GHN");
             return;
         }
 
-        voucherMsg.textContent = json.message || "Áp dụng thành công ";
-        discountText.textContent = vnd(json.discount);
-        totalPayText.textContent = vnd(json.totalToPay);
-    });
-</script>
-<script>
-    const ctx = "<%=request.getContextPath()%>";
+        // ====== VOUCHER ======
+        if (btnApplyVoucher) {
+            btnApplyVoucher.addEventListener("click", async () => {
+                try {
+                    const code = (voucherCodeEl?.value || "").trim();
+                    voucherMsg.textContent = "Đang áp dụng...";
 
-    const provinceSelect = document.getElementById("provinceSelect");
-    const districtSelect = document.getElementById("districtSelect");
-    const wardSelect = document.getElementById("wardSelect");
+                    const body = new URLSearchParams();
+                    body.append("code", code);
 
-    const shippingFeeText = document.getElementById("shippingFeeText");
-    const totalPayText = document.getElementById("totalPayText");
+                    const res = await fetch(CTX + "/voucher/apply", {
+                        method: "POST",
+                        headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+                        body: body.toString(),
+                        credentials: "same-origin"
+                    });
 
-    function vnd(n) {
-        return (n || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "₫";
-    }
+                    const json = await res.json();
 
-    async function loadProvinces() {
-        const res = await fetch(ctx + "/ghn/provinces");
-        const json = await res.json();
-        provinceSelect.innerHTML = `<option value="">-- Chọn tỉnh/thành --</option>`;
+                    if (!json.success) {
+                        voucherMsg.textContent = json.message || "Áp dụng thất bại";
+                        return;
+                    }
 
-        (json.data || []).forEach(p => {
-            const opt = document.createElement("option");
-            opt.value = p.ProvinceID;
-            opt.textContent = p.ProvinceName;
-            provinceSelect.appendChild(opt);
-        });
-    }
-
-    async function loadDistricts(provinceId) {
-        districtSelect.disabled = true;
-        wardSelect.disabled = true;
-        districtSelect.innerHTML = `<option value="">-- Chọn quận/huyện --</option>`;
-        wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
-
-        const res = await fetch(ctx + "/ghn/districts?provinceId=" + encodeURIComponent(provinceId));
-        const json = await res.json();
-        (json.data || []).forEach(d => {
-            const opt = document.createElement("option");
-            opt.value = d.DistrictID;
-            opt.textContent = d.DistrictName;
-            districtSelect.appendChild(opt);
-        });
-        districtSelect.disabled = false;
-    }
-
-    async function loadWards(districtId) {
-        wardSelect.disabled = true;
-        wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
-
-        const res = await fetch(ctx + "/ghn/wards?districtId=" + encodeURIComponent(districtId));
-        const json = await res.json();
-        (json.data || []).forEach(w => {
-            const opt = document.createElement("option");
-            opt.value = w.WardCode;
-            opt.textContent = w.WardName;
-            wardSelect.appendChild(opt);
-        });
-        wardSelect.disabled = false;
-    }
-
-    async function calcFee(districtId, wardCode) {
-        const body = new URLSearchParams();
-        body.append("districtId", districtId);
-        body.append("wardCode", wardCode);
-
-        const res = await fetch(ctx + "/ghn/fee", {
-            method: "POST",
-            headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
-            body: body.toString()
-        });
-
-        const json = await res.json(); // bạn đang trả {success, fee, totalToPay} hoặc {success:false,message:...}
-
-        if (!json.success) {
-            console.log("GHN fee error:", json.message);
-            return;
+                    voucherMsg.textContent = json.message || "Áp dụng thành công";
+                    if (discountValue) discountValue.textContent = vnd(json.discount);
+                    if (totalPayText) totalPayText.textContent = vnd(json.totalToPay);
+                } catch (e) {
+                    console.error("Voucher error:", e);
+                    voucherMsg.textContent = "Lỗi áp dụng voucher";
+                }
+            });
         }
 
-        // update UI
-        shippingFeeText.textContent = vnd(json.fee);
-        totalPayText.textContent = vnd(json.totalToPay);
-    }
+        // ====== GHN: LOAD PROVINCES/DISTRICTS/WARDS ======
+        async function loadProvinces() {
+            try {
+                const res = await fetch(CTX + "/ghn/provinces", { credentials: "same-origin" });
+                if (!res.ok) throw new Error("HTTP " + res.status);
 
-    provinceSelect.addEventListener("change", () => {
-        const pid = provinceSelect.value;
-        if (!pid) return;
-        loadDistricts(pid);
-    });
+                const json = await res.json();
+                const list = json.data || [];
 
-    districtSelect.addEventListener("change", () => {
-        const did = districtSelect.value;
-        if (!did) return;
-        loadWards(did);
-    });
+                provinceSelect.innerHTML = `<option value="">-- Chọn tỉnh/thành --</option>`;
+                list.forEach(p => {
+                    const opt = document.createElement("option");
+                    opt.value = p.ProvinceID;
+                    opt.textContent = p.ProvinceName;
+                    provinceSelect.appendChild(opt);
+                });
 
-    wardSelect.addEventListener("change", () => {
-        const did = districtSelect.value;
-        const wcode = wardSelect.value;
-        if (!did || !wcode) return;
-        calcFee(did, wcode);
-    });
+                console.log("Loaded provinces:", list.length);
+            } catch (e) {
+                console.error("Load provinces failed:", e);
+                provinceSelect.innerHTML = `<option value="">Không tải được tỉnh/thành</option>`;
+            }
+        }
 
-    // init
-    loadProvinces();
+        async function loadDistricts(provinceId) {
+            try {
+                districtSelect.disabled = true;
+                wardSelect.disabled = true;
+                districtSelect.innerHTML = `<option value="">-- Chọn quận/huyện --</option>`;
+                wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
 
+                const res = await fetch(CTX + "/ghn/districts?provinceId=" + encodeURIComponent(provinceId),
+                    { credentials: "same-origin" }
+                );
+                if (!res.ok) throw new Error("HTTP " + res.status);
 
+                const json = await res.json();
+                const list = json.data || [];
+
+                list.forEach(d => {
+                    const opt = document.createElement("option");
+                    opt.value = d.DistrictID;
+                    opt.textContent = d.DistrictName;
+                    districtSelect.appendChild(opt);
+                });
+
+                districtSelect.disabled = false;
+                console.log("Loaded districts:", list.length);
+            } catch (e) {
+                console.error("Load districts failed:", e);
+                districtSelect.innerHTML = `<option value="">Không tải được quận/huyện</option>`;
+            }
+        }
+
+        async function loadWards(districtId) {
+            try {
+                wardSelect.disabled = true;
+                wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
+
+                const res = await fetch(CTX + "/ghn/wards?districtId=" + encodeURIComponent(districtId),
+                    { credentials: "same-origin" }
+                );
+                if (!res.ok) throw new Error("HTTP " + res.status);
+
+                const json = await res.json();
+                const list = json.data || [];
+
+                list.forEach(w => {
+                    const opt = document.createElement("option");
+                    opt.value = w.WardCode;
+                    opt.textContent = w.WardName;
+                    wardSelect.appendChild(opt);
+                });
+
+                wardSelect.disabled = false;
+                console.log("Loaded wards:", list.length);
+            } catch (e) {
+                console.error("Load wards failed:", e);
+                wardSelect.innerHTML = `<option value="">Không tải được phường/xã</option>`;
+            }
+        }
+
+        async function calcFee(districtId, wardCode) {
+            try {
+                const body = new URLSearchParams();
+                body.append("districtId", districtId);
+                body.append("wardCode", wardCode);
+
+                const res = await fetch(CTX + "/ghn/fee", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+                    body: body.toString(),
+                    credentials: "same-origin"
+                });
+
+                if (!res.ok) throw new Error("HTTP " + res.status);
+
+                const json = await res.json();
+                if (!json.success) {
+                    console.log("GHN fee error:", json.message);
+                    return;
+                }
+
+                if (shippingFeeText) shippingFeeText.textContent = vnd(json.fee);
+                if (totalPayText) totalPayText.textContent = vnd(json.totalToPay);
+            } catch (e) {
+                console.error("Calc fee failed:", e);
+            }
+        }
+
+        // ====== EVENTS ======
+        provinceSelect.addEventListener("change", () => {
+            const pid = provinceSelect.value;
+            if (!pid) return;
+            loadDistricts(pid);
+        });
+
+        districtSelect.addEventListener("change", () => {
+            const did = districtSelect.value;
+            if (!did) return;
+            loadWards(did);
+        });
+
+        wardSelect.addEventListener("change", () => {
+            const did = districtSelect.value;
+            const wcode = wardSelect.value;
+            if (!did || !wcode) return;
+            calcFee(did, wcode);
+        });
+
+        // ====== INIT ======
+        loadProvinces();
+    })();
 </script>
-
 
 </body>
 
