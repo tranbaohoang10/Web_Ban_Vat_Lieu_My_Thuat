@@ -715,10 +715,11 @@
 
                     <div class="discount-section">
                         <div class="discount-input-group">
-                            <input type="text"
+                            <input id="voucherCode" type="text"
                                    placeholder="Mã giảm giá">
-                            <button class="btn-apply">Sử dụng</button>
+                            <button id="btnApplyVoucher" type="button" class="btn-apply">Sử dụng</button>
                         </div>
+                        <div id="voucherMsg" style="margin-top:6px; font-size:14px;"></div>
                     </div>
 
                     <!-- Price Summary -->
@@ -733,7 +734,7 @@
                         </div>
 
                         <div class="price-row">
-                            <span>Giảm giá</span>
+                            <span id="discountText">Giảm giá</span>
                             <span>
                                         <fmt:formatNumber
                                                 value="${sessionScope.cart.discount}"
@@ -763,6 +764,47 @@
 </div>
 
 <%@ include file="Footer.jsp" %>
+<script>
+    const ctx = "<%=request.getContextPath()%>";
+
+    const voucherCodeEl = document.getElementById("voucherCode");
+    const btnApplyVoucher = document.getElementById("btnApplyVoucher");
+    const voucherMsg = document.getElementById("voucherMsg");
+
+    const discountText = document.getElementById("discountText");
+    const totalPayText = document.getElementById("totalPayText");
+
+    function vnd(n) {
+        n = Math.round(Number(n) || 0);
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
+    }
+
+    btnApplyVoucher.addEventListener("click", async () => {
+        const code = (voucherCodeEl.value || "").trim();
+        voucherMsg.textContent = "Đang áp dụng...";
+
+        const body = new URLSearchParams();
+        body.append("code", code);
+
+        const res = await fetch(ctx + "/voucher/apply", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+            body: body.toString(),
+            credentials: "same-origin"
+        });
+
+        const json = await res.json();
+
+        if (!json.success) {
+            voucherMsg.textContent = json.message || "Áp dụng thất bại";
+            return;
+        }
+
+        voucherMsg.textContent = json.message || "Áp dụng thành công ";
+        discountText.textContent = vnd(json.discount);
+        totalPayText.textContent = vnd(json.totalToPay);
+    });
+</script>
 <script>
     const ctx = "<%=request.getContextPath()%>";
 
@@ -866,7 +908,10 @@
 
     // init
     loadProvinces();
+
+
 </script>
+
 
 </body>
 
