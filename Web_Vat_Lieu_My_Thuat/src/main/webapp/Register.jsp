@@ -229,7 +229,9 @@
             <div class="tt-chitiet">
                 <label for="Email">Email cá nhân:</label>
                 <input type="email" id="email" name="email"
-                       placeholder="Email cá nhân" required>
+                       placeholder="Email cá nhân" required
+                       pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+                       title="Email phải đúng định dạng, ví dụ: ten@gmail.com">
                 <span id="email-error"
                       style="color: #FFD700; font-size: 14px;"></span>
             </div>
@@ -251,8 +253,8 @@
                 <input type="password" id="Mk" name="password"
                        placeholder="Mật khẩu" required
                         minlength="12"
-                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{12,}$"
-                       title="Mật khẩu có ít nhất 12 kí tự gồm chữ hoa, chữ thường và các kí tự đặc biệt."  >
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$"
+                       title="Mật khẩu có ít nhất 8 kí tự gồm chữ hoa, chữ thường và các kí tự đặc biệt."  >
                        <span id="pwerror" style="color: #FFD700; font-size: 14px;"></span>
 
                 <i class="hide-display" id="togglePassword"
@@ -327,7 +329,7 @@
     passInput.addEventListener("input", () => {
         const pass = passInput.value;
 
-        const okLength = pass.length >= 12;
+        const okLength = pass.length >= 8;
         const okLower  = /[a-z]/.test(pass);
         const okUpper  = /[A-Z]/.test(pass);
         const okSpecial = /[^A-Za-z0-9]/.test(pass);
@@ -336,11 +338,35 @@
             passError.textContent = "";
         } else {
             passError.textContent =
-                "Mật khẩu >= 12 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt.";
+                "Mật khẩu có ít nhất 8 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt.";
         }
     });
 </script>
+<%--check error email--%>
+<script>
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("email-error");
 
+    // Regex đơn giản, đủ dùng cho form đăng ký
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    emailInput.addEventListener("input", () => {
+        const email = emailInput.value.trim();
+
+        if (email.length === 0) {
+            // nếu muốn bắt buộc nhập thì để thông báo,
+            // còn không thì có thể để rỗng
+            emailError.textContent = "";
+            return;
+        }
+
+        if (emailRegex.test(email)) {
+            emailError.textContent = "";
+        } else {
+            emailError.textContent = "Email không hợp lệ (vd: ten@gmail.com)";
+        }
+    });
+</script>
 
 </body>
 

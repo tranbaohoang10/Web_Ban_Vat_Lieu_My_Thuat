@@ -248,14 +248,14 @@
                     <input type="password" id="matkhaumoi" name="matkhaumoi"
                     required
                     minlength="12"
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{12,}$"
-                    title="Mật khẩu có ít nhất 12 kí tự gồm chữ hoa, chữ thường và các kí tự đặc biệt.">
-                    <span id="pwerror" style="color: #FFD700; font-size: 14px;"></span>
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$"
+                    title="Mật khẩu có ít nhất 8 kí tự gồm chữ hoa, chữ thường và các kí tự đặc biệt.">
+                    <span id="pwerror" style="color: #DC3545; font-size: 14px;"></span>
                     <br>
                     <label for="nhaplaimatkhaumoi">Nhập lại mật khẩu mới:</label>
                     <br>
                     <input type="password" id="nhaplaimkmoi" name="nhaplaimkmoi">
-                    <span id="nhaplai-pwerror" style="color: #FFD700; font-size: 14px;"></span>
+                    <span id="nhaplai-pwerror" style="color: #DC3545; font-size: 14px;"></span>
                     <br>
 
                     <input type="submit" value="Thay đổi mật khẩu" class="button">
@@ -303,7 +303,7 @@
     function validateNewPassword() {
         const pass = newPassInput.value;
 
-        const okLength  = pass.length >= 12;
+        const okLength  = pass.length >= 8;
         const okLower   = /[a-z]/.test(pass);
         const okUpper   = /[A-Z]/.test(pass);
         const okSpecial = /[^A-Za-z0-9]/.test(pass);
@@ -318,7 +318,7 @@
             return true;
         } else {
             newPassError.textContent =
-                "Mật khẩu có ít nhất 12 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt.";
+                "Mật khẩu có ít nhất 8 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt.";
             return false;
         }
     }

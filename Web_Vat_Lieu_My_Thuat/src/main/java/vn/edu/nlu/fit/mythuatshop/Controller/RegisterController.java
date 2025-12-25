@@ -43,8 +43,8 @@ public class RegisterController extends HttpServlet {
         }
 
 //        check error mk
-        if(password==null || !password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{12,}$")){
-            req.setAttribute("error", "Mật khẩu có ít nhất 12 kí tự gồm chữ hoa, chũ thường và các kí tự đặc biệt.");
+        if(password==null || !password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$")){
+            req.setAttribute("error", "Mật khẩu có ít nhất 8 kí tự gồm chữ hoa, chũ thường và các kí tự đặc biệt.");
             req.getRequestDispatcher("Register.jsp").forward(req, resp);
             return;
         }

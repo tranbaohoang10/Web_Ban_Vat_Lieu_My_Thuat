@@ -175,6 +175,10 @@
         border: 1px solid #ddd;
         border-radius: 5px;
         margin-bottom: 10px;
+
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 14px;
+        color: #333;
     }
 
     .section-main-ca-nhan .container .thongtin-canhan form input.button {
