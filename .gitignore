@@ -56,3 +56,7 @@ target/
 src/main/resources/vnpay.properties
 Web_Vat_Lieu_My_Thuat/src/main/resources/vnpay.properties
 .env
+#ghn
+Web_Vat_Lieu_My_Thuat/src/main/resources/ghn.properties
+src/main/resources/ghn.properties
+

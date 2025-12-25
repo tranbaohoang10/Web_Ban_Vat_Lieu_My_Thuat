@@ -49,6 +49,9 @@ public class ChangePasswordController extends HttpServlet {
         else if (matkhaumoi.isEmpty()) {
             error = "Vui lòng nhập mật khẩu mới!";
         }
+        else if (!matkhaumoi.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{12,}$")) {
+            error = "Mật khẩu mới phải có ít nhất 12 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt.";
+        }
         // Chưa nhập lại mật khẩu mới
         else if (nhaplaimkmoi.isEmpty()) {
             error = "Vui lòng nhập lại mật khẩu mới!";

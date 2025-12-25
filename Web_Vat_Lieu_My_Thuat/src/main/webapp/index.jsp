@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -370,7 +372,19 @@
         <!-- Begin slider show -->
         <div class="w3-content w3-display-container">
             <c:forEach var ="slider" items="${sliders}">
-                <a href="${pageContext.request.contextPath}/${slider.linkTo}"> <img class="mySlides" src="${slider.thumbnail}"></a>
+                <a href="${pageContext.request.contextPath}/${slider.linkTo}"> <c:set var="imgUrl" value="${slider.thumbnail}" />
+                    <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
+                        <c:choose>
+                            <c:when test="${fn:startsWith(imgUrl,'/')}">
+                                <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
+                    <img class="mySlides" src="${imgUrl}">
+                </a>
             </c:forEach>
 
             <div class="w3-left" onclick="plusDivs(-1)">&#10094;</div>
@@ -415,7 +429,19 @@
         <!-- Begin section -->
         <div class="section-but">
             <div class="container">
-                <img src="${cat1.thumbnail}" alt="${cat1.categoryName}">
+                <c:set var="imgUrl" value="${cat1.thumbnail}" />
+                <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
+                    <c:choose>
+                        <c:when test="${fn:startsWith(imgUrl,'/')}">
+                            <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+                <img src="${imgUrl}" alt="category" />
+
                 <div class="section-but-header">
                     <h2 class="category-title">${cat1.categoryName}</h2>
                 </div>
@@ -424,7 +450,19 @@
                         <c:forEach var="p" items="${productsCat1}">
                             <div class="list-product-list1">
                                 <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
-                                    <img src="${p.thumbnail}" alt="${p.name}">
+                                    <c:set var="imgUrl" value="${p.thumbnail}" />
+                                    <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
+                                        <c:choose>
+                                            <c:when test="${fn:startsWith(imgUrl,'/')}">
+                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
+                                    <img src="${imgUrl}" alt="Sale Product">
+
                                     <div class="list-product-list1-content">
                                         <div class="list-product-list1-content-socials">
                                             <%@ include file="BadgeType.jsp" %>
@@ -508,7 +546,19 @@
                         <c:forEach var="p" items="${productsCat2}">
                             <div class="list-product-list1">
                                 <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
-                                    <img src="${p.thumbnail}" alt="${p.name}">
+                                    <c:set var="imgUrl" value="${p.thumbnail}" />
+                                    <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
+                                        <c:choose>
+                                            <c:when test="${fn:startsWith(imgUrl,'/')}">
+                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
+                                    <img src="${imgUrl}" alt="Sale Product">
+
                                     <div class="list-product-list1-content">
                                         <div class="list-product-list1-content-socials">
                                             <%@ include file="BadgeType.jsp" %>

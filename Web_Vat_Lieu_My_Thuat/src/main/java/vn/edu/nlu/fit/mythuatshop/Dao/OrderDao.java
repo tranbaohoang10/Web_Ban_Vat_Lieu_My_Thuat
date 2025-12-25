@@ -21,9 +21,9 @@ public class OrderDao implements DaoInterface<Order> {
         return jdbi.inTransaction(handle -> {
             // 1. Insert vào Orders, lấy ID sinh ra
             String sql = "INSERT INTO Orders (userID, fullName, email, phoneNumber, address, " +
-                    " totalPrice, paymentID, orderStatusID, voucherID, discount, note) " +
+                    " totalPrice, paymentID, orderStatusID, voucherID, discount,shippingFee, note) " +
                     "VALUES (:userID, :fullName, :email, :phoneNumber, :address, " +
-                    " :totalPrice, :paymentID, :orderStatusID, :voucherID, :discount, :note)";
+                    " :totalPrice, :paymentID, :orderStatusID, :voucherID, :discount,:shippingFee, :note)";
             int orderId = handle.createUpdate(sql)
                     .bind("userID", order.getUserId())
                     .bind("fullName", order.getFullName())
@@ -35,6 +35,7 @@ public class OrderDao implements DaoInterface<Order> {
                     .bind("orderStatusID", order.getOrderStatusId())
                     .bind("voucherID", order.getVoucherId())
                     .bind("discount", order.getDiscount())
+                    .bind("shippingFee", order.getShippingFee())
                     .bind("note", order.getNote())
                     .executeAndReturnGeneratedKeys("ID")
                     .mapTo(Integer.class)
@@ -70,7 +71,7 @@ public class OrderDao implements DaoInterface<Order> {
         return jdbi.inTransaction(handle -> {
             String sql = """
                         SELECT ID, userID, fullName, email, phoneNumber, address,
-                               totalPrice, paymentID, orderStatusID, voucherID, discount, note
+                               totalPrice, paymentID, orderStatusID, voucherID, discount,shippingFee, note
                         FROM Orders
                         WHERE ID = :id
                     """;
@@ -90,6 +91,7 @@ public class OrderDao implements DaoInterface<Order> {
                         o.setOrderStatusId(rs.getInt("orderStatusID"));
                         o.setVoucherId((Integer) rs.getObject("voucherID"));
                         o.setDiscount(rs.getDouble("discount"));
+                        o.setShippingFee(rs.getDouble("shippingFee"));
                         o.setNote(rs.getString("note"));
                         return o;
                     })
@@ -177,6 +179,7 @@ public class OrderDao implements DaoInterface<Order> {
                         "       o.orderStatusID AS orderStatusId, " +
                         "       o.voucherID     AS voucherId, " +
                         "       o.discount      AS discount, " +
+                        "       o.shippingFee AS shippingFee, "+
                         "       o.createAt      AS createAt, " +
                         "       o.note          AS note, " +
                         "       os.statusName   AS statusName " +
@@ -235,6 +238,7 @@ public class OrderDao implements DaoInterface<Order> {
                 "       o.orderStatusID AS orderStatusId, " +
                 "       o.voucherID     AS voucherId, " +
                 "       o.discount      AS discount, " +
+                "       o.shippingFee AS shippingFee, "+
                 "       o.createAt      AS createAt, " +
                 "       o.note          AS note, " +
                 "       os.statusName   AS statusName, " +

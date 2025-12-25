@@ -35,6 +35,19 @@ public class RegisterController extends HttpServlet {
       String password = req.getParameter("password");
       String phoneNumber = req.getParameter("phoneNumber");
       String address = req.getParameter("address");
+//        check error sdt
+        if (phoneNumber == null || !phoneNumber.matches("^0\\d{9}$")) {
+            req.setAttribute("error", "Số điện thoại không hợp lệ (vd: 0912345678)");
+            req.getRequestDispatcher("Register.jsp").forward(req, resp);
+            return;
+        }
+
+//        check error mk
+        if(password==null || !password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$")){
+            req.setAttribute("error", "Mật khẩu có ít nhất 8 kí tự gồm chữ hoa, chũ thường và các kí tự đặc biệt.");
+            req.getRequestDispatcher("Register.jsp").forward(req, resp);
+            return;
+        }
 
       boolean success = userService.register(fullName, email, phoneNumber, password, address);
       if(!success){

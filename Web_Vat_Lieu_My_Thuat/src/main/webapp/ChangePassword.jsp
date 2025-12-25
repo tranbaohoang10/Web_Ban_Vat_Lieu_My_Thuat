@@ -245,11 +245,17 @@
                     <br>
                     <label for="matkhaumoi">Mật khẩu mới:</label>
                     <br>
-                    <input type="password" id="matkhaumoi" name="matkhaumoi">
+                    <input type="password" id="matkhaumoi" name="matkhaumoi"
+                    required
+                    minlength="12"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$"
+                    title="Mật khẩu có ít nhất 8 kí tự gồm chữ hoa, chữ thường và các kí tự đặc biệt.">
+                    <span id="pwerror" style="color: #DC3545; font-size: 14px;"></span>
                     <br>
                     <label for="nhaplaimatkhaumoi">Nhập lại mật khẩu mới:</label>
                     <br>
                     <input type="password" id="nhaplaimkmoi" name="nhaplaimkmoi">
+                    <span id="nhaplai-pwerror" style="color: #DC3545; font-size: 14px;"></span>
                     <br>
 
                     <input type="submit" value="Thay đổi mật khẩu" class="button">
@@ -279,10 +285,63 @@
         });
     </script>
 </c:if>
-
+<%--kiem tra dinh dang mk--%>
+<c:if test="${not empty error}">
+    <p style="color:red; padding:10px;">${error}</p>
+</c:if>
 
 <!-- End section main -->
 <%@ include file="Footer.jsp" %>
+
+<%--kiem tra dinh dang mk--%>
+<script>
+    const newPassInput = document.getElementById("matkhaumoi");
+    const confirmPassInput = document.getElementById("nhaplaimkmoi");
+    const newPassError = document.getElementById("pwerror");
+    const confirmPassError = document.getElementById("nhaplai-pwerror");
+
+    function validateNewPassword() {
+        const pass = newPassInput.value;
+
+        const okLength  = pass.length >= 8;
+        const okLower   = /[a-z]/.test(pass);
+        const okUpper   = /[A-Z]/.test(pass);
+        const okSpecial = /[^A-Za-z0-9]/.test(pass);
+
+        if (!pass) {
+            newPassError.textContent = "";
+            return false;
+        }
+
+        if (okLength && okLower && okUpper && okSpecial) {
+            newPassError.textContent = "";
+            return true;
+        } else {
+            newPassError.textContent =
+                "Mật khẩu có ít nhất 8 ký tự, có chữ hoa, chữ thường và ký tự đặc biệt.";
+            return false;
+        }
+    }
+
+    function validateConfirmPassword() {
+        if (!confirmPassInput.value) {
+            confirmPassError.textContent = "";
+            return false;
+        }
+
+        if (confirmPassInput.value !== newPassInput.value) {
+            confirmPassError.textContent = "Mật khẩu nhập lại không khớp.";
+            return false;
+        } else {
+            confirmPassError.textContent = "";
+            return true;
+        }
+    }
+
+    newPassInput.addEventListener("input", validateNewPassword);
+    confirmPassInput.addEventListener("input", validateConfirmPassword);
+</script>
+
 </body>
 
 </html>

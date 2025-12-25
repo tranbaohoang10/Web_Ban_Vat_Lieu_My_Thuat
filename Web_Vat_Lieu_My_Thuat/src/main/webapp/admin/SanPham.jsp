@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
   <!DOCTYPE html>
   <html lang="en">
@@ -7,10 +9,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
       integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 
     <title>Quản lý sản phẩm</title>
   </head>
@@ -44,7 +49,7 @@
 
     #main .left .list-admin a:hover {
       background-color: #203247;
-      bsanpham-left: #3B7DDD 2px solid;
+      border-left: 2px solid #3B7DDD;
     }
 
     #main .left .list-admin .logo img {
@@ -88,7 +93,7 @@
       margin: 30px auto;
       background: white;
       padding: 25px;
-      bsanpham-radius: 10px;
+      border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
@@ -360,6 +365,51 @@
       font-weight: bold;
       border-color: #2659F5;
     }
+    .dataTables_wrapper {
+      width: 100%;
+      margin-top: 10px;
+    }
+    .thumb{
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .col-thumb{
+      text-align: center;
+      width: 90px;
+    }
+
+    .dataTables_filter input,
+    .dataTables_length select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    .dataTables_filter {
+      margin-bottom: 10px;
+    }
+
+    .dataTables_paginate .paginate_button {
+      padding: 6px 10px !important;
+      border-radius: 6px !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+      background: #17479D !important;
+      color: #fff !important;
+      border: 1px solid #17479D !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+      background: #17479D !important;
+      color: #fff !important;
+      border: 1px solid #17479D !important;
+    }
+
   </style>
 
   <body>
@@ -372,7 +422,7 @@
             kê</a>
           <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh
             mục</a>
-          <a href="SanPham.html" class="active"><i class="fa-solid fa-palette"></i>Quản
+          <a href="${pageContext.request.contextPath}/admin/products" class="active"><i class="fa-solid fa-palette"></i>Quản
             lý sản phẩm</a>
           <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản
             lý người dùng</a>
@@ -394,17 +444,16 @@
             <div class="sanpham-header">
               <h1>Danh sách sản phẩm</h1>
               <div class="sanpham-header-timkiem">
-                <input type="text" placeholder="Tìm kiếm">
-                <button class="icon-timkiem"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <button class="them-sanpham">Thêm sản phẩm</button>
               </div>
             </div>
-            <table class="sanpham-table">
-              <thead>
+            <table id="productTable" class="sanpham-table display">
+            <thead>
                 <tr>
                   <th>STT</th>
                   <th>ID</th>
                   <th>Tên sản phẩm</th>
+                  <th>Hình ảnh</th>
                   <th>Danh mục</th>
                   <th>Giá</th>
                   <th>Ngày tạo</th>
@@ -419,11 +468,29 @@
                   <td>${st.index + 1}</td>
                   <td>${p.id}</td>
                   <td>${p.name}</td>
+
+
+                  <c:set var="thumbUrl" value="${p.thumbnail}" />
+                  <c:if test="${not empty p.thumbnail and not fn:startsWith(p.thumbnail,'http')}">
+                    <c:set var="thumbUrl" value="${pageContext.request.contextPath}${p.thumbnail}" />
+                  </c:if>
+
+                  <td class="col-thumb">
+                    <c:choose>
+                      <c:when test="${not empty p.thumbnail}">
+                        <img class="thumb" src="${thumbUrl}" alt="thumbnail">
+                      </c:when>
+                      <c:otherwise>-</c:otherwise>
+                    </c:choose>
+                  </td>
+
+
                   <td>
                     <c:forEach var="c" items="${categories}">
                       <c:if test="${c.id == p.categoryId}">${c.categoryName}</c:if>
                     </c:forEach>
                   </td>
+
                   <td>${p.price}</td>
                   <td>${p.createAt}</td>
                   <td>${p.quantityStock}</td>
@@ -436,7 +503,7 @@
                             data-discount="${p.discountDefault}"
                             data-quantity="${p.quantityStock}"
                             data-brand="${p.brand}"
-                            data-thumbnail="${p.thumbnail}">
+                            data-thumbnail="${thumbUrl}">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
 
@@ -455,13 +522,7 @@
               </tbody>
 
             </table>
-            <div class="pagination">
-              <a href="#" class="page-link">Trước</a>
-              <a href="#" class="page-link active">1</a>
-              <a href="#" class="page-link">2</a>
-              <a href="#" class="page-link">3</a>
-              <a href="#" class="page-link">Sau</a>
-            </div>
+
           </div>
         </div>
       </div>
@@ -476,7 +537,8 @@
                 enctype="multipart/form-data">
 
             <input type="hidden" name="action" id="action" value="create">
-            <input type="hidden" name="id" id="dbId" value=""> // value được lấy từ dbId.value ở js
+            <input type="hidden" name="id" id="dbId" value="">
+<%--            value được lấy từ dbId.value ở js--%>
 
             <div class="form-row">
               <div class="form-left">
@@ -676,6 +738,24 @@
           openModal();
         });
       });
+    </script>
+    <script>
+      $(function () {
+        const viUrl = "https://cdn.datatables.net/plug-ins/1.13.8/i18n/vi.json";
+
+        $("#productTable").DataTable({
+          pageLength: 5,
+          lengthChange: false,
+          ordering: true,
+          searching: true,
+          info: false,
+          language: {url: viUrl},
+          columnDefs: [
+            {orderable: false, targets: [3, 8]} // 3 = Hình ảnh, 8 = Tùy chọn
+          ]
+        })
+      });
+
     </script>
 
   </body>
