@@ -6,19 +6,19 @@
 
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Chi tiết đơn hàng</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết đơn hàng</title>
 
-        <link rel="stylesheet"
-            href="${pageContext.request.contextPath}/assets/css/style.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-        <style>
+    <style>
         .order-detail-wrap {
             padding: 20px 0 30px;
         }
@@ -36,7 +36,7 @@
             font-weight: 700;
         }
 
-        .order-meta{
+        .order-meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
             column-gap: 60px;
@@ -124,7 +124,8 @@
             font-weight: 650;
             margin: 0;
         }
-        .order-meta b{
+
+        .order-meta b {
             font-weight: 600;
         }
 
@@ -208,7 +209,8 @@
         page-offset {
             padding-top: 24px;
         }
-        .order-meta .payment-line{
+
+        .order-meta .payment-line {
             grid-column: 2;
         }
 
@@ -228,59 +230,59 @@
             }
         }
     </style>
-    </head>
+</head>
 
-    <body>
-        <%@ include file="Header.jsp" %>
-        <div class="page-offset">
+<body>
+<%@ include file="Header.jsp" %>
+<div class="page-offset">
 
-            <div class="container order-detail-wrap">
-                <div class="order-detail-card">
+    <div class="container order-detail-wrap">
+        <div class="order-detail-card">
 
-                    <h2 class="order-detail-title">Chi tiết đơn hàng
-                        #DH0${order.id}</h2>
+            <h2 class="order-detail-title">Chi tiết đơn hàng
+                #DH0${order.id}</h2>
 
-                    <div class="order-meta">
-                        <p>
-                            <b>Trạng thái:</b>
-                            <c:choose>
-                                <c:when test="${order.orderStatusId == 1}">
+            <div class="order-meta">
+                <p>
+                    <b>Trạng thái:</b>
+                    <c:choose>
+                        <c:when test="${order.orderStatusId == 1}">
                                     <span
-                                        class="status-badge st-pending">${order.statusName}</span>
-                                </c:when>
-                                <c:when test="${order.orderStatusId == 2}">
+                                            class="status-badge st-pending">${order.statusName}</span>
+                        </c:when>
+                        <c:when test="${order.orderStatusId == 2}">
                                     <span
-                                        class="status-badge st-shipping">${order.statusName}</span>
-                                </c:when>
-                                <c:when test="${order.orderStatusId == 3}">
+                                            class="status-badge st-shipping">${order.statusName}</span>
+                        </c:when>
+                        <c:when test="${order.orderStatusId == 3}">
                                     <span
-                                        class="status-badge st-completed">${order.statusName}</span>
-                                </c:when>
-                                <c:when test="${order.orderStatusId == 4}">
+                                            class="status-badge st-completed">${order.statusName}</span>
+                        </c:when>
+                        <c:when test="${order.orderStatusId == 4}">
                                     <span
-                                        class="status-badge st-cancelled">${order.statusName}</span>
-                                </c:when>
-                                <c:otherwise>
+                                            class="status-badge st-cancelled">${order.statusName}</span>
+                        </c:when>
+                        <c:otherwise>
                                     <span
-                                        class="status-badge">${order.statusName}</span>
-                                </c:otherwise>
-                            </c:choose>
-                        </p>
+                                            class="status-badge">${order.statusName}</span>
+                        </c:otherwise>
+                    </c:choose>
+                </p>
 
-                        <p><b>Ngày đặt:</b>
-                            <fmt:formatDate value="${order.createAt}"
-                                pattern="dd/MM/yyyy HH:mm" />
-                        </p>
+                <p><b>Ngày đặt:</b>
+                    <fmt:formatDate value="${order.createAt}"
+                                    pattern="dd/MM/yyyy HH:mm"/>
+                </p>
 
-                        <p><b>Người nhận:</b> ${order.fullName} -
-                            ${order.phoneNumber}</p>
-                        <p><b>Địa chỉ:</b> ${order.address}</p>
-                        <p><b>Phương thức thanh toán:</b>
-                            ${order.paymentName}</p>
-                        <c:if test="${not empty order.note}">
-                            <p><b>Ghi chú:</b> ${order.note}</p>
-                        </c:if>
-                    </div>
+                <p><b>Người nhận:</b> ${order.fullName} </p>
+                <p><b>Số điện thoại:</b> ${order.phoneNumber} </p>
+                <p><b>Địa chỉ:</b> ${order.address}</p>
+                <p><b>Phương thức thanh toán:</b>
+                    ${order.paymentName}</p>
+                <c:if test="${not empty order.note}">
+                    <p><b>Ghi chú:</b> ${order.note}</p>
+                </c:if>
+            </div>
 
                     <div class="order-items-title">Sản phẩm</div>
 
@@ -334,27 +336,60 @@
                         </p>
                     </div>
 
-                    <div class="od-actions">
-                        <a class="od-btn od-btn-back"
-                            href="${pageContext.request.contextPath}/order-history?status=all">Quay
-                            lại</a>
-
-                        <c:if test="${order.orderStatusId == 1}">
-                            <a class="od-btn od-btn-cancel"
-                                href="${pageContext.request.contextPath}/cancel-order?id=${order.id}">Hủy
-                                đơn</a>
-                        </c:if>
-
-                        <c:if test="${order.orderStatusId == 3}">
-                            <a class="od-btn od-btn-review"
-                                href="${pageContext.request.contextPath}/review?orderId=${order.id}">Đánh
-                                giá</a>
-                        </c:if>
+                    <div class="od-info">
+                        <p class="od-name">${item.name}</p>
+                        <p class="od-qty">Số lượng: ${item.quantity}</p>
                     </div>
 
+                    <div class="od-price">
+                        <div class="od-unit">
+                            <fmt:formatNumber value="${item.price}"
+                                              type="number"/>₫
+                        </div>
+                        <div class="od-line">
+                            <fmt:formatNumber value="${item.lineTotal}"
+                                              type="number"/>₫
+                        </div>
+                    </div>
                 </div>
+            </c:forEach>
+
+            <div class="od-summary">
+                <p>Giảm giá:
+                    <b><fmt:formatNumber value="${order.discount}" type="number"/>₫</b>
+                </p>
+                <p>Phí vận chuyển:
+                    <b><fmt:formatNumber value="${order.shippingFee}" type="number"/>₫</b>
+                </p>
+
+                <p>Tổng cộng:
+                    <span class="od-total">
+                        <fmt:formatNumber value="${order.totalPrice}" type="number"/>₫
+                            </span>
+                </p>
             </div>
+
+            <div class="od-actions">
+                <a class="od-btn od-btn-back"
+                   href="${pageContext.request.contextPath}/order-history?status=all">Quay
+                    lại</a>
+
+                <c:if test="${order.orderStatusId == 1}">
+                    <a class="od-btn od-btn-cancel"
+                       href="${pageContext.request.contextPath}/cancel-order?id=${order.id}">Hủy
+                        đơn</a>
+                </c:if>
+
+                <c:if test="${order.orderStatusId == 3}">
+                    <a class="od-btn od-btn-review"
+                       href="${pageContext.request.contextPath}/review?orderId=${order.id}">Đánh
+                        giá</a>
+                </c:if>
+            </div>
+
         </div>
-        <%@ include file="Footer.jsp" %>
-    </body>
+    </div>
+</div>
+<%@ include file="Footer.jsp" %>
+</body>
 </html>

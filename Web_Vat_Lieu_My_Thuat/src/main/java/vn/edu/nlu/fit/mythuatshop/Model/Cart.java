@@ -6,7 +6,8 @@ import java.util.Map;
 public class Cart {
     private Map<Integer, CartItem> carts;
     private int fee = 0;
-    private int discount = 0;
+    private double discount = 0;
+    private Integer voucherId;
 
     public Cart() {
         carts = new HashMap<>();
@@ -28,11 +29,11 @@ public class Cart {
         this.fee = fee;
     }
 
-    public int getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
@@ -82,6 +83,13 @@ public class Cart {
             sum += item.totalPriceCartItem();
         }
         return sum;
+    }
+    public Integer getVoucherId() { return voucherId; }
+    public void setVoucherId(Integer voucherId) { this.voucherId = voucherId; }
+
+    public void clearVoucher() {
+        this.voucherId = null;
+        this.discount = 0;
     }
     public double getTotalPriceToPay() {
         return getTotalProductPrice() - discount + fee;

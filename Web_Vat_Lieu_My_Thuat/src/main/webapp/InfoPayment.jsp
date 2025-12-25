@@ -7,18 +7,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Thanh toán</title>
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    </head>
-    <style>
+</head>
+<style>
 
     .breadcrumb {
         background-color: #f0f4f8;
@@ -561,113 +561,121 @@
 
 </style>
 
-    <body>
-        <%@ include file="Header.jsp" %>
+<body>
+<%@ include file="Header.jsp" %>
 
-        <div class="container">
-            <div class="main">
-                <nav>
-                    <div class="breadcrumb">
-                        <a href="Cart.jsp">Giỏ hàng</a>
-                        <span>/</span>
-                        <span>Thông tin giao hàng</span>
-                    </div>
+<div class="container">
+    <div class="main">
+        <nav>
+            <div class="breadcrumb">
+                <a href="Cart.jsp">Giỏ hàng</a>
+                <span>/</span>
+                <span>Thông tin giao hàng</span>
+            </div>
 
-                    <div class="checkout-container">
-                        <!-- Left Column - Shipping Info -->
-                        <div class="form-infor-checkout">
-                            <h4 class="infor-delivery-label">Thông tin giao
-                                hàng</h4>
+            <div class="checkout-container">
+                <!-- Left Column - Shipping Info -->
+                <div class="form-infor-checkout">
+                    <h4 class="infor-delivery-label">Thông tin giao
+                        hàng</h4>
 
-                            <form
-                                action="${pageContext.request.contextPath}/place-order"
-                                method="post">
-                                <div class="input-group">
-                                    <label for="fullname">Họ và tên</label>
-                                    <input type="text" class="form-input-item"
-                                        id="fullname" placeholder="Họ và tên"
-                                        name="fullName"
-                                        value="${sessionScope.currentUser.fullName}"
-                                        required>
-                                </div>
-                                <div class="row">
-                                    <div class="input-group col-md-6">
-                                        <label for="email">Email</label>
-                                        <input type="email"
-                                            class="form-input-item"
-                                            id="email" name="email"
-                                            placeholder="Email"
-                                            value="${sessionScope.currentUser.email}"
-                                            required>
-                                        <span id="error_email"></span>
-                                    </div>
-                                    <div class="input-group col-md-6">
-                                        <label for="phone">Số điện thoại</label>
-                                        <input type="text" name="phone"
-                                            class="form-input-item"
-                                            id="phone"
-                                            placeholder="Số điện thoại"
-                                            value="${sessionScope.currentUser.phoneNumber}"
-                                            required>
-                                        <span id="error_phone"></span>
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <label for="address">Địa chỉ</label>
-                                    <input type="text" class="form-input-item"
-                                        id="address" name="address"
-                                        placeholder="Địa chỉ"
-                                        value="${sessionScope.currentUser.address}"
-                                        required>
-                                </div>
-
-                                <div class="note">
-                                    <label for="content-notes" class="bold">Ghi
-                                        chú đơn
-                                        hàng</label>
-                                    <textarea class="form-control"
-                                        id="content-notes" name="note"
-                                        rows="5"
-                                        placeholder="Ghi chú đơn hàng..."></textarea>
-                                </div>
-
-                                <!-- Payment Method -->
-                                <div class="payment-method">
-                                    <h4 class="payment-title">Phương thức thanh
-                                        toán</h4>
-                                    <div class="payment-options">
-                                        <label class="payment-option">
-                                            <input type="radio" name="payment"
-                                                value="COD" checked>
-                                            <div class="payment-content">
-                                                <img
-                                                    src="./assets/images/logo/cod.svg"
-                                                    alt="COD">
-                                                <span>Thanh toán khi nhận
-                                                    hàng</span>
-                                            </div>
-                                        </label>
-                                        <label class="payment-option">
-                                            <input type="radio" name="payment"
-                                                value="VNPAY">
-                                            <div class="payment-content">
-                                                <img
-                                                    src="./assets/images/logo/OIP.webp"
-                                                    alt="VNPay">
-                                                <span>Thanh toán qua
-                                                    VNPay</span>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn-continue">Thanh
-                                    toán
-                                    ngay
-                                </button>
-
-                            </form>
+                    <form
+                            action="${pageContext.request.contextPath}/place-order"
+                            method="post">
+                        <div class="input-group">
+                            <label for="fullname">Họ và tên</label>
+                            <input type="text" class="form-input-item"
+                                   id="fullname" placeholder="Họ và tên"
+                                   name="fullName"
+                                   value="${sessionScope.currentUser.fullName}"
+                                   required>
+                        </div>
+                        <div class="row">
+                            <div class="input-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email"
+                                       class="form-input-item"
+                                       id="email" name="email"
+                                       placeholder="Email"
+                                       value="${sessionScope.currentUser.email}"
+                                       required>
+                                <span id="error_email"></span>
+                            </div>
+                            <div class="input-group col-md-6">
+                                <label for="phone">Số điện thoại</label>
+                                <input type="text" name="phone"
+                                       class="form-input-item"
+                                       id="phone"
+                                       placeholder="Số điện thoại"
+                                       value="${sessionScope.currentUser.phoneNumber}"
+                                       required>
+                                <span id="error_phone"></span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="provinceSelect">Tỉnh/Thành</label>
+                            <select id="provinceSelect" class="form-input-item">
+                                <option value="">-- Chọn tỉnh/thành --</option>
+                            </select>
                         </div>
 
+                        <div class="input-group">
+                            <label for="districtSelect">Quận/Huyện</label>
+                            <select id="districtSelect" class="form-input-item" disabled>
+                                <option value="">-- Chọn quận/huyện --</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="wardSelect">Phường/Xã</label>
+                            <select id="wardSelect" class="form-input-item" disabled>
+                                <option value="">-- Chọn phường/xã --</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" class="form-input-item"
+                                   id="address" name="address"
+                                   placeholder="Địa chỉ"
+                                   value="${sessionScope.currentUser.address}"
+                                   required>
+                        </div>
+
+                        <div class="note">
+                            <label for="content-notes" class="bold">Ghi
+                                chú đơn
+                                hàng</label>
+                            <textarea class="form-control"
+                                      id="content-notes" name="note"
+                                      rows="5"
+                                      placeholder="Ghi chú đơn hàng..."></textarea>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="payment-method">
+                            <h4 class="payment-title">Phương thức thanh
+                                toán</h4>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment"
+                                           value="COD" checked>
+                                    <div class="payment-content">
+                                        <img
+                                                src="./assets/images/logo/cod.svg"
+                                                alt="COD">
+                                        <span>Thanh toán khi nhận
+                                                    hàng</span>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment"
+                                           value="VNPAY">
+                                    <div class="payment-content">
+                                        <img
+                                                src="./assets/images/logo/OIP.webp"
+                                                alt="VNPay">
+                                        <span>Thanh toán qua
+                                                    VNPay</span>
                         <div class="order-summary">
                             <h4 class="cart-title">Giỏ hàng</h4>
 
@@ -704,63 +712,176 @@
                                             </p>
                                         </div>
                                     </div>
-                                </c:forEach>
-                            </div>
-
-                            <div class="discount-section">
-                                <div class="discount-input-group">
-                                    <input type="text"
-                                        placeholder="Mã giảm giá">
-                                    <button class="btn-apply">Sử dụng</button>
-                                </div>
-                            </div>
-
-                            <!-- Price Summary -->
-                            <div class="price-summary">
-                                <div class="price-row">
-                                    <span>Tạm tính</span>
-                                    <span>
-                                        <fmt:formatNumber
-                                            value="${sessionScope.cart.totalProductPrice}"
-                                            type="number" />₫
-                                    </span>
-                                </div>
-
-                                <div class="price-row">
-                                    <span>Giảm giá</span>
-                                    <span>
-                                        <fmt:formatNumber
-                                            value="${sessionScope.cart.discount}"
-                                            type="number" />₫
-
-                                    </span>
-                                </div>
-                                <div class="price-row">
-                                    <span>Phí vận chuyển</span>
-                                    <span>
-                                        <fmt:formatNumber
-                                            value="${sessionScope.cart.fee}"
-                                            type="number" />₫
-                                    </span>
-                                </div>
-                                <div class="price-row total">
-                                    <span>Tổng cộng</span>
-                                    <span class="total-amount">
-                                        <fmt:formatNumber
-                                            value="${sessionScope.cart.totalPriceToPay}"
-                                            type="number" />₫
-
-                                    </span>
-                                </div>
+                                </label>
                             </div>
                         </div>
+                        <button type="submit" class="btn-continue">Thanh
+                            toán
+                            ngay
+                        </button>
+
+                    </form>
+                </div>
+
+                            </div>
+                        </c:forEach>
                     </div>
-                </nav>
+
+                    <div class="discount-section">
+                        <div class="discount-input-group">
+                            <input type="text"
+                                   placeholder="Mã giảm giá">
+                            <button class="btn-apply">Sử dụng</button>
+                        </div>
+                    </div>
+
+                    <!-- Price Summary -->
+                    <div class="price-summary">
+                        <div class="price-row">
+                            <span>Tạm tính</span>
+                            <span>
+                                        <fmt:formatNumber
+                                                value="${sessionScope.cart.totalProductPrice}"
+                                                type="number"/>₫
+                                    </span>
+                        </div>
+
+                        <div class="price-row">
+                            <span>Giảm giá</span>
+                            <span>
+                                        <fmt:formatNumber
+                                                value="${sessionScope.cart.discount}"
+                                                type="number"/>₫
+
+                                    </span>
+                        </div>
+                        <div class="price-row">
+                            <span>Phí vận chuyển</span>
+                            <span id="shippingFeeText">
+             <fmt:formatNumber value="${sessionScope.cart.fee}" type="number"/>₫
+                        </span>
+
+                        </div>
+                        <div class="price-row total">
+                            <span>Tổng cộng</span>
+                            <span id="totalPayText" class="total-amount">
+                         <fmt:formatNumber value="${sessionScope.cart.totalPriceToPay}" type="number"/>₫
+                        </span>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </nav>
+    </div>
+</div>
 
-        <%@ include file="Footer.jsp" %>
+<%@ include file="Footer.jsp" %>
+<script>
+    const ctx = "<%=request.getContextPath()%>";
 
-    </body>
+    const provinceSelect = document.getElementById("provinceSelect");
+    const districtSelect = document.getElementById("districtSelect");
+    const wardSelect = document.getElementById("wardSelect");
+
+    const shippingFeeText = document.getElementById("shippingFeeText");
+    const totalPayText = document.getElementById("totalPayText");
+
+    function vnd(n) {
+        return (n || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "₫";
+    }
+
+    async function loadProvinces() {
+        const res = await fetch(ctx + "/ghn/provinces");
+        const json = await res.json();
+        provinceSelect.innerHTML = `<option value="">-- Chọn tỉnh/thành --</option>`;
+
+        (json.data || []).forEach(p => {
+            const opt = document.createElement("option");
+            opt.value = p.ProvinceID;
+            opt.textContent = p.ProvinceName;
+            provinceSelect.appendChild(opt);
+        });
+    }
+
+    async function loadDistricts(provinceId) {
+        districtSelect.disabled = true;
+        wardSelect.disabled = true;
+        districtSelect.innerHTML = `<option value="">-- Chọn quận/huyện --</option>`;
+        wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
+
+        const res = await fetch(ctx + "/ghn/districts?provinceId=" + encodeURIComponent(provinceId));
+        const json = await res.json();
+        (json.data || []).forEach(d => {
+            const opt = document.createElement("option");
+            opt.value = d.DistrictID;
+            opt.textContent = d.DistrictName;
+            districtSelect.appendChild(opt);
+        });
+        districtSelect.disabled = false;
+    }
+
+    async function loadWards(districtId) {
+        wardSelect.disabled = true;
+        wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
+
+        const res = await fetch(ctx + "/ghn/wards?districtId=" + encodeURIComponent(districtId));
+        const json = await res.json();
+        (json.data || []).forEach(w => {
+            const opt = document.createElement("option");
+            opt.value = w.WardCode;
+            opt.textContent = w.WardName;
+            wardSelect.appendChild(opt);
+        });
+        wardSelect.disabled = false;
+    }
+
+    async function calcFee(districtId, wardCode) {
+        const body = new URLSearchParams();
+        body.append("districtId", districtId);
+        body.append("wardCode", wardCode);
+
+        const res = await fetch(ctx + "/ghn/fee", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+            body: body.toString()
+        });
+
+        const json = await res.json(); // bạn đang trả {success, fee, totalToPay} hoặc {success:false,message:...}
+
+        if (!json.success) {
+            console.log("GHN fee error:", json.message);
+            return;
+        }
+
+        // update UI
+        shippingFeeText.textContent = vnd(json.fee);
+        totalPayText.textContent = vnd(json.totalToPay);
+    }
+
+    provinceSelect.addEventListener("change", () => {
+        const pid = provinceSelect.value;
+        if (!pid) return;
+        loadDistricts(pid);
+    });
+
+    districtSelect.addEventListener("change", () => {
+        const did = districtSelect.value;
+        if (!did) return;
+        loadWards(did);
+    });
+
+    wardSelect.addEventListener("change", () => {
+        const did = districtSelect.value;
+        const wcode = wardSelect.value;
+        if (!did || !wcode) return;
+        calcFee(did, wcode);
+    });
+
+    // init
+    loadProvinces();
+</script>
+
+</body>
 
 </html>

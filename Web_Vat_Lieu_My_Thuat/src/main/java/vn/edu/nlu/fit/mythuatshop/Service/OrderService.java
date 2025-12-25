@@ -51,6 +51,7 @@ public class OrderService {
 
         order.setDiscount(cart.getDiscount());
         order.setVoucherId(voucherId);
+        order.setShippingFee(cart.getFee());
         order.setTotalPrice(cart.getTotalPriceToPay());
 
         List<OrderDetail> details = new ArrayList<>();
