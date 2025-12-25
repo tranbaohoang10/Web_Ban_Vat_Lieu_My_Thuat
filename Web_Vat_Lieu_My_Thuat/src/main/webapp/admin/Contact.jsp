@@ -1,19 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quản lý liên hệ</title>
-        <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý liên hệ</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 
-    </head>
-    <style>
+
+</head>
+<style>
     #main {
         display: flex;
     }
@@ -269,7 +276,7 @@
         border-color: #2659F5;
     }
 
-    .order-table td:nth-child(7) {
+    .order-table td:nth-child(6) {
         max-width: 250px;
         white-space: nowrap;
         overflow: hidden;
@@ -402,308 +409,227 @@
     }
 </style>
 
-    <body>
-        <div id="main">
-            <div class="left">
-                <div class="list-admin">
-                    <a href="Admin.jsp" class="logo"><img
-                            src="../assets/images/logo/logo.png" alt></a>
-                    <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng
-                        quan</a>
-                    <a href="ThongKe.jsp"><i
-                            class="fa-solid fa-chart-line"></i>Thống
-                        kê</a>
-                    <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản
-                        lý danh
-                        mục</a>
-                    <a href="${pageContext.request.contextPath}/admin/products"><i
-                            class="fa-solid fa-palette"></i>Quản
-                        lý sản phẩm</a>
-                    <a href="Nguoidung.jsp"><i
-                            class="fa-solid fa-person"></i>Quản
-                        lý người dùng</a>
-                    <a href="DonHang.jsp"><i
-                            class="fa-solid fa-box-open"></i>Quản
-                        lý đơn hàng</a>
-                    <a href="Khuyenmai.jsp"><i
-                            class="fa-solid fa-gift"></i>Quản lý
-                        khuyến mãi</a>
-                    <a href="SliderShow.jsp"><i
-                            class="fa-solid fa-sliders"></i>Quản lý Slider
-                        Show</a>
-                    <a href="LienHe.html" class="active"><i
-                            class="fa-solid fa-address-book"></i>Quản lý liên
-                        hệ</a>
-                    <a href="${pageContext.request.contextPath}/logout"><i
-                            class="fa-solid fa-right-from-bracket"></i>
-                        Đăng xuất</a>
-                </div>
-            </div>
-            <div class="right">
+<body>
+<c:if test="${not empty sessionScope.toast}">
+    <div id="toastMsg" style="
+      position: fixed; right: 18px; top: 18px; z-index: 99999;
+      background: #111; color:#fff; padding:10px 14px; border-radius:8px;">
+            ${sessionScope.toast}
+    </div>
 
-                <div class="container">
-                    <div class="order-container">
-                        <h1>Quản lý liên hệ</h1>
+    <c:remove var="toast" scope="session"/>
 
-                        <!-- Ô tìm kiếm -->
-                        <div class="search-box">
-                            <input type="text"
-                                placeholder="Tìm kiếm liên hệ...">
-                            <button class="search-btn">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
+    <script>
+        setTimeout(() => {
+            const t = document.getElementById("toastMsg");
+            if (t) t.style.display = "none";
+        }, 1800);
+    </script>
+</c:if>
+<div id="main">
+    <div class="left">
+        <div class="list-admin">
+            <a href="Admin.jsp" class="logo"><img
+                    src="../assets/images/logo/logo.png" alt></a>
+            <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng
+                quan</a>
+            <a href="ThongKe.jsp"><i
+                    class="fa-solid fa-chart-line"></i>Thống
+                kê</a>
+            <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản
+                lý danh
+                mục</a>
+            <a href="${pageContext.request.contextPath}/admin/products"><i
+                    class="fa-solid fa-palette"></i>Quản
+                lý sản phẩm</a>
+            <a href="Nguoidung.jsp"><i
+                    class="fa-solid fa-person"></i>Quản
+                lý người dùng</a>
+            <a href="DonHang.jsp"><i
+                    class="fa-solid fa-box-open"></i>Quản
+                lý đơn hàng</a>
+            <a href="Khuyenmai.jsp"><i
+                    class="fa-solid fa-gift"></i>Quản lý
+                khuyến mãi</a>
+            <a href="SliderShow.jsp"><i
+                    class="fa-solid fa-sliders"></i>Quản lý Slider
+                Show</a>
+            <a href="${pageContext.request.contextPath}/admin/contacts" class="active"><i
+                    class="fa-solid fa-address-book"></i>Quản lý liên
+                hệ</a>
+            <a href="${pageContext.request.contextPath}/logout"><i
+                    class="fa-solid fa-right-from-bracket"></i>
+                Đăng xuất</a>
+        </div>
+    </div>
+    <div class="right">
 
-                        <table class="order-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Họ Tên</th>
-                                    <th>Số Điện Thoại</th>
-                                    <th>Email</th>
-                                    <th>Ngày Gửi</th>
-                                    <th>Nội Dung</th>
-                                    <th>Trạng Thái</th>
-                                    <th>Tùy Chọn</th>
-                                </tr>
-                            </thead>
+        <div class="container">
+            <div class="order-container">
+                <h1>Quản lý liên hệ</h1>
+                <table id="contactTable" class="order-table display">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Họ Tên</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Email</th>
+                        <th>Ngày Gửi</th>
+                        <th>Nội Dung</th>
+                        <th>Trạng Thái</th>
+                        <th>Tùy Chọn</th>
+                    </tr>
+                    </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>0909123456</td>
-                                    <td>vana@gmail.com</td>
-                                    <td>25-11-2025</td>
-                                    <td>Tôi muốn hỏi về sản phẩm bút lông
-                                    </td>
-                                    <td><span class="status pending">Chờ phản
-                                            hổi</span></td>
-                                    <td>
-                                        <button class="btn btn-reply btn-sm">
-                                            <i class="fa-solid fa-reply"></i>
-                                        </button>
+                    <tbody>
+                    <c:forEach var="ct" items="${contacts}" varStatus="st">
+                        <tr>
+                            <td>${st.index + 1}</td>
+                            <td><c:out value="${ct.fullName}" default="-"/></td>
+                            <td><c:out value="${ct.phoneNumber}" default="-"/></td>
+                            <td><c:out value="${ct.email}" default="-"/></td>
 
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${not empty ct.createAt}">
+                                        <fmt:formatDate value="${ct.createAt}" pattern="dd-MM-yyyy"/>
+                                    </c:when>
+                                    <c:otherwise>-</c:otherwise>
+                                </c:choose>
+                            </td>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td>Trần Thị B</td>
-                                    <td>0912345678</td>
-                                    <td>btran@gmail.com</td>
-                                    <td>22-11-2025</td>
-                                    <td>Tôi chưa nhận được đơn hàng.</td>
-                                    <td><span class="status success">Đã phản
-                                            hồi</span></td>
-                                    <td>
+                            <td title="<c:out value='${ct.message}'/>">
+                                <c:out value="${ct.message}" default="-"/>
+                            </td>
 
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${ct.status == 'Chưa xử lý' || ct.status == 'Chờ phản hồi'}">
+                                        <span class="status pending"><c:out value="${ct.status}"/></span>
+                                    </c:when>
+                                    <c:when test="${ct.status == 'Đã phản hồi' || ct.status == 'Đã xử lý'}">
+                                        <span class="status success"><c:out value="${ct.status}"/></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="status cancel"><c:out value="${ct.status}" default="-"/></span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
 
-                                <tr>
-                                    <td>3</td>
-                                    <td>Lê Minh C</td>
-                                    <td>0933456789</td>
-                                    <td>minhc@gmail.com</td>
-                                    <td>20-11-2025</td>
-                                    <td>Sản phẩm bị lỗi, vui lòng đổi trả.</td>
-                                    <td><span class="status success">Đã phản
-                                            hồi</span></td>
-                                    <td>
+                            <td>
+                                <button class="btn btn-reply btn-sm"
+                                        data-id="${ct.id}"
+                                        data-email="${ct.email}">
+                                    <i class="fa-solid fa-reply"></i>
+                                </button>
 
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Nguyễn Văn D</td>
-                                    <td>0909123456</td>
-                                    <td>vana@gmail.com</td>
-                                    <td>25-11-2025</td>
-                                    <td>Tôi muốn hỏi về sản phẩm bút lông
-                                    </td>
-                                    <td><span class="status success">Đã phản
-                                            hồi</span></td>
-                                    <td>
-
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Nguyễn Văn E</td>
-                                    <td>0909123456</td>
-                                    <td>vana@gmail.com</td>
-                                    <td>25-11-2025</td>
-                                    <td>Tôi muốn hỏi về sản phẩm bút lông
-                                    </td>
-                                    <td><span class="status pending">Chờ phản
-                                            hổi</span></td>
-                                    <td>
-                                        <button class="btn btn-reply btn-sm">
-                                            <i class="fa-solid fa-reply"></i>
-                                        </button>
-
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Nguyễn Văn F</td>
-                                    <td>0909123456</td>
-                                    <td>vana@gmail.com</td>
-                                    <td>25-11-2025</td>
-                                    <td>Tôi muốn hỏi về sản phẩm bút lông
-                                    </td>
-                                    <td><span class="status pending">Chờ phản
-                                            hổi</span></td>
-                                    <td>
-                                        <button class="btn btn-reply btn-sm">
-                                            <i class="fa-solid fa-reply"></i>
-                                        </button>
-
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Nguyễn Văn G</td>
-                                    <td>0909123456</td>
-                                    <td>vana@gmail.com</td>
-                                    <td>25-11-2025</td>
-                                    <td>Tôi muốn hỏi về sản phẩm bút lông
-                                    </td>
-                                    <td><span class="status pending">Chờ phản
-                                            hổi</span></td>
-                                    <td>
-                                        <button class="btn btn-reply btn-sm">
-                                            <i class="fa-solid fa-reply"></i>
-                                        </button>
-
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Nguyễn Văn H</td>
-                                    <td>0909123456</td>
-                                    <td>vana@gmail.com</td>
-                                    <td>25-11-2025</td>
-                                    <td>Tôi muốn hỏi về sản phẩm bút lông
-                                    </td>
-                                    <td><span class="status pending">Chờ phản
-                                            hổi</span></td>
-                                    <td>
-                                        <button class="btn btn-reply btn-sm">
-                                            <i class="fa-solid fa-reply"></i>
-                                        </button>
-
-                                        <button
-                                            class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <!-- Phân trang -->
-                        <div class="pagination">
-                            <a href="#" class="page-link">Trước</a>
-                            <a href="#" class="page-link active">1</a>
-                            <a href="#" class="page-link">2</a>
-                            <a href="#" class="page-link">3</a>
-                            <a href="#" class="page-link">Sau</a>
-                        </div>
-                    </div>
-
-                </div>
-
+                                <form action="${pageContext.request.contextPath}/admin/contacts/delete"
+                                      method="post"
+                                      style="display:inline;"
+                                      onsubmit="return confirmDelete();">
+                                    <input type="hidden" name="id" value="${ct.id}">
+                                    <button type="submit" class="btn btn-danger btn-sm btn-delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
 
-            <!-- Modal Form Phản Hồi -->
-            <div id="replyModal" class="modal">
-                <div class="reply-box">
-                    <div class="modal-header">
-                        <span class="close-reply">&times;</span>
-                        <h3>Phản Hồi Khách Hàng</h3>
-                    </div>
+        </div>
 
-                    <div class="modal-body">
-                        <p><strong>Email:</strong> hanano1@gmail.com</p>
+    </div>
 
-                        <label for="replyMessage">Nội dung phản hồi:</label>
-                        <textarea id="replyMessage"
-                            placeholder="Nhập nội dung phản hồi..."
-                            rows="6"></textarea>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn-cancel">Hủy</button>
-                        <button class="btn-send">Gửi phản hồi</button>
-                    </div>
-                </div>
+    <!-- Modal Form Phản Hồi -->
+    <div id="replyModal" class="modal">
+        <div class="reply-box">
+            <div class="modal-header">
+                <span class="close-reply">&times;</span>
+                <h3>Phản Hồi Khách Hàng</h3>
             </div>
 
-            <script>
-            // Lấy các phần tử
-            const modal = document.getElementById('replyModal');
-            const closeBtn = document.querySelector('.close-reply');
-            const cancelBtn = document.querySelector('.btn-cancel');
-            const sendBtn = document.querySelector('.btn-send');
-            const replyBtns = document.querySelectorAll('.btn-reply');
+            <form action="${pageContext.request.contextPath}/admin/contacts/reply" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="replyContactId">
 
-            // Mở modal khi click nút phản hồi
-            replyBtns.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    modal.style.display = 'block';
-                });
-            });
+                    <p><strong>Email:</strong> <span id="replyEmail"></span></p>
 
+                    <label>Tiêu đề:</label>
+                    <input type="text" name="subject" value="Phản hồi liên hệ -Thiên Long"
+                           style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px; margin-bottom:12px;">
 
+                    <label for="replyMessage">Nội dung phản hồi:</label>
+                    <textarea id="replyMessage" name="replyMessage"
+                              placeholder="Nhập nội dung phản hồi..." rows="6"></textarea>
+                </div>
 
-            // Đóng modal khi click nút Hủy
-            cancelBtn.addEventListener('click', function () {
-                modal.style.display = 'none';
-            });
-
-
-
-            // Xử lý gửi phản hồi
-            sendBtn.addEventListener('click', function () {
-                const message = document.getElementById('replyMessage').value;
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel">Hủy</button>
+                    <button type="submit" class="btn-send">Gửi phản hồi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
+<script>
 
-                alert('Đã gửi phản hồi thành công!');
-                document.getElementById('replyMessage').value = '';
-                modal.style.display = 'none';
-            });
-        </script>
-        </body>
+    function confirmDelete() {
+        return confirm("Bạn có chắc chắn muốn xóa liên hệ này không?");
+    }
 
-    </html>
+    const modal = document.getElementById('replyModal');
+    const closeBtn = document.querySelector('.close-reply');
+    const cancelBtn = document.querySelector('#replyModal .btn-cancel');
+
+    const replyIdEl = document.getElementById('replyContactId');
+    const replyEmailEl = document.getElementById('replyEmail');
+    const replyMessageEl = document.getElementById('replyMessage');
+
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.btn-reply');
+        if (!btn) return;
+
+        replyIdEl.value = btn.getAttribute('data-id');
+        replyEmailEl.textContent = btn.getAttribute('data-email') || "-";
+        replyMessageEl.value = "";
+
+        modal.style.display = 'block';
+    });
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    $(function () {
+        const viUrl = "https://cdn.datatables.net/plug-ins/1.13.8/i18n/vi.json";
+
+        const dt = $("#contactTable").DataTable({
+            pageLength: 8,
+            lengthChange: false,
+            ordering: true,
+            searching: true,
+            info: false,
+            language: {url: viUrl}
+        });
+
+
+        $("#contactSearch").on("keyup", function () {
+            dt.search(this.value).draw();
+        });
+    });
+</script>
+</body>
+
+</html>

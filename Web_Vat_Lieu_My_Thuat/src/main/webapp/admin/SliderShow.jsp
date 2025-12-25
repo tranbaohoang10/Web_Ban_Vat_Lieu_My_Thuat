@@ -500,7 +500,7 @@
                     <a href="SliderShow.html" class="active"><i
                             class="fa-solid fa-sliders"></i>Quản lý Slider
                         Show</a>
-                    <a href="LienHe.jsp"><i
+                    <a href="Contact.jsp"><i
                             class="fa-solid fa-address-book"></i>Quản lý liên
                         hệ</a>
                     <a href="${pageContext.request.contextPath}/logout"><i
