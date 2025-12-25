@@ -139,6 +139,11 @@
     }
 
 
+    .btn-login-gg {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .btn-gg {
         background-color: #DE3F32;
         color: white;
@@ -199,9 +204,14 @@
 
             <div class="btn-login-gg">
 
-                <button class="btn-gg"><i
-                        class="fa-brands fa-google"></i>Google
-                </button>
+<%--                <button class="btn-gg"><i--%>
+<%--                        class="fa-brands fa-google"></i>Google--%>
+<%--                </button>--%>
+                <a class="btn-gg" href="${pageContext.request.contextPath}/oauth2/google"
+                   style="text-align: center"><i
+                        class="fa-brands fa-google"></i>
+                    Google
+                </a>
 
             </div>
 
@@ -209,109 +219,8 @@
     </div>
 </div>
 
-<footer id="footer-trang-chu">
-    <div class="footer-title">
-        <img src="./assets/images/logo/logo.png" alt class="img-main">
-        <p class="footer-title-header">Thienlong.vn - Website thương mại
-            điện tử thuộc Tập đoàn Thiên Long</p>
-        <p class="footer-title-description">Công ty Cổ Phần Tập Đoàn
-            Thiên Long
-            <br>
-            <br>
-            GPĐKKD số 0301464830 do Sở KHĐT TP. Hồ Chí Minh cấp ngày
-            14/03/2005.
-        </p>
-        <form action class="footer-title-form">
-            <input type="email" placeholder="Nhập địa chỉ email">
-            <a href>Đăng ký</a>
-        </form>
-        <img
-                src="./assets/images/logo/logo-parker_53d035f3ab7645168e62cd9e3f595090.png"
-                alt class="img-footer">
-    </div>
-    <div class="footer-diachi">
-        <h2>ĐỊA CHỈ CÔNG TY</h2>
-        <span>
-                    Head Office:
-                    <p class="footer-diachi-header"> Tầng 10, Sofic Tower, Số 10
-                        Đường Mai Chí Thọ, Phường An Khánh,
-                        Thành Phố Hồ Chí Minh, Việt Nam
-                    </span>
-        <br>
-        <span>
-                        Miền Bắc:
-                        <p class="footer-diachi-description"> Số 38, đường
-                            Gamuda Gardens 2-5, Khu đô thị mới C2 - Gamuda
-                            Gardens, Phường Trần Phú, Thành phố Hà Nội, Việt
-                            Nam.
-                        </span>
 
-        <img src="./assets/images/logo/footer_bct.png" alt
-             class="img-main">
-    </div>
-    <div class="footer-help">
-        <h2>HỖ TRỢ KHÁCH HÀNG</h2>
-        <span>
-                            Hotline:
-                            <p class="footer-help-header">1900 866 819
-                            </span>
-        <span>
-                                Thứ 2 - Thứ 6 (8h - 17h)
-                                salesonline@thienlongvn.com
-                                <div class="footer-help-header-list">
-                                    <a href>
-                                        - Hướng dẫn mua hàng
-                                    </a>
-                                    <a href>
-                                        - Hướng dẫn thanh toán
-                                    </a>
-                                    <a href>
-                                        - Chính sách giao hàng
-                                    </a>
-                                    <a href>
-                                        - Chính sách đổi trả & hoàn tiền
-                                    </a>
-                                    <a href>
-                                        - Khách hàng thân thiết
-                                    </a>
-                                    <a href>
-                                        - Khách hàng ưu tiên
-                                    </a>
-                                    <a href>
-                                        - Phản ánh chất lượng sản phẩm
-                                    </a>
-                                </div>
-                            </span>
-    </div>
-    <div class="footer-information">
-        <h2>VỀ THIENLONG.VN</h2>
-        <div class="footer-information-header-list">
-            <a href="IntroductionPage.jsp">
-                - Giới thiệu
-            </a>
-            <a href>
-                - Dịch vụ in ấn quảng cáo
-            </a>
-            <a href>
-                - Chính sách bảo mật chung
-            </a>
-            <a href>
-                - Chính sách bảo mật thông tin cá nhân
-            </a>
-            <a href>
-                - Thông tin liên hệ
-            </a>
-            <a href>
-                - Chương trình Affiliate
-            </a>
-        </div>
-        <div class="footer-information-socials">
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-youtube"></i>
-        </div>
-    </div>
-</footer>
-
+<%@ include file="Footer.jsp" %>
 </body>
 
 </html>
