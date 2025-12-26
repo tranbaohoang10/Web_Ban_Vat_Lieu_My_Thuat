@@ -65,9 +65,11 @@ public class CategoryProductsController extends HttpServlet {
             }
         }
 
-        Category category = categoryService.getCategoryById(categoryId);
-
-        // ✅ đếm + list (ProductCard có avgRating/reviewCount)
+        Category category = categoryService.getCategoryByIdActive(categoryId);
+        if (category == null) {
+            response.sendRedirect(request.getContextPath() + "/home");
+            return;
+        }
         int totalProducts = cardService.countByCategoryWithFilter(categoryId, minPrice, maxPrice);
         int totalPages = (int) Math.ceil(totalProducts * 1.0 / pageSize);
 

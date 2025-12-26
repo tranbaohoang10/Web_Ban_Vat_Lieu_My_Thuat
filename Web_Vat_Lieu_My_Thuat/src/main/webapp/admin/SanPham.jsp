@@ -153,6 +153,25 @@
       color: black;
 
     }
+    /* nút khóa/mở khóa */
+    .sanpham-table .btn-lock {
+      background-color: #DC3545; /* đỏ */
+      color: white;
+    }
+    .sanpham-table .btn-unlock {
+      background-color: #28a745; /* xanh */
+      color: white;
+    }
+
+    /* trạng thái chữ */
+    .status-selling {
+      color: #28a745;
+      font-weight: 600;
+    }
+    .status-stopped {
+      color: #DC3545;
+      font-weight: 600;
+    }
 
     .sanpham-table .xoa-sanpham {
       background-color: #DC3545;
@@ -420,19 +439,19 @@
           <a href="${pageContext.request.contextPath}/admin/overview"><i class="fa-solid fa-house"></i> Tổng quan</a>
           <a href="${pageContext.request.contextPath}/admin/statistics"><i class="fa-solid fa-chart-line"></i>Thống
             kê</a>
-          <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh
+          <a href="${pageContext.request.contextPath}/admin/categories"><i class="fa-solid fa-list"></i>Quản lý danh
             mục</a>
           <a href="${pageContext.request.contextPath}/admin/products" class="active"><i class="fa-solid fa-palette"></i>Quản
             lý sản phẩm</a>
-          <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản
+          <a href="${pageContext.request.contextPath}/admin/users"><i class="fa-solid fa-person"></i>Quản
             lý người dùng</a>
-          <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i>Quản
+          <a href="${pageContext.request.contextPath}/admin/orders"><i class="fa-solid fa-box-open"></i>Quản
             lý đơn hàng</a>
-          <a href="Khuyenmai.jsp"><i class="fa-solid fa-gift"></i>Quản lý
+          <a href="${pageContext.request.contextPath}/admin/vouchers"><i class="fa-solid fa-gift"></i>Quản lý
             khuyến mãi</a>
           <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý
             Slider Show</a>
-          <a href="Contact.jsp"><i class="fa-solid fa-address-book"></i>Quản lý
+          <a href="${pageContext.request.contextPath}/admin/contacts"><i class="fa-solid fa-address-book"></i>Quản lý
             liên hệ</a>
           <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i>
             Đăng xuất</a>
@@ -458,6 +477,7 @@
                   <th>Giá</th>
                   <th>Ngày tạo</th>
                   <th>Số lượng tồn</th>
+                  <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
               </thead>
@@ -495,6 +515,19 @@
                   <td>${p.createAt}</td>
                   <td>${p.quantityStock}</td>
                   <td>
+                    <c:choose>
+                      <c:when test="${p.isActive == 1}">
+                        <span class="status-selling">Đang bán</span>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="status-stopped">Ngừng bán</span>
+                      </c:otherwise>
+                    </c:choose>
+                  </td>
+
+
+                  <!-- Tùy chọn -->
+                  <td>
                     <button class="chinhsua-sanpham"
                             data-id="${p.id}"
                             data-name="${p.name}"
@@ -509,13 +542,29 @@
 
                     <form action="${pageContext.request.contextPath}/admin/products"
                           method="post" style="display:inline">
-                      <input type="hidden" name="action" value="delete">
+                      <input type="hidden" name="action" value="toggleActive">
                       <input type="hidden" name="id" value="${p.id}">
-                      <button class="xoa-sanpham" type="submit"
-                              onclick="return confirm('Xóa sản phẩm này?')">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
+
+                      <c:choose>
+                        <c:when test="${p.isActive == 1}">
+                          <input type="hidden" name="isActive" value="0">
+                          <button class="xoa-sanpham" type="submit"
+                                  onclick="return confirm('Khóa (ngừng bán) sản phẩm này?')"
+                                  title="Khóa sản phẩm">
+                            <i class="fa-solid fa-lock"></i>
+                          </button>
+                        </c:when>
+                        <c:otherwise>
+                          <input type="hidden" name="isActive" value="1">
+                          <button class="chinhsua-sanpham" type="submit"
+                                  onclick="return confirm('Mở khóa (bán lại) sản phẩm này?')"
+                                  title="Mở khóa sản phẩm">
+                            <i class="fa-solid fa-lock-open"></i>
+                          </button>
+                        </c:otherwise>
+                      </c:choose>
                     </form>
+
                   </td>
                 </tr>
               </c:forEach>
@@ -715,12 +764,11 @@
           qtyInput.value = btn.dataset.quantity || 0;
           brandInput.value = btn.dataset.brand || "";
 
-          // nếu bạn có data-size/madein/warning thì set tiếp
           sizeInput.value = btn.dataset.size || "";
           madeInInput.value = btn.dataset.madein || "";
           warningInput.value = btn.dataset.warning || "";
 
-          // ảnh chính (chỉ preview URL cũ)
+          // ảnh chính (preview URL cũ)
           const thumb = btn.dataset.thumbnail;
           if (thumb) {
             previewImg.src = thumb;
@@ -731,9 +779,14 @@
             removeImgBtn.style.display = "none";
           }
 
-          // update: thường ẩn ảnh phụ (đỡ phức tạp)
-          thumbnailSub.style.display = "none";
-          subPreviewContainer.style.display = "none";
+
+          thumbnailSub.style.display = "block";
+          subPreviewContainer.style.display = "flex";
+
+
+          subImages = [];
+          subPreviewContainer.innerHTML = "";
+          thumbnailSub.value = "";
 
           openModal();
         });
@@ -751,7 +804,7 @@
           info: false,
           language: {url: viUrl},
           columnDefs: [
-            {orderable: false, targets: [3, 8]} // 3 = Hình ảnh, 8 = Tùy chọn
+            {orderable: false, targets: [3, 9]} // 3 = Hình ảnh, 9 = Tùy chọn
           ]
         })
       });

@@ -131,9 +131,8 @@
         <div class="info-mithuat-description-second">
         </div>
         <div class="info-mithuat-description-img">
-            <img
-                    src="./assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg"
-                    alt>
+            <img src="${pageContext.request.contextPath}/assets/images/logo/1920x600_c17ffe56498a4e2a9e5d27ac6eeaaad2_1024x1024.jpg" alt="">
+
         </div>
     </div>
 </div>

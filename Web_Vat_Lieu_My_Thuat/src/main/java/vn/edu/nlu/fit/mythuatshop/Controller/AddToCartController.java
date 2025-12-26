@@ -104,12 +104,33 @@ public class AddToCartController extends HttpServlet {
         int quantity = Integer.parseInt(qtyStr);
         if (quantity <= 0) quantity = 1;
 
-        Product p = productService.getProductById(productId);
+        Product p = productService.getProductByIdActive(productId); // ✅ chỉ lấy active
         if (p == null) {
+            // sản phẩm không tồn tại hoặc đã bị khóa
+            if ("XMLHttpRequest".equals(req.getHeader("X-Requested-With"))) {
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                resp.getWriter().write("{\"success\":false,\"message\":\"Sản phẩm đã ngừng bán\"}");
+                return;
+            }
             String ref = req.getHeader("referer");
             resp.sendRedirect(ref != null ? ref : (req.getContextPath() + "/home"));
             return;
         }
+
+// (khuyến nghị) chặn nếu hết hàng
+        if (p.getQuantityStock() <= 0) {
+            if ("XMLHttpRequest".equals(req.getHeader("X-Requested-With"))) {
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write("{\"success\":false,\"message\":\"Sản phẩm đã hết hàng\"}");
+                return;
+            }
+            String ref = req.getHeader("referer");
+            resp.sendRedirect(ref != null ? ref : (req.getContextPath() + "/home"));
+            return;
+        }
+
         Cart cart = getOrCreateCart(session);
         CartItem cartItem = new CartItem(
                 p.getId(),
@@ -166,8 +187,9 @@ public class AddToCartController extends HttpServlet {
             }
 
             if (qty < 1) qty = 1;
-            Product p = productService.getProductById(pid);
-            if (p == null) continue;
+            Product p = productService.getProductByIdActive(pid);
+            if (p == null) continue; // hàng bị khóa => bỏ qua (không add lại vào cart)
+
             CartItem ci = new CartItem(p.getId(), p.getName(), p.getPrice(),
                     p.getDiscountDefault(), p.getThumbnail(), qty);
             cart.addCartItem(ci);
@@ -197,20 +219,56 @@ public class AddToCartController extends HttpServlet {
 
         int productId = Integer.parseInt(pidStr);
         int quantity = Integer.parseInt(qtyStr);
-        if (quantity < 1)
-            quantity = 1;
+        if (quantity < 1) quantity = 1;
 
+
+        Product pCheck = productService.getProductByIdActive(productId);
         Cart cart = getOrCreateCart(session);
+
+        if (pCheck == null) {
+            // sản phẩm đã bị khóa => remove khỏi giỏ
+            cart.removeCartItem(productId);
+            session.setAttribute("cart", cart);
+
+            int cartCount = cart.getTotalQuantity();
+            session.setAttribute("cartCount", cartCount);
+
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            resp.getWriter().write("{\"success\":false,\"message\":\"Sản phẩm đã ngừng bán\",\"cartCount\":" + cartCount + "}");
+            return;
+        }
+
+// (khuyến nghị) giới hạn theo tồn kho
+        if (pCheck.getQuantityStock() <= 0) {
+            cart.removeCartItem(productId);
+            session.setAttribute("cart", cart);
+
+            int cartCount = cart.getTotalQuantity();
+            session.setAttribute("cartCount", cartCount);
+
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write("{\"success\":false,\"message\":\"Sản phẩm đã hết hàng\",\"cartCount\":" + cartCount + "}");
+            return;
+        }
+        if (quantity > pCheck.getQuantityStock()) quantity = pCheck.getQuantityStock();
+        if (quantity < 1) quantity = 1;
+
+
         cart.updateQuantity(productId, quantity);
         session.setAttribute("cart", cart);
+
 
         long totalAmount = 0;
         long itemSubtotal = 0;
 
+        java.util.List<Integer> toRemove = new java.util.ArrayList<>();
+
         for (CartItem item : cart.getCarts().values()) {
-            Product p = productService.getProductById(item.getProductId());
-            if (p == null)
+            Product p = productService.getProductByIdActive(item.getProductId());
+            if (p == null) {
+                toRemove.add(item.getProductId());
                 continue;
+            }
 
             long price = (long) p.getPriceAfterDiscount();
             long sub = price * item.getQuantity();
@@ -220,6 +278,10 @@ public class AddToCartController extends HttpServlet {
                 itemSubtotal = sub;
             }
         }
+
+        for (Integer rid : toRemove) cart.removeCartItem(rid);
+        session.setAttribute("cart", cart);
+
 
         int cartCount = cart.getTotalQuantity();
         session.setAttribute("cartCount", cartCount);

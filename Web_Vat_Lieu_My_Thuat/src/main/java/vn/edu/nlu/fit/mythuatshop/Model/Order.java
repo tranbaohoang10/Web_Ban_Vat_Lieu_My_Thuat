@@ -24,9 +24,27 @@ public class Order implements Serializable {
     private String paymentName;
     private List<OrderItem> viewItems;
     private double shippingFee;
+    private String productNames;
+    private String paymentStatus;
 
 
     public Order() {
+    }
+
+    public String getProductNames() {
+        return productNames;
+    }
+
+    public void setProductNames(String productNames) {
+        this.productNames = productNames;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public double getShippingFee() {

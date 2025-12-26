@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -472,311 +473,314 @@
 </style>
 
     <body>
-        <div id="main">
-            <div class="left">
-                <div class="list-admin">
-                    <a href="Admin.jsp" class="logo"><img
-                            src="../assets/images/logo/logo.png" alt></a>
-                    <a href="${pageContext.request.contextPath}/admin/overview"><i class="fa-solid fa-house"></i> Tổng
-                        quan</a>
-                    <a href="${pageContext.request.contextPath}/admin/statistics"><i
-                            class="fa-solid fa-chart-line"></i>Thống
-                        kê</a>
-                    <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản
-                        lý danh
-                        mục</a>
-                    <a href="${pageContext.request.contextPath}/admin/products"><i
-                            class="fa-solid fa-palette"></i>Quản
-                        lý sản phẩm</a>
-                    <a href="Nguoidung.jsp"><i
-                            class="fa-solid fa-person"></i>Quản
-                        lý người dùng</a>
-                    <a href="DonHang.jsp"><i
-                            class="fa-solid fa-box-open"></i>Quản
-                        lý đơn hàng</a>
-                    <a href="Khuyenmai.jsp"><i
-                            class="fa-solid fa-gift"></i>Quản lý
-                        khuyến mãi</a>
-                    <a href="SliderShow.html" class="active"><i
-                            class="fa-solid fa-sliders"></i>Quản lý Slider
-                        Show</a>
-                    <a href="Contact.jsp"><i
-                            class="fa-solid fa-address-book"></i>Quản lý liên
-                        hệ</a>
-                    <a href="${pageContext.request.contextPath}/logout"><i
-                            class="fa-solid fa-right-from-bracket"></i>
-                        Đăng xuất</a>
-                </div>
-            </div>
-            <div class="right">
+    <div id="main">
+        <div class="left">
+            <div class="list-admin">
+                <a href="Admin.jsp" class="logo"><img src="../assets/images/logo/logo.png" alt=""></a>
 
-                <div class="container">
+                <a href="${pageContext.request.contextPath}/admin/overview"><i class="fa-solid fa-house"></i> Tổng quan</a>
+                <a href="${pageContext.request.contextPath}/admin/statistics"><i class="fa-solid fa-chart-line"></i>Thống kê</a>
+                <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản lý danh mục</a>
+                <a href="${pageContext.request.contextPath}/admin/products"><i class="fa-solid fa-palette"></i>Quản lý sản phẩm</a>
+                <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản lý người dùng</a>
+                <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i>Quản lý đơn hàng</a>
+                <a href="Khuyenmai.jsp"><i class="fa-solid fa-gift"></i>Quản lý khuyến mãi</a>
 
-                    <div class="order-container">
-                        <h1>Danh sách banner</h1>
-                        <div class="search">
-                            <div class="search-input-icon">
-                                <input type="text"
-                                    placeholder="Tìm kiếm slider...">
-                                <div class="icon"><i
-                                        class="fa-solid fa-magnifying-glass"></i></div>
-                            </div>
-                            <button class="btn-them-banner">Thêm
-                                banner</button>
-                        </div>
-                        <table class="order-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tiêu đề</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Ảnh</th>
-                                    <th>Tùy chọn</th>
-                                </tr>
-                            </thead>
+                <!-- SỬA LINK -->
+                <a href="${pageContext.request.contextPath}/admin/sliders" class="active">
+                    <i class="fa-solid fa-sliders"></i>Quản lý Slider Show
+                </a>
 
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Banner 1</td>
-                                    <td>2024-11-26</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-1.webp"
-                                            alt="tintuc1"></td>
-
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Banner 2</td>
-                                    <td>2024-11-27</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-2.webp"
-                                            alt="tintuc2"></td>
-
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Banner 3</td>
-                                    <td>2024-11-28</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-3.webp"
-                                            alt="tintuc3"></td>
-
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td>Banner 4</td>
-                                    <td>2024-11-29</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-1.webp"
-                                            alt></td>
-
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td>Banner 5</td>
-                                    <td>2024-11-30</td>
-                                    <td><img
-                                            src="../assets/images/logo/banner-2.webp"
-                                            alt></td>
-
-                                    <td><button class="btn-Sua"><i
-                                                class="fa-solid fa-pen-to-square"></i>
-                                        </button> <button class="btn-Xoa"><i
-                                                class="fa-solid fa-trash"></i></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="pagination">
-                            <a href="#" class="page-link">Trước</a>
-                            <a href="#" class="page-link active">1</a>
-                            <a href="#" class="page-link">2</a>
-                            <a href="#" class="page-link">3</a>
-                            <a href="#" class="page-link">Sau</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Dialog thêm khách hàng -->
-        <div id="customerModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Thêm banner</h2>
-                    <span class="close-modal">&times;</span>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="tenKH">Tên</label>
-                        <input type="text" id="tenKH"
-                            placeholder="Nhập tên banner">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tenKH">Trạng thái</label>
-                        <input type="text" id="tenKH"
-                            placeholder="Nhập trạng thái">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sdtKH">Thứ tự hiển thị</label>
-                        <input type="text" id="sdtKH"
-                            placeholder="Nhập số điện thoại">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sdtKH">Ảnh banner</label>
-                        <input type="file" id="sdtKH" placeholder="Thêm ảnh">
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn-cancel">Hủy</button>
-                    <button class="btn-save">Lưu</button>
-                </div>
+                <a href="Contact.jsp"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+                <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
             </div>
         </div>
 
-        <!-- ========== Dialog SỬA khách hàng ========== -->
-        <div id="editCustomerModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Chỉnh sửa thông tin</h2>
-                    <span class="close-edit-modal">&times;</span>
+        <div class="right">
+            <div class="container">
+                <div class="order-container">
+                    <h1>Danh sách banner</h1>
+
+                    <!-- SEARCH: submit về /admin/sliders -->
+                    <form class="search" method="get" action="${pageContext.request.contextPath}/admin/sliders">
+                        <div class="search-input-icon">
+                            <input type="text" name="q" value="${q}" placeholder="Tìm kiếm slider...">
+                            <button class="icon" type="submit" style="border:none;">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                        <button type="button" class="btn-them-banner">Thêm banner</button>
+                    </form>
+
+                    <!-- BẢNG: bỏ "Ngày tạo" vì DB không có -->
+                    <table class="order-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tiêu đề</th>
+                            <th>Trạng thái</th>
+                            <th>Thứ tự</th>
+<%--                            <th>Link</th>--%>
+                            <th>Ảnh</th>
+                            <th>Tùy chọn</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <c:forEach var="s" items="${sliders}">
+                            <tr>
+                                <td>${s.id}</td>
+                                <td class="col-title">${s.title}</td>
+
+                                <td class="col-status">
+                                    <c:choose>
+                                        <c:when test="${s.status == 1}">
+                                            <span class="status success">Hiển thị</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="status cancel">Ẩn</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+
+                                <td class="col-order">${s.indexOrder}</td>
+<%--                                <td class="col-link">${s.linkTo}</td>--%>
+
+                                <td>
+                                    <img class="col-thumb" src="${s.thumbnail}" alt="banner">
+                                </td>
+
+                                <td>
+                                    <!-- SỬA: mở modal edit, đổ data-* -->
+                                    <button class="btn-Sua btn-open-edit"
+                                            data-id="${s.id}"
+                                            data-title="${s.title}"
+                                            data-status="${s.status}"
+                                            data-order="${s.indexOrder}"
+<%--                                            data-link="${s.linkTo}"--%>
+                                            data-thumb="${s.thumbnail}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+
+                                    <!-- TOGGLE status -->
+                                    <form style="display:inline;" method="post" action="${pageContext.request.contextPath}/admin/sliders">
+                                        <input type="hidden" name="action" value="toggle">
+                                        <input type="hidden" name="id" value="${s.id}">
+                                        <input type="hidden" name="currentStatus" value="${s.status}">
+                                        <button class="btn-Sua" type="submit" title="Ẩn/Hiện">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </form>
+
+                                    <!-- XÓA -->
+                                    <form style="display:inline;" method="post"
+                                          action="${pageContext.request.contextPath}/admin/sliders"
+                                          onsubmit="return confirm('Xóa slider #${s.id}?');">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="id" value="${s.id}">
+                                        <button class="btn-Xoa" type="submit">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+
+                        <c:if test="${empty sliders}">
+                            <tr><td colspan="7">Không có dữ liệu</td></tr>
+                        </c:if>
+                        </tbody>
+                    </table>
+
+                    <!-- PAGINATION -->
+                    <div class="pagination">
+                        <c:if test="${page > 1}">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/admin/sliders?q=${q}&size=${size}&page=${page-1}">Trước</a>
+                        </c:if>
+
+                        <c:forEach var="p" begin="1" end="${totalPages}">
+                            <a class="page-link ${p==page ? 'active' : ''}"
+                               href="${pageContext.request.contextPath}/admin/sliders?q=${q}&size=${size}&page=${p}">${p}</a>
+                        </c:forEach>
+
+                        <c:if test="${page < totalPages}">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/admin/sliders?q=${q}&size=${size}&page=${page+1}">Sau</a>
+                        </c:if>
+                    </div>
+
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== MODAL THÊM =============== -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thêm banner</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+
+            <!-- FORM THÊM: action=create + enctype upload -->
+            <form method="post" action="${pageContext.request.contextPath}/admin/sliders" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="create">
+
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="editTenKH">Tiêu đề</label>
-                        <input type="text" id="editTenKH" value="Banner 2">
+                        <label>Tiêu đề</label>
+                        <input type="text" name="title" placeholder="Nhập tiêu đề" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="editSdtKH">Thứ tự hiển thị</label>
-                        <input type="text" id="editSdtKH" value="2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="TrangThai">Trạng Thái</label>
-                        <select id="TrangThai">
-                            <option value="display">Hiển thị</option>
-                            <option value="hide">Ẩn</option>
+                        <label>Trạng thái</label>
+                        <select name="status">
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Ẩn</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="editDiaChiKH">Thêm ảnh</label>
-                        <input type="file" id="editDiaChiKH"
-                            value="../assets/images/logo/banner-2.webp">
+                        <label>Thứ tự hiển thị (indexOrder)</label>
+                        <input type="number" name="indexOrder" min="1" placeholder="Nhập thứ tự" required>
                     </div>
 
+<%--                    <div class="form-group">--%>
+<%--                        <label>LinkTo</label>--%>
+<%--                        <input type="text" name="linkTo" placeholder="VD: category?categoryId=2">--%>
+<%--                    </div>--%>
+
+                    <div class="form-group">
+                        <label>Upload ảnh (ưu tiên)</label>
+                        <input type="file" name="thumbnailFile" accept="image/*" required>
+                    </div>
+
+<%--                    <div class="form-group">--%>
+<%--                        <label>Hoặc nhập URL ảnh</label>--%>
+<%--                        <input type="text" name="thumbnailUrl" placeholder="https://...">--%>
+<%--                    </div>--%>
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn-edit-cancel">Hủy</button>
-                    <button class="btn-edit-save">Lưu thay đổi</button>
+                    <button type="button" class="btn-cancel">Hủy</button>
+                    <button type="submit" class="btn-save">Lưu</button>
                 </div>
-            </div>
+            </form>
         </div>
+    </div>
 
-        <!-- JS mở / đóng dialog -->
-        <script>
-        const btnThemKH = document.querySelector('.btn-them-banner');
-        const modal = document.getElementById('customerModal');
-        const btnClose = document.querySelector('.close-modal');
-        const btnCancel = document.querySelector('.btn-cancel');
+    <!-- =============== MODAL SỬA =============== -->
+    <div id="editCustomerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Chỉnh sửa banner</h2>
+                <span class="close-edit-modal">&times;</span>
+            </div>
 
-        // Mở dialog
-        btnThemKH.addEventListener('click', () => {
-            modal.style.display = 'flex';
-        });
+            <!-- FORM SỬA: action=update -->
+            <form method="post" action="${pageContext.request.contextPath}/admin/sliders" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="id" id="editId">
 
-        // Đóng dialog khi bấm dấu X hoặc nút Hủy
-        btnClose.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Tiêu đề</label>
+                        <input type="text" name="title" id="editTitle" required>
+                    </div>
 
-        btnCancel.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+                    <div class="form-group">
+                        <label>Thứ tự hiển thị (indexOrder)</label>
+                        <input type="number" name="indexOrder" id="editOrder" min="1" required>
+                    </div>
 
-        // Click ra ngoài khung dialog cũng đóng
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <select name="status" id="editStatus">
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Ẩn</option>
+                        </select>
+                    </div>
+
+<%--                    <div class="form-group">--%>
+<%--                        <label>LinkTo</label>--%>
+<%--                        <input type="text" name="linkTo" id="editLink">--%>
+<%--                    </div>--%>
+
+                    <div class="form-group">
+                        <label>Ảnh hiện tại</label>
+                        <img id="editPreview" src="" style="width:100px;border-radius:6px;border:1px solid #eee;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload ảnh mới (nếu muốn đổi)</label>
+                        <input type="file" name="thumbnailFile" accept="image/*">
+                    </div>
+
+<%--                    <div class="form-group">--%>
+<%--                        <label>Hoặc nhập URL ảnh mới</label>--%>
+<%--                        <input type="text" name="thumbnailUrl" placeholder="https://...">--%>
+<%--                    </div>--%>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-edit-cancel">Hủy</button>
+                    <button type="submit" class="btn-edit-save">Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS mở / đóng + đổ dữ liệu edit -->
+    <script>
+        // ===== MODAL THÊM =====
+        const btnThem = document.querySelector('.btn-them-banner');
+        const modalAdd = document.getElementById('customerModal');
+        const btnCloseAdd = document.querySelector('.close-modal');
+        const btnCancelAdd = document.querySelector('.btn-cancel');
+
+        btnThem.addEventListener('click', () => modalAdd.style.display = 'flex');
+        btnCloseAdd.addEventListener('click', () => modalAdd.style.display = 'none');
+        btnCancelAdd.addEventListener('click', () => modalAdd.style.display = 'none');
+
         window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
+            if (e.target === modalAdd) modalAdd.style.display = 'none';
         });
 
+        // ===== MODAL SỬA =====
         const modalEdit = document.getElementById("editCustomerModal");
         const btnCloseEdit = document.querySelector(".close-edit-modal");
         const btnEditCancel = document.querySelector(".btn-edit-cancel");
 
-        // Lấy danh sách nút sửa
-        const btnSuaList = document.querySelectorAll(".btn-Sua");
+        const editId = document.getElementById("editId");
+        const editTitle = document.getElementById("editTitle");
+        const editOrder = document.getElementById("editOrder");
+        const editStatus = document.getElementById("editStatus");
+        const editLink = document.getElementById("editLink");
+        const editPreview = document.getElementById("editPreview");
 
-        // Khi nhấn Sửa
-        btnSuaList.forEach(btn => {
+        document.querySelectorAll(".btn-open-edit").forEach(btn => {
             btn.addEventListener("click", () => {
                 modalEdit.style.display = "flex";
 
-                // Lấy dữ liệu từ dòng bảng (ví dụ)
-                let row = btn.closest("tr");
-                let ten = row.querySelector(".col-ten").innerText;
-                let sdt = row.querySelector(".col-sdt").innerText;
-                let diachi = row.querySelector(".col-diachi").innerText;
-                let vaitro = row.querySelector(".col-vaitro").innerText;
-
-                // Gán vào dialog sửa
-                document.getElementById("editTenKH").value = ten;
-                document.getElementById("editSdtKH").value = sdt;
-                document.getElementById("editDiaChiKH").value = diachi;
-                document.getElementById("editVaiTroKH").value = vaitro;
+                editId.value = btn.dataset.id;
+                editTitle.value = btn.dataset.title || "";
+                editOrder.value = btn.dataset.order || "1";
+                editStatus.value = btn.dataset.status || "1";
+                editLink.value = btn.dataset.link || "";
+                editPreview.src = btn.dataset.thumb || "";
             });
         });
 
-        // Đóng dialog khi bấm X
-        btnCloseEdit.addEventListener("click", () => {
-            modalEdit.style.display = "none";
-        });
+        btnCloseEdit.addEventListener("click", () => modalEdit.style.display = "none");
+        btnEditCancel.addEventListener("click", () => modalEdit.style.display = "none");
 
-        // Đóng khi bấm Hủy
-        btnEditCancel.addEventListener("click", () => {
-            modalEdit.style.display = "none";
-        });
-
-        // Click ra ngoài đóng modal
         window.addEventListener("click", (e) => {
-            if (e.target === modalEdit) {
-                modalEdit.style.display = "none";
-            }
+            if (e.target === modalEdit) modalEdit.style.display = "none";
         });
     </script>
+
     </body>
 
 </html>

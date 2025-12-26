@@ -37,7 +37,7 @@ public class DetailsProductController extends HttpServlet {
         }
         int productId = Integer.parseInt(idUrl);
         DetailsProductService service = new DetailsProductService();
-        Product p = service.getProduct(productId);
+        Product p = service.getProductActive(productId);
         if(p==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Product not found");
             return;
