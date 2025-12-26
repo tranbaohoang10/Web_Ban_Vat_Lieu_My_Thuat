@@ -295,7 +295,7 @@
         <a href="${pageContext.request.contextPath}/admin/statistics" class="active">
           <i class="fa-solid fa-chart-line"></i> Thống kê
         </a>
-        <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i> Quản lý danh mục</a>
+        <a href="${pageContext.request.contextPath}/admin/categories"><i class="fa-solid fa-list"></i> Quản lý danh mục</a>
         <a href="${pageContext.request.contextPath}/admin/products"><i class="fa-solid fa-palette"></i> Quản lý sản phẩm</a>
         <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i> Quản lý người dùng</a>
         <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i> Quản lý đơn hàng</a>

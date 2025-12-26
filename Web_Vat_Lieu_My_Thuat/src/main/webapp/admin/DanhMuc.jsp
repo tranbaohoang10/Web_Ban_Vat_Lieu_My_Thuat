@@ -1,590 +1,360 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý danh mục</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        #main { display:flex; }
+        #main .left{ background-color:#17479D; height:100vh; width:17%; }
+        #main .left .list-admin{ display:flex; flex-direction:column; gap:15px; }
+        #main .left .list-admin a{ display:block; text-decoration:none; color:#fff; padding:10px 20px; }
+        #main .left .list-admin a i{ margin-right:20px; }
+        #main .left .list-admin a:hover{ background-color:#203247; border-left:2px solid #3B7DDD; }
+        #main .left .list-admin .logo img{ width:100%; height:auto; margin:10px 0 20px 0; }
+        #main .left .list-admin a.logo{ padding:0; }
+        #main .left .list-admin a.logo:hover{ background-color:#203247; border-left:none; }
+        .list-admin a.active{ background-color:#203247; border-left:4px solid #FFD700; font-weight:bold; }
+
+        #main .right{ flex:1; background:#F9F9F9; }
+        #main .right .container{
+            display:flex; flex-direction:column; width:calc(100% - 100px);
+            margin:20px auto 0 auto;
+        }
+
+        .list-container{
+            width:95%; margin:30px auto; background:#fff; padding:25px;
+            border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.1);
+        }
+
+        .header{
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;
+        }
+
+        .btn-add{
+            background:#2659F5; color:#fff; border:none; padding:8px 12px;
+            border-radius:5px; cursor:pointer;
+        }
+        .btn-add:hover{ background:#17479D; }
+
+        table.category-table{ width:100%; border-collapse:collapse; margin-top:10px; }
+        table.category-table th{
+            background:#2659F5; color:#fff; padding:12px; font-size:14px;
+        }
+        table.category-table td{
+            padding:12px; background:#fafafa;
+            border-bottom:1px solid #ddd; border-left:1px solid #ddd; border-right:1px solid #ddd;
+        }
+        table.category-table tr:nth-child(even) td{ background:#f0f0f0; }
+
+        .thumb{
+            width:60px; height:60px; object-fit:cover; border-radius:8px;
+            border:1px solid #ddd;
+        }
+        .col-thumb{ text-align:center; width:90px; }
+
+        .btn-icon{
+            color:#fff; padding:8px 12px; border-radius:5px; cursor:pointer;
+            margin-right:5px; border:none;
+        }
+        .btn-edit{ background:#FFC107; color:#000; }
+        .btn-lock{ background:#DC3545; }
+        .btn-unlock{ background:#28a745; }
+        .btn-icon:hover{ opacity:.85; }
+
+        /* DataTables style giống SanPham */
+        .dataTables_wrapper{ width:100%; margin-top:10px; }
+        .dataTables_filter input,
+        .dataTables_length select{
+            padding:6px 10px; border-radius:6px; border:1px solid #ddd; outline:none;
+        }
+        .dataTables_filter{ margin-bottom:10px; }
+        .dataTables_paginate .paginate_button{ padding:6px 10px !important; border-radius:6px !important; }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            background:#17479D !important; color:#fff !important; border:1px solid #17479D !important;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current{
+            background:#17479D !important; color:#fff !important; border:1px solid #17479D !important;
+        }
+
+        /* Modal giống SanPham */
+        .modal{
+            display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,.5); justify-content:center; align-items:center; z-index:999;
+            padding:20px; overflow-y:auto;
+        }
+        .modal-content{
+            background:#fff; padding:25px; width:600px; border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,.2); max-height:90vh; overflow-y:auto;
+            animation:fadeIn .2s ease;
+        }
+        @keyframes fadeIn{
+            from{ opacity:0; transform:scale(.95); }
+            to{ opacity:1; transform:scale(1); }
+        }
+        .modal-content label{ display:block; margin-top:10px; font-size:14px; color:#444; }
+        .modal-content input{ width:100%; padding:8px; margin-top:4px; border:1px solid #ccc; border-radius:5px; }
+        .modal-buttons{ display:flex; justify-content:flex-end; margin-top:20px; gap:10px; }
+        #btn-save{ background:#2659F5; color:#fff; padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
+        #btn-close{ background:#ccc; padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
+    </style>
 </head>
 
 <body>
-    <style>
-        #main {
-            display: flex;
-        }
+<div id="main">
 
-        #main .left {
-            background-color: #17479D;
-            height: 100vh;
-            width: 17%;
-        }
-
-        #main .left .list-admin {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        #main .left .list-admin a {
-            display: block;
-            text-decoration: none;
-            color: white;
-            padding: 10px 20px;
-        }
-
-        #main .left .list-admin a i {
-            margin-right: 20px;
-        }
-
-        #main .left .list-admin a:hover {
-            background-color: #203247;
-            border-left: #3B7DDD 2px solid;
-        }
-
-        #main .left .list-admin .logo img {
-            width: 100%;
-            height: auto;
-            margin: 10px 0 20px 0;
-        }
-
-        #main .left .list-admin a.logo {
-            padding: 0;
-        }
-
-        #main .left .list-admin a.logo:hover {
-            background-color: #203247;
-            border-left: none;
-        }
-
-        .list-admin a.active {
-            background-color: #203247;
-            border-left: 4px solid #FFD700;
-            /* hoặc màu khác */
-            font-weight: bold;
-        }
-
-        #main .right .container {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #main .right {
-            flex: 1;
-            background-color: #F9F9F9;
-        }
-
-
-        .order-container {
-            width: 95%;
-            margin: 30px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin: 0;
-            margin-bottom: 10px;
-            color: #222;
-        }
-
-        .sub-title {
-            color: #555;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .order-table th {
-            background: #2659F5;
-            color: white;
-            padding: 12px;
-            font-size: 14px;
-        }
-
-        .order-table td {
-            padding: 12px;
-            background: #fafafa;
-        }
-
-        .order-table tr:nth-child(even) td {
-            background: #f0f0f0;
-        }
-
-        .order-table td:nth-child(6) {
-            max-width: 220px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-
-        .order-table td,
-        .order-table th {
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        .btn-sm {
-            background-color: #FFC107;
-            color: black;
-            border: none;
-            padding: 6px 10px;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .btn-sm:hover {
-            background-color: #e0a800;
-        }
-
-
-
-
-        .btn-sm i {
-            font-size: 14px;
-        }
-
-        .search-box {
-            margin-left: auto;
-            margin-right: 15px;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            width: 400px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding-left: 10px;
-            overflow: hidden;
-        }
-
-        .search-box input {
-            border: none;
-            outline: none;
-            padding: 8px 10px;
-            width: 100%;
-            font-size: 14px;
-        }
-
-        .search-btn {
-            background: #ddd;
-            border: none;
-            color: black;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 14px;
-            border-left: 1px solid #ddd;
-        }
-
-        .search-btn:hover {
-            background: #ccc;
-        }
-
-        .search-btn i {
-            font-size: 14px;
-        }
-
-        .search-box {
-            height: 40px;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-box input {
-            height: 100%;
-        }
-
-        .search-btn {
-            height: 100%;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 25px 0;
-            gap: 5px;
-        }
-
-        .page-link {
-            padding: 6px 12px;
-            border: 1px solid #d0d7de;
-            border-radius: 4px;
-            color: #0d6efd;
-            background-color: white;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .page-link:hover {
-            background-color: #e9ecef;
-        }
-
-        .page-link.active {
-            background-color: #2659F5;
-            color: white;
-            font-weight: bold;
-            border-color: #2659F5;
-
-        }
-
-        .top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .btn-add-category {
-            background-color: #2659F5;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            cursor: pointer;
-            white-space: nowrap;
-            height: 40px;
-        }
-
-        .btn-add-category:hover {
-            background-color: #1e48c0;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        /* Khung modal */
-        .category-box {
-            width: 450px;
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Header */
-        .modal-header {
-            padding: 14px 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .close-add {
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        /* Body */
-        .modal-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .modal-body input[type="text"],
-        .modal-body input[type="file"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            outline: none;
-        }
-
-        .modal-body input:focus {
-            border-color: #2659F5;
-        }
-
-        /* Footer */
-        .modal-footer {
-            padding: 12px 20px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .btn-cancel,
-        .btn-cancel-edit {
-            background: #6c757d;
-            color: white;
-            padding: 8px 14px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .btn-save,
-        .btn-save-edit {
-            background: #2659F5;
-            color: white;
-            padding: 8px 14px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .order-table img {
-            width: 100px;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        img {
-            overflow-clip-margin: content-box;
-            overflow: clip;
-        }
-    </style>
-    <div id="main">
-
-        <!-- SIDEBAR -->
-        <div class="left">
-            <div class="list-admin">
-                <a href="Admin.jsp" class="logo"><img src="../assets/images/logo/logo.png" alt></a>
-                <a href="${pageContext.request.contextPath}/admin/overview"><i class="fa-solid fa-house"></i> Tổng
-                    quan</a>
-                <a href="${pageContext.request.contextPath}/admin/statistics"><i class="fa-solid fa-chart-line"></i>Thống
-                    kê</a>
-                <a href="DanhMuc.html" class="active"><i class="fa-solid fa-list"></i>Quản
-                    lý danh
-                    mục</a>
-                <a href="${pageContext.request.contextPath}/admin/products"><i class="fa-solid fa-palette"></i>Quản
-                    lý sản phẩm</a>
-                <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản
-                    lý người dùng</a>
-                <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i>Quản
-                    lý đơn hàng</a>
-                <a href="Khuyenmai.jsp"><i class="fa-solid fa-gift"></i>Quản lý
-                    khuyến mãi</a>
-                <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý Slider
-                    Show</a>
-                <a href="Contact.jsp"><i class="fa-solid fa-address-book"></i>Quản lý liên
-                    hệ</a>
-                <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i>
-                    Đăng xuất</a>
-            </div>
+    <!-- SIDEBAR -->
+    <div class="left">
+        <div class="list-admin">
+            <a href="Admin.jsp" class="logo"><img src="../assets/images/logo/logo.png" alt=""></a>
+            <a href="${pageContext.request.contextPath}/admin/overview"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="${pageContext.request.contextPath}/admin/statistics"><i class="fa-solid fa-chart-line"></i>Thống kê</a>
+            <a href="${pageContext.request.contextPath}/admin/categories" class="active">
+                <i class="fa-solid fa-list"></i>Quản lý danh mục
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/products"><i class="fa-solid fa-palette"></i>Quản lý sản phẩm</a>
+            <a href="Nguoidung.jsp"><i class="fa-solid fa-person"></i>Quản lý người dùng</a>
+            <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i>Quản lý đơn hàng</a>
+            <a href="Khuyenmai.jsp"><i class="fa-solid fa-gift"></i>Quản lý khuyến mãi</a>
+            <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý Slider Show</a>
+            <a href="Contact.jsp"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
+            <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
         </div>
+    </div>
 
-        <!-- RIGHT -->
-        <div class="right">
-            <div class="container">
+    <!-- RIGHT -->
+    <div class="right">
+        <div class="container">
 
-                <div class="order-container">
-                    <h1>Quản lý danh mục</h1>
-                    <div class="top-bar">
-                        <div class="search-box">
-                            <input type="text" placeholder="Tìm kiếm đơn hàng...">
-                            <button class="search-btn">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-
-                        <button class="btn-add-category">
-                            Thêm danh mục
-                        </button>
-
-                    </div>
-                    <table class="order-table">
-                        <thead>
-                            <tr>
-                                <th>Mã Danh Mục</th>
-                                <th>Tên Danh Mục</th>
-                                <th>Hình Ảnh</th>
-                                <th>Tùy Chọn</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>CT01</td>
-                                <td>Bút lông màu</td>
-                                <td><img src="..\assets\images\logo\banner-3.webp" alt="Danh mục 1"></td>
-                                <td>
-                                    <button class="btn btn-warning btn-sm btn-edit-category">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>CT02</td>
-                                <td>Màu nước</td>
-                                <td><img src="..\assets\images\logo\ct-maunuoc.jpg" alt="Danh mục 2"></td>
-                                <td>
-                                    <button class="btn btn-warning btn-sm btn-edit-category">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>CT03</td>
-                                <td>Bút chì</td>
-                                <td><img src="..\assets\images\logo\banner-2.webp" alt="Danh mục 3"></td>
-                                <td>
-                                    <button class="btn btn-warning btn-sm btn-edit-category">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <div class="pagination">
-                        <a href="#" class="page-link">Trước</a>
-                        <a href="#" class="page-link active">1</a>
-                        <a href="#" class="page-link">2</a>
-                        <a href="#" class="page-link">3</a>
-                        <a href="#" class="page-link">Sau</a>
-                    </div>
-
+            <div class="list-container">
+                <div class="header">
+                    <h1>Danh sách danh mục</h1>
+                    <button class="btn-add" id="btnAdd">Thêm danh mục</button>
                 </div>
 
+                <table id="categoryTable" class="category-table display">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>ID</th>
+                        <th>Tên danh mục</th>
+                        <th>Hình ảnh</th>
+                        <th>Tùy chọn</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <c:forEach var="c" items="${categories}" varStatus="st">
+                        <tr>
+                            <td>${st.index + 1}</td>
+                            <td>${c.id}</td>
+                            <td>${c.categoryName}</td>
+
+                            <c:set var="imgUrl" value="${c.thumbnail}" />
+                            <c:if test="${not empty c.thumbnail and not fn:startsWith(c.thumbnail,'http')}">
+                                <c:set var="imgUrl" value="${pageContext.request.contextPath}${c.thumbnail}" />
+                            </c:if>
+
+                            <td class="col-thumb">
+                                <c:choose>
+                                    <c:when test="${not empty c.thumbnail}">
+                                        <img class="thumb" src="${imgUrl}" alt="category">
+                                    </c:when>
+                                    <c:otherwise>-</c:otherwise>
+                                </c:choose>
+                            </td>
+
+                            <td>
+                                <!-- EDIT -->
+                                <button class="btn-icon btn-edit btnEdit"
+                                        data-id="${c.id}"
+                                        data-name="${c.categoryName}"
+                                        data-thumbnail="${imgUrl}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+
+                                <!-- LOCK/UNLOCK -->
+                                <form action="${pageContext.request.contextPath}/admin/categories"
+                                      method="post" style="display:inline">
+                                    <input type="hidden" name="action" value="toggleActive">
+                                    <input type="hidden" name="id" value="${c.id}">
+                                    <input type="hidden" name="isActive" value="${c.isActive}">
+                                    <button class="btn-icon ${c.isActive == 1 ? 'btn-lock' : 'btn-unlock'}" type="submit"
+                                            onclick="return confirm('${c.isActive == 1 ? "Khóa" : "Mở khóa"} danh mục này?')">
+                                        <c:choose>
+                                            <c:when test="${c.isActive == 1}">
+                                                <i class="fa-solid fa-lock"></i>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <i class="fa-solid fa-lock-open"></i>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td>
+                                <c:choose>
+                                    <c:when test="${c.isActive == 1}">
+                                        <span style="color:#28a745;font-weight:600;">Đang dùng</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span style="color:#dc3545;font-weight:600;">Đã khóa</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
             </div>
         </div>
-
-    </div>
-    <!-- Modal Thêm Danh Mục -->
-    <div id="addCategoryModal" class="modal">
-        <div class="modal-content category-box">
-
-            <div class="modal-header">
-                <h3>Thêm Danh Mục</h3>
-                <span class="close-add">&times;</span>
-            </div>
-
-            <div class="modal-body">
-                <label>Mã danh mục:</label>
-                <input type="text" id="catCode" placeholder="Nhập mã danh mục...">
-
-                <label>Tên danh mục:</label>
-                <input type="text" id="catName" placeholder="Nhập tên danh mục...">
-
-                <label>Ảnh danh mục:</label>
-                <input type="file" id="catImage">
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn-cancel">Hủy</button>
-                <button class="btn-save">Thêm danh mục</button>
-            </div>
-
-        </div>
-    </div>
-    <div id="editCategoryModal" class="modal">
-        <div class="modal-content category-box">
-
-            <div class="modal-header">
-                <h3>Sửa Danh Mục</h3>
-                <span class="close-edit">&times;</span>
-            </div>
-
-            <div class="modal-body">
-                <label>Mã danh mục:</label>
-                <input type="text" id="editCatCode" value="CT01" disabled>
-                <label>Tên danh mục:</label>
-                <input type="text" id="editCatName" value="Bút lông màu">
-
-                <label>Ảnh danh mục:</label>
-                <input type="file" id="editCatImage">
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn-cancel-edit">Hủy</button>
-                <button class="btn-save-edit">Cập nhật</button>
-            </div>
-
-        </div>
     </div>
 
-</body>
+</div>
+
+<!-- MODAL ADD/EDIT -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Thêm danh mục</h2>
+
+        <form id="categoryForm"
+              action="${pageContext.request.contextPath}/admin/categories"
+              method="post"
+              enctype="multipart/form-data">
+
+            <input type="hidden" name="action" id="action" value="create">
+            <input type="hidden" name="id" id="dbId" value="">
+
+            <label>Tên danh mục</label>
+            <input type="text" id="categoryName" name="categoryName" required>
+
+            <label>Ảnh danh mục</label>
+            <input type="file" id="thumbnail" name="thumbnail" accept="image/*">
+
+            <img id="previewImg" style="width:120px; display:none; margin-top:10px;">
+            <button type="button" id="removeImgBtn" style="display:none;">Xóa ảnh</button>
+
+            <div class="modal-buttons">
+                <button id="btn-save" type="submit">Lưu</button>
+                <button id="btn-close" type="button">Hủy</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
-    const addModal = document.getElementById("addCategoryModal");
-    const btnAdd = document.querySelector(".btn-add-category");
-    const closeAdd = document.querySelector(".close-add");
-    const btnCancel = document.querySelector(".btn-cancel");
-    const btnSave = document.querySelector(".btn-save");
+    // ===== Modal controls =====
+    const modal = document.getElementById("modal");
+    const btnAdd = document.getElementById("btnAdd");
+    const btnClose = document.getElementById("btn-close");
+    const modalTitle = document.getElementById("modalTitle");
+    const actionInput = document.getElementById("action");
+    const dbId = document.getElementById("dbId");
 
+    const nameInput = document.getElementById("categoryName");
 
-    btnAdd.onclick = () => {
-        addModal.style.display = "flex";
-    };
-    closeAdd.onclick = () => addModal.style.display = "none";
-    btnCancel.onclick = () => addModal.style.display = "none";
-    btnSave.onclick = () => {
-        alert("Danh mục đã được thêm ");
-        addModal.style.display = "none";
-    };
+    // preview
+    const thumbnailInput = document.getElementById("thumbnail");
+    const previewImg = document.getElementById("previewImg");
+    const removeImgBtn = document.getElementById("removeImgBtn");
 
-    const editModal = document.getElementById("editCategoryModal");
-    const closeEdit = document.querySelector(".close-edit");
-    const btnCancelEdit = document.querySelector(".btn-cancel-edit");
-    const btnSaveEdit = document.querySelector(".btn-save-edit");
+    function openModal(){ modal.style.display="flex"; }
+    function closeModal(){ modal.style.display="none"; }
 
-    document.querySelectorAll(".btn-edit-category").forEach(btn => {
-        btn.addEventListener("click", () => {
-            editModal.style.display = "flex";
+    btnAdd.addEventListener("click", () => {
+        modalTitle.innerText = "Thêm danh mục";
+        actionInput.value = "create";
+        dbId.value = "";
+        nameInput.value = "";
 
-        });
+        thumbnailInput.value = "";
+        previewImg.style.display = "none";
+        removeImgBtn.style.display = "none";
+
+        openModal();
     });
 
+    btnClose.addEventListener("click", closeModal);
+    window.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
 
-    closeEdit.onclick = () => editModal.style.display = "none";
-    btnCancelEdit.onclick = () => editModal.style.display = "none";
+    thumbnailInput.addEventListener("change", function(){
+        const file = this.files[0];
+        if(file){
+            previewImg.src = URL.createObjectURL(file);
+            previewImg.style.display = "block";
+            removeImgBtn.style.display = "inline-block";
+        }
+    });
 
-    btnSaveEdit.onclick = () => {
-        alert("Danh mục đã được cập nhật ");
-        editModal.style.display = "none";
-    };
+    removeImgBtn.addEventListener("click", function(){
+        thumbnailInput.value = "";
+        previewImg.src = "";
+        previewImg.style.display = "none";
+        removeImgBtn.style.display = "none";
+    });
 
+    // ===== Edit button fill =====
+    document.querySelectorAll(".btnEdit").forEach(btn => {
+        btn.addEventListener("click", () => {
+            modalTitle.innerText = "Cập nhật danh mục";
+            actionInput.value = "update";
+
+            dbId.value = btn.dataset.id;
+            nameInput.value = btn.dataset.name || "";
+
+            const thumb = btn.dataset.thumbnail;
+            if(thumb){
+                previewImg.src = thumb;
+                previewImg.style.display = "block";
+                removeImgBtn.style.display = "inline-block";
+            }else{
+                previewImg.style.display = "none";
+                removeImgBtn.style.display = "none";
+            }
+
+            // không set input file theo URL (browser không cho), chỉ preview thôi
+            thumbnailInput.value = "";
+
+            openModal();
+        });
+    });
 </script>
 
+<script>
+    // ===== DataTables =====
+    $(function () {
+        const viUrl = "https://cdn.datatables.net/plug-ins/1.13.8/i18n/vi.json";
+        $("#categoryTable").DataTable({
+            pageLength: 5,
+            lengthChange: false,
+            ordering: true,
+            searching: true,
+            info: false,
+            language: { url: viUrl },
+            columnDefs: [
+                { orderable: false, targets: [3, 4] } // 3: hình, 4: tùy chọn
+            ]
+        });
+    });
+</script>
+
+</body>
 </html>

@@ -482,7 +482,7 @@
                     <a href="${pageContext.request.contextPath}/admin/statistics"><i
                             class="fa-solid fa-chart-line"></i>Thống
                         kê</a>
-                    <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản
+                    <a href="${pageContext.request.contextPath}/admin/categories"><i class="fa-solid fa-list"></i>Quản
                         lý danh
                         mục</a>
                     <a href="${pageContext.request.contextPath}/admin/products"><i
