@@ -355,13 +355,14 @@
                 lý sản phẩm</a>
                 <a href="${pageContext.request.contextPath}/admin/users" ><i
                         class="fa-solid fa-person"></i>Quản lý người dùng</a>
-              <a href="Order.jsp"><i class="fa-solid fa-box-open"></i>Quản
+
+              <a href="${pageContext.request.contextPath}/admin/orders"><i class="fa-solid fa-box-open"></i>Quản
                 lý đơn hàng</a>
-              <a href="Khuyenmai.jsp"><i class="fa-solid fa-gift"></i>Quản lý
+              <a href="${pageContext.request.contextPath}/admin/vouchers"><i class="fa-solid fa-gift"></i>Quản lý
                 khuyến mãi</a>
               <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý
                 Slider Show</a>
-              <a href="Contact.jsp"><i class="fa-solid fa-address-book"></i>Quản lý
+              <a href="${pageContext.request.contextPath}/admin/contacts"><i class="fa-solid fa-address-book"></i>Quản lý
                 liên hệ</a>
               <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i>
                 Đăng xuất</a>

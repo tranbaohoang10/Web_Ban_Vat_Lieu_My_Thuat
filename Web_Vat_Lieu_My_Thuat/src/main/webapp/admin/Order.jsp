@@ -447,13 +447,13 @@
             <a href="${pageContext.request.contextPath}/admin/products"><i
                     class="fa-solid fa-palette"></i>Quản
                 lý sản phẩm</a>
-            <a href="Nguoidung.jsp"><i
+            <a href="${pageContext.request.contextPath}/admin/users"><i
                     class="fa-solid fa-person"></i>Quản
                 lý người dùng</a>
             <a href="${pageContext.request.contextPath}/admin/orders" class="active"><i
                     class="fa-solid fa-box-open"></i>Quản
                 lý đơn hàng</a>
-            <a href="Khuyenmai.jsp"><i
+            <a href="${pageContext.request.contextPath}/admin/vouchers"><i
                     class="fa-solid fa-gift"></i>Quản lý
                 khuyến mãi</a>
             <a href="SliderShow.jsp"><i
