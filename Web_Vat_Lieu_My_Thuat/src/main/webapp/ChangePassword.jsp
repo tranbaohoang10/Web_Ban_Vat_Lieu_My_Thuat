@@ -247,7 +247,7 @@
                     <br>
                     <input type="password" id="matkhaumoi" name="matkhaumoi"
                     required
-                    minlength="12"
+                    minlength="8"
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$"
                     title="Mật khẩu có ít nhất 8 kí tự gồm chữ hoa, chữ thường và các kí tự đặc biệt.">
                     <span id="pwerror" style="color: #DC3545; font-size: 14px;"></span>

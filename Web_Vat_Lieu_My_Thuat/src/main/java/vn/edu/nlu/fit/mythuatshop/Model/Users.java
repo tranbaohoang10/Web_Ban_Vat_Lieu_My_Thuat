@@ -13,7 +13,7 @@ public class Users {
     private String address;
     private String role;
     private LocalDateTime createAt;
-
+    private int isActive;
 
     ;
 
@@ -88,4 +88,7 @@ public class Users {
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
     }
+
+    public int getIsActive() { return isActive; }
+    public void setIsActive(int isActive) { this.isActive = isActive; }
 }

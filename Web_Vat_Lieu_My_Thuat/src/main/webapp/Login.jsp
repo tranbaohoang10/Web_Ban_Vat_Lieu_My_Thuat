@@ -195,13 +195,13 @@
 
     /* End footer */
 
-/*    style session*/
+    /*    style session*/
 
     #sessionModal {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.55);
-        display: none;               /* mặc định ẩn */
+        display: none; /* mặc định ẩn */
         align-items: center;
         justify-content: center;
         z-index: 9999;
@@ -258,8 +258,9 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
         transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
-    .btn-session-close i{
-       color: #343A40;
+
+    .btn-session-close i {
+        color: #343A40;
     }
 
     .btn-session-close:hover {
@@ -274,7 +275,6 @@
     }
 
 
-
 </style>
 
 <body>
@@ -282,22 +282,24 @@
 <div class="main">
     <div class="container">
         <h4>Đăng Nhập</h4>
-<%--  Them e      --%>
-<%--        <% String e = request.getAttribute("error")== null?" ": request.getAttribute("error")+" ";%>--%>
+        <%--  Them e      --%>
+        <%--        <% String e = request.getAttribute("error")== null?" ": request.getAttribute("error")+" ";%>--%>
         <form action="${pageContext.request.contextPath}/login" method="post" class="form-login">
             <div class="form-1">
                 <label for="email"> Email*</label>
                 <input type="email" name="email" placeholder="Nhập Email"
                        required
-                       id="email">
+                       id="email"
+                       pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+                       title="Email phải đúng định dạng, ví dụ: ten@gmail.com">
+
                 <span id="email-error"
                       style="color: #FFD700; font-size: 14px;"></span>
             </div>
             <div class="form-1">
                 <label for="password"> Mật Khẩu*</label>
                 <input type="password" name="password" placeholder="Nhập mật khẩu"
-                       required id="password">
-            </div>
+                       required id="Mk"></div>
             <p style="color: red; margin-top:8px"> ${error}</p>
 
             <div class="forgot-password">
@@ -310,7 +312,7 @@
             </button>
 
             <div class="chuataikhoan">
-                Bạn chưa có tài khoản <a href= "${pageContext.request.contextPath}/register"
+                Bạn chưa có tài khoản <a href="${pageContext.request.contextPath}/register"
                                          class="link-dki">Đăng ký tại đây</a>
             </div>
 
@@ -359,6 +361,33 @@
                     if (emailInput) emailInput.focus();
                 });
             }
+        }
+    });
+</script>
+
+
+<%--check error email--%>
+<script>
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("email-error");
+
+    // Regex đơn giản, đủ dùng cho form đăng ký
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    emailInput.addEventListener("input", () => {
+        const email = emailInput.value.trim();
+
+        if (email.length === 0) {
+            // nếu muốn bắt buộc nhập thì để thông báo,
+            // còn không thì có thể để rỗng
+            emailError.textContent = "";
+            return;
+        }
+
+        if (emailRegex.test(email)) {
+            emailError.textContent = "";
+        } else {
+            emailError.textContent = "Email không hợp lệ (vd: ten@gmail.com)";
         }
     });
 </script>
