@@ -153,6 +153,25 @@
       color: black;
 
     }
+    /* nút khóa/mở khóa */
+    .sanpham-table .btn-lock {
+      background-color: #DC3545; /* đỏ */
+      color: white;
+    }
+    .sanpham-table .btn-unlock {
+      background-color: #28a745; /* xanh */
+      color: white;
+    }
+
+    /* trạng thái chữ */
+    .status-selling {
+      color: #28a745;
+      font-weight: 600;
+    }
+    .status-stopped {
+      color: #DC3545;
+      font-weight: 600;
+    }
 
     .sanpham-table .xoa-sanpham {
       background-color: #DC3545;
@@ -498,13 +517,14 @@
                   <td>
                     <c:choose>
                       <c:when test="${p.isActive == 1}">
-                        Đang bán
+                        <span class="status-selling">Đang bán</span>
                       </c:when>
                       <c:otherwise>
-                        Ngừng bán
+                        <span class="status-stopped">Ngừng bán</span>
                       </c:otherwise>
                     </c:choose>
                   </td>
+
 
                   <!-- Tùy chọn -->
                   <td>
