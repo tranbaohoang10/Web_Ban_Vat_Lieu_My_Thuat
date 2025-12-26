@@ -6,7 +6,6 @@ import vn.edu.nlu.fit.mythuatshop.Model.Users;
 import vn.edu.nlu.fit.mythuatshop.Util.EmailUtil;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.UUID;
 
@@ -17,93 +16,122 @@ public class UserService {
         this.userDao = new UserDao();
     }
 
+    //  LOGIN: chặn tài khoản bị khóa
     public Users login(String email, String password) {
-       Users user = userDao.findByEmail(email);
-       if(user==null){
-           return null;
-       }
-       boolean matched = BCrypt.checkpw(password, user.getPassword());
-       if(!matched){
-           return null;
-       }
-       return user;
+        if (email == null || password == null) return null;
+
+        Users user = userDao.findByEmail(email.trim());
+        if (user == null) return null;
+
+        //  CHẶN nếu bị khóa
+        // (yêu cầu Model Users có getIsActive() hoặc isActive)
+        if (user.getIsActive() == 0) {
+            return null; // hoặc bạn có thể throw / set message tùy hệ thống
+        }
+
+        boolean matched = BCrypt.checkpw(password, user.getPassword());
+        if (!matched) return null;
+
+        return user;
     }
 
+    //  REGISTER: set address + set isActive=1
     public boolean register(String fullName, String email, String phoneNumber, String password, String address) {
-        if(userDao.findByEmail(email)!=null){
+        if (email == null || email.isBlank()) return false;
+        if (password == null || password.isBlank()) return false;
+
+        email = email.trim();
+
+        if (userDao.findByEmail(email) != null) {
             return false;
         }
+
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
         Users user = new Users();
         user.setFullName(fullName);
         user.setEmail(email);
         user.setPassword(hashedPassword);
         user.setPhoneNumber(phoneNumber);
+        user.setAddress(address);      //  bạn bị thiếu dòng này
         user.setRole("USER");
 
-        int row =   userDao.insertUser(user);
-        return row>0;
+        user.setIsActive(1);           //  mặc định active
+
+        int row = userDao.insertUser(user);
+        return row > 0;
     }
-    // Chức năng cập nhật thông tin
+
+    // =================== Cập nhật thông tin ===================
     public Users getUserById(int id) {
         return userDao.findById(id);
     }
+
     public boolean updateProfile(int userId, String fullName, String phoneNumber, String dobStr, String address) {
         Users user = userDao.findById(userId);
-        if(user==null){
-            return false;
-        }
+        if (user == null) return false;
+
+        //  nếu user bị khóa thì bạn có thể chặn sửa profile (tuỳ bạn)
+        // if (user.getIsActive() == 0) return false;
+
         user.setFullName(fullName);
         user.setPhoneNumber(phoneNumber);
         user.setAddress(address);
 
-        if(dobStr!=null && !dobStr.isEmpty()){
+        if (dobStr != null && !dobStr.isEmpty()) {
             LocalDate ld = LocalDate.parse(dobStr);
             user.setDob(ld);
         }
+
         int row = userDao.updateUser(user);
-        return row>0;
+        return row > 0;
     }
-    // Chức năng đổi mật khẩu
+
+    // =================== Đổi mật khẩu ===================
     public boolean changePassword(int userId, String oldPassword, String newPassword) {
         Users user = userDao.findById(userId);
-        if (user == null) {
-            return false;
-        }
-        String curentHash = user.getPassword();
-        boolean match = BCrypt.checkpw(oldPassword, curentHash);
-        if (!match) {
-            return false;
-        }
+        if (user == null) return false;
+
+        //  nếu user bị khóa thì chặn đổi pass (tuỳ bạn)
+        // if (user.getIsActive() == 0) return false;
+
+        String currentHash = user.getPassword();
+        boolean match = BCrypt.checkpw(oldPassword, currentHash);
+        if (!match) return false;
+
         String newHash = BCrypt.hashpw(newPassword, BCrypt.gensalt(12));
         return userDao.updatePassword(userId, newHash);
     }
-    // quên mật khẩu
+
+    // =================== Quên mật khẩu ===================
     public Users getUserByEmail(String email) {
         return userDao.findByEmailFp(email);
     }
-    public boolean resetAndSendEmail(String email){
-        email = email.trim();
-        Users user = userDao.findByEmailFp(email);
-        if(user == null) return false;
 
-        String matkhaumoi = generateRandomPassword();
-        String hashed = BCrypt.hashpw(matkhaumoi, BCrypt.gensalt(12));
+    public boolean resetAndSendEmail(String email) {
+        if (email == null) return false;
+        email = email.trim();
+
+        Users user = userDao.findByEmailFp(email);
+        if (user == null) return false;
+
+        //  nếu user bị khóa thì bạn có thể chặn reset (tuỳ bạn)
+        // if (user.getIsActive() == 0) return false;
+
+        String matKhauMoi = generateRandomPassword();
+        String hashed = BCrypt.hashpw(matKhauMoi, BCrypt.gensalt(12));
 
         int row = userDao.updatePasswordByEmail(email, hashed);
-        if(row <= 0) return false;
+        if (row <= 0) return false;
 
         String subject = "Đặt lại mật khẩu cho tài khoản";
-        String nd = "Mật khẩu mới của bạn là: " + matkhaumoi;
+        String nd = "Mật khẩu mới của bạn là: " + matKhauMoi;
 
         try {
-            System.out.println(">>> START send mail to: " + email);
             EmailUtil.send(email, subject, nd);
-            System.out.println(">>> SEND MAIL OK to: " + email);
             return true;
         } catch (Exception e) {
-            System.out.println(">>> SEND MAIL FAILED to: " + email);
-            e.printStackTrace();   // ⭐ dòng này sẽ cho bạn biết lỗi SMTP/Auth/Port
+            e.printStackTrace();
             return false;
         }
     }
@@ -117,12 +145,22 @@ public class UserService {
         }
         return sb.toString();
     }
-    // chức năng đăng nhập bằng gg
+
+    // =================== Đăng nhập bằng Google ===================
     public Users findByEmailForGG(String email) {
-        return userDao.findByEmail(email);
+        if (email == null) return null;
+        return userDao.findByEmail(email.trim());
     }
 
+    //  register google: role USER + isActive=1
     public Users registerGoogleUser(String name, String email) {
+        if (email == null || email.isBlank()) return null;
+        email = email.trim();
+
+        // nếu đã tồn tại thì trả về user hiện có
+        Users existed = userDao.findByEmail(email);
+        if (existed != null) return existed;
+
         String randomPassword = UUID.randomUUID().toString();
         String hashed = BCrypt.hashpw(randomPassword, BCrypt.gensalt(12));
 
@@ -130,35 +168,35 @@ public class UserService {
         user.setFullName(name);
         user.setEmail(email);
         user.setPassword(hashed);
-        user.setRole("user");
+        user.setRole("USER");      //  đồng nhất role
+        user.setPhoneNumber("");
+        user.setAddress("");
+        user.setIsActive(1);       //  mặc định active
 
         userDao.insertUser(user);
         return userDao.findByEmail(email);
     }
 
+    //  bản safe cũng set isActive=1
     public void registerGoogleUserSafe(String name, String email) {
-        // nếu email đã tồn tại thì thôi
+        if (email == null || email.isBlank()) return;
+        email = email.trim();
+
         if (userDao.findByEmail(email) != null) return;
 
         Users user = new Users();
         user.setFullName(name != null && !name.isBlank() ? name : "Google User");
         user.setEmail(email);
 
-        // password vẫn cần (nếu DB NOT NULL). Tạo random + hash.
-        // Nếu project bạn đang dùng BCrypt (org.mindrot.jbcrypt.BCrypt) thì dùng như dưới:
-        String raw = java.util.UUID.randomUUID().toString();
-        String hashed = org.mindrot.jbcrypt.BCrypt.hashpw(raw, org.mindrot.jbcrypt.BCrypt.gensalt());
+        String raw = UUID.randomUUID().toString();
+        String hashed = BCrypt.hashpw(raw, BCrypt.gensalt(12));
         user.setPassword(hashed);
 
-        // tránh lỗi NOT NULL
         user.setPhoneNumber("");
         user.setAddress("");
-
-        // đồng nhất role (bạn đang dùng "USER" ở các chỗ khác)
         user.setRole("USER");
+        user.setIsActive(1);       //  mặc định active
 
         userDao.insertUser(user);
     }
-
-
 }
