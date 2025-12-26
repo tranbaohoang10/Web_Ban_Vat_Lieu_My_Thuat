@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -1075,10 +1077,23 @@
                 <div class="product-main-image">
                     <c:choose>
                         <c:when test="${not empty subimagesList}">
-                            <img src="${subimagesList[0].image}"
+                            <c:set var="mainImgUrl" value="${subimagesList[0].image}" />
+                            <c:if test="${not empty mainImgUrl and not fn:startsWith(mainImgUrl,'http') and not fn:startsWith(mainImgUrl, pageContext.request.contextPath)}">
+                                <c:choose>
+                                    <c:when test="${fn:startsWith(mainImgUrl,'/')}">
+                                        <c:set var="mainImgUrl" value="${pageContext.request.contextPath}${mainImgUrl}" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var="mainImgUrl" value="${pageContext.request.contextPath}/${mainImgUrl}" />
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if>
+
+                            <img src="${mainImgUrl}"
                                  alt="${product.name}"
                                  id="mainProductImage">
                         </c:when>
+
                         <c:otherwise>
                             <img src="./assets/images/logo/list1-1.jpg"
                                  alt="${product.name}"
@@ -1105,8 +1120,21 @@
                                 <c:forEach var="img" items="${subimagesList}" varStatus="st">
                                     <div class="thumbnail-item ${st.first ? 'active' : ''}"
                                          data-index="${st.index}">
-                                        <img src="${img.image}"
+                                        <c:set var="subImgUrl" value="${img.image}" />
+                                        <c:if test="${not empty subImgUrl and not fn:startsWith(subImgUrl,'http') and not fn:startsWith(subImgUrl, pageContext.request.contextPath)}">
+                                            <c:choose>
+                                                <c:when test="${fn:startsWith(subImgUrl,'/')}">
+                                                    <c:set var="subImgUrl" value="${pageContext.request.contextPath}${subImgUrl}" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set var="subImgUrl" value="${pageContext.request.contextPath}/${subImgUrl}" />
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:if>
+
+                                        <img src="${subImgUrl}"
                                              alt="Ảnh phụ ${st.index + 1}">
+
                                     </div>
                                 </c:forEach>
                             </c:when>
@@ -1205,7 +1233,19 @@
                     <c:forEach var="p" items="${relatedProducts}">
                         <div class="list-product-list1">
                             <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
-                                <img src="${p.thumbnail}" alt="${p.name}">
+                                <c:set var="relThumbUrl" value="${p.thumbnail}" />
+                                <c:if test="${not empty relThumbUrl and not fn:startsWith(relThumbUrl,'http') and not fn:startsWith(relThumbUrl, pageContext.request.contextPath)}">
+                                    <c:choose>
+                                        <c:when test="${fn:startsWith(relThumbUrl,'/')}">
+                                            <c:set var="relThumbUrl" value="${pageContext.request.contextPath}${relThumbUrl}" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:set var="relThumbUrl" value="${pageContext.request.contextPath}/${relThumbUrl}" />
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
+
+                                <img src="${relThumbUrl}" alt="${p.name}">
                                 <div class="list-product-list1-content">
                                     <div class="list-product-list1-content-socials">
                                         <%@ include file="BadgeType.jsp" %>

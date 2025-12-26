@@ -46,7 +46,7 @@ public class PlaceOrderController extends HttpServlet {
         String address = req.getParameter("address");
         String note = req.getParameter("note");
         String paymentName = req.getParameter("payment");
-        Integer voucherId = null;
+        Integer voucherId = (Integer) session.getAttribute("appliedVoucherId");
 
         Order order = orderService.createOrder(currentUser, cart, fullName, email, phone,
                 address, note, paymentName, voucherId);
@@ -66,6 +66,7 @@ public class PlaceOrderController extends HttpServlet {
         session.removeAttribute("cart");
         session.setAttribute("cartCount", 0);
         session.setAttribute("paidOrder", order);
+        session.removeAttribute("appliedVoucherId");
         resp.sendRedirect(req.getContextPath() + "/payment-success");
         return;
     }

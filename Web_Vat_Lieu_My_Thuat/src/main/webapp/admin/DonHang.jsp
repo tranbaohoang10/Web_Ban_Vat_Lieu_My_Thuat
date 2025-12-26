@@ -401,15 +401,15 @@
                 <div class="list-admin">
                     <a href="Admin.jsp" class="logo"><img
                             src="../assets/images/logo/logo.png" alt></a>
-                    <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng
+                    <a href="${pageContext.request.contextPath}/admin/overview"><i class="fa-solid fa-house"></i> Tổng
                         quan</a>
-                    <a href="ThongKe.jsp"><i
+                    <a href="${pageContext.request.contextPath}/admin/statistics"><i
                             class="fa-solid fa-chart-line"></i>Thống
                         kê</a>
                     <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản
                         lý danh
                         mục</a>
-                    <a href="SanPham.jsp"><i
+                    <a href="${pageContext.request.contextPath}/admin/products"><i
                             class="fa-solid fa-palette"></i>Quản
                         lý sản phẩm</a>
                     <a href="Nguoidung.jsp"><i

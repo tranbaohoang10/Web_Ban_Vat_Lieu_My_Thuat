@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -369,9 +371,20 @@
                                                 </div>
 
                                                 <div class="thumb">
-                                                    <img
-                                                            src="${item.thumbnail}"
-                                                            alt="${item.name}"/>
+                                                    <c:set var="cartThumbUrl" value="${item.thumbnail}" />
+                                                    <c:if test="${not empty cartThumbUrl and not fn:startsWith(cartThumbUrl,'http') and not fn:startsWith(cartThumbUrl, pageContext.request.contextPath)}">
+                                                        <c:choose>
+                                                            <c:when test="${fn:startsWith(cartThumbUrl,'/')}">
+                                                                <c:set var="cartThumbUrl" value="${pageContext.request.contextPath}${cartThumbUrl}" />
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:set var="cartThumbUrl" value="${pageContext.request.contextPath}/${cartThumbUrl}" />
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:if>
+
+                                                    <img src="${cartThumbUrl}" alt="${item.name}"/>
+
                                                 </div>
 
                                                 <div

@@ -30,11 +30,11 @@ public class HomeController extends HttpServlet {
         if (categories.size() > 1) cat2 = categories.get(1);
 
         List<ProductCard> productsCat1 = (cat1 != null)
-                ? cardService.topByCategory(cat1.getId(), 6)   // hoặc 10 tuỳ bạn
+                ? cardService.topByCategory(cat1.getId(), 10)
                 : List.of();
 
         List<ProductCard> productsCat2 = (cat2 != null)
-                ? cardService.topByCategory(cat2.getId(), 6)
+                ? cardService.topByCategory(cat2.getId(), 10)
                 : List.of();
 
         List<SliderShow> sliderShows = sliderShowService.getSliderShow();

@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.mythuatshop.Service;
 import vn.edu.nlu.fit.mythuatshop.Dao.OrderDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.OrderStatusDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.PaymentDao;
+import vn.edu.nlu.fit.mythuatshop.Dao.VoucherDao;
 import vn.edu.nlu.fit.mythuatshop.Model.*;
 import vn.edu.nlu.fit.mythuatshop.Util.EmailUtil;
 
@@ -22,7 +23,7 @@ public class OrderService {
     }
 
     public Order createOrder(Users user, Cart cart, String fullName, String email, String phone,
-            String address, String note, String paymentName, Integer voucherId) {
+                             String address, String note, String paymentName, Integer voucherId) {
 
         if (user == null || cart == null || cart.cartSize() == 0)
             return null;
@@ -51,6 +52,7 @@ public class OrderService {
 
         order.setDiscount(cart.getDiscount());
         order.setVoucherId(voucherId);
+        order.setShippingFee(cart.getFee());
         order.setTotalPrice(cart.getTotalPriceToPay());
 
         List<OrderDetail> details = new ArrayList<>();
@@ -70,7 +72,14 @@ public class OrderService {
                 return null;
 
             order.setId(newId);
-
+            if (!isVnpay && voucherId != null) {
+                try {
+                    VoucherDao voucherDao = new VoucherDao();
+                    voucherDao.increaseUsed(voucherId);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
             // Chỉ gửi mail ngay cho COD
             if (!isVnpay) {
                 try {
@@ -94,6 +103,14 @@ public class OrderService {
         try {
             Order order = orderDao.confirmVnpayPaid(orderId, amountVnd);
             if (order != null) {
+                Integer vid = order.getVoucherId();
+                if (vid != null) {
+                    try {
+                        new VoucherDao().increaseUsed(vid);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
                 // Gửi email xác nhận sau khi thanh toán VNPAY thành công
                 try {
                     String subject = "Xác nhận đơn hàng #DH" + orderId;
@@ -150,6 +167,7 @@ public class OrderService {
         order.setViewItems(orderDao.findOrderItemsView(orderId));
         return order;
     }
+
     public boolean cancelOrder(int userId, int orderId) {
         return orderDao.cancelOrder(orderId, userId);
     }
