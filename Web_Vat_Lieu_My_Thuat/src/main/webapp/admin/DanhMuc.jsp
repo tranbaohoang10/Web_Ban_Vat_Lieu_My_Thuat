@@ -73,9 +73,13 @@
             margin-right:5px; border:none;
         }
         .btn-edit{ background:#FFC107; color:#000; }
-        .btn-lock{ background:#DC3545; }
-        .btn-unlock{ background:#28a745; }
+        .btn-lock{ background:#DC3545; }      /* đỏ: khóa */
+        .btn-unlock{ background:#FFC107; }    /* xanh: mở */
         .btn-icon:hover{ opacity:.85; }
+
+        /* Badge trạng thái */
+        .badge-active { color:#28a745; font-weight:600; }
+        .badge-inactive { color:#dc3545; font-weight:600; }
 
         /* DataTables style giống SanPham */
         .dataTables_wrapper{ width:100%; margin-top:10px; }
@@ -112,6 +116,19 @@
         .modal-buttons{ display:flex; justify-content:flex-end; margin-top:20px; gap:10px; }
         #btn-save{ background:#2659F5; color:#fff; padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
         #btn-close{ background:#ccc; padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
+        /* mặc định theo trạng thái */
+        .toggle-btn.is-active { background:#DC3545; }   /* đang dùng -> nút khóa màu đỏ */
+        .toggle-btn.is-inactive { background:#FFC107; } /* đã khóa -> nút mở khóa màu vàng */
+
+        /* icon màu trắng/đen tùy bạn */
+        .toggle-btn i { color: #fff; }
+
+        /* khi bấm (active) hoặc giữ chuột (focus) -> icon đen */
+        .toggle-btn:active i,
+        .toggle-btn:focus i {
+            color: #000 !important;
+        }
+
     </style>
 </head>
 
@@ -154,15 +171,17 @@
                         <th>ID</th>
                         <th>Tên danh mục</th>
                         <th>Hình ảnh</th>
-                        <th>Tùy chọn</th>
+
                         <th>Trạng thái</th>
+                        <th>Tùy chọn</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    <c:forEach var="c" items="${categories}" varStatus="st">
+                    <c:forEach var="c" items="${categories}">
                         <tr>
-                            <td>${st.index + 1}</td>
+                            <td></td> <!-- STT để trống -->
+
                             <td>${c.id}</td>
                             <td>${c.categoryName}</td>
 
@@ -180,6 +199,19 @@
                                 </c:choose>
                             </td>
 
+                            <!-- ✅ TRẠNG THÁI (đưa lên trước) -->
+                            <td>
+                                <c:choose>
+                                    <c:when test="${c.isActive == 1}">
+                                        <span class="badge-active">Đang dùng</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge-inactive">Đã khóa</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+
+
                             <td>
                                 <!-- EDIT -->
                                 <button class="btn-icon btn-edit btnEdit"
@@ -195,7 +227,10 @@
                                     <input type="hidden" name="action" value="toggleActive">
                                     <input type="hidden" name="id" value="${c.id}">
                                     <input type="hidden" name="isActive" value="${c.isActive}">
-                                    <button class="btn-icon ${c.isActive == 1 ? 'btn-lock' : 'btn-unlock'}" type="submit"
+
+                                    <button class="btn-icon ${c.isActive == 1 ? 'btn-lock' : 'btn-unlock'}"
+                                            type="submit"
+                                            title="${c.isActive == 1 ? 'Khóa danh mục' : 'Mở khóa danh mục'}"
                                             onclick="return confirm('${c.isActive == 1 ? "Khóa" : "Mở khóa"} danh mục này?')">
                                         <c:choose>
                                             <c:when test="${c.isActive == 1}">
@@ -207,17 +242,6 @@
                                         </c:choose>
                                     </button>
                                 </form>
-                            </td>
-
-                            <td>
-                                <c:choose>
-                                    <c:when test="${c.isActive == 1}">
-                                        <span style="color:#28a745;font-weight:600;">Đang dùng</span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span style="color:#dc3545;font-weight:600;">Đã khóa</span>
-                                    </c:otherwise>
-                                </c:choose>
                             </td>
                         </tr>
                     </c:forEach>
@@ -268,7 +292,6 @@
     const modalTitle = document.getElementById("modalTitle");
     const actionInput = document.getElementById("action");
     const dbId = document.getElementById("dbId");
-
     const nameInput = document.getElementById("categoryName");
 
     // preview
@@ -330,19 +353,18 @@
                 removeImgBtn.style.display = "none";
             }
 
-            // không set input file theo URL (browser không cho), chỉ preview thôi
             thumbnailInput.value = "";
-
             openModal();
         });
     });
 </script>
 
 <script>
-    // ===== DataTables =====
+    // ===== DataTables + Auto STT =====
     $(function () {
         const viUrl = "https://cdn.datatables.net/plug-ins/1.13.8/i18n/vi.json";
-        $("#categoryTable").DataTable({
+
+        const table = $("#categoryTable").DataTable({
             pageLength: 5,
             lengthChange: false,
             ordering: true,
@@ -350,9 +372,20 @@
             info: false,
             language: { url: viUrl },
             columnDefs: [
-                { orderable: false, targets: [3, 4] } // 3: hình, 4: tùy chọn
-            ]
+
+                // 0: STT, 3: Hình, 5: Tùy chọn
+                { orderable: false, targets: [0, 3, 5] }
+            ],
+            order: [[1, "asc"]] // sort theo ID
         });
+
+        table.on("order.dt search.dt draw.dt", function () {
+            const pageInfo = table.page.info();
+            table.column(0, { search: "applied", order: "applied" }).nodes()
+                .each(function (cell, i) {
+                    cell.innerHTML = pageInfo.start + i + 1;
+                });
+        }).draw();
     });
 </script>
 

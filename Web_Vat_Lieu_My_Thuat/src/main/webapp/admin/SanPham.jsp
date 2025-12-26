@@ -764,12 +764,11 @@
           qtyInput.value = btn.dataset.quantity || 0;
           brandInput.value = btn.dataset.brand || "";
 
-          // nếu bạn có data-size/madein/warning thì set tiếp
           sizeInput.value = btn.dataset.size || "";
           madeInInput.value = btn.dataset.madein || "";
           warningInput.value = btn.dataset.warning || "";
 
-          // ảnh chính (chỉ preview URL cũ)
+          // ảnh chính (preview URL cũ)
           const thumb = btn.dataset.thumbnail;
           if (thumb) {
             previewImg.src = thumb;
@@ -780,9 +779,14 @@
             removeImgBtn.style.display = "none";
           }
 
-          // update: thường ẩn ảnh phụ (đỡ phức tạp)
-          thumbnailSub.style.display = "none";
-          subPreviewContainer.style.display = "none";
+
+          thumbnailSub.style.display = "block";
+          subPreviewContainer.style.display = "flex";
+
+
+          subImages = [];
+          subPreviewContainer.innerHTML = "";
+          thumbnailSub.value = "";
 
           openModal();
         });

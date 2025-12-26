@@ -42,4 +42,8 @@ public class CategoryService {
         int newValue = (currentIsActive == 1) ? 0 : 1;
         return categoryDao.updateActive(id, newValue);
     }
+    public List<Category> getAllActiveCategories() {
+        return categoryDao.findAllActive();
+    }
+
 }

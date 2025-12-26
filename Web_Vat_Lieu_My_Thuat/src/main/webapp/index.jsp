@@ -536,7 +536,20 @@
         </div>
         <div class="section-but">
             <div class="container">
-                <img src="${cat2.thumbnail}" alt="${cat2.categoryName}">
+
+                <c:set var="imgUrl2" value="${cat2.thumbnail}" />
+                <c:if test="${not empty imgUrl2 and not fn:startsWith(imgUrl2,'http') and not fn:startsWith(imgUrl2, pageContext.request.contextPath)}">
+                    <c:choose>
+                        <c:when test="${fn:startsWith(imgUrl2,'/')}">
+                            <c:set var="imgUrl2" value="${pageContext.request.contextPath}${imgUrl2}" />
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="imgUrl2" value="${pageContext.request.contextPath}/${imgUrl2}" />
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+
+                <img src="${imgUrl2}" alt="${cat2.categoryName}">
                 <div class="section-but-header">
                     <h2 class="category-title">${cat2.categoryName}</h2>
                 </div>
