@@ -184,7 +184,12 @@
         <form action = "${pageContext.request.contextPath}/forgotpassword" class="form-email" method="post">
 
             <div class="form-1">
-                <input type="email" name = "email" placeholder="Email" required>
+                <input type="email" name = "email" placeholder="Email" id="email" required
+                       pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+                       title="Email phải đúng định dạng, ví dụ: ten@gmail.com">
+                <span id="email-error"
+                      style="color: #FFD700; font-size: 14px;"></span>
+
             </div>
 
             <p style="color: red; margin-top: 10px">${error}</p>
@@ -221,6 +226,33 @@
 
 
 <%@ include file="Footer.jsp" %>
+
+<%--check error email--%>
+<script>
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("email-error");
+
+    // Regex đơn giản, đủ dùng cho form đăng ký
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    emailInput.addEventListener("input", () => {
+        const email = emailInput.value.trim();
+
+        if (email.length === 0) {
+            // nếu muốn bắt buộc nhập thì để thông báo,
+            // còn không thì có thể để rỗng
+            emailError.textContent = "";
+            return;
+        }
+
+        if (emailRegex.test(email)) {
+            emailError.textContent = "";
+        } else {
+            emailError.textContent = "Email không hợp lệ (vd: ten@gmail.com)";
+        }
+    });
+</script>
+
 </body>
 
 </html>
