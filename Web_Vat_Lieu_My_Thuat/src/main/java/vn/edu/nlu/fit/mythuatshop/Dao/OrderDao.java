@@ -21,9 +21,9 @@ public class OrderDao implements DaoInterface<Order> {
         return jdbi.inTransaction(handle -> {
             // 1. Insert vào Orders, lấy ID sinh ra
             String sql = "INSERT INTO Orders (userID, fullName, email, phoneNumber, address, " +
-                    " totalPrice, paymentID, orderStatusID, voucherID, discount,shippingFee, note) " +
+                    " totalPrice, paymentID, orderStatusID, voucherID, discount,shippingFee, note,paymentStatus ) " +
                     "VALUES (:userID, :fullName, :email, :phoneNumber, :address, " +
-                    " :totalPrice, :paymentID, :orderStatusID, :voucherID, :discount,:shippingFee, :note)";
+                    " :totalPrice, :paymentID, :orderStatusID, :voucherID, :discount,:shippingFee, :note, :paymentStatus)";
             int orderId = handle.createUpdate(sql)
                     .bind("userID", order.getUserId())
                     .bind("fullName", order.getFullName())
@@ -37,6 +37,7 @@ public class OrderDao implements DaoInterface<Order> {
                     .bind("discount", order.getDiscount())
                     .bind("shippingFee", order.getShippingFee())
                     .bind("note", order.getNote())
+                    .bind("paymentStatus", order.getPaymentStatus())
                     .executeAndReturnGeneratedKeys("ID")
                     .mapTo(Integer.class)
                     .one();
@@ -138,8 +139,9 @@ public class OrderDao implements DaoInterface<Order> {
             handle.createUpdate("""
                                 UPDATE Orders
                                 SET orderStatusID = (
-                                    SELECT ID FROM Order_Statuses WHERE statusName = 'Đang xử lý' LIMIT 1
-                                )
+                                        SELECT ID FROM Order_Statuses WHERE statusName = 'Đang xử lý' LIMIT 1
+                                    ),
+                                    paymentStatus = 'Đã thanh toán'
                                 WHERE ID = :id
                             """)
                     .bind("id", orderId)
@@ -155,8 +157,9 @@ public class OrderDao implements DaoInterface<Order> {
         String sql = """
                     UPDATE Orders
                     SET orderStatusID = (
-                        SELECT ID FROM Order_Statuses WHERE statusName = 'Thanh toán thất bại' LIMIT 1
-                    )
+                        SELECT ID FROM Order_Statuses WHERE statusName = 'Đã hủy' LIMIT 1
+                    ),
+                    paymentStatus = 'Thanh toán thất bại'
                     WHERE ID = :id
                 """;
         jdbi.useHandle(handle -> handle.createUpdate(sql)
@@ -175,6 +178,7 @@ public class OrderDao implements DaoInterface<Order> {
                         "       o.phoneNumber   AS phoneNumber, " +
                         "       o.address       AS address, " +
                         "       o.totalPrice    AS totalPrice, " +
+                        "       o.paymentStatus AS paymentStatus, " +
                         "       o.paymentID     AS paymentId, " +
                         "       o.orderStatusID AS orderStatusId, " +
                         "       o.voucherID     AS voucherId, " +
@@ -286,17 +290,80 @@ public class OrderDao implements DaoInterface<Order> {
                         o.createAt      AS createAt,
                         o.address       AS address,
                         o.totalPrice    AS totalPrice,
+                        o.paymentStatus AS paymentStatus,
                         os.statusName   AS statusName,
                         GROUP_CONCAT(p.name ORDER BY p.name SEPARATOR ', ') AS productNames
                     FROM Orders o
                     JOIN Order_Statuses os ON os.ID = o.orderStatusID
                     LEFT JOIN Order_Details od ON od.orderID = o.ID
                     LEFT JOIN Products p ON p.ID = od.productID
-                    GROUP BY o.ID, o.fullName, o.phoneNumber, o.createAt, o.address, o.totalPrice, os.statusName
+                    GROUP BY o.ID, o.fullName, o.phoneNumber, o.createAt, o.address, o.totalPrice,o.paymentStatus, os.statusName
                     ORDER BY o.createAt DESC
                 """;
 
         return jdbi.withHandle(h -> h.createQuery(sql).mapToBean(Order.class).list());
+    }
+
+    public Order findOrderForAdmin(int orderId) {
+        String sql = """
+                    SELECT o.ID AS id,
+                           os.statusName AS statusName,
+                           p.paymentName AS paymentName,
+                           o.paymentStatus AS paymentStatus
+                    FROM Orders o
+                    JOIN Order_Statuses os ON os.ID = o.orderStatusID
+                    JOIN Payments p ON p.ID = o.paymentID
+                    WHERE o.ID = :id
+                """;
+
+        return jdbi.withHandle(h -> h.createQuery(sql)
+                .bind("id", orderId)
+                .mapToBean(Order.class)
+                .findOne()
+                .orElse(null));
+    }
+
+    public boolean updateOrderStatusByName(int orderId, String statusName) {
+        String sql = """
+                    UPDATE Orders
+                    SET orderStatusID = (SELECT ID FROM Order_Statuses WHERE statusName = :name LIMIT 1)
+                    WHERE ID = :id
+                """;
+        int n = jdbi.withHandle(h -> h.createUpdate(sql)
+                .bind("id", orderId)
+                .bind("name", statusName)
+                .execute());
+        return n == 1;
+    }
+
+    public boolean updatePaymentStatus(int orderId, String paymentStatus) {
+        String sql = "UPDATE Orders SET paymentStatus = :ps WHERE ID = :id";
+        int n = jdbi.withHandle(h -> h.createUpdate(sql)
+                .bind("id", orderId)
+                .bind("ps", paymentStatus)
+                .execute());
+        return n == 1;
+    }
+
+    public boolean updateInfoIfProcessing(int orderId, String fullName, String phone, String address) {
+        String sql = """
+                    UPDATE Orders o
+                    JOIN Order_Statuses os ON os.ID = o.orderStatusID
+                    SET o.fullName = :fullName,
+                        o.phoneNumber = :phone,
+                        o.address = :address
+                    WHERE o.ID = :orderId
+                      AND os.statusName = 'Đang xử lý'
+                """;
+
+        int affected = jdbi.withHandle(h -> h.createUpdate(sql)
+                .bind("fullName", fullName)
+                .bind("phone", phone)
+                .bind("address", address)
+                .bind("orderId", orderId)
+                .execute());
+
+        return affected == 1;
     }
 
 

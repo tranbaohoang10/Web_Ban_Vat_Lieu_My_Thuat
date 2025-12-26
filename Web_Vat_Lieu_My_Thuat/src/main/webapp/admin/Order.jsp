@@ -397,9 +397,40 @@
     .modal-body select:focus {
         border-color: #2659F5;
     }
+    .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        min-width: 260px;
+        max-width: 360px;
+        padding: 12px 14px;
+        border-radius: 10px;
+        background: #111827;
+        color: #fff;
+        font-size: 14px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.18);
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: .25s ease;
+        z-index: 999999;
+    }
+
+    .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 </style>
 
 <body>
+<c:if test="${not empty sessionScope.toast}">
+    <div id="toast" class="toast show">
+        <c:out value="${sessionScope.toast}"/>
+    </div>
+    <c:remove var="toast" scope="session"/>
+</c:if>
+
 <div id="main">
     <div class="left">
         <div class="list-admin">
@@ -490,27 +521,60 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-
                             <td class="action-col">
                                 <div class="actions">
-                                    <button class="btn btn-success btn-sm" title="Duyệt">
-                                        <i class="fa-solid fa-check"></i>
-                                    </button>
 
-                                    <button class="btn btn-warning btn-sm btn-edit-order"
-                                            data-id="${o.id}"
-                                            data-name="${o.fullName}"
-                                            data-phone="${o.phoneNumber}"
-                                            data-address="${o.address}"
-                                            data-status="${o.statusName}">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
+                                    <c:if test="${o.statusName == 'Đang xử lý'}">
+                                        <form action="${pageContext.request.contextPath}/admin/orders/status"
+                                              method="post" style="display:inline;">
+                                            <input type="hidden" name="orderId" value="${o.id}">
+                                            <input type="hidden" name="statusName" value="Đang vận chuyển">
+                                            <button class="btn btn-success btn-sm" type="submit"
+                                                    title="Chuyển sang đang vận chuyển">
+                                                <i class="fa-solid fa-truck"></i>
+                                            </button>
+                                        </form>
+                                    </c:if>
 
-                                    <button class="btn btn-danger btn-sm btn-delete" title="Xóa">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
+                                    <c:if test="${o.statusName == 'Đang vận chuyển'}">
+                                        <form action="${pageContext.request.contextPath}/admin/orders/status"
+                                              method="post" style="display:inline;">
+                                            <input type="hidden" name="orderId" value="${o.id}">
+                                            <input type="hidden" name="statusName" value="Hoàn thành">
+                                            <button class="btn btn-success btn-sm" type="submit" title="Hoàn thành đơn">
+                                                <i class="fa-solid fa-check"></i>
+                                            </button>
+                                        </form>
+                                    </c:if>
+
+                                    <c:if test="${o.statusName == 'Đang xử lý'}">
+                                        <button class="btn btn-warning btn-sm btn-edit-order"
+                                                data-id="${o.id}"
+                                                data-name="${o.fullName}"
+                                                data-phone="${o.phoneNumber}"
+                                                data-address="${o.address}"
+                                                data-status="${o.statusName}">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </c:if>
+
+
+                                    <c:if test="${o.statusName == 'Đang xử lý'}">
+                                        <form action="${pageContext.request.contextPath}/admin/orders/status"
+                                              method="post" style="display:inline;"
+                                              onsubmit="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?');">
+                                            <input type="hidden" name="orderId" value="${o.id}">
+                                            <input type="hidden" name="statusName" value="Đã hủy">
+                                            <button class="btn btn-danger btn-sm btn-delete" type="submit"
+                                                    title="Hủy đơn">
+                                                <i class="fa-solid fa-ban"></i>
+                                            </button>
+                                        </form>
+                                    </c:if>
+
                                 </div>
                             </td>
+
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -525,43 +589,38 @@
     <!-- Modal Cập Nhật Đơn Hàng -->
     <div id="editOrderModal" class="modal">
         <div class="modal-content category-box">
-
             <div class="modal-header">
                 <h3>Cập Nhật Đơn Hàng</h3>
                 <span class="close-edit-order">&times;</span>
             </div>
 
-            <div class="modal-body">
-                <label>Mã đơn hàng:</label>
-                <input type="text" id="editOrderId" value="DH01"
-                       disabled>
+            <form action="${pageContext.request.contextPath}/admin/orders/edit"
+                  method="post" accept-charset="UTF-8">
 
-                <label>Họ tên khách hàng:</label>
-                <input type="text" id="editOrderName"
-                       value="Nguyễn Văn A">
+                <div class="modal-body">
+                    <input type="hidden" id="editOrderIdHidden" name="orderId">
 
-                <label>Số điện thoại:</label>
-                <input type="text" id="editOrderPhone"
-                       value="0909123456">
+                    <label>Mã đơn hàng:</label>
+                    <input type="text" id="editOrderId" value="" disabled>
 
-                <label>Địa chỉ giao hàng:</label>
-                <input type="text" id="editOrderAddress"
-                       value="Hà Nội, Việt Nam">
-                <label>Trạng thái đơn hàng:</label>
-                <select id="editOrderStatus">
-                    <option value="Đang giao">Đang giao</option>
-                    <option value="Hoàn tất">Hoàn tất</option>
-                    <option value="Đã huỷ">Đã huỷ</option>
-                </select>
-            </div>
+                    <label>Họ tên khách hàng:</label>
+                    <input type="text" id="editOrderName" name="fullName" required>
 
-            <div class="modal-footer">
-                <button class="btn-cancel-edit">Hủy</button>
-                <button class="btn-save-edit">Cập nhật</button>
-            </div>
+                    <label>Số điện thoại:</label>
+                    <input type="text" id="editOrderPhone" name="phoneNumber" required>
 
+                    <label>Địa chỉ giao hàng:</label>
+                    <input type="text" id="editOrderAddress" name="address" required>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel-edit">Hủy</button>
+                    <button type="submit" class="btn-save-edit">Cập nhật</button>
+                </div>
+            </form>
         </div>
     </div>
+
 </div>
 
 
@@ -584,23 +643,42 @@
     const editOrderModal = document.getElementById("editOrderModal");
     const closeEditOrder = document.querySelector(".close-edit-order");
     const btnCancelOrder = document.querySelector(".btn-cancel-edit");
-    const btnSaveOrder = document.querySelector(".btn-save-edit");
+
+    function openEditModal(btn) {
+        const id = btn.dataset.id;
+        const name = btn.dataset.name || "";
+        const phone = btn.dataset.phone || "";
+        const address = btn.dataset.address || "";
+
+        document.getElementById("editOrderIdHidden").value = id;
+        document.getElementById("editOrderId").value = "DH" + String(id).padStart(2, "0");
+        document.getElementById("editOrderName").value = name;
+        document.getElementById("editOrderPhone").value = phone;
+        document.getElementById("editOrderAddress").value = address;
+
+        editOrderModal.style.display = "flex";
+    }
 
     document.querySelectorAll(".btn-edit-order").forEach(btn => {
-        btn.addEventListener("click", () => {
-
-            editOrderModal.style.display = "flex";
-
-
-        });
+        btn.addEventListener("click", () => openEditModal(btn));
     });
+
     closeEditOrder.onclick = () => editOrderModal.style.display = "none";
     btnCancelOrder.onclick = () => editOrderModal.style.display = "none";
-    btnSaveOrder.onclick = () => {
-        alert("Đơn hàng đã được cập nhật!");
-        editOrderModal.style.display = "none";
-    };
 
+
+    (function () {
+        const toast = document.getElementById("toast");
+        if (!toast) return;
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2200);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 2600);
+    })();
 </script>
 
 </html>
