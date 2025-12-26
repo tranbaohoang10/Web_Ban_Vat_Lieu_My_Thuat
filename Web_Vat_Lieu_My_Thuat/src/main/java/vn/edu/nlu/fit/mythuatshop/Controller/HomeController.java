@@ -22,7 +22,8 @@ public class HomeController extends HttpServlet {
         ProductCardService cardService = new ProductCardService();
         SliderShowService sliderShowService = new SliderShowService();
 
-        List<Category> categories = categoryService.getAllcategories();
+        List<Category> categories = categoryService.getAllActiveCategories();
+
 
         Category cat1 = null;
         Category cat2 = null;

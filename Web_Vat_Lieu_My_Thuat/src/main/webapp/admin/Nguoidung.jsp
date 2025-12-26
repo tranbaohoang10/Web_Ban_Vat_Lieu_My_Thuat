@@ -490,7 +490,7 @@
   <i class="fa-solid fa-chart-line"></i> Thống kê
 </a>
 
-<a href="DanhMuc.jsp">
+<a href="${pageContext.request.contextPath}/admin/categories">
   <i class="fa-solid fa-list"></i> Quản lý danh mục
 </a>
 
