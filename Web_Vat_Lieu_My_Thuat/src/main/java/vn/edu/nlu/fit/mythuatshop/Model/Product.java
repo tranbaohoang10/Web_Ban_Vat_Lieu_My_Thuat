@@ -15,6 +15,7 @@ public class Product implements Serializable {
     private String status;
     private Timestamp createAt;
     private String brand;
+    private int isActive;
 
     public Product() {
     }
@@ -160,5 +161,12 @@ public class Product implements Serializable {
                 ", createAt=" + createAt +
                 ", brand='" + brand + '\'' +
                 '}';
+    }
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
 }

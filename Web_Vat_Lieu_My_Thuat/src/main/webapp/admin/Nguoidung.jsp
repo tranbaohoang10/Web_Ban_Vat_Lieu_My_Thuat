@@ -518,7 +518,7 @@
   <i class="fa-solid fa-chart-line"></i> Thống kê
 </a>
 
-<a href="DanhMuc.jsp">
+<a href="${pageContext.request.contextPath}/admin/categories">
   <i class="fa-solid fa-list"></i> Quản lý danh mục
 </a>
 
@@ -530,11 +530,11 @@
   <i class="fa-solid fa-person"></i> Quản lý người dùng
 </a>
 
-<a href="DonHang.jsp">
+<a href="${pageContext.request.contextPath}/admin/orders">
   <i class="fa-solid fa-box-open"></i> Quản lý đơn hàng
 </a>
 
-<a href="Khuyenmai.jsp">
+<a href="${pageContext.request.contextPath}/admin/vouchers">
   <i class="fa-solid fa-gift"></i> Quản lý khuyến mãi
 </a>
 

@@ -44,11 +44,10 @@ public class OrderService {
             payment = paymentDao.findByName("COD");
         order.setPaymentId(payment.getId());
 
-        OrderStatus status = isVnpay
-                ? orderStatusDao.findByName("Chờ thanh toán")
-                : orderStatusDao.findByName("Đang xử lý");
-
+        OrderStatus status = orderStatusDao.findByName("Đang xử lý");
         order.setOrderStatusId(status != null ? status.getId() : 1);
+
+        order.setPaymentStatus("Chưa thanh toán");
 
         order.setDiscount(cart.getDiscount());
         order.setVoucherId(voucherId);
@@ -265,5 +264,61 @@ public class OrderService {
                 .replace("\"", "&quot;")
                 .replace("'", "&#39;");
     }
+
+    public List<Order> getAllForAdmin() {
+        return orderDao.findAllForAdmin();
+    }
+
+    public boolean adminUpdateOrderStatus(int orderId, String newStatusName) {
+        Order o = orderDao.findOrderForAdmin(orderId);
+        if (o == null) return false;
+
+        String current = o.getStatusName();
+        String payName = o.getPaymentName();
+        String payStatus = o.getPaymentStatus();
+
+        // 1) Khóa sửa nếu đã kết thúc
+        if ("Hoàn thành".equalsIgnoreCase(current) || "Đã hủy".equalsIgnoreCase(current)) {
+            return false;
+        }
+
+        // 2) Rule thanh toán
+        boolean isVnpay = "VNPAY".equalsIgnoreCase(payName);
+
+        if (isVnpay) {
+            // chưa thanh toán hoặc thất bại thì không cho giao/hoàn thành
+            if (!"Đã thanh toán".equalsIgnoreCase(payStatus)) {
+                if ("Đang vận chuyển".equalsIgnoreCase(newStatusName) || "Hoàn thành".equalsIgnoreCase(newStatusName)) {
+                    return false;
+                }
+            }
+        }
+
+        // 3) Rule chuyển trạng thái tối thiểu
+        boolean allowed =
+                ("Đang xử lý".equalsIgnoreCase(current) &&
+                        ("Đang vận chuyển".equalsIgnoreCase(newStatusName) || "Đã hủy".equalsIgnoreCase(newStatusName)))
+                        ||
+                        ("Đang vận chuyển".equalsIgnoreCase(current) &&
+                                "Hoàn thành".equalsIgnoreCase(newStatusName));
+
+        if (!allowed) return false;
+
+        // 4) Update orderStatus
+        boolean ok = orderDao.updateOrderStatusByName(orderId, newStatusName);
+        if (!ok) return false;
+
+        // 5) Nếu COD và hoàn thành => set paymentStatus = Đã thanh toán
+        if ("COD".equalsIgnoreCase(payName) && "Hoàn thành".equalsIgnoreCase(newStatusName)) {
+            orderDao.updatePaymentStatus(orderId, "Đã thanh toán");
+        }
+
+        return true;
+    }
+
+    public boolean adminUpdateOrderInfo(int orderId, String fullName, String phone, String address) {
+        return orderDao.updateInfoIfProcessing(orderId, fullName, phone, address);
+    }
+
 
 }

@@ -25,6 +25,7 @@ public class ProductCardDao {
             FROM products p
             LEFT JOIN product_reviews pr ON pr.productID = p.id
             WHERE p.categoryID = :categoryId
+              AND p.isActive = 1
             GROUP BY 
                 p.id, p.name, p.price, p.discountDefault, p.categoryID,
                 p.thumbnail, p.quantityStock, p.soldQuantity, p.status, p.createAt, p.brand
@@ -62,7 +63,8 @@ public class ProductCardDao {
                 COUNT(pr.id) AS reviewCount
             FROM products p
             LEFT JOIN product_reviews pr ON pr.productID = p.id
-            WHERE p.name LIKE CONCAT('%', :kw, '%')
+            WHERE p.isActive = 1
+              AND p.name LIKE CONCAT('%', :kw, '%')
             GROUP BY 
                 p.id, p.name, p.price, p.discountDefault, p.categoryID,
                 p.thumbnail, p.quantityStock, p.soldQuantity, p.status, p.createAt, p.brand
@@ -81,7 +83,13 @@ public class ProductCardDao {
     }
 
     public int countSearch(String keyword) {
-        String sql = "SELECT COUNT(*) FROM products WHERE name LIKE CONCAT('%', :kw, '%')";
+        String sql = """
+            SELECT COUNT(*)
+            FROM products p
+            WHERE p.isActive = 1
+              AND p.name LIKE CONCAT('%', :kw, '%')
+        """;
+
         return jdbi.withHandle(h ->
                 h.createQuery(sql)
                         .bind("kw", keyword)
@@ -89,7 +97,8 @@ public class ProductCardDao {
                         .one()
         );
     }
-    // ProductCardDao.java
+
+    // Lọc theo category + min/max + sort (dùng cho ProductList.jsp)
     public List<ProductCard> byCategoryWithFilter(int categoryId,
                                                   Double minPrice,
                                                   Double maxPrice,
@@ -105,19 +114,19 @@ public class ProductCardDao {
             default          -> " ORDER BY p.soldQuantity DESC ";
         };
 
-
         StringBuilder sql = new StringBuilder("""
-        SELECT
-            p.id, p.name, p.price, p.discountDefault,
-            p.categoryID AS categoryId,
-            p.thumbnail, p.quantityStock, p.soldQuantity,
-            p.status, p.createAt, p.brand,
-            COALESCE(AVG(pr.rating), 0) AS avgRating,
-            COUNT(pr.id) AS reviewCount
-        FROM products p
-        LEFT JOIN product_reviews pr ON pr.productID = p.id
-        WHERE p.categoryID = :categoryId
-    """);
+            SELECT
+                p.id, p.name, p.price, p.discountDefault,
+                p.categoryID AS categoryId,
+                p.thumbnail, p.quantityStock, p.soldQuantity,
+                p.status, p.createAt, p.brand,
+                COALESCE(AVG(pr.rating), 0) AS avgRating,
+                COUNT(pr.id) AS reviewCount
+            FROM products p
+            LEFT JOIN product_reviews pr ON pr.productID = p.id
+            WHERE p.categoryID = :categoryId
+              AND p.isActive = 1
+        """);
 
         if (minPrice != null) {
             sql.append(" AND (p.price * (100.0 - p.discountDefault)/100.0) >= :minPrice ");
@@ -127,10 +136,10 @@ public class ProductCardDao {
         }
 
         sql.append("""
-        GROUP BY
-            p.id, p.name, p.price, p.discountDefault, p.categoryID,
-            p.thumbnail, p.quantityStock, p.soldQuantity, p.status, p.createAt, p.brand
-    """);
+            GROUP BY
+                p.id, p.name, p.price, p.discountDefault, p.categoryID,
+                p.thumbnail, p.quantityStock, p.soldQuantity, p.status, p.createAt, p.brand
+        """);
 
         sql.append(orderBy);
         sql.append(" LIMIT :limit OFFSET :offset ");
@@ -150,10 +159,11 @@ public class ProductCardDao {
 
     public int countByCategoryWithFilter(int categoryId, Double minPrice, Double maxPrice) {
         StringBuilder sql = new StringBuilder("""
-        SELECT COUNT(*)
-        FROM products p
-        WHERE p.categoryID = :categoryId
-    """);
+            SELECT COUNT(*)
+            FROM products p
+            WHERE p.categoryID = :categoryId
+              AND p.isActive = 1
+        """);
 
         if (minPrice != null) {
             sql.append(" AND (p.price * (100.0 - p.discountDefault)/100.0) >= :minPrice ");
@@ -169,5 +179,4 @@ public class ProductCardDao {
             return q.mapTo(Integer.class).one();
         });
     }
-
 }
