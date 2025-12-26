@@ -3,6 +3,8 @@ package vn.edu.nlu.fit.mythuatshop.Dao;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.nlu.fit.mythuatshop.Model.Voucher;
 
+import java.util.List;
+
 public class VoucherDao {
     private final Jdbi jdbi;
 
@@ -37,6 +39,146 @@ public class VoucherDao {
                 h.createUpdate(sql).bind("id", voucherId).execute()
         );
         return updated > 0;
+    }
+
+    // LẤY TẤT CẢ VOUCHER (cho trang quản lý)
+    public List<Voucher> findAll() {
+        String sql = "SELECT ID, code, name, description, voucherCash, minOrderValue, " +
+                "startDate, endDate, quantity, quantityUsed, isActive " +
+                "FROM Vouchers " +
+                "ORDER BY ID DESC";
+
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .mapToBean(Voucher.class)
+                        .list()
+        );
+    }
+
+    // LẤY 1 VOUCHER THEO ID (để load form edit)
+    public Voucher findById(int id) {
+        String sql = """
+                SELECT ID, code, name, description, voucherCash,
+                       startDate, endDate, quantity
+                FROM Vouchers
+                WHERE ID = :id
+                """;
+
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("id", id)
+                        .mapToBean(Voucher.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+
+    // THÊM MỚI
+    public int insert(Voucher v) {
+        String sql = """
+                INSERT INTO Vouchers
+                (code, name, description, voucherCash, startDate, endDate, quantity)
+                VALUES (:code, :name, :description, :voucherCash, :startDate, :endDate, :quantity)
+                """;
+
+        return jdbi.withHandle(h ->
+                h.createUpdate(sql)
+                        .bindBean(v)
+                        .execute()
+        );
+    }
+
+    // CẬP NHẬT
+    public int update(Voucher v) {
+        String sql = """
+                UPDATE Vouchers SET
+                    code = :code,
+                    name = :name,
+                    description = :description,
+                    voucherCash = :voucherCash,
+                    startDate = :startDate,
+                    endDate = :endDate,
+                    quantity = :quantity
+                WHERE ID = :id
+                """;
+
+        return jdbi.withHandle(h ->
+                h.createUpdate(sql)
+                        .bindBean(v)
+                        .execute()
+        );
+    }
+
+    // XOÁ
+    public int delete(int id) {
+        String sql = "DELETE FROM Vouchers WHERE ID = :id";
+        return jdbi.withHandle(h ->
+                h.createUpdate(sql)
+                        .bind("id", id)
+                        .execute()
+        );
+    }
+    // ĐẾM TẤT CẢ VOUCHER (phục vụ phân trang)
+    public int countAll() {
+        String sql = "SELECT COUNT(*) FROM Vouchers";
+        return jdbi.withHandle(h -> h.createQuery(sql).mapTo(Integer.class).one());
+    }
+
+    // LẤY DANH SÁCH THEO TRANG (offset, limit)
+    public List<Voucher> findPage(int offset, int limit) {
+        String sql = """
+                SELECT ID, code, name, description, voucherCash,
+                       startDate, endDate, quantity
+                FROM Vouchers
+                ORDER BY ID DESC
+                LIMIT :limit OFFSET :offset
+                """;
+
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("limit", limit)
+                        .bind("offset", offset)
+                        .mapToBean(Voucher.class)
+                        .list()
+        );
+    }
+
+    // ĐẾM KHI TÌM KIẾM THEO TỪ KHÓA
+    public int countByKeyword(String keyword) {
+        String sql = """
+                SELECT COUNT(*)
+                FROM Vouchers
+                WHERE code LIKE :kw OR name LIKE :kw
+                """;
+        String pattern = "%" + keyword + "%";
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("kw", pattern)
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
+    // TÌM KIẾM THEO TỪ KHÓA + PHÂN TRANG
+    public List<Voucher> searchPage(String keyword, int offset, int limit) {
+        String sql = """
+                SELECT ID, code, name, description, voucherCash,
+                       startDate, endDate, quantity
+                FROM Vouchers
+                WHERE code LIKE :kw OR name LIKE :kw
+                ORDER BY ID DESC
+                LIMIT :limit OFFSET :offset
+                """;
+
+        String pattern = "%" + keyword + "%";
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("kw", pattern)
+                        .bind("limit", limit)
+                        .bind("offset", offset)
+                        .mapToBean(Voucher.class)
+                        .list()
+        );
     }
 }
 

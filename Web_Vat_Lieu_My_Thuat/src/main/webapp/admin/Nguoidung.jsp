@@ -164,6 +164,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        border: none;
     }
 
     .icon i {
@@ -185,7 +186,7 @@
     .btn-Sua:hover {
         background-color: #e0a800;
     }
-
+    /*modal khóa*/
     .btn-Xoa {
         background-color: #DC3545;
         color: white;
@@ -200,16 +201,43 @@
     .btn-Xoa:hover {
         background-color: #b02a37;
     }
-
-    .btn-them-khach-hang {
-        background-color: #2659F5;
+    #lockConfirmModal .btn-lock-cancel{
         border: none;
-        color: white;
-        padding: 8px 16px;
-        font-size: 14px;
+        background: #e0e0e0;
         border-radius: 5px;
         cursor: pointer;
-        margin-left: 0;
+    }
+    .btn-unlock{
+        background-color: #FFC107;
+        color: black;
+        border: none;
+        padding: 6px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+    .btn-unlock:hover{ background-color:#e0a800; }
+
+    #lockConfirmModal .modal-header{
+        text-align: center;
+    }
+    #lockConfirmModal .close-lock-modal{
+        cursor: pointer;
+    }
+    #lockConfirmModal .modal-header{
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+    }
+
+    #lockConfirmModal .modal-header h2{
+        margin: 0;
+        flex: 1;
+        text-align: center;
+    }
+    #lockConfirmModal .modal-body {
+        text-align: center;
     }
 
     /*  */
@@ -292,7 +320,17 @@
         /* Căn giữa theo chiều ngang */
         z-index: 999;
     }
-
+    /*modal thêm kh*/
+    .btn-them-khach-hang {
+        background-color: #2659F5;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 0;
+    }
     .modal-content {
         background: #fff;
         width: 400px;
@@ -308,8 +346,9 @@
         justify-content: space-between;
         align-items: center;
         padding: 12px 16px;
-        background-color: #17479D;
+        background-color: #2659F5;
         color: #fff;
+        text-align: center;
     }
 
     .modal-header h2 {
@@ -460,17 +499,6 @@
             transform: scale(1);
         }
     }
-    .btn-unlock{
-        background-color: #FFC107;
-        color: black;
-        border: none;
-        padding: 6px 10px;
-        cursor: pointer;
-        font-size: 14px;
-        border-radius: 4px;
-        transition: 0.2s;
-    }
-    .btn-unlock:hover{ background-color:#e0a800; }
 
 </style>
 
