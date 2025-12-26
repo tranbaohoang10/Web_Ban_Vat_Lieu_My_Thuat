@@ -491,7 +491,7 @@
                     <a href="Nguoidung.jsp"><i
                             class="fa-solid fa-person"></i>Quản
                         lý người dùng</a>
-                    <a href="DonHang.jsp"><i
+                    <a href="Order.jsp"><i
                             class="fa-solid fa-box-open"></i>Quản
                         lý đơn hàng</a>
                     <a href="Khuyenmai.jsp"><i

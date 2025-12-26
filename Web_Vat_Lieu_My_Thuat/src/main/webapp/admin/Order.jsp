@@ -1,23 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý liên hệ</title>
+    <title>Quản lý đơn hàng</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-
 
 </head>
 <style>
@@ -53,6 +52,13 @@
         border-left: #3B7DDD 2px solid;
     }
 
+    .list-admin a.active {
+        background-color: #203247;
+        border-left: 4px solid #FFD700;
+        /* hoặc màu khác */
+        font-weight: bold;
+    }
+
     #main .left .list-admin .logo img {
         width: 100%;
         height: auto;
@@ -68,23 +74,16 @@
         border-left: none;
     }
 
-    .list-admin a.active {
-        background-color: #203247;
-        border-left: 4px solid #FFD700;
-        /* hoặc màu khác */
-        font-weight: bold;
-    }
-
     #main .right .container {
         display: flex;
         flex-direction: column;
-        width: calc(100% - 100px);
+        width: 100%;
         margin-top: 20px;
         margin-left: auto;
         margin-right: auto;
     }
 
-
+    /* Make right column grow to fill remaining space so children can space-between */
     #main .right {
         flex: 1;
         background-color: #F9F9F9;
@@ -117,6 +116,19 @@
         border-collapse: collapse;
         margin-top: 10px;
     }
+
+    .order-table td:nth-child(6) {
+        white-space: normal !important;
+    }
+
+    .order-table td:nth-child(8) {
+        white-space: nowrap !important;
+    }
+
+    .order-table td:nth-child(9) {
+        white-space: nowrap !important;
+    }
+
 
     .order-table th {
         background: #2659F5;
@@ -154,7 +166,7 @@
     }
 
     .status.delivery {
-        background: #484ddf;
+        background: #2659F5;
         color: white;
     }
 
@@ -171,6 +183,17 @@
     .btn-sm {
         background-color: #FFC107;
         color: black;
+        border: none;
+        padding: 6px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
         border: none;
         padding: 6px 10px;
         cursor: pointer;
@@ -239,7 +262,7 @@
     }
 
     .search-btn:hover {
-        background: #ccc;
+        background-color: #ccc;
     }
 
     .search-btn i {
@@ -276,164 +299,115 @@
         border-color: #2659F5;
     }
 
-    .order-table td:nth-child(6) {
-        max-width: 250px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* phan hoi */
-    .btn-reply {
-        background-color: #0D6EFD;
-        /* xanh kiểu bootstrap */
-        color: white;
-        border: none;
-        padding: 6px 10px;
-        cursor: pointer;
-        font-size: 14px;
-        border-radius: 4px;
-        transition: 0.2s;
-    }
-
-    .btn-reply:hover {
-        background-color: #0b5ed7;
-    }
-
-    .btn-reply i {
-        font-size: 14px;
-    }
-
-    /* form gui phan hoi */
     .modal {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
     }
 
-    .reply-box {
-        width: 500px;
-        background: white;
-        margin: 100px auto;
-        padding: 0;
+    /* Khung modal */
+    .category-box {
+        width: 450px;
+        background: #fff;
         border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
+    /* Header */
     .modal-header {
-        padding: 20px;
-        border-bottom: 1px solid #ddd;
+        padding: 14px 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .modal-header h3 {
         margin: 0;
         font-size: 18px;
-        color: #333;
     }
 
-    .close-reply {
-        float: right;
-        font-size: 24px;
+    .close-add {
+        font-size: 22px;
         cursor: pointer;
-        color: #999;
     }
 
-    .close-reply:hover {
-        color: #333;
-    }
-
+    /* Body */
     .modal-body {
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
 
-    .modal-body p {
-        margin: 0 0 15px 0;
-        font-size: 14px;
-    }
-
-    .modal-body label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-    .modal-body textarea {
-        width: 100%;
+    .modal-body input[type="text"],
+    .modal-body input[type="file"] {
         padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-
-    .modal-body textarea:focus {
-        border-color: #2659F3;
+        border: 1px solid #ccc;
+        border-radius: 6px;
         outline: none;
     }
 
+    .modal-body input:focus {
+        border-color: #2659F5;
+    }
+
+    /* Footer */
     .modal-footer {
-        padding: 15px 20px;
-        border-top: 1px solid #ddd;
-        text-align: right;
+        padding: 12px 20px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
     }
 
-    .btn-cancel {
-        background: #f5f5f5;
-        color: #333;
-        padding: 8px 20px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-right: 10px;
-    }
-
-    .btn-cancel:hover {
-        background: #e5e5e5;
-    }
-
-    .btn-send {
-        background: #2659F3;
+    .btn-cancel,
+    .btn-cancel-edit {
+        background: #6c757d;
         color: white;
-        padding: 8px 20px;
+        padding: 8px 14px;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         cursor: pointer;
     }
 
-    .btn-send:hover {
-        background: #1e40af;
+    .btn-save,
+    .btn-save-edit {
+        background: #2659F5;
+        color: white;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .modal-body select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        font-size: 15px;
+    }
+
+    .modal-body select:focus {
+        border-color: #2659F5;
     }
 </style>
 
 <body>
-<c:if test="${not empty sessionScope.toast}">
-    <div id="toastMsg" style="
-      position: fixed; right: 18px; top: 18px; z-index: 99999;
-      background: #111; color:#fff; padding:10px 14px; border-radius:8px;">
-            ${sessionScope.toast}
-    </div>
-
-    <c:remove var="toast" scope="session"/>
-
-    <script>
-        setTimeout(() => {
-            const t = document.getElementById("toastMsg");
-            if (t) t.style.display = "none";
-        }, 1800);
-    </script>
-</c:if>
 <div id="main">
     <div class="left">
         <div class="list-admin">
             <a href="Admin.jsp" class="logo"><img
                     src="../assets/images/logo/logo.png" alt></a>
-            <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng
+            <a href="${pageContext.request.contextPath}/admin/overview"><i class="fa-solid fa-house"></i> Tổng
                 quan</a>
-            <a href="ThongKe.jsp"><i
+            <a href="${pageContext.request.contextPath}/admin/statistics"><i
                     class="fa-solid fa-chart-line"></i>Thống
                 kê</a>
             <a href="DanhMuc.jsp"><i class="fa-solid fa-list"></i>Quản
@@ -445,7 +419,7 @@
             <a href="Nguoidung.jsp"><i
                     class="fa-solid fa-person"></i>Quản
                 lý người dùng</a>
-            <a href="Order.jsp"><i
+            <a href="${pageContext.request.contextPath}/admin/orders" class="active"><i
                     class="fa-solid fa-box-open"></i>Quản
                 lý đơn hàng</a>
             <a href="Khuyenmai.jsp"><i
@@ -454,7 +428,7 @@
             <a href="SliderShow.jsp"><i
                     class="fa-solid fa-sliders"></i>Quản lý Slider
                 Show</a>
-            <a href="${pageContext.request.contextPath}/admin/contacts" class="active"><i
+            <a href="${pageContext.request.contextPath}/admin/contacts"><i
                     class="fa-solid fa-address-book"></i>Quản lý liên
                 hệ</a>
             <a href="${pageContext.request.contextPath}/logout"><i
@@ -466,158 +440,138 @@
 
         <div class="container">
             <div class="order-container">
-                <h1>Quản lý liên hệ</h1>
-                <table id="contactTable" class="order-table display">
+                <h1>Quản lý đơn hàng</h1>
+
+                <table id="orderTable" class="order-table display">
                     <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Họ Tên</th>
+                        <th>Mã Đơn</th>
+                        <th>Khách Hàng</th>
                         <th>Số Điện Thoại</th>
-                        <th>Email</th>
-                        <th>Ngày Gửi</th>
-                        <th>Nội Dung</th>
+                        <th>Ngày Đặt</th>
+                        <th>Địa Chỉ Giao</th>
+                        <th>Sản Phẩm</th>
+                        <th>Thành Tiền</th>
                         <th>Trạng Thái</th>
                         <th>Tùy Chọn</th>
                     </tr>
                     </thead>
-
                     <tbody>
-                    <c:forEach var="ct" items="${contacts}" varStatus="st">
+                    <c:forEach var="o" items="${orders}" varStatus="st">
                         <tr>
-                            <td>${st.index + 1}</td>
-                            <td><c:out value="${ct.fullName}" default="-"/></td>
-                            <td><c:out value="${ct.phoneNumber}" default="-"/></td>
-                            <td><c:out value="${ct.email}" default="-"/></td>
-
+                            <td>DH<fmt:formatNumber value="${o.id}" pattern="00"/></td>
+                            <td><c:out value="${o.fullName}" default="-"/></td>
+                            <td><c:out value="${o.phoneNumber}" default="-"/></td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${not empty ct.createAt}">
-                                        <fmt:formatDate value="${ct.createAt}" pattern="dd-MM-yyyy"/>
+                                    <c:when test="${not empty o.createAt}">
+                                        <fmt:formatDate value="${o.createAt}" pattern="dd-MM-yyyy"/>
                                     </c:when>
                                     <c:otherwise>-</c:otherwise>
                                 </c:choose>
                             </td>
-
-                            <td title="<c:out value='${ct.message}'/>">
-                                <c:out value="${ct.message}" default="-"/>
-                            </td>
+                            <td><c:out value="${o.address}" default="-"/></td>
+                            <td><c:out value="${o.productNames}" default="-"/></td>
+                            <td><fmt:formatNumber value="${o.totalPrice}" type="number"/> VND</td>
 
                             <td>
                                 <c:choose>
-                                    <c:when test="${ct.status == 'Chưa xử lý' || ct.status == 'Chờ phản hồi'}">
-                                        <span class="status pending"><c:out value="${ct.status}"/></span>
+                                    <c:when test="${o.statusName == 'Đang xử lý'}">
+                                        <span class="status pending">${o.statusName}</span>
                                     </c:when>
-                                    <c:when test="${ct.status == 'Đã phản hồi' || ct.status == 'Đã xử lý'}">
-                                        <span class="status success"><c:out value="${ct.status}"/></span>
+                                    <c:when test="${o.statusName == 'Đang vận chuyển'}">
+                                        <span class="status delivery">${o.statusName}</span>
+                                    </c:when>
+                                    <c:when test="${o.statusName == 'Hoàn thành'}">
+                                        <span class="status success">${o.statusName}</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span class="status cancel"><c:out value="${ct.status}" default="-"/></span>
+                                        <span class="status cancel"><c:out value="${o.statusName}" default="-"/></span>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
 
-                            <td>
-                                <c:if test="${ct.status != 'Đã phản hồi' && ct.status != 'Đã xử lý'}">
-                                    <button class="btn btn-reply btn-sm"
-                                            data-id="${ct.id}"
-                                            data-email="${ct.email}">
-                                        <i class="fa-solid fa-reply"></i>
+                            <td class="action-col">
+                                <div class="actions">
+                                    <button class="btn btn-success btn-sm" title="Duyệt">
+                                        <i class="fa-solid fa-check"></i>
                                     </button>
-                                </c:if>
 
-                                <form action="${pageContext.request.contextPath}/admin/contacts/delete"
-                                      method="post"
-                                      style="display:inline;"
-                                      onsubmit="return confirmDelete();">
-                                    <input type="hidden" name="id" value="${ct.id}">
-                                    <button type="submit" class="btn btn-danger btn-sm btn-delete">
+                                    <button class="btn btn-warning btn-sm btn-edit-order"
+                                            data-id="${o.id}"
+                                            data-name="${o.fullName}"
+                                            data-phone="${o.phoneNumber}"
+                                            data-address="${o.address}"
+                                            data-status="${o.statusName}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+
+                                    <button class="btn btn-danger btn-sm btn-delete" title="Xóa">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
-                                </form>
+                                </div>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
+
                 </table>
+
             </div>
 
         </div>
 
     </div>
+    <!-- Modal Cập Nhật Đơn Hàng -->
+    <div id="editOrderModal" class="modal">
+        <div class="modal-content category-box">
 
-    <!-- Modal Form Phản Hồi -->
-    <div id="replyModal" class="modal">
-        <div class="reply-box">
             <div class="modal-header">
-                <span class="close-reply">&times;</span>
-                <h3>Phản Hồi Khách Hàng</h3>
+                <h3>Cập Nhật Đơn Hàng</h3>
+                <span class="close-edit-order">&times;</span>
             </div>
 
-            <form action="${pageContext.request.contextPath}/admin/contacts/reply" method="post">
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="replyContactId">
+            <div class="modal-body">
+                <label>Mã đơn hàng:</label>
+                <input type="text" id="editOrderId" value="DH01"
+                       disabled>
 
-                    <p><strong>Email:</strong> <span id="replyEmail"></span></p>
+                <label>Họ tên khách hàng:</label>
+                <input type="text" id="editOrderName"
+                       value="Nguyễn Văn A">
 
-                    <label>Tiêu đề:</label>
-                    <input type="text" name="subject" value="Phản hồi liên hệ -Thiên Long"
-                           style="width:100%; padding:10px; border:1px solid #ddd; border-radius:4px; margin-bottom:12px;">
+                <label>Số điện thoại:</label>
+                <input type="text" id="editOrderPhone"
+                       value="0909123456">
 
-                    <label for="replyMessage">Nội dung phản hồi:</label>
-                    <textarea id="replyMessage" name="replyMessage"
-                              placeholder="Nhập nội dung phản hồi..." rows="6"></textarea>
-                </div>
+                <label>Địa chỉ giao hàng:</label>
+                <input type="text" id="editOrderAddress"
+                       value="Hà Nội, Việt Nam">
+                <label>Trạng thái đơn hàng:</label>
+                <select id="editOrderStatus">
+                    <option value="Đang giao">Đang giao</option>
+                    <option value="Hoàn tất">Hoàn tất</option>
+                    <option value="Đã huỷ">Đã huỷ</option>
+                </select>
+            </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn-cancel">Hủy</button>
-                    <button type="submit" class="btn-send">Gửi phản hồi</button>
-                </div>
-            </form>
+            <div class="modal-footer">
+                <button class="btn-cancel-edit">Hủy</button>
+                <button class="btn-save-edit">Cập nhật</button>
+            </div>
+
         </div>
     </div>
 </div>
 
 
+</body>
 <script>
-
-    function confirmDelete() {
-        return confirm("Bạn có chắc chắn muốn xóa liên hệ này không?");
-    }
-
-    const modal = document.getElementById('replyModal');
-    const closeBtn = document.querySelector('.close-reply');
-    const cancelBtn = document.querySelector('#replyModal .btn-cancel');
-
-    const replyIdEl = document.getElementById('replyContactId');
-    const replyEmailEl = document.getElementById('replyEmail');
-    const replyMessageEl = document.getElementById('replyMessage');
-
-    document.addEventListener('click', function (e) {
-        const btn = e.target.closest('.btn-reply');
-        if (!btn) return;
-
-        replyIdEl.value = btn.getAttribute('data-id');
-        replyEmailEl.textContent = btn.getAttribute('data-email') || "-";
-        replyMessageEl.value = "";
-
-        modal.style.display = 'block';
-    });
-
-    function closeModal() {
-        modal.style.display = 'none';
-    }
-
-    closeBtn.addEventListener('click', closeModal);
-    cancelBtn.addEventListener('click', closeModal);
-
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-
+    //datatable
     $(function () {
         const viUrl = "https://cdn.datatables.net/plug-ins/1.13.8/i18n/vi.json";
 
-        const dt = $("#contactTable").DataTable({
+        $("#orderTable").DataTable({
             pageLength: 8,
             lengthChange: false,
             ordering: true,
@@ -625,13 +579,28 @@
             info: false,
             language: {url: viUrl}
         });
+    });
+
+    const editOrderModal = document.getElementById("editOrderModal");
+    const closeEditOrder = document.querySelector(".close-edit-order");
+    const btnCancelOrder = document.querySelector(".btn-cancel-edit");
+    const btnSaveOrder = document.querySelector(".btn-save-edit");
+
+    document.querySelectorAll(".btn-edit-order").forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            editOrderModal.style.display = "flex";
 
 
-        $("#contactSearch").on("keyup", function () {
-            dt.search(this.value).draw();
         });
     });
+    closeEditOrder.onclick = () => editOrderModal.style.display = "none";
+    btnCancelOrder.onclick = () => editOrderModal.style.display = "none";
+    btnSaveOrder.onclick = () => {
+        alert("Đơn hàng đã được cập nhật!");
+        editOrderModal.style.display = "none";
+    };
+
 </script>
-</body>
 
 </html>

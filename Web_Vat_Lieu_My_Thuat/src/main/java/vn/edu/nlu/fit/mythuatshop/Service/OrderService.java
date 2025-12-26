@@ -265,5 +265,8 @@ public class OrderService {
                 .replace("\"", "&quot;")
                 .replace("'", "&#39;");
     }
+    public List<Order> getAllForAdmin() {
+        return orderDao.findAllForAdmin();
+    }
 
 }

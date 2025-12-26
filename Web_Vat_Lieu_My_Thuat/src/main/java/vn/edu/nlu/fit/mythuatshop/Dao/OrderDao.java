@@ -179,7 +179,7 @@ public class OrderDao implements DaoInterface<Order> {
                         "       o.orderStatusID AS orderStatusId, " +
                         "       o.voucherID     AS voucherId, " +
                         "       o.discount      AS discount, " +
-                        "       o.shippingFee AS shippingFee, "+
+                        "       o.shippingFee AS shippingFee, " +
                         "       o.createAt      AS createAt, " +
                         "       o.note          AS note, " +
                         "       os.statusName   AS statusName " +
@@ -238,7 +238,7 @@ public class OrderDao implements DaoInterface<Order> {
                 "       o.orderStatusID AS orderStatusId, " +
                 "       o.voucherID     AS voucherId, " +
                 "       o.discount      AS discount, " +
-                "       o.shippingFee AS shippingFee, "+
+                "       o.shippingFee AS shippingFee, " +
                 "       o.createAt      AS createAt, " +
                 "       o.note          AS note, " +
                 "       os.statusName   AS statusName, " +
@@ -275,6 +275,28 @@ public class OrderDao implements DaoInterface<Order> {
         );
 
         return affected == 1;
+    }
+
+    public List<Order> findAllForAdmin() {
+        String sql = """
+                    SELECT
+                        o.ID            AS id,
+                        o.fullName      AS fullName,
+                        o.phoneNumber   AS phoneNumber,
+                        o.createAt      AS createAt,
+                        o.address       AS address,
+                        o.totalPrice    AS totalPrice,
+                        os.statusName   AS statusName,
+                        GROUP_CONCAT(p.name ORDER BY p.name SEPARATOR ', ') AS productNames
+                    FROM Orders o
+                    JOIN Order_Statuses os ON os.ID = o.orderStatusID
+                    LEFT JOIN Order_Details od ON od.orderID = o.ID
+                    LEFT JOIN Products p ON p.ID = od.productID
+                    GROUP BY o.ID, o.fullName, o.phoneNumber, o.createAt, o.address, o.totalPrice, os.statusName
+                    ORDER BY o.createAt DESC
+                """;
+
+        return jdbi.withHandle(h -> h.createQuery(sql).mapToBean(Order.class).list());
     }
 
 
