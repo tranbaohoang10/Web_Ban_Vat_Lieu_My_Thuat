@@ -25,7 +25,9 @@ public class DetailsProductService {
     public Product getProduct(int productId) {
         return productDao.findByProductId(productId);
     }
-
+    public Product getProductActive(int productId) {
+        return productDao.findByProductIdActive(productId);
+    }
     // Lấy thông số kĩ thuật theo product
     public List<Specification> getSpecifications(int productId) {
         return specificationsDao.findByProductId(productId);

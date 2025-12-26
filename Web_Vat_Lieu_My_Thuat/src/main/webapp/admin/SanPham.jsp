@@ -458,6 +458,7 @@
                   <th>Giá</th>
                   <th>Ngày tạo</th>
                   <th>Số lượng tồn</th>
+                  <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
               </thead>
@@ -495,6 +496,18 @@
                   <td>${p.createAt}</td>
                   <td>${p.quantityStock}</td>
                   <td>
+                    <c:choose>
+                      <c:when test="${p.isActive == 1}">
+                        Đang bán
+                      </c:when>
+                      <c:otherwise>
+                        Ngừng bán
+                      </c:otherwise>
+                    </c:choose>
+                  </td>
+
+                  <!-- Tùy chọn -->
+                  <td>
                     <button class="chinhsua-sanpham"
                             data-id="${p.id}"
                             data-name="${p.name}"
@@ -509,13 +522,29 @@
 
                     <form action="${pageContext.request.contextPath}/admin/products"
                           method="post" style="display:inline">
-                      <input type="hidden" name="action" value="delete">
+                      <input type="hidden" name="action" value="toggleActive">
                       <input type="hidden" name="id" value="${p.id}">
-                      <button class="xoa-sanpham" type="submit"
-                              onclick="return confirm('Xóa sản phẩm này?')">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
+
+                      <c:choose>
+                        <c:when test="${p.isActive == 1}">
+                          <input type="hidden" name="isActive" value="0">
+                          <button class="xoa-sanpham" type="submit"
+                                  onclick="return confirm('Khóa (ngừng bán) sản phẩm này?')"
+                                  title="Khóa sản phẩm">
+                            <i class="fa-solid fa-lock"></i>
+                          </button>
+                        </c:when>
+                        <c:otherwise>
+                          <input type="hidden" name="isActive" value="1">
+                          <button class="chinhsua-sanpham" type="submit"
+                                  onclick="return confirm('Mở khóa (bán lại) sản phẩm này?')"
+                                  title="Mở khóa sản phẩm">
+                            <i class="fa-solid fa-lock-open"></i>
+                          </button>
+                        </c:otherwise>
+                      </c:choose>
                     </form>
+
                   </td>
                 </tr>
               </c:forEach>
@@ -751,7 +780,7 @@
           info: false,
           language: {url: viUrl},
           columnDefs: [
-            {orderable: false, targets: [3, 8]} // 3 = Hình ảnh, 8 = Tùy chọn
+            {orderable: false, targets: [3, 9]} // 3 = Hình ảnh, 9 = Tùy chọn
           ]
         })
       });

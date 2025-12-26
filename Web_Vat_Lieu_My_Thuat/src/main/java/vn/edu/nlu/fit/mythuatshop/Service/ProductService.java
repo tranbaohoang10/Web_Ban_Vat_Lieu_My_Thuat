@@ -68,6 +68,11 @@ public class ProductService {
     public int update(Product p) {
         return productDao.update(p);
     }
+    public int updateActive(int id, int isActive) {
+        return productDao.updateActive(id, isActive);
+    }public Product getProductByIdActive(int productId) {
+        return productDao.findByProductIdActive(productId);
+    }
 
     public int delete(int id) {
         return productDao.deleteById(id);
