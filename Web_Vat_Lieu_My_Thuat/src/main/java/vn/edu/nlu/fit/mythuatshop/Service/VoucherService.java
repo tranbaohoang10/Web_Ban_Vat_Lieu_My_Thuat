@@ -5,6 +5,7 @@ import vn.edu.nlu.fit.mythuatshop.Model.Cart;
 import vn.edu.nlu.fit.mythuatshop.Model.Voucher;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class VoucherService {
     private final VoucherDao voucherDao = new VoucherDao();
@@ -57,5 +58,25 @@ public class VoucherService {
     public void clear(Cart cart) {
         if (cart == null) return;
         cart.clearVoucher();
+    }
+    public List<Voucher> getAll() {
+        return voucherDao.findAll();
+    }
+
+    public Voucher getById(int id) {
+        return voucherDao.findById(id);
+    }
+
+    public boolean create(Voucher v) {
+        // logic validate nếu cần
+        return voucherDao.insert(v) > 0;
+    }
+
+    public boolean update(Voucher v) {
+        return voucherDao.update(v) > 0;
+    }
+
+    public boolean delete(int id) {
+        return voucherDao.delete(id) > 0;
     }
 }
