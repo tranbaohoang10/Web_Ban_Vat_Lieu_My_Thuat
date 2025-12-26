@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,6 +164,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+      border: none;
   }
 
   .icon i {
@@ -458,6 +462,41 @@
       transform: scale(1);
     }
   }
+/*  style cho modal xóa km*/
+  #Dialog-xoa-km .modal-body {
+      text-align: center;
+  }
+
+  #Dialog-xoa-km .modal-header{
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+  }
+
+  #Dialog-xoa-km .modal-header h2{
+      margin: 0;
+      flex: 1;
+      text-align: center;
+  }
+  #Dialog-xoa-km .btn-delete-cancel{
+      border: none;
+      background: #e0e0e0;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  #Dialog-xoa-km .btn-delete-confirm{
+      background-color: #DC3545;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: 0.2s;
+  }
+  #Dialog-xoa-km .btn-delete-confirm:hover{
+      background-color: #b02a37;
+  }
 </style>
 
 <body>
@@ -476,9 +515,10 @@
           lý người dùng</a>
         <a href="DonHang.jsp"><i class="fa-solid fa-box-open"></i>Quản
           lý đơn hàng</a>
-        <a href="Khuyenmai.html" class="active"><i class="fa-solid fa-gift"></i>Quản lý
-          khuyến mãi</a>
-        <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý
+          <a href="${pageContext.request.contextPath}/admin/vouchers" class="active">
+              <i class="fa-solid fa-gift"></i>Quản lý khuyến mãi
+          </a>
+          <a href="SliderShow.jsp"><i class="fa-solid fa-sliders"></i>Quản lý
           Slider Show</a>
         <a href="AdminLienHe.html"><i class="fa-solid fa-address-book"></i>Quản lý liên hệ</a>
         <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket"></i>
@@ -491,15 +531,21 @@
 
         <div class="order-container">
           <h1>Danh sách khuyến mãi</h1>
-          <div class="search">
-            <div class="search-input-icon">
-              <input type="text" placeholder="Tìm kiếm khuyến m...">
-              <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-            </div>
-            <button class="btn-them-km">Thêm khuyến mãi</button>
+            <div class="search">
+                <div class="search-input-icon">
+                    <form action="${pageContext.request.contextPath}/admin/vouchers" method="get" style="display:flex;">
+                        <input type="text" name="keyword" placeholder="Tìm kiếm khuyến mãi..." value="${keyword}">
+                        <button type="submit" class="icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </div>
 
-          </div>
-          <table class="order-table">
+                <button type="button" class="btn-them-km">Thêm khuyến mãi</button>
+            </div>
+
+
+            <table class="order-table">
             <thead>
               <tr>
                 <th>STT</th>
@@ -513,132 +559,75 @@
               </tr>
             </thead>
 
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>KM001</td>
-                <td>Giảm giá mùa hè</td>
-                <td>Khuyến mãi đặc biệt cho mùa hè, giảm giá các sản phẩm mùa
-                  hè.</td>
-                <td>01/06/2025</td>
-                <td>31/01/2025</td>
-                <td>40000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
+              <tbody>
+              <c:if test="${empty vouchers}">
+                  <tr>
+                      <td colspan="8">Không có khuyến mãi nào.</td>
+                  </tr>
+              </c:if>
 
-              <tr>
-                <td>2</td>
-                <td>KM002</td>
-                <td>Khuyến mãi Tết Nguyên đán</td>
-                <td>Giảm giá đặc biệt nhân dịp Tết Nguyên Đán, áp dụng cho tất
-                  cả sản phẩm.</td>
-                <td>01/01/2025</td>
-                <td>31/03/2025</td>
-                <td>25000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
+              <c:forEach var="v" items="${vouchers}" varStatus="st">
+                  <tr data-id="${v.id}">
+                      <td>${(currentPage - 1) * 10 + st.index + 1}</td>
+                      <td class="col-code">${v.code}</td>
+                      <td class="col-name">${v.name}</td>
+                      <td class="col-desc">${v.description}</td>
+                      <td class="col-start" data-value="${v.startDate}">
+                              ${v.startDate.toString().substring(0, 10)}
+                      </td>
+                      <td class="col-end" data-value="${v.endDate}">
+                              ${v.endDate.toString().substring(0, 10)}
+                      </td>
+                      <td class="col-cash" data-value="${v.voucherCash}">${v.voucherCash}đ</td>
+                      <td>
+                          <!-- nút Sửa: mở modal, không cần submit -->
+                          <button class="btn-Sua" type="button">
+                              <i class="fa-solid fa-pen-to-square"></i>
+                          </button>
 
-              <tr>
-                <td>3</td>
-                <td>KM003</td>
-                <td>Giảm giá sinh viên </td>
-                <td>Khuyến mãi đặc biệt dành cho sinh viên, giảm giá cho các
-                  mặt hàng học tập.</td>
-                <td>01/03/2025</td>
-                <td>31/05/2025</td>
-                <td>10000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
+                          <!-- nút Xóa: form POST -->
+                          <form action="${pageContext.request.contextPath}/admin/vouchers" method="post"
+                                style="display:inline">
+                              <input type="hidden" name="action" value="delete">
+                              <input type="hidden" name="id" value="${v.id}">
+                              <!-- ĐỂ type="button" ĐỂ KHÔNG SUBMIT NGAY -->
+                              <button class="btn-Xoa" type="button">
+                                  <i class="fa-solid fa-trash"></i>
+                              </button>
+                          </form>
+                      </td>
+                  </tr>
+              </c:forEach>
+              </tbody>
 
-              <tr>
-                <td>4</td>
-                <td>KM004</td>
-                <td>Khuyến mãi đầu năm</td>
-                <td>Giảm giá đặc biệt đầu năm, áp dụng cho tất cả các sản phẩm
-                  trong cửa hàng.</td>
-                <td>01/01/2025</td>
-                <td>15/01/2025</td>
-                <td>20000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
 
-              <tr>
-                <td>5</td>
-                <td>KM005</td>
-                <td>Giảm giá Giáng Sinh</td>
-                <td>Khuyến mãi dịp Giáng Sinh, giảm giá lên đến 50% cho các
-                  sản phẩm mùa lễ hội.</td>
-                <td>01/12/2025</td>
-                <td>31/12/2025</td>
-                <td>50000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-
-              <tr>
-                <td>6</td>
-                <td>KM006</td>
-                <td>Giảm giá Tết Trung Thu</td>
-                <td>Giảm giá sản phẩm đặc biệt cho Tết Trung Thu, áp dụng cho
-                  các mặt hàng bánh trung thu.</td>
-                <td>01/09/2025</td>
-                <td>30/09/2025</td>
-                <td>30000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-
-              <tr>
-                <td>7</td>
-                <td>KM007</td>
-                <td>Giảm giá Black Friday</td>
-                <td>Giảm giá cực lớn nhân dịp Black Friday, lên đến 40% cho
-                  các mặt hàng công nghệ.</td>
-                <td>01/11/2025</td>
-                <td>30/11/2025</td>
-                <td>40000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-
-              <tr>
-                <td>8</td>
-                <td>KM005</td>
-                <td>Giảm giá Lễ Quốc Khách</td>
-                <td>Khuyến mãi đặc biệt trong dịp lễ Quốc Khánh, giảm giá cho
-                  các sản phẩm quà tặng.</td>
-                <td>01/09/2025</td>
-                <td>03/09/2025</td>
-                <td>50000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-
-              <tr>
-                <td>9</td>
-                <td>KM009</td>
-                <td>Giảm giá mua 1 tặng 1</td>
-                <td>Khuyến mãi Mua 1 Tặng 1, áp dụng cho tất cả sản phẩm trong
-                  cửa hàng. </td>
-                <td>01/06/2025</td>
-                <td>30/06/2025</td>
-                <td>100000đ</td>
-                <td><button class="btn-Sua"><i class="fa-solid fa-pen-to-square"></i>
-                  </button> <button class="btn-Xoa"><i class="fa-solid fa-trash"></i></button></td>
-              </tr>
-            </tbody>
           </table>
-          <div class="pagination">
-            <a href="#" class="page-link">Trước</a>
-            <a href="#" class="page-link active">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link">3</a>
-            <a href="#" class="page-link">Sau</a>
-          </div>
+            <div class="pagination">
+                <!-- Nút Trước -->
+                <c:if test="${currentPage > 1}">
+                    <a class="page-link"
+                       href="${pageContext.request.contextPath}/admin/vouchers?page=${currentPage - 1}&keyword=${keyword}">
+                        Trước
+                    </a>
+                </c:if>
+
+                <!-- Các số trang -->
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <a class="page-link ${i == currentPage ? 'active' : ''}"
+                       href="${pageContext.request.contextPath}/admin/vouchers?page=${i}&keyword=${keyword}">
+                            ${i}
+                    </a>
+                </c:forEach>
+
+                <!-- Nút Sau -->
+                <c:if test="${currentPage < totalPages}">
+                    <a class="page-link"
+                       href="${pageContext.request.contextPath}/admin/vouchers?page=${currentPage + 1}&keyword=${keyword}">
+                        Sau
+                    </a>
+                </c:if>
+            </div>
+
         </div>
       </div>
     </div>
@@ -652,161 +641,254 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2>Thêm khuyến mãi</h2>
-        <span class="close-modal">&times;</span>
+          <span class="close-modal">&times;</span>
       </div>
-
+        <form action="${pageContext.request.contextPath}/admin/vouchers" method="post">
       <div class="modal-body">
-        <div class="form-group">
+          <input type="hidden" name="action" value="create">
+          <input type="hidden" name="quantityUsed" value="0">
+          <input type="hidden" name="isActive" value="1">
+
+          <div class="form-group">
           <label for="maKM">Mã khuyến mãi</label>
-          <input type="text" id="maKM" placeholder="Nhập mã khuyến mãi">
+          <input type="text" id="maKM" name="code" placeholder="Nhập mã khuyến mãi">
         </div>
 
         <div class="form-group">
           <label for="tenKM">Tên khuyến mãi</label>
-          <input type="text" id="tenKM" placeholder="Nhập tên khuyến mãi">
+          <input type="text" id="tenKM" name="name" placeholder="Nhập tên khuyến mãi">
         </div>
 
         <div class="form-group">
           <label for="mota">Mô tả</label>
-          <input type="text" id="mota" placeholder="Nhập mô tả">
+          <input type="text" id="mota" name="description" placeholder="Nhập mô tả">
         </div>
 
         <div class="form-group">
           <label for="ngaybatdau">Ngày bắt đầu</label>
-          <input type="date" id="ngaybatdau" placeholder="Nhập ngày bắt đầu">
+          <input type="date" id="ngaybatdau" name="startDate" placeholder="Nhập ngày bắt đầu">
         </div>
 
         <div class="form-group">
           <label for="ngàyketthuc">Ngày ngày kết thúc</label>
-          <input type="date" id="ngàyketthuc" placeholder="Nhập ngày kết thúc">
+          <input type="date" id="ngàyketthuc" name="endDate" placeholder="Nhập ngày kết thúc">
         </div>
 
         <div class="form-group">
           <label for="giamgia">Giảm giá</label>
-          <input type="text" id="giamgia" placeholder="Nhập số tiền giảm">
+          <input type="number" id="giamgia" name="voucherCash" placeholder="Nhập số tiền giảm">
         </div>
+
+          <div class="form-group">
+              <label for="minOrderValue">Đơn tối thiểu</label>
+              <input type="number" id="minOrderValue" name="minOrderValue" value="0" placeholder="Nhập đơn tối thiểu">
+          </div>
 
         <div class="form-group">
           <label for="sl">Số lượng</label>
-          <input type="text" id="sl" placeholder="Nhập số lượng">
+          <input type="number" id="sl" name="quantity" placeholder="Nhập số lượng">
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-cancel">Hủy</button>
-        <button class="btn-save">Lưu</button>
+        <button type="button" class="btn-cancel">Hủy</button>
+        <button type="submit" class="btn-save">Lưu</button>
       </div>
+        </form>
     </div>
   </div>
   <!-- ========== Dialog chỉnh sửa khuyến mãi ========== -->
   <div id="Dialog-sua-km" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Chỉnh sửa khuyến mãi</h2>
-        <span class="close-edit-modal">&times;</span>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2>Chỉnh sửa khuyến mãi</h2>
+              <span class="close-edit-modal">&times;</span>
+          </div>
+
+          <form id="editVoucherForm" action="${pageContext.request.contextPath}/admin/vouchers" method="post">
+              <div class="modal-body">
+                  <input type="hidden" name="action" value="update">
+                  <input type="hidden" name="id" id="editId">
+                  <input type="hidden" name="minOrderValue" id="editMinOrderValue">
+                  <input type="hidden" name="quantityUsed" id="editQuantityUsed">
+                  <input type="hidden" name="isActive" id="editIsActive" value="1">
+
+                  <div class="form-group">
+                      <label for="editCode">Mã khuyến mãi</label>
+                      <input type="text" id="editCode" name="code" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="editName">Tên khuyến mãi</label>
+                      <input type="text" id="editName" name="name" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="editDesc">Mô tả</label>
+                      <input type="text" id="editDesc" name="description">
+                  </div>
+
+                  <div class="form-group">
+                      <label for="editStartDate">Ngày bắt đầu</label>
+                      <input type="date" id="editStartDate" name="startDate">
+                  </div>
+
+                  <div class="form-group">
+                      <label for="editEndDate">Ngày kết thúc</label>
+                      <input type="date" id="editEndDate" name="endDate">
+                  </div>
+
+                  <div class="form-group">
+                      <label for="editCash">Giảm giá</label>
+                      <input type="number" id="editCash" name="voucherCash" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="editQuantity">Số lượng</label>
+                      <input type="number" id="editQuantity" name="quantity" required>
+                  </div>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn-edit-cancel">Hủy</button>
+                  <button type="submit" class="btn-edit-save">Lưu thay đổi</button>
+              </div>
+          </form>
       </div>
-
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="sua-ngay-km">Ngày bắt đầu</label>
-          <input type="date" id="sua-ngay-km" value="2025-06-01">
-        </div>
-
-        <div class="form-group">
-          <label for="sua-ngay-km">Ngày kết thúc</label>
-          <input type="date" id="sua-ngay-km" value="2025-01-31">
-        </div>
-
-        <div class="form-group">
-          <label for="sua-giam-gia">Giảm giá</label>
-          <input type="text" id="sua-giam-gia" value="40000đ">
-        </div>
-
-        <div class="form-group">
-          <label for="trangthai">Trạng thái</label>
-          <input type="text" id="trangthai" value="Hoạt động">
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn-edit-cancel">Hủy</button>
-        <button class="btn-edit-save">Lưu thay đổi</button>
-      </div>
-    </div>
   </div>
 
-  <!-- JS mở / đóng dialog -->
+  <!-- ========== Dialog XÓA khuyến mãi ========== -->
+  <div id="Dialog-xoa-km" class="modal">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2>Xóa khuyến mãi</h2>
+              <span class="close-delete-modal">&times;</span>
+          </div>
+
+          <div class="modal-body">
+              <p>Bạn chắc chắn muốn xóa khuyến mãi này?</p>
+          </div>
+
+          <div class="modal-footer">
+              <button type="button" class="btn-delete-cancel">Hủy</button>
+              <button type="button" class="btn-delete-confirm">Xóa</button>
+          </div>
+      </div>
+  </div>
+
   <script>
-    const btnThemKH = document.querySelector('.btn-them-km');
-    const modal = document.getElementById('Dialog-them-km');
-    const btnClose = document.querySelector('.close-modal');
-    const btnCancel = document.querySelector('.btn-cancel');
+      // mở modal thêm
+      const btnThemKM = document.querySelector('.btn-them-km');
+      const modalAdd = document.getElementById('Dialog-them-km');
+      const btnCloseAdd = document.querySelector('.close-modal');
+      const btnCancelAdd = document.querySelector('.btn-cancel');
 
-    // Mở dialog
-    btnThemKH.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
+      if (btnThemKM) btnThemKM.onclick = () => modalAdd.style.display = 'flex';
+      if (btnCloseAdd) btnCloseAdd.onclick = () => modalAdd.style.display = 'none';
+      if (btnCancelAdd) btnCancelAdd.onclick = () => modalAdd.style.display = 'none';
 
-    // Đóng dialog khi bấm dấu X hoặc nút Hủy
-    btnClose.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    btnCancel.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    // Click ra ngoài khung dialog cũng đóng
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    const modalEdit = document.getElementById("Dialog-sua-km");
-    const btnCloseEdit = document.querySelector(".close-edit-modal");
-    const btnEditCancel = document.querySelector(".btn-edit-cancel");
-
-    // Lấy danh sách nút sửa
-    const btnSuaList = document.querySelectorAll(".btn-Sua");
-
-    // Khi nhấn Sửa
-    btnSuaList.forEach(btn => {
-      btn.addEventListener("click", () => {
-        modalEdit.style.display = "flex";
-
-        // Lấy dữ liệu từ dòng bảng (ví dụ)
-        let row = btn.closest("tr");
-        let ten = row.querySelector(".col-ten").innerText;
-        let sdt = row.querySelector(".col-sdt").innerText;
-        let diachi = row.querySelector(".col-diachi").innerText;
-        let vaitro = row.querySelector(".col-vaitro").innerText;
-
-        // Gán vào dialog sửa
-        document.getElementById("sua-ngay-km").value = ten;
-        document.getElementById("editSdtKH").value = sdt;
-        document.getElementById("editDiaChiKH").value = diachi;
-        document.getElementById("editVaiTroKH").value = vaitro;
+      // click ngoài đóng modal thêm
+      window.addEventListener('click', e => {
+          if (e.target === modalAdd) modalAdd.style.display = 'none';
       });
-    });
 
-    // Đóng dialog khi bấm X
-    btnCloseEdit.addEventListener("click", () => {
-      modalEdit.style.display = "none";
-    });
+      // modal sửa
+      const modalEdit = document.getElementById("Dialog-sua-km");
+      const btnCloseEdit = document.querySelector(".close-edit-modal");
+      const btnEditCancel = document.querySelector(".btn-edit-cancel");
+      const btnSuaList = document.querySelectorAll(".btn-Sua");
 
-    // Đóng khi bấm Hủy
-    btnEditCancel.addEventListener("click", () => {
-      modalEdit.style.display = "none";
-    });
+      btnSuaList.forEach(btn => {
+          btn.addEventListener("click", () => {
+              const row = btn.closest("tr");
 
-    // Click ra ngoài đóng modal
-    window.addEventListener("click", (e) => {
-      if (e.target === modalEdit) {
-        modalEdit.style.display = "none";
+              const id = row.getAttribute("data-id");
+              const code = row.querySelector(".col-code").innerText.trim();
+              const name = row.querySelector(".col-name").innerText.trim();
+              const desc = row.querySelector(".col-desc").innerText.trim();
+              const start = row.querySelector(".col-start").getAttribute("data-value") || "";
+              const end   = row.querySelector(".col-end").getAttribute("data-value") || "";
+              const cash = row.querySelector(".col-cash").getAttribute("data-value");
+
+              const min = row.getAttribute("data-min") || "0";
+              const used = row.getAttribute("data-used") || "0";
+              const active = row.getAttribute("data-active") || "1";
+
+              document.getElementById("editId").value = id;
+              document.getElementById("editCode").value = code;
+              document.getElementById("editName").value = name;
+              document.getElementById("editDesc").value = desc;
+              document.getElementById("editStartDate").value = start.substring(0, 10);
+              document.getElementById("editEndDate").value   = end.substring(0, 10);
+              document.getElementById("editCash").value = cash;
+              document.getElementById("editQuantity").value = row.querySelector(".col-qty")
+                  ? row.querySelector(".col-qty").innerText.trim()
+                  : "";
+
+              document.getElementById("editMinOrderValue").value = min;
+              document.getElementById("editQuantityUsed").value = used;
+              document.getElementById("editIsActive").value = active;
+
+              modalEdit.style.display = "flex";
+          });
+      });
+
+
+      if (btnCloseEdit) btnCloseEdit.onclick = () => modalEdit.style.display = "none";
+      if (btnEditCancel) btnEditCancel.onclick = () => modalEdit.style.display = "none";
+
+      window.addEventListener("click", e => {
+          if (e.target === modalEdit) {
+              modalEdit.style.display = "none";
+          }
+      });
+      // ===== Modal XÓA khuyến mãi =====
+      const deleteModal = document.getElementById("Dialog-xoa-km");
+      const btnCloseDelete = document.querySelector(".close-delete-modal");
+      const btnDeleteCancel = document.querySelector(".btn-delete-cancel");
+      const btnDeleteConfirm = document.querySelector(".btn-delete-confirm");
+      const btnDeleteList = document.querySelectorAll(".btn-Xoa");
+
+      let deleteForm = null; // form sẽ được submit sau khi xác nhận
+
+      // Khi bấm nút thùng rác
+      btnDeleteList.forEach(btn => {
+          btn.addEventListener("click", () => {
+              deleteForm = btn.closest("form");   // lấy form chứa nút xóa
+              deleteModal.style.display = "flex"; // mở modal
+          });
+      });
+
+      // Bấm "Xóa" trong modal => submit form
+      if (btnDeleteConfirm) {
+          btnDeleteConfirm.onclick = () => {
+              if (deleteForm) {
+                  deleteForm.submit();
+                  deleteModal.style.display = "none";
+                  deleteForm = null;
+              }
+          };
       }
-    });
+
+      // Bấm Hủy hoặc dấu X => đóng modal
+      if (btnCloseDelete) btnCloseDelete.onclick = () => {
+          deleteModal.style.display = "none";
+          deleteForm = null;
+      };
+      if (btnDeleteCancel) btnDeleteCancel.onclick = () => {
+          deleteModal.style.display = "none";
+          deleteForm = null;
+      };
+
+      // Click ra ngoài modal => đóng
+      window.addEventListener("click", e => {
+          if (e.target === deleteModal) {
+              deleteModal.style.display = "none";
+              deleteForm = null;
+          }
+      });
   </script>
+
 </body>
 
 </html>
