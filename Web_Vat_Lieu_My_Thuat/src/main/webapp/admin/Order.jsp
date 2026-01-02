@@ -421,6 +421,66 @@
         transform: translateY(0);
     }
 
+
+    .dataTables_wrapper .dataTables_filter input {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 8px 10px;
+        outline: none;
+        transition: 0.2s;
+    }
+    .dataTables_wrapper .dataTables_filter input:focus {
+        border-color: #2659F5;
+        box-shadow: 0 0 0 2px rgba(38, 89, 245, 0.15);
+    }
+
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        border: 1px solid #d0d7de !important;
+        border-radius: 6px !important;
+        padding: 6px 12px !important;
+        margin: 0 3px !important;
+        background: #fff !important;
+        color: #2659F5 !important;
+        transition: 0.2s;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: #e9ecef !important;
+        border-color: #2659F5 !important;
+        color: #2659F5 !important;
+    }
+
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        background: #2659F5 !important;
+        border-color: #2659F5 !important;
+        color: #fff !important;
+    }
+
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+        opacity: 0.5;
+        cursor: not-allowed !important;
+        background: #fff !important;
+        border-color: #d0d7de !important;
+        color: #2659F5 !important;
+    }
+
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after {
+        opacity: 0.65;
+        color: #fff;
+    }
+
+
+    .order-table tbody tr:hover td {
+        background: rgba(38, 89, 245, 0.06);
+    }
+
 </style>
 
 <body>
@@ -456,7 +516,7 @@
             <a href="${pageContext.request.contextPath}/admin/vouchers"><i
                     class="fa-solid fa-gift"></i>Quản lý
                 khuyến mãi</a>
-            <a href="SliderShow.jsp"><i
+            <a href="${pageContext.request.contextPath}/admin/sliders"><i
                     class="fa-solid fa-sliders"></i>Quản lý Slider
                 Show</a>
             <a href="${pageContext.request.contextPath}/admin/contacts"><i

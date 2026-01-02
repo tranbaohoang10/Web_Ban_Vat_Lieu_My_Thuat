@@ -538,7 +538,7 @@
   <i class="fa-solid fa-gift"></i> Quản lý khuyến mãi
 </a>
 
-<a href="SliderShow.jsp">
+<a href="${pageContext.request.contextPath}/admin/sliders">
   <i class="fa-solid fa-sliders"></i> Quản lý Slider Show
 </a>
 
