@@ -1412,12 +1412,9 @@
 <script>
     function increaseQuantity() {
         const input = document.getElementById("quantity");
-        let value = parseInt(input.value);
-        if (!isNaN(value)) {
-            input.value = value + 1;
-        } else {
-            input.value = 1;
-        }
+        const value = parseInt(input.value) || 1;
+        const max = parseInt(input.max) || 999999;
+        if (value < max) input.value = value + 1;
     }
 
     function decreaseQuantity() {
