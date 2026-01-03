@@ -46,6 +46,7 @@ public class DetailsProductController extends HttpServlet {
         List<Subimages> subimagesList = service.getSubImages(productId);
         List<ProductCard> relatedProducts = service.getRelatedProductCards(p);
         request.setAttribute("product", p);
+        request.setAttribute("outOfStock", p.getQuantityStock() <= 0);
         request.setAttribute("specificationList", specificationList);
         request.setAttribute("subimagesList", subimagesList);
         request.setAttribute("relatedProducts", relatedProducts);

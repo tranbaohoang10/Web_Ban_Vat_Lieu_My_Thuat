@@ -1050,6 +1050,16 @@
     .section-but .section-but-button .button:hover {
         opacity: 0.9;
     }
+    .btn-disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        pointer-events: none; /* chặn click link */
+    }
+    button:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+
 </style>
 
 <body>
@@ -1167,8 +1177,12 @@
                     </div>
                     <div class="product-meta-item">
                         <span class="product-meta-label">Tình trạng:</span>
-                        <span class="product-meta-value" style="color:#10b981;">
-                            ${product.status}
+                        <span class="product-meta-value"
+                              style="color: ${outOfStock ? '#ef4444' : '#10b981'};">
+                          <c:choose>
+                              <c:when test="${outOfStock}">Hết hàng</c:when>
+                              <c:otherwise>Còn hàng</c:otherwise>
+                          </c:choose>
                         </span>
                     </div>
                     <div class="product-meta-item">
@@ -1197,22 +1211,39 @@
                     <div class="quantity-section">
                         <div class="variant-label">Số lượng:</div>
                         <div class="quantity-controls">
-                            <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <button type="button" class="quantity-btn"
+                                    onclick="decreaseQuantity()"
+                            ${outOfStock ? "disabled" : ""}>-</button>
                             <!-- QUAN TRỌNG: thêm name="quantity" -->
                             <input type="number" class="quantity-input"
                                    id="quantity" name="quantity"
-                                   value="1" min="1">
-                            <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                   value="1" min="1"
+                                   max="${product.quantityStock}"
+                            ${outOfStock ? "disabled" : ""}>
+                            <button type="button" class="quantity-btn"
+                                    onclick="increaseQuantity()"
+                            ${outOfStock ? "disabled" : ""}>+</button>
                         </div>
                     </div>
 
                     <div class="product-actions">
-                        <button type="submit" class="btn btn-add-cart" id="addToCartBtn">
-                            <i class="fa-solid fa-cart-plus"></i>
+                        <button type="submit" class="btn btn-add-cart" id="addToCartBtn"
+                        ${outOfStock ? "disabled" : ""}>
+                            <c:if test="${outOfStock}">
+                                <i class="fa-solid fa-ban"></i>
+                            </c:if>
+                            <c:if test="${not outOfStock}">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </c:if>
                             THÊM VÀO GIỎ
                         </button>
 
-                        <a href="${pageContext.request.contextPath}/checkout" class="btn btn-buy-now link">
+                        <a href="${outOfStock ? '#' : pageContext.request.contextPath.concat('/checkout')}"
+                           class="btn btn-buy-now link ${outOfStock ? 'btn-disabled' : ''}"
+                        ${outOfStock ? 'aria-disabled="true"' : ''}>
+                            <c:if test="${outOfStock}">
+                                <i class="fa-solid fa-ban"></i>
+                            </c:if>
                             MUA NGAY
                         </a>
                     </div>
