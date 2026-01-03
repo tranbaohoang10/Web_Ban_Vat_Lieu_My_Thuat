@@ -21,22 +21,14 @@ public class UserService {
 
     //  LOGIN: chặn tài khoản bị khóa
     public Users login(String email, String password) {
-        if (email == null || password == null) return null;
-
-        Users user = userDao.findByEmail(email.trim());
+        Users user = userDao.findByEmail(email);
         if (user == null) return null;
 
-        //  CHẶN nếu bị khóa
-        // (yêu cầu Model Users có getIsActive() hoặc isActive)
-        if (user.getIsActive() == 0) {
-            return null; // hoặc bạn có thể throw / set message tùy hệ thống
-        }
-
-        boolean matched = BCrypt.checkpw(password, user.getPassword());
-        if (!matched) return null;
+        if (!BCrypt.checkpw(password, user.getPassword())) return null;
 
         return user;
     }
+
 
     //  REGISTER: set address + set isActive=1
     public boolean register(String fullName, String email, String phoneNumber, String password, String address, String baseUrl) {

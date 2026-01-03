@@ -278,7 +278,12 @@
     .msg-success{
         color: #00ff99;
     }
-
+    .msg-error {
+        color: #ff6666;
+    }
+    .msg-warning{
+        color: #FFD700;
+    }
 </style>
 
 <body>
@@ -306,25 +311,30 @@
                        required id="Mk"></div>
             <div class="msg-box">
                 <%
-                    Object errObj = request.getAttribute("error");
-                    if (errObj != null && !errObj.toString().trim().isEmpty()) {
+                    String verify = request.getParameter("verify");   // <- lấy từ URL ?verify=success
+                    Object warnObj = request.getAttribute("warning");
+                    Object errObj  = request.getAttribute("error");
+
+                    if ("success".equals(verify)) {
+                %>
+                <div class="msg msg-success">Tài khoản đã xác thực thành công! Bạn hãy đăng nhập.</div>
+                <%
+                } else if ("failed".equals(verify)) {
+                %>
+                <div class="msg msg-error">Link xác thực không hợp lệ hoặc đã hết hạn.</div>
+                <%
+                } else if (warnObj != null && !warnObj.toString().trim().isEmpty()) {
+                %>
+                <div class="msg msg-warning"><%= warnObj.toString() %></div>
+                <%
+                } else if (errObj != null && !errObj.toString().trim().isEmpty()) {
                 %>
                 <div class="msg msg-error"><%= errObj.toString() %></div>
                 <%
                     }
-
-                    String verify = request.getParameter("verify");
-                    if ("success".equals(verify)) {
-                %>
-                <div class="msg msg-success">Kích hoạt tài khoản thành công! Bạn hãy đăng nhập.</div>
-                <%
-                } else if ("failed".equals(verify)) {
-                %>
-                <div class="msg msg-error">Link kích hoạt không hợp lệ hoặc đã hết hạn.</div>
-                <%
-                    }
                 %>
             </div>
+
 
 
             <div class="forgot-password">
