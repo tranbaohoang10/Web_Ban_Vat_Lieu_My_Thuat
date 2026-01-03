@@ -282,6 +282,21 @@ public class ProductDao {
                 .bind("qty", qty)
                 .execute();
     }
+    public int restoreStockAndSold(Handle handle, int productId, int qty) {
+        String sql = """
+        UPDATE Products
+        SET quantityStock = quantityStock + :qty,
+            soldQuantity = CASE
+                WHEN soldQuantity >= :qty THEN soldQuantity - :qty
+                ELSE 0
+            END
+        WHERE id = :pid
+    """;
+        return handle.createUpdate(sql)
+                .bind("pid", productId)
+                .bind("qty", qty)
+                .execute();
+    }
 
     // ===================== CRUD ADMIN =====================
 
