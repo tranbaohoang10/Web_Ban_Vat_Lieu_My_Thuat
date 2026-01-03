@@ -52,7 +52,7 @@ public class AdminProductController extends HttpServlet {
         req.setAttribute("products", productService.getAllProducts());
         req.setAttribute("categories", categoryService.getAllcategories());
 
-        req.getRequestDispatcher("/admin/SanPham.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/Product.jsp").forward(req, resp);
     }
 
     @Override
