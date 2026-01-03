@@ -296,13 +296,14 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Đăng ký thành công!',
-
+                text: 'Vui lòng kiểm tra email và bấm link để kích hoạt tài khoản.',
                 showConfirmButton: false,
-                timer: 2000
+                timer: 3000
             }).then(() => {
                 window.location.href = 'login';
             });
         }
+
     });
 </script>
 <%--check sdt--%>

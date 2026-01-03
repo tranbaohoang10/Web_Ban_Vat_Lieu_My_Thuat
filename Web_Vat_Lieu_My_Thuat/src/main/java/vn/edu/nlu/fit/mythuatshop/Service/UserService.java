@@ -4,6 +4,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import vn.edu.nlu.fit.mythuatshop.Dao.UserDao;
 import vn.edu.nlu.fit.mythuatshop.Model.Users;
 import vn.edu.nlu.fit.mythuatshop.Util.EmailUtil;
+import vn.edu.nlu.fit.mythuatshop.Dao.EmailVerificationTokenDao;
+import java.time.LocalDateTime;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -11,6 +13,7 @@ import java.util.UUID;
 
 public class UserService {
     private final UserDao userDao;
+    private final EmailVerificationTokenDao tokenDao = new EmailVerificationTokenDao();
 
     public UserService() {
         this.userDao = new UserDao();
@@ -36,15 +39,13 @@ public class UserService {
     }
 
     //  REGISTER: set address + set isActive=1
-    public boolean register(String fullName, String email, String phoneNumber, String password, String address) {
+    public boolean register(String fullName, String email, String phoneNumber, String password, String address, String baseUrl) {
         if (email == null || email.isBlank()) return false;
         if (password == null || password.isBlank()) return false;
 
         email = email.trim();
 
-        if (userDao.findByEmail(email) != null) {
-            return false;
-        }
+        if (userDao.findByEmail(email) != null) return false;
 
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
@@ -53,13 +54,30 @@ public class UserService {
         user.setEmail(email);
         user.setPassword(hashedPassword);
         user.setPhoneNumber(phoneNumber);
-        user.setAddress(address);      //  bạn bị thiếu dòng này
+        user.setAddress(address);
         user.setRole("USER");
 
-        user.setIsActive(1);           //  mặc định active
+        user.setIsActive(0); // ✅ CHƯA KÍCH HOẠT
 
-        int row = userDao.insertUser(user);
-        return row > 0;
+        int userId = userDao.insertUserAndReturnId(user);
+        if (userId <= 0) return false;
+
+        // tạo token
+        String token = UUID.randomUUID().toString().replace("-", "");
+        LocalDateTime expiresAt = LocalDateTime.now().plusHours(24);
+        tokenDao.insert(userId, token, expiresAt);
+
+        // gửi mail
+        String verifyLink = baseUrl + "/verify-email?token=" + token;
+        String subject = "Xác nhận đăng ký tài khoản";
+        String html = ""
+                + "<p>Chào bạn,</p>"
+                + "<p>Vui lòng nhấn link sau để kích hoạt tài khoản:</p>"
+                + "<p><a href='" + verifyLink + "'>Kích hoạt tài khoản</a></p>"
+                + "<p>Link hết hạn sau 24 giờ.</p>";
+
+        EmailUtil.sendHtml(email, subject, html);
+        return true;
     }
 
     // =================== Cập nhật thông tin ===================
@@ -199,4 +217,16 @@ public class UserService {
 
         userDao.insertUser(user);
     }
+    // xác nhân tài khoản
+    public boolean verifyEmailToken(String token) {
+        if (token == null || token.isBlank()) return false;
+
+        Integer userId = tokenDao.findUserIdIfValid(token);
+        if (userId == null) return false;
+
+        userDao.setActive(userId, 1);
+        tokenDao.markUsed(token);
+        return true;
+    }
+
 }

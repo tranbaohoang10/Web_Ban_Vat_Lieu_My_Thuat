@@ -206,6 +206,25 @@ public class UserDao {
                         .execute()
         );
     }
+//xác thực tài khoản
+public int insertUserAndReturnId(Users user) {
+    String sql = "INSERT INTO users (fullName, email, password, phoneNumber, address, role, createAt, isActive) " +
+            "VALUES (:fullName, :email, :password, :phoneNumber, :address, :role, CURRENT_TIMESTAMP(), :isActive)";
+
+    return jdbi.withHandle(handle ->
+            handle.createUpdate(sql)
+                    .bind("fullName", user.getFullName())
+                    .bind("email", user.getEmail())
+                    .bind("password", user.getPassword())
+                    .bind("phoneNumber", user.getPhoneNumber())
+                    .bind("address", user.getAddress())
+                    .bind("role", user.getRole())
+                    .bind("isActive", user.getIsActive())
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(int.class)
+                    .one()
+    );
+}
 
 
 }
