@@ -223,13 +223,16 @@
             <div class="tt-chitiet" style="grid-column: span 2;">
                 <label for="Ho">Họ và Tên:</label>
                 <input type="text" id="Ho" name="fullName"
-                       placeholder="Họ và Tên" required>
+                       placeholder="Họ và Tên" required
+                       value="${param.fullName}">
+
             </div>
 
             <div class="tt-chitiet">
                 <label for="Email">Email cá nhân:</label>
                 <input type="email" id="email" name="email"
                        placeholder="Email cá nhân" required
+                       value="${param.email}"
                        pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
                        title="Email phải đúng định dạng, ví dụ: ten@gmail.com">
                 <span id="email-error"
@@ -241,6 +244,7 @@
                 <input type="tel" id="sdt" name="phoneNumber"
                        required maxlength = "10"
                        placeholder="Số điện thoại"
+                       value="${param.phoneNumber}"
                        pattern = "^0\d{9}$"
                        title = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0">
                        <span id="phonerror" style="color: #FFD700; font-size: 14px;"></span>

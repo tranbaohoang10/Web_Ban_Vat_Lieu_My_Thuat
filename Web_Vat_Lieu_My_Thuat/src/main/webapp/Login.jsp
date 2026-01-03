@@ -308,7 +308,7 @@
             <div class="form-1">
                 <label for="password"> Mật Khẩu*</label>
                 <input type="password" name="password" placeholder="Nhập mật khẩu"
-                       required id="Mk"></div>
+                       required id="password"></div>
             <div class="msg-box">
                 <%
                     String verify = request.getParameter("verify");   // <- lấy từ URL ?verify=success
