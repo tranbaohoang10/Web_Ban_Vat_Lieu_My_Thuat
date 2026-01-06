@@ -79,7 +79,7 @@ public class AdminVoucherController extends HttpServlet {
                 req.setAttribute("totalPages", totalPages);
                 req.setAttribute("keyword", keyword);
 
-                req.getRequestDispatcher("/admin/Khuyenmai.jsp").forward(req, resp);
+                req.getRequestDispatcher("/admin/Voucher.jsp").forward(req, resp);
             }
         }
     }

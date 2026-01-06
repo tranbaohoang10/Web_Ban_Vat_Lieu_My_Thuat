@@ -40,7 +40,7 @@
         background-color: rgba(0, 0, 0, 0.4);
         padding: 45px 45px;
         box-sizing: border-box;
-        overflow: hidden;
+        overflow: visible;
         position: relative;
         transition: 0.5s ease;
         /* display: flex; */
@@ -48,7 +48,8 @@
         flex-wrap: wrap;
         border-radius: 10px;
         width: 460px;
-        height: 480px;
+        min-height: 480px;
+        height: auto;
 
     }
 
@@ -274,7 +275,15 @@
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
     }
 
-
+    .msg-success{
+        color: #00ff99;
+    }
+    .msg-error {
+        color: #ff6666;
+    }
+    .msg-warning{
+        color: #FFD700;
+    }
 </style>
 
 <body>
@@ -299,8 +308,34 @@
             <div class="form-1">
                 <label for="password"> Mật Khẩu*</label>
                 <input type="password" name="password" placeholder="Nhập mật khẩu"
-                       required id="Mk"></div>
-            <p style="color: red; margin-top:8px"> ${error}</p>
+                       required id="password"></div>
+            <div class="msg-box">
+                <%
+                    String verify = request.getParameter("verify");   // <- lấy từ URL ?verify=success
+                    Object warnObj = request.getAttribute("warning");
+                    Object errObj  = request.getAttribute("error");
+
+                    if ("success".equals(verify)) {
+                %>
+                <div class="msg msg-success">Tài khoản đã xác thực thành công! Bạn hãy đăng nhập.</div>
+                <%
+                } else if ("failed".equals(verify)) {
+                %>
+                <div class="msg msg-error">Link xác thực không hợp lệ hoặc đã hết hạn.</div>
+                <%
+                } else if (warnObj != null && !warnObj.toString().trim().isEmpty()) {
+                %>
+                <div class="msg msg-warning"><%= warnObj.toString() %></div>
+                <%
+                } else if (errObj != null && !errObj.toString().trim().isEmpty()) {
+                %>
+                <div class="msg msg-error"><%= errObj.toString() %></div>
+                <%
+                    }
+                %>
+            </div>
+
+
 
             <div class="forgot-password">
                 <p>Quên mật khẩu? Nhấn vào <a

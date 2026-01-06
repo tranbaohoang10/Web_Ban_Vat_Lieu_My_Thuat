@@ -33,7 +33,7 @@ public class AdminUserController extends HttpServlet {
         req.setAttribute("q", (q == null) ? "" : q);
         req.setAttribute("msg", msg);
 
-        req.getRequestDispatcher("/admin/Nguoidung.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/User.jsp").forward(req, resp);
     }
 
     @Override

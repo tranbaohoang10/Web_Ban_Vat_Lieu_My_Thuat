@@ -20,8 +20,8 @@ public class UserDao {
     }
     // thêm user mới dô db
     public int insertUser(Users user) {
-        String sql = "INSERT INTO users (fullName, email, password, phoneNumber, address, role, createAt) " +
-                "VALUES (:fullName, :email, :password, :phoneNumber, :address, :role, CURRENT_TIMESTAMP())";
+        String sql = "INSERT INTO users (fullName, email, password, phoneNumber, address, role, createAt, isActive) " +
+                "VALUES (:fullName, :email, :password, :phoneNumber, :address, :role, CURRENT_TIMESTAMP(), :isActive)";
         return jdbi.withHandle(handle -> handle.createUpdate(sql)
                 .bind("fullName", user.getFullName())
                 .bind("email", user.getEmail())
@@ -29,6 +29,7 @@ public class UserDao {
                 .bind("phoneNumber", user.getPhoneNumber())
                 .bind("address", user.getAddress())
                 .bind("role", user.getRole())
+                .bind("isActive", user.getIsActive())
                 .execute()
         );
     }
@@ -153,9 +154,10 @@ public class UserDao {
 
     public int adminCreateUser(Users user) {
         String sql = """
-        INSERT INTO users (fullName, email, password, phoneNumber, dob, address, role, createAt)
-        VALUES (:fullName, :email, :password, :phoneNumber, :dob, :address, :role, CURRENT_TIMESTAMP())
-    """;
+    INSERT INTO users (fullName, email, password, phoneNumber, dob, address, role, createAt, isActive)
+    VALUES (:fullName, :email, :password, :phoneNumber, :dob, :address, :role, CURRENT_TIMESTAMP(), :isActive)
+""";
+
 
         return jdbi.withHandle(h -> h.createUpdate(sql)
                 .bind("fullName", user.getFullName())
@@ -165,6 +167,7 @@ public class UserDao {
                 .bind("dob", user.getDob() != null ? java.sql.Date.valueOf(user.getDob()) : null)
                 .bind("address", user.getAddress())
                 .bind("role", user.getRole())
+                .bind("isActive", user.getIsActive())
                 .execute());
     }
 
@@ -206,6 +209,25 @@ public class UserDao {
                         .execute()
         );
     }
+//xác thực tài khoản
+public int insertUserAndReturnId(Users user) {
+    String sql = "INSERT INTO users (fullName, email, password, phoneNumber, address, role, createAt, isActive) " +
+            "VALUES (:fullName, :email, :password, :phoneNumber, :address, :role, CURRENT_TIMESTAMP(), :isActive)";
+
+    return jdbi.withHandle(handle ->
+            handle.createUpdate(sql)
+                    .bind("fullName", user.getFullName())
+                    .bind("email", user.getEmail())
+                    .bind("password", user.getPassword())
+                    .bind("phoneNumber", user.getPhoneNumber())
+                    .bind("address", user.getAddress())
+                    .bind("role", user.getRole())
+                    .bind("isActive", user.getIsActive())
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(int.class)
+                    .one()
+    );
+}
 
 
 }

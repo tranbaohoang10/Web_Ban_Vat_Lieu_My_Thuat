@@ -49,14 +49,19 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-      boolean success = userService.register(fullName, email, phoneNumber, password, address);
+        String baseUrl = req.getScheme() + "://" + req.getServerName()
+                + ((req.getServerPort() == 80 || req.getServerPort() == 443) ? "" : (":" + req.getServerPort()))
+                + req.getContextPath();
+
+        boolean success = userService.register(fullName, email, phoneNumber, password, address, baseUrl);
       if(!success){
           req.setAttribute("error", "Email đã được sử dụng, vui lòng nhập email khác!");
           req.getRequestDispatcher("Register.jsp").forward(req,resp);
           return;
       }
 
-            resp.sendRedirect(req.getContextPath() + "/register?success=true");
+//            resp.sendRedirect(req.getContextPath() + "/register?success=true");
+        resp.sendRedirect(req.getContextPath() + "/register?success=true&verify=sent");
 
     }
 

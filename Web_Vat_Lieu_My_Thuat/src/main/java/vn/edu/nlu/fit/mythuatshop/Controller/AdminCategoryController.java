@@ -34,7 +34,7 @@ public class AdminCategoryController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         req.setAttribute("categories", categoryService.getAllcategories());
-        req.getRequestDispatcher("/admin/DanhMuc.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/Category.jsp").forward(req, resp);
     }
 
     @Override
