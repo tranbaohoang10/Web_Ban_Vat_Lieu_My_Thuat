@@ -40,7 +40,7 @@ public class AdminStatisticsController extends HttpServlet {
         req.setAttribute("bestChart", bestChart);
         req.setAttribute("noSaleTable", noSaleTable);
 
-        req.getRequestDispatcher("/admin/ThongKe.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/Statistic.jsp").forward(req, resp);
     }
 
     private int parseInt(String s, int def) {

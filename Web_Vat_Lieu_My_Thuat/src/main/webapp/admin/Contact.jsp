@@ -494,7 +494,7 @@
                     src="../assets/images/logo/logo.png" alt></a>
             <a href="Admin.jsp"><i class="fa-solid fa-house"></i> Tổng
                 quan</a>
-            <a href="ThongKe.jsp"><i
+            <a href="Statistic.jsp"><i
                     class="fa-solid fa-chart-line"></i>Thống
                 kê</a>
             <a href="${pageContext.request.contextPath}/admin/categories"><i class="fa-solid fa-list"></i>Quản

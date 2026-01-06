@@ -262,24 +262,37 @@ public class OrderDao implements DaoInterface<Order> {
         );
     }
 
-    public boolean cancelOrder(int orderId, int userId) {
-        String sql = """
-                    UPDATE Orders
-                    SET orderStatusID = 4
-                    WHERE ID = :orderId
-                      AND userID = :userId
-                      AND orderStatusID = 1
-                """;
+    public boolean cancelOrder(int userId, int orderId) {
+        return jdbi.inTransaction(handle -> {
 
-        int affected = jdbi.withHandle(h ->
-                h.createUpdate(sql)
-                        .bind("orderId", orderId)
-                        .bind("userId", userId)
-                        .execute()
-        );
+            // 1) đổi trạng thái: chỉ hủy khi đang xử lý (1)
+            int updated = handle.createUpdate("""
+                UPDATE Orders
+                SET orderStatusID = 4
+                WHERE ID = :oid
+                  AND userID = :uid
+                  AND orderStatusID = 1
+            """)
+                    .bind("oid", orderId)
+                    .bind("uid", userId)
+                    .execute();
 
-        return affected == 1;
+            if (updated != 1) return false;
+
+            // 2) hoàn kho (cộng lại tồn) dựa trên Order_Details
+            handle.createUpdate("    UPDATE Products p\n" +
+                                "    JOIN Order_Details od ON od.productID = p.id\n" +
+                                "    SET p.quantityStock = p.quantityStock + od.quantity,\n" +
+                                "        p.soldQuantity = GREATEST(p.soldQuantity - od.quantity, 0)\n" +
+                                "    WHERE od.orderID = :oid\n")
+                    .bind("oid", orderId)
+                    .execute();
+
+            return true;
+        });
     }
+
+
 
     public List<Order> findAllForAdmin() {
         String sql = """

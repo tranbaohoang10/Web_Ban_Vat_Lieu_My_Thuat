@@ -168,7 +168,7 @@ public class OrderService {
     }
 
     public boolean cancelOrder(int userId, int orderId) {
-        return orderDao.cancelOrder(orderId, userId);
+        return orderDao.cancelOrder(userId,orderId);
     }
 
 

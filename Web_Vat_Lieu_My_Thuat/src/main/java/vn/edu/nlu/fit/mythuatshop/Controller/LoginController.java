@@ -37,15 +37,31 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        // 2. Gọi login 1 lần
-        Users users = userService.login(email, password);
+        // 2) Tìm user theo email trước để phân biệt lỗi
+        Users u = userService.getUserByEmail(email.trim());
 
-        // 3. Sai tài khoản/mật khẩu
+        if (u == null) {
+            req.setAttribute("error", "Sai email hoặc mật khẩu");
+            req.getRequestDispatcher("Login.jsp").forward(req, resp);
+            return;
+        }
+
+// 3) Chưa xác thực
+        if (u.getIsActive() == 0) {
+            req.setAttribute("warning", "Vui lòng truy cập gmail để xác thực tài khoản!");
+            req.getRequestDispatcher("Login.jsp").forward(req, resp);
+            return;
+        }
+
+// 4) Active rồi mới check mật khẩu
+        Users users = userService.login(email.trim(), password);
+
         if (users == null) {
             req.setAttribute("error", "Sai email hoặc mật khẩu");
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
             return;
         }
+
 
         // 4. Đúng -> lưu vào session với tên currentUser
         HttpSession session = req.getSession(true);
