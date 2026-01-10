@@ -64,8 +64,8 @@ public class GoogleCallbackController extends HttpServlet {
             user = userService.registerGoogleUser(fullName, email); // bạn cần thêm hàm này
         }
         if (user != null && user.getIsActive() == 3) {
-            req.setAttribute("error", "Tài khoản đã bị khóa!");
-            req.getRequestDispatcher("Login.jsp").forward(req, resp);
+            session.setAttribute("FLASH_ERROR", "Tài khoản đã bị khóa!");
+            resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 
