@@ -605,6 +605,7 @@
 <%--Khóa --%>
                                 <c:choose>
                                     <c:when test="${u.isActive == 1}">
+                                        <!-- Nút KHÓA -->
                                         <form class="lockForm" method="post" action="${pageContext.request.contextPath}/admin/users" style="display:inline">
                                             <input type="hidden" name="action" value="lock"/>
                                             <input type="hidden" name="id" value="${u.id}"/>
@@ -616,7 +617,8 @@
                                         </form>
                                     </c:when>
 
-                                    <c:otherwise>
+                                    <c:when test="${u.isActive == 3}">
+                                        <!-- Nút MỞ KHÓA -->
                                         <form class="lockForm" method="post" action="${pageContext.request.contextPath}/admin/users" style="display:inline">
                                             <input type="hidden" name="action" value="unlock"/>
                                             <input type="hidden" name="id" value="${u.id}"/>
@@ -626,8 +628,14 @@
                                                 <i class="fa-solid fa-lock-open"></i>
                                             </button>
                                         </form>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <!-- isActive == 0: chưa kích hoạt -->
+                                        <span style="font-size:12px; opacity:.7;">Chưa kích hoạt</span>
                                     </c:otherwise>
                                 </c:choose>
+
 
                             </td>
                         </tr>

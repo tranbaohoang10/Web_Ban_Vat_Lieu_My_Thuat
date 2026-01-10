@@ -45,15 +45,20 @@ public class LoginController extends HttpServlet {
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
             return;
         }
-
-// 3) Chưa xác thực
+// 3) Tài khoản bị khóa
+        if (u.getIsActive() == 3) {
+            req.setAttribute("error", "Tài khoản đã bị khóa!");
+            req.getRequestDispatcher("Login.jsp").forward(req, resp);
+            return;
+        }
+// 4) Chưa xác thực
         if (u.getIsActive() == 0) {
             req.setAttribute("warning", "Vui lòng truy cập gmail để xác thực tài khoản!");
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
             return;
         }
 
-// 4) Active rồi mới check mật khẩu
+// 5) Active rồi mới check mật khẩu
         Users users = userService.login(email.trim(), password);
 
         if (users == null) {
