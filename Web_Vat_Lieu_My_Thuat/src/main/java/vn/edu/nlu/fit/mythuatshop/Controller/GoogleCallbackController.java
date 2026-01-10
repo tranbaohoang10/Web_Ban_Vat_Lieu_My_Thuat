@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.mythuatshop.Controller;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import vn.edu.nlu.fit.mythuatshop.Model.Users;
@@ -30,7 +31,7 @@ public class GoogleCallbackController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String code = req.getParameter("code");
         String state = req.getParameter("state");
 
@@ -61,6 +62,11 @@ public class GoogleCallbackController extends HttpServlet {
         if (user == null) {
             // tạo user mới (password random/không dùng)
             user = userService.registerGoogleUser(fullName, email); // bạn cần thêm hàm này
+        }
+        if (user != null && user.getIsActive() == 3) {
+            session.setAttribute("FLASH_ERROR", "Tài khoản đã bị khóa!");
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
         }
 
         // 4) set session giống LoginController hiện tại

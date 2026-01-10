@@ -68,7 +68,7 @@ public class AdminUserService {
 
     // KHÓA = isActive=0
     public boolean lockUser(int id) {
-        return userDao.setActive(id, 0) > 0;
+        return userDao.setActive(id, 3) > 0;
     }
 
     // (tuỳ chọn) MỞ KHÓA = isActive=1
