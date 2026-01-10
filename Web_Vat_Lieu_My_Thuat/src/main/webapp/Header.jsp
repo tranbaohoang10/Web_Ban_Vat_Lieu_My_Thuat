@@ -161,6 +161,56 @@
         border-radius: 50%;
         transition: all 0.3s ease;
     }
+    .search-suggest-box{
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        overflow: hidden;
+        z-index: 9999;
+        max-height: 320px;
+        overflow-y: auto;
+    }
+
+    .search-suggest-item{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        cursor: pointer;
+    }
+
+    .search-suggest-item:hover{
+        background: #f2f6ff;
+    }
+
+    .search-suggest-item img{
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .search-suggest-item .name{
+        font-size: 14px;
+        color: #111;
+        font-weight: 600;
+    }
+
+    .search-suggest-item .meta{
+        font-size: 12px;
+        color: #555;
+    }
+
+    .search-suggest-item .stock-out{
+        color: #dc2626;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+
 
     /* Animation khi cập nhật giỏ hàng */
     #header-trang-chu .header-giohang.cart-updated::after {
@@ -195,14 +245,22 @@
         </a>
     </div>
     <form action="${pageContext.request.contextPath}/search"
-        method="get"
-        class="tim-kiem-san-pham">
+          method="get"
+          class="tim-kiem-san-pham"
+          id="headerSearchForm">
+
         <input type="text"
-            name="keyword"
-            placeholder="Tìm kiếm sản phẩm...">
+               id="headerSearchInput"
+               name="keyword"
+               autocomplete="off"
+               placeholder="Tìm kiếm sản phẩm...">
+
         <button type="submit" class="btn-search">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+
+        <!-- dropdown -->
+        <div id="searchSuggestBox" class="search-suggest-box" style="display:none;"></div>
     </form>
     <div class="header-contact">
         <i class="fa-solid fa-phone"></i>
