@@ -265,6 +265,25 @@ public class ProductDao {
         );
     }
 
+    public List<Product> suggestProducts(String keyword, int limit) {
+        String sql = """
+                    SELECT id, name, price, discountDefault, thumbnail, quantityStock, soldQuantity, isActive
+                    FROM Products
+                    WHERE isActive = 1
+                      AND name LIKE CONCAT('%', :kw, '%')
+                    ORDER BY soldQuantity DESC
+                    LIMIT :limit
+                """;
+
+        return jdbi.withHandle(h ->
+                h.createQuery(sql)
+                        .bind("kw", keyword)
+                        .bind("limit", limit)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
     // ===================== ORDER / STOCK =====================
 
     // Chặn luôn không cho mua nếu sản phẩm bị khóa
@@ -282,16 +301,17 @@ public class ProductDao {
                 .bind("qty", qty)
                 .execute();
     }
+
     public int restoreStockAndSold(Handle handle, int productId, int qty) {
         String sql = """
-        UPDATE Products
-        SET quantityStock = quantityStock + :qty,
-            soldQuantity = CASE
-                WHEN soldQuantity >= :qty THEN soldQuantity - :qty
-                ELSE 0
-            END
-        WHERE id = :pid
-    """;
+                    UPDATE Products
+                    SET quantityStock = quantityStock + :qty,
+                        soldQuantity = CASE
+                            WHEN soldQuantity >= :qty THEN soldQuantity - :qty
+                            ELSE 0
+                        END
+                    WHERE id = :pid
+                """;
         return handle.createUpdate(sql)
                 .bind("pid", productId)
                 .bind("qty", qty)

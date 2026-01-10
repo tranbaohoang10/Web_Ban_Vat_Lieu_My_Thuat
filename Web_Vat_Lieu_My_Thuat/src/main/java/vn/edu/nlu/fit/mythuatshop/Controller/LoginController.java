@@ -45,15 +45,20 @@ public class LoginController extends HttpServlet {
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
             return;
         }
-
-// 3) Chưa xác thực
+// 3) Tài khoản bị khóa
+        if (u.getIsActive() == 3) {
+            req.setAttribute("error", "Tài khoản đã bị khóa!");
+            req.getRequestDispatcher("/Login.jsp").forward(req, resp);
+            return;
+        }
+// 4) Chưa xác thực
         if (u.getIsActive() == 0) {
             req.setAttribute("warning", "Vui lòng truy cập gmail để xác thực tài khoản!");
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
             return;
         }
 
-// 4) Active rồi mới check mật khẩu
+// 5) Active rồi mới check mật khẩu
         Users users = userService.login(email.trim(), password);
 
         if (users == null) {
@@ -85,7 +90,13 @@ public class LoginController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Hiển thị trang đăng nhập
-        req.getRequestDispatcher("Login.jsp").forward(req, resp);
+        HttpSession session = req.getSession();
+        String flash = (String) session.getAttribute("FLASH_ERROR");
+        if (flash != null) {
+            req.setAttribute("error", flash);
+            session.removeAttribute("FLASH_ERROR");
+        }
+        req.getRequestDispatcher("/Login.jsp").forward(req, resp);
     }
+
 }

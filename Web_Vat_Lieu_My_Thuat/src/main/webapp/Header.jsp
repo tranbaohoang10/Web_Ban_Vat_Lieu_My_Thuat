@@ -119,8 +119,7 @@
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki {
         margin-left: 15px;
         max-width: 100px;
-        overflow: hidden;
-    }
+        }
 
     #header-trang-chu .header-dangnhap-dangki .dangnhap-dangki .dangnhap {
         color: white;
@@ -161,6 +160,56 @@
         border-radius: 50%;
         transition: all 0.3s ease;
     }
+    .search-suggest-box{
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        overflow: hidden;
+        z-index: 9999;
+        max-height: 320px;
+        overflow-y: auto;
+    }
+
+    .search-suggest-item{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        cursor: pointer;
+    }
+
+    .search-suggest-item:hover{
+        background: #f2f6ff;
+    }
+
+    .search-suggest-item img{
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .search-suggest-item .name{
+        font-size: 14px;
+        color: #111;
+        font-weight: 600;
+    }
+
+    .search-suggest-item .meta{
+        font-size: 12px;
+        color: #555;
+    }
+
+    .search-suggest-item .stock-out{
+        color: #dc2626;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+
 
     /* Animation khi cập nhật giỏ hàng */
     #header-trang-chu .header-giohang.cart-updated::after {
@@ -195,14 +244,22 @@
         </a>
     </div>
     <form action="${pageContext.request.contextPath}/search"
-        method="get"
-        class="tim-kiem-san-pham">
+          method="get"
+          class="tim-kiem-san-pham"
+          id="headerSearchForm">
+
         <input type="text"
-            name="keyword"
-            placeholder="Tìm kiếm sản phẩm...">
+               id="headerSearchInput"
+               name="keyword"
+               autocomplete="off"
+               placeholder="Tìm kiếm sản phẩm...">
+
         <button type="submit" class="btn-search">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+
+        <!-- dropdown -->
+        <div id="searchSuggestBox" class="search-suggest-box" style="display:none;"></div>
     </form>
     <div class="header-contact">
         <i class="fa-solid fa-phone"></i>
@@ -259,3 +316,135 @@
     </a>
 
 </header>
+<script>
+    (function(){
+        const ctx = '${pageContext.request.contextPath}';
+        const input = document.getElementById('headerSearchInput');
+        const box = document.getElementById('searchSuggestBox');
+        if(!input || !box) return;
+
+        let timer = null;
+        let abortCtrl = null;
+
+        function debounce(fn, delay){
+            return function(...args){
+                clearTimeout(timer);
+                timer = setTimeout(() => fn.apply(this, args), delay);
+            }
+        }
+
+        function moneyVND(n){
+            try { return Number(n).toLocaleString('vi-VN') + 'đ'; }
+            catch(e){ return n + 'đ'; }
+        }
+
+        function resolveThumb(url){
+            if(!url) return '';
+            if(url.startsWith('http')) return url;
+            return ctx + url;
+        }
+
+        async function fetchSuggest(keyword){
+            const kw = keyword.trim();
+            if(kw.length < 2){
+                box.style.display = 'none';
+                box.innerHTML = '';
+                return;
+            }
+
+            // hủy request cũ nếu user gõ tiếp
+            if(abortCtrl) abortCtrl.abort();
+            abortCtrl = new AbortController();
+
+            const url = ctx + '/search-suggest?keyword=' + encodeURIComponent(kw) + '&limit=5';
+
+            try{
+                const res = await fetch(url, {
+                    method: 'GET',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    signal: abortCtrl.signal
+                });
+
+                if(!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                render(data);
+            }catch(err){
+                // abort thì bỏ qua
+                if(err.name === 'AbortError') return;
+                box.style.display = 'none';
+            }
+        }
+
+        function render(items){
+            box.innerHTML = '';
+
+            if(!items || items.length === 0){
+                box.style.display = 'none';
+                return;
+            }
+
+            items.forEach(p => {
+                const a = document.createElement('a');
+                a.className = 'search-suggest-item';
+                a.href = ctx + '/DetailsProductController?id=' + p.id;
+
+                const img = document.createElement('img');
+                img.src = resolveThumb(p.thumbnail);
+                img.alt = '';
+                a.appendChild(img);
+
+                const wrap = document.createElement('div');
+
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'name';
+                nameDiv.textContent = p.name || '';
+
+                if(p.outOfStock){
+                    const space = document.createTextNode(' ');
+                    const badge = document.createElement('span');
+                    badge.className = 'stock-out';
+                    badge.textContent = 'Hết hàng';
+                    nameDiv.appendChild(space);
+                    nameDiv.appendChild(badge);
+                }
+
+                const metaDiv = document.createElement('div');
+                metaDiv.className = 'meta';
+                metaDiv.textContent = moneyVND(p.priceAfter);
+
+                wrap.appendChild(nameDiv);
+                wrap.appendChild(metaDiv);
+                a.appendChild(wrap);
+
+                box.appendChild(a);
+            });
+
+            box.style.display = 'block';
+        }
+
+        function escapeHtml(str){
+            if(str == null) return '';
+            return String(str)
+                .replaceAll('&','&amp;')
+                .replaceAll('<','&lt;')
+                .replaceAll('>','&gt;')
+                .replaceAll('"','&quot;')
+                .replaceAll("'",'&#39;');
+        }
+
+        const debounced = debounce(() => fetchSuggest(input.value), 250);
+
+        input.addEventListener('keyup', debounced);
+        input.addEventListener('focus', () => {
+            if(box.innerHTML.trim()) box.style.display = 'block';
+        });
+
+        // click ra ngoài thì đóng
+        document.addEventListener('click', (e) => {
+            if(!e.target.closest('#headerSearchForm')) {
+                box.style.display = 'none';
+            }
+        });
+    })();
+</script>
+
