@@ -3,18 +3,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tìm kiếm</title>
+
+
     <link rel="stylesheet" href="./assets/css/style.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
+
 <style>
     .container {
         width: 1200px;
@@ -32,16 +38,12 @@
     }
 
     #section-trangchinh-danhmuc-sanpham .content {
-
         padding: 20px 0;
         margin-bottom: 30px;
     }
 
     #section-trangchinh-danhmuc-sanpham .content a {
         text-decoration: none;
-    }
-
-    #section-trangchinh-danhmuc-sanpham .content a {
         color: black;
     }
 
@@ -60,21 +62,15 @@
         border-radius: 10px;
     }
 
-
     #section-main .section-main-content {
         width: 100%;
         padding: 0 30px;
     }
 
-
     #section-main .section-main-content .section-main-content-image img {
         width: 100%;
         margin-top: 30px;
         border-radius: 20px;
-    }
-
-    #section-main .section-main-content .section-main-content-list {
-        /* margin được xử lý bởi padding của parent */
     }
 
     #section-main .section-main-content .section-main-content-list .list-product {
@@ -106,7 +102,6 @@
         align-items: center;
         gap: 10px;
         margin-top: 10px;
-
     }
 
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content {
@@ -122,11 +117,8 @@
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content .content {
         width: 200px;
         white-space: nowrap;
-        /* không cho xuống dòng */
         overflow: hidden;
-        /* ẩn phần bị tràn */
         text-overflow: ellipsis;
-        /* thêm dấu … */
     }
 
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-1 {
@@ -134,8 +126,6 @@
         border-radius: 10px;
         text-align: center;
         line-height: 30px;
-        /* height: 30px; */
-        /* padding: 5px; */
         background-color: #FFE0E2;
     }
 
@@ -145,7 +135,6 @@
     }
 
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content-socials .list-product-list1-content-socials-1 span {
-        /* display: inline-block; */
         color: #ED1C24;
         font-size: 12px;
         font-weight: 600;
@@ -157,7 +146,6 @@
         border-radius: 10px;
         text-align: center;
         line-height: 30px;
-        /* height: 30px; */
         background-color: #E0EBFF;
     }
 
@@ -212,8 +200,6 @@
         border-radius: 20px;
         text-align: center;
         line-height: 30px;
-        /* height: 30px; */
-        /* padding: 5px; */
         display: inline-block;
         background-color: #FFE0E2;
     }
@@ -229,13 +215,8 @@
         background-color: transparent;
         border: 1px solid #268EF8;
         border-radius: 10px;
-        color: white;
-        cursor: pointer;
-
-    }
-
-    #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .button .btn-xemchitiet {
         color: #268EF8;
+        cursor: pointer;
     }
 
     #section-main .section-main-content .section-main-content-list .list-product .list-product-list1 .list-product-list1-content .list-product-list1-content-description .button .btn-xemchitiet:hover {
@@ -266,7 +247,6 @@
         transition: all 0.3s ease;
     }
 
-    /* Trang được chọn - class active */
     #section-main .section-main-content .section-main-content-quantity a.active {
         background-color: #2659F3;
         color: white;
@@ -310,7 +290,6 @@
         color: #333;
     }
 
-    /* Gạch chân + màu khi được chọn */
     .sort-option.active {
         color: #17479D;
         font-weight: 600;
@@ -326,25 +305,23 @@
         background-color: #17479D;
         border-radius: 999px;
     }
-
-    /* End section-main */
+    html, body { height: 100%; }
+    body { min-height: 100vh; display: flex; flex-direction: column; margin: 0; }
+    #page-content { flex: 1; }
 
 </style>
+
 <body>
 <!-- Begin header-->
 <%@ include file="Header.jsp" %>
 <!-- End header-->
 
-<!-- Begin section info mithuat -->
 <div id="section-info-mithuat">
-    <div class="container">
-    </div>
+    <div class="container"></div>
 </div>
-<!-- End section trang chinh - danh muc - san pham -->
-<!-- Begin section main -->
+
 <div id="section-main">
     <div class="container">
-
         <div class="section-main-content">
 
             <div class="section-main-content-list">
@@ -359,82 +336,72 @@
                     </c:choose>
                 </h2>
 
-                <c:if test="${empty products}">
+                <!-- ✅ CHỈ SỬA ĐÚNG PHẦN KHÔNG TÌM THẤY -->
+                <!-- Ưu tiên totalProducts, fallback thêm empty products để chắc chắn -->
+                <c:if test="${(not empty totalProducts and totalProducts == 0) or empty products}">
                     <p>Không tìm thấy sản phẩm nào.</p>
                 </c:if>
 
-                <c:if test="${not empty products}">
-                <div class="search-sort">
-                    <span class="search-sort-label">Sắp xếp theo:</span>
+                <!-- ✅ Chỉ hiển thị sort + list + paging khi có kết quả -->
+                <c:if test="${not empty totalProducts and totalProducts > 0}">
+                    <div class="search-sort">
+                        <span class="search-sort-label">Sắp xếp theo:</span>
 
-                    <form id="filterForm"
-                          action="${pageContext.request.contextPath}/search"
-                          method="get">
+                        <form id="filterForm"
+                              action="${pageContext.request.contextPath}/search"
+                              method="get">
 
-                        <!-- giữ lại keyword -->
-                        <input type="hidden" name="keyword" value="${keyword}"/>
+                            <input type="hidden" name="keyword" value="${keyword}"/>
+                            <input type="hidden" name="sort" id="sortInput" value="${param.sort}"/>
 
-                        <!-- sort hiện tại -->
-                        <input type="hidden" name="sort" id="sortInput"
-                               value="${param.sort}"/>
+                            <div class="search-sort-tabs">
+                                <span class="sort-option <c:if test='${empty param.sort}'>active</c:if>'" data-sort="">
+                                    Tất cả
+                                </span>
 
-                        <div class="search-sort-tabs">
-                <span class="sort-option
-                      <c:if test='${empty param.sort}'>active</c:if>"
-                      data-sort="">
-                    Tất cả
-                </span>
+                                <span class="sort-option <c:if test='${param.sort == "soldDesc"}'>active</c:if>'" data-sort="soldDesc">
+                                    Bán chạy
+                                </span>
 
-                            <span class="sort-option
-                      <c:if test='${param.sort == "soldDesc"}'>active</c:if>"
-                                  data-sort="soldDesc">
-                    Bán chạy
-                </span>
+                                <span class="sort-option <c:if test='${param.sort == "newest"}'>active</c:if>'" data-sort="newest">
+                                    Sản phẩm mới
+                                </span>
 
-                            <span class="sort-option
-                      <c:if test='${param.sort == "newest"}'>active</c:if>"
-                                  data-sort="newest">
-                    Sản phẩm mới
-                </span>
+                                <span class="sort-option <c:if test='${param.sort == "priceAsc"}'>active</c:if>'" data-sort="priceAsc">
+                                    Giá tăng dần
+                                </span>
 
-                            <span class="sort-option
-                      <c:if test='${param.sort == "priceAsc"}'>active</c:if>"
-                                  data-sort="priceAsc">
-                    Giá tăng dần
-                </span>
+                                <span class="sort-option <c:if test='${param.sort == "priceDesc"}'>active</c:if>'" data-sort="priceDesc">
+                                    Giá giảm dần
+                                </span>
+                            </div>
+                        </form>
+                    </div>
 
-                            <span class="sort-option
-                      <c:if test='${param.sort == "priceDesc"}'>active</c:if>"
-                                  data-sort="priceDesc">
-                    Giá giảm dần
-                </span>
-                        </div>
-                    </form>
-                </div>
-                <div class="list-product" id="productList">
-                    <%@ include file="ProductList.jsp" %>
-                </div>
+                    <div class="list-product" id="productList">
+                        <%@ include file="ProductList.jsp" %>
+                    </div>
 
-            </div>
-            <div class="section-main-content-quantity">
-                <c:if test="${totalPages > 1}">
-                    <c:forEach var="p" begin="1" end="${totalPages}">
-                        <a href="#" 
-                           class="page-link ${p == currentPage ? 'active' : ''}"
-                           data-page="${p}">
-                                ${p}
-                        </a>
-                    </c:forEach>
+                    <div class="section-main-content-quantity">
+                        <c:if test="${totalPages > 1}">
+                            <c:forEach var="p" begin="1" end="${totalPages}">
+                                <a href="#"
+                                   class="page-link ${p == currentPage ? 'active' : ''}"
+                                   data-page="${p}">
+                                        ${p}
+                                </a>
+                            </c:forEach>
+                        </c:if>
+                    </div>
                 </c:if>
             </div>
+
         </div>
-        </c:if>
     </div>
 </div>
-<!-- End section main -->
 
-<!-- Begin footer-->
 <%@ include file="Footer.jsp" %>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('filterForm');
@@ -442,91 +409,73 @@
         const sortInput = document.getElementById('sortInput');
         const sortOptions = document.querySelectorAll('.sort-option');
 
-        if (!form || !productList) return;
+        if (!form || !productList || !sortInput) return;
 
-        function submitFilter() {
+        function submitFilter(extraParams = {}) {
             const formData = new FormData(form);
             formData.append('ajax', '1');
 
+            Object.keys(extraParams).forEach(k => formData.set(k, extraParams[k]));
             const params = new URLSearchParams(formData);
 
             fetch(form.action + '?' + params.toString(), {
                 method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
             })
                 .then(response => response.text())
                 .then(html => {
                     productList.innerHTML = html;
                 })
-                .catch(err => {
-                    console.error('Lỗi khi lọc sản phẩm:', err);
-                });
+                .catch(err => console.error('Lỗi khi lọc sản phẩm:', err));
         }
 
-        // Click vào từng tab sort
         sortOptions.forEach(option => {
             option.addEventListener('click', function () {
-                // đổi highlight
                 sortOptions.forEach(o => o.classList.remove('active'));
                 this.classList.add('active');
 
-                const sortValue = this.getAttribute('data-sort');
-                sortInput.value = sortValue;
-
-                // gọi AJAX
-                submitFilter();
+                sortInput.value = this.getAttribute('data-sort');
+                submitFilter({ page: 1 });
             });
         });
 
-        // Click vào phân trang
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('page-link')) {
                 e.preventDefault();
-                
+
                 const page = e.target.getAttribute('data-page');
                 const keyword = document.querySelector('input[name="keyword"]').value;
                 const sort = sortInput.value;
-                
-                // Gọi AJAX với page mới
+
                 const params = new URLSearchParams({
                     keyword: keyword,
                     sort: sort || '',
                     page: page,
                     ajax: '1'
                 });
-                
+
                 fetch('${pageContext.request.contextPath}/search?' + params.toString(), {
                     method: 'GET',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
                 })
-                .then(response => response.text())
-                .then(html => {
-                    productList.innerHTML = html;
-                    
-                    // Cập nhật active cho pagination
-                    document.querySelectorAll('.page-link').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('data-page') === page) {
-                            link.classList.add('active');
-                        }
-                    });
-                    
-                    // Scroll lên top của product list
-                    productList.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                })
-                .catch(err => {
-                    console.error('Lỗi khi chuyển trang:', err);
-                });
+                    .then(response => response.text())
+                    .then(html => {
+                        productList.innerHTML = html;
+
+                        document.querySelectorAll('.page-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('data-page') === page) {
+                                link.classList.add('active');
+                            }
+                        });
+
+                        productList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    })
+                    .catch(err => console.error('Lỗi khi chuyển trang:', err));
             }
         });
     });
 </script>
 
-
 </body>
-
 </html>
