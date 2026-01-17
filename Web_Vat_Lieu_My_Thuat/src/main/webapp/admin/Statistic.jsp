@@ -287,7 +287,8 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <c:set var="activePage" value="vouchers" />
+
+
   <div id="main">
     <jsp:include page="/admin/includes/Sidebar.jsp" />
 

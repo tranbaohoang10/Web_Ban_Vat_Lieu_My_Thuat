@@ -487,7 +487,8 @@
         }, 1800);
     </script>
 </c:if>
-<c:set var="activePage" value="vouchers" />
+
+
 <div id="main">
     <jsp:include page="/admin/includes/Sidebar.jsp" />
 

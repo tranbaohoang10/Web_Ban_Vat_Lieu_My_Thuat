@@ -1,11 +1,50 @@
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: var(--font-family);
-}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; font-family: var(--font-family); }
+
 :root {
   --color-main: #17479d;
-  --font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
-    sans-serif;
+  --font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+
+#main { display: flex; min-height: 100vh; align-items: stretch; }
+#main .left { width: 17%; background: var(--color-main); min-height: 100vh; flex-shrink: 0; }
+#main .right { flex: 1; background: #F9F9F9; min-height: 100vh; }
+
+#main .left .list-admin { display: flex; flex-direction: column; gap: 15px; }
+
+
+#main .left .list-admin a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+#main .left .list-admin a i { margin-right: 20px; }
+
+
+#main .left .list-admin a.logo::before { content: none !important; }
+
+#main .left .list-admin a::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: #FFD700;
+  opacity: 0;
+  transform: scaleY(0.2);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+#main .left .list-admin a:hover,
+#main .left .list-admin a.active {
+  background-color: #203247;
+}
+
+#main .left .list-admin a:hover::before,
+#main .left .list-admin a.active::before {
+  opacity: 1;
+  transform: scaleY(1);
 }

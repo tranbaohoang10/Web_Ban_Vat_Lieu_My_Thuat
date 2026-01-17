@@ -491,7 +491,8 @@
     <c:remove var="toast" scope="session"/>
 </c:if>
 
-<c:set var="activePage" value="vouchers" />
+
+
 <div id="main">
     <jsp:include page="/admin/includes/Sidebar.jsp" />
 
