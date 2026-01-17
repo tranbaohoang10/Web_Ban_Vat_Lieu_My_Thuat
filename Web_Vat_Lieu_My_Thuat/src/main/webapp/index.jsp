@@ -1,27 +1,28 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Trang chủ</title>
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    </head>
-    <style>
+</head>
+<style>
     .container {
         width: 1200px;
         margin: auto;
     }
+
     /* ========== Slider ========== */
     .w3-left,
     .w3-right {
@@ -349,299 +350,199 @@
     .section-but .section-but-button .button:hover {
         opacity: 0.9;
     }
+
     .category-title {
         text-transform: uppercase;
     }
 
 
-
     /* End section main */
 </style>
 
-    <body>
-        <!-- Begin header-->
-        <%@ include file="Header.jsp" %>
-        <!-- Begin section info mithuat -->
-        <div id="section-info-mithuat">
-            <div class="container">
-                <%@ include file="CategoryMenu.jsp" %>
-            </div>
-        </div>
+<body>
+<!-- Begin header-->
+<%@ include file="Header.jsp" %>
+<!-- Begin section info mithuat -->
+<div id="section-info-mithuat">
+    <div class="container">
+        <%@ include file="CategoryMenu.jsp" %>
+    </div>
+</div>
 
-        <!-- End section info mithuat -->
-        <!-- Begin slider show -->
-        <div class="w3-content w3-display-container">
-            <c:forEach var ="slider" items="${sliders}">
-                <a href="${pageContext.request.contextPath}/${slider.linkTo}"> <c:set var="imgUrl" value="${slider.thumbnail}" />
-                    <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
-                        <c:choose>
-                            <c:when test="${fn:startsWith(imgUrl,'/')}">
-                                <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
-                            </c:when>
-                            <c:otherwise>
-                                <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
-                            </c:otherwise>
-                        </c:choose>
-                    </c:if>
-                    <img class="mySlides" src="${imgUrl}">
-                </a>
-            </c:forEach>
+<!-- End section info mithuat -->
+<!-- Begin slider show -->
+<div class="w3-content w3-display-container">
+    <c:forEach var="slider" items="${sliders}">
+        <a href="${pageContext.request.contextPath}/${slider.linkTo}"> <c:set var="imgUrl" value="${slider.thumbnail}"/>
+            <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
+                <c:choose>
+                    <c:when test="${fn:startsWith(imgUrl,'/')}">
+                        <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
+            <img class="mySlides" src="${imgUrl}">
+        </a>
+    </c:forEach>
 
-            <div class="w3-left" onclick="plusDivs(-1)">&#10094;</div>
-            <div class="w3-right" onclick="plusDivs(1)">&#10095;</div>
+    <div class="w3-left" onclick="plusDivs(-1)">&#10094;</div>
+    <div class="w3-right" onclick="plusDivs(1)">&#10095;</div>
 
-            <div class="w3-display-bottommiddle" style="width:100%">
-                <span class="w3-badge demo" onclick="currentDiv(1)"></span>
-                <span class="w3-badge demo" onclick="currentDiv(2)"></span>
-                <span class="w3-badge demo" onclick="currentDiv(3)"></span>
-            </div>
-        </div>
+    <div class="w3-display-bottommiddle" style="width:100%">
+        <span class="w3-badge demo" onclick="currentDiv(1)"></span>
+        <span class="w3-badge demo" onclick="currentDiv(2)"></span>
+        <span class="w3-badge demo" onclick="currentDiv(3)"></span>
+    </div>
+</div>
 
-        <script>
-        let slideIndex = 0;
-        showDivs(slideIndex);
+<script>
+    let slideIndex = 0;
+    showDivs(slideIndex);
 
-        // nút điều hướng
-        function plusDivs(n) { showDivs(slideIndex += n); }
-        function currentDiv(n) { showDivs(slideIndex = n - 1); }
+    // nút điều hướng
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
 
-        // hiển thị slide
-        function showDivs(n) {
-            let i;
-            const slides = document.getElementsByClassName("mySlides");
-            const dots = document.getElementsByClassName("demo");
-            if (n >= slides.length) { slideIndex = 0 }
-            if (n < 0) { slideIndex = slides.length - 1 }
+    function currentDiv(n) {
+        showDivs(slideIndex = n - 1);
+    }
 
-            for (i = 0; i < slides.length; i++) slides[i].style.display = "none";
-            for (i = 0; i < dots.length; i++) dots[i].classList.remove("w3-white");
-
-            slides[slideIndex].style.display = "block";
-            dots[slideIndex].classList.add("w3-white");
+    // hiển thị slide
+    function showDivs(n) {
+        let i;
+        const slides = document.getElementsByClassName("mySlides");
+        const dots = document.getElementsByClassName("demo");
+        if (n >= slides.length) {
+            slideIndex = 0
+        }
+        if (n < 0) {
+            slideIndex = slides.length - 1
         }
 
-        // tự động chạy
-        setInterval(() => {
-            plusDivs(1);
-        }, 4000); // 4 giây chuyển 1 ảnh
-    </script>
-        <!-- End slider show -->
-        <!-- Begin section -->
-        <div class="section-but">
-            <div class="container">
-                <c:set var="imgUrl" value="${cat1.thumbnail}" />
-                <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
-                    <c:choose>
-                        <c:when test="${fn:startsWith(imgUrl,'/')}">
-                            <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
-                        </c:when>
-                        <c:otherwise>
-                            <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
-                        </c:otherwise>
-                    </c:choose>
-                </c:if>
-                <img src="${imgUrl}" alt="category" />
+        for (i = 0; i < slides.length; i++) slides[i].style.display = "none";
+        for (i = 0; i < dots.length; i++) dots[i].classList.remove("w3-white");
 
-                <div class="section-but-header">
-                    <h2 class="category-title">${cat1.categoryName}</h2>
-                </div>
-                <div class="section-but-content">
-                    <div class="list-product">
-                        <c:forEach var="p" items="${productsCat1}">
-                            <div class="list-product-list1">
-                                <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
-                                    <c:set var="imgUrl" value="${p.thumbnail}" />
-                                    <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
-                                        <c:choose>
-                                            <c:when test="${fn:startsWith(imgUrl,'/')}">
-                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:if>
-                                    <img src="${imgUrl}" alt="Sale Product">
+        slides[slideIndex].style.display = "block";
+        dots[slideIndex].classList.add("w3-white");
+    }
 
-                                    <div class="list-product-list1-content">
-                                        <div class="list-product-list1-content-socials">
-                                            <%@ include file="BadgeType.jsp" %>
+    // tự động chạy
+    setInterval(() => {
+        plusDivs(1);
+    }, 4000); // 4 giây chuyển 1 ảnh
+</script>
+<!-- End slider show -->
+<!-- Begin section -->
+<c:forEach var="entry" items="${productsByCategory}">
+    <c:set var="cat" value="${entry.key}"/>
+    <c:set var="products" value="${entry.value}"/>
 
+    <div class="section-but">
+        <div class="container">
+            <c:set var="imgUrl" value="${cat.thumbnail}"/>
+            <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
+                <c:choose>
+                    <c:when test="${fn:startsWith(imgUrl,'/')}">
+                        <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
 
-                                            <div class="list-product-list1-content-socials-2">
-                                                <i class="fa-solid fa-arrow-up-right-dots"></i>
-                                                <span>Đã bán ${p.soldQuantity}</span>
-                                            </div>
-                                        </div>
-                                        <div class="list-product-list1-content-description">
-                                            <!-- Tên sản phẩm -->
-                                            <p class="content">${p.name}</p>
+            <img src="${imgUrl}" alt="category"/>
 
-                                            <!-- Rating: tạm thời để cứng (0), sau này có bảng review thì đổi -->
-                                            <div class="star">
-                                                <!-- full stars -->
-                                                <c:forEach var="i" begin="1" end="${p.fullStarCount}">
-                                                    <i class="fa-solid fa-star"></i>
-                                                </c:forEach>
+            <div class="section-but-header">
+                <h2 class="category-title">${cat.categoryName}</h2>
+            </div>
 
-                                                <!-- half star -->
-                                                <c:if test="${p.halfStar}">
-                                                    <i class="fa-solid fa-star-half-stroke"></i>
-                                                </c:if>
+            <div class="section-but-content">
+                <div class="list-product">
+                    <c:forEach var="p" items="${products}">
+                        <div class="list-product-list1">
+                            <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
+                                <c:set var="imgUrlP" value="${p.thumbnail}"/>
+                                <c:if test="${not empty imgUrlP and not fn:startsWith(imgUrlP,'http') and not fn:startsWith(imgUrlP, pageContext.request.contextPath)}">
+                                    <c:choose>
+                                        <c:when test="${fn:startsWith(imgUrlP,'/')}">
+                                            <c:set var="imgUrlP" value="${pageContext.request.contextPath}${imgUrlP}"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:set var="imgUrlP" value="${pageContext.request.contextPath}/${imgUrlP}"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
+                                <img src="${imgUrlP}" alt="Sale Product">
 
-                                                <!-- empty stars -->
-                                                <c:forEach var="i" begin="1" end="${p.emptyStarCount}">
-                                                    <i class="fa-regular fa-star"></i>
-                                                </c:forEach>
-
-                                                <span>
-        (<fmt:formatNumber value="${p.avgRating}" maxFractionDigits="1" />)
-    </span>
-                                            </div>
-
-                                            <!-- Giá sau giảm, giá gốc, % giảm -->
-                                            <h2 class="price-product-after">
-                                                <fmt:formatNumber value="${p.priceAfterDiscount}" type="number" />₫
-                                            </h2>
-                                            <p class="price-product-before">
-                                                <fmt:formatNumber value="${p.price}" type="number" />₫
-                                            </p>
-                                            <span class="price-product-discount">
-                            -${p.discountDefault}%
-                        </span>
-
-                                            <div class="button">
-                                                    <button class="btn-xemchitiet">
-                                                        <i class="fa-solid fa-eye"></i>
-                                                        Xem chi tiết
-                                                    </button>
-                                            </div>
+                                <div class="list-product-list1-content">
+                                    <div class="list-product-list1-content-socials">
+                                        <%@ include file="BadgeType.jsp" %>
+                                        <div class="list-product-list1-content-socials-2">
+                                            <i class="fa-solid fa-arrow-up-right-dots"></i>
+                                            <span>Đã bán ${p.soldQuantity}</span>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                        </c:forEach>
-                    </div>
 
+                                    <div class="list-product-list1-content-description">
+                                        <p class="content">${p.name}</p>
 
-                </div>
-                <div class="section-but-button">
-                    <a class="button"
-                       href="${pageContext.request.contextPath}/category?categoryId=${cat1.id}">
-                        Xem tất cả <i class="fa-solid fa-angle-right"></i>
-                    </a>
+                                        <div class="star">
+                                            <c:forEach var="i" begin="1" end="${p.fullStarCount}">
+                                                <i class="fa-solid fa-star"></i>
+                                            </c:forEach>
 
-                </div>
-            </div>
-        </div>
-        <div class="section-but">
-            <div class="container">
+                                            <c:if test="${p.halfStar}">
+                                                <i class="fa-solid fa-star-half-stroke"></i>
+                                            </c:if>
 
-                <c:set var="imgUrl2" value="${cat2.thumbnail}" />
-                <c:if test="${not empty imgUrl2 and not fn:startsWith(imgUrl2,'http') and not fn:startsWith(imgUrl2, pageContext.request.contextPath)}">
-                    <c:choose>
-                        <c:when test="${fn:startsWith(imgUrl2,'/')}">
-                            <c:set var="imgUrl2" value="${pageContext.request.contextPath}${imgUrl2}" />
-                        </c:when>
-                        <c:otherwise>
-                            <c:set var="imgUrl2" value="${pageContext.request.contextPath}/${imgUrl2}" />
-                        </c:otherwise>
-                    </c:choose>
-                </c:if>
+                                            <c:forEach var="i" begin="1" end="${p.emptyStarCount}">
+                                                <i class="fa-regular fa-star"></i>
+                                            </c:forEach>
 
-                <img src="${imgUrl2}" alt="${cat2.categoryName}">
-                <div class="section-but-header">
-                    <h2 class="category-title">${cat2.categoryName}</h2>
-                </div>
-
-                <div class="section-but-content">
-                    <div class="list-product">
-                        <c:forEach var="p" items="${productsCat2}">
-                            <div class="list-product-list1">
-                                <a href="${pageContext.request.contextPath}/DetailsProductController?id=${p.id}">
-                                    <c:set var="imgUrl" value="${p.thumbnail}" />
-                                    <c:if test="${not empty imgUrl and not fn:startsWith(imgUrl,'http') and not fn:startsWith(imgUrl, pageContext.request.contextPath)}">
-                                        <c:choose>
-                                            <c:when test="${fn:startsWith(imgUrl,'/')}">
-                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}${imgUrl}" />
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:set var="imgUrl" value="${pageContext.request.contextPath}/${imgUrl}" />
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:if>
-                                    <img src="${imgUrl}" alt="Sale Product">
-
-                                    <div class="list-product-list1-content">
-                                        <div class="list-product-list1-content-socials">
-                                            <%@ include file="BadgeType.jsp" %>
-
-                                            <div class="list-product-list1-content-socials-2">
-                                                <i class="fa-solid fa-arrow-up-right-dots"></i>
-                                                <span>Đã bán ${p.soldQuantity}</span>
-                                            </div>
+                                            <span>(<fmt:formatNumber value="${p.avgRating}"
+                                                                     maxFractionDigits="1"/>)</span>
                                         </div>
-                                        <div class="list-product-list1-content-description">
-                                            <p class="content">${p.name}</p>
 
-                                            <div class="star">
-                                                <!-- full stars -->
-                                                <c:forEach var="i" begin="1" end="${p.fullStarCount}">
-                                                    <i class="fa-solid fa-star"></i>
-                                                </c:forEach>
+                                        <h2 class="price-product-after">
+                                            <fmt:formatNumber value="${p.priceAfterDiscount}" type="number"/>₫
+                                        </h2>
+                                        <p class="price-product-before">
+                                            <fmt:formatNumber value="${p.price}" type="number"/>₫
+                                        </p>
+                                        <span class="price-product-discount">-${p.discountDefault}%</span>
 
-                                                <!-- half star -->
-                                                <c:if test="${p.halfStar}">
-                                                    <i class="fa-solid fa-star-half-stroke"></i>
-                                                </c:if>
-
-                                                <!-- empty stars -->
-                                                <c:forEach var="i" begin="1" end="${p.emptyStarCount}">
-                                                    <i class="fa-regular fa-star"></i>
-                                                </c:forEach>
-
-                                                <span>
-        (<fmt:formatNumber value="${p.avgRating}" maxFractionDigits="1" />)
-    </span>
-                                            </div>
-
-                                            <h2 class="price-product-after">
-                                                <fmt:formatNumber value="${p.priceAfterDiscount}" type="number" />₫
-                                            </h2>
-                                            <p class="price-product-before">
-                                                <fmt:formatNumber value="${p.price}" type="number" />₫
-                                            </p>
-                                            <span class="price-product-discount">
-                                -${p.discountDefault}%
-                            </span>
-
-                                            <div class="button">
-                                                    <button class="btn-xemchitiet">
-                                                        <i class="fa-solid fa-eye"></i>
-                                                        Xem chi tiết
-                                                    </button>
-
-                                            </div>
+                                        <div class="button">
+                                            <button class="btn-xemchitiet">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Xem chi tiết
+                                            </button>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                        </c:forEach>
-                    </div>
-
-                    <div class="section-but-button">
-                        <a class="button"
-                           href="${pageContext.request.contextPath}/category?categoryId=${cat2.id}">
-                            Xem tất cả <i class="fa-solid fa-angle-right"></i>
-                        </a>
-                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
+
+            <div class="section-but-button">
+                <a class="button"
+                   href="${pageContext.request.contextPath}/category?categoryId=${cat.id}">
+                    Xem tất cả <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </div>
         </div>
+    </div>
+</c:forEach>
 
 
-        <!-- End section -->
-        <%@ include file="Footer.jsp" %>
-                </body>
+<!-- End section -->
+<%@ include file="Footer.jsp" %>
+</body>
 
-            </html>
+</html>
