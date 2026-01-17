@@ -19,7 +19,7 @@ public class StatisticDAO {
         this.jdbi = JDBIConnector.getJdbi();
     }
 
-    // ====== RANGE HELPERS: N tháng tính từ tháng này ======
+
     public static LocalDateTime startOfMonthRange(int months) {
         LocalDate firstOfThisMonth = LocalDate.now().withDayOfMonth(1);
         return firstOfThisMonth.minusMonths(months - 1L).atStartOfDay();
