@@ -14,7 +14,7 @@ public class AdminUserService {
     public List<Users> listUsers(int page, int pageSize, String keyword) {
         int safePage = Math.max(page, 1);
         int offset = (safePage - 1) * pageSize;
-        String kw = (keyword == null) ? "" : keyword.trim(); // QUAN TRỌNG: tránh null => không ra list
+        String kw = (keyword == null) ? "" : keyword.trim();
         return userDao.findUsers(kw, offset, pageSize);
     }
 
@@ -27,7 +27,7 @@ public class AdminUserService {
     public boolean createUser(String fullName, String email, String phone, String dobStr, String address, String role) {
         if (email == null || email.isBlank()) return false;
 
-        // chặn trùng EMAIL (khuyên dùng UNIQUE DB nữa)
+
         if (userDao.findByEmail(email.trim()) != null) return false;
 
         Users u = new Users();
@@ -41,7 +41,7 @@ public class AdminUserService {
             u.setDob(LocalDate.parse(dobStr)); // yyyy-MM-dd
         }
 
-        // mật khẩu random, lưu dạng HASH (không lưu plain)
+        // mật khẩu random, lưu dạng HASH
         String rawPass = UUID.randomUUID().toString().substring(0, 8);
         u.setPassword(BCrypt.hashpw(rawPass, BCrypt.gensalt(12)));
 
@@ -71,7 +71,7 @@ public class AdminUserService {
         return userDao.setActive(id, 3) > 0;
     }
 
-    // (tuỳ chọn) MỞ KHÓA = isActive=1
+    // MỞ KHÓA = isActive=1
     public boolean unlockUser(int id) {
         return userDao.setActive(id, 1) > 0;
     }

@@ -9,7 +9,7 @@ public class NoSaleRow {
     private String categoryName;
     private BigDecimal price;
     private Timestamp createAt;
-    private int soldQuantity; // Products.soldQuantity (tổng tích lũy)
+    private int soldQuantity;
 
     public int getProductId() { return productId; }
     public void setProductId(int productId) { this.productId = productId; }
