@@ -1,8 +1,10 @@
 package vn.edu.nlu.fit.mythuatshop.Controller;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.mythuatshop.Model.Category;
 import vn.edu.nlu.fit.mythuatshop.Model.ProductCard;
 import vn.edu.nlu.fit.mythuatshop.Model.SliderShow;
@@ -11,47 +13,45 @@ import vn.edu.nlu.fit.mythuatshop.Service.ProductCardService;
 import vn.edu.nlu.fit.mythuatshop.Service.SliderShowService;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "HomeController", value = "/home")
 public class HomeController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         CategoryService categoryService = new CategoryService();
         ProductCardService cardService = new ProductCardService();
         SliderShowService sliderShowService = new SliderShowService();
 
         List<Category> categories = categoryService.getAllActiveCategories();
-
-
-        Category cat1 = null;
-        Category cat2 = null;
-        if (categories.size() > 0) cat1 = categories.get(0);
-        if (categories.size() > 1) cat2 = categories.get(1);
-
-        List<ProductCard> productsCat1 = (cat1 != null)
-                ? cardService.topByCategory(cat1.getId(), 10)
-                : List.of();
-
-        List<ProductCard> productsCat2 = (cat2 != null)
-                ? cardService.topByCategory(cat2.getId(), 10)
-                : List.of();
-
         List<SliderShow> sliderShows = sliderShowService.getSliderShow();
 
+        // dung LinkedHashMap de luu dung vi tri
+        Map<Category, List<ProductCard>> productsByCategory = new LinkedHashMap<>();
+        for (Category c : categories) {
+            List<ProductCard> top = cardService.topByCategory(c.getId(), 10);
+            // chi hien thi danh muc khong rong
+            if (top != null && !top.isEmpty()) {
+                productsByCategory.put(c, top);
+            }
+        }
+
         request.setAttribute("sliders", sliderShows);
-        request.setAttribute("categories", categories);
-        request.setAttribute("cat1", cat1);
-        request.setAttribute("cat2", cat2);
-        request.setAttribute("productsCat1", productsCat1);
-        request.setAttribute("productsCat2", productsCat2);
+        request.setAttribute("categories", categories); // vẫn dùng cho CategoryMenu.jsp
+        request.setAttribute("productsByCategory", productsByCategory);
 
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
+    
     }
 }
