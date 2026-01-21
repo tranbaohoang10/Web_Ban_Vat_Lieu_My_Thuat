@@ -95,7 +95,7 @@
 
     .item-grid {
         display: grid;
-        grid-template-columns: auto 80px 1fr auto auto;
+        grid-template-columns: 80px 1fr auto auto;
         align-items: center;
         gap: 16px;
     }
@@ -363,12 +363,12 @@
                                     <div class="cart-item-card">
                                         <div class="item">
                                             <div class="item-grid">
-                                                <div
-                                                        class="select-product">
-                                                    <input
-                                                            type="checkbox"
-                                                            checked/>
-                                                </div>
+<%--                                                <div--%>
+<%--                                                        class="select-product">--%>
+<%--                                                    <input--%>
+<%--                                                            type="checkbox"--%>
+<%--                                                            checked/>--%>
+<%--                                                </div>--%>
 
                                                 <div class="thumb">
                                                     <c:set var="cartThumbUrl" value="${item.thumbnail}" />

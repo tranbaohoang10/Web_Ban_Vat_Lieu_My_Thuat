@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.mythuatshop.Model.Cart;
 import vn.edu.nlu.fit.mythuatshop.Model.CartItem;
 import vn.edu.nlu.fit.mythuatshop.Model.Users;
 import vn.edu.nlu.fit.mythuatshop.Service.UserService;
@@ -73,12 +74,16 @@ public class LoginController extends HttpServlet {
         session.setAttribute("currentUser", users);
         session.setMaxInactiveInterval(30 * 60); // 30 phút
         // sau khi có session thì tạo giỏ hàng cho session
-        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ArrayList<>();
+        Object cartObj = session.getAttribute("cart");
+        Cart cart;
+        if (cartObj instanceof Cart) {
+            cart = (Cart) cartObj;
+        } else {
+            cart = new Cart();
             session.setAttribute("cart", cart);
-            session.setAttribute("cartCount", 0);
         }
+        session.setAttribute("cartCount", cart.getTotalQuantity());
+
         // 5. Redirect theo role
         String role = users.getRole(); // DB: 'user' hoặc 'ADMIN'
 

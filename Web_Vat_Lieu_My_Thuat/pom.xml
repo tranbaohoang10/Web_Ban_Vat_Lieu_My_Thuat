@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- ✅ Java 17 -->
+<!--        &lt;!&ndash; ✅ Java 17 &ndash;&gt;-->
         <maven.compiler.release>25</maven.compiler.release>
 
         <junit.version>5.13.2</junit.version>
@@ -162,6 +162,8 @@
                 <version>3.13.0</version>
                 <configuration>
                     <release>${maven.compiler.release}</release>
+                    <source>14</source>
+                    <target>14</target>
                 </configuration>
             </plugin>
 

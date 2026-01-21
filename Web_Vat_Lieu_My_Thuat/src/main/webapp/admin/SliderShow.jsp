@@ -499,7 +499,7 @@
         <div class="right">
             <div class="container">
                 <div class="order-container">
-                    <h1>Danh sách banner</h1>
+                    <h1>Danh sách slideshow</h1>
 
                     <!-- SEARCH: submit về /admin/sliders -->
                     <form class="search" method="get" action="${pageContext.request.contextPath}/admin/sliders">
@@ -509,7 +509,7 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
-                        <button type="button" class="btn-them-banner">Thêm banner</button>
+                        <button type="button" class="btn-them-banner">Thêm slideshow</button>
                     </form>
 
                     <!-- BẢNG: bỏ "Ngày tạo" vì DB không có -->
@@ -619,7 +619,7 @@
     <div id="customerModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Thêm banner</h2>
+                <h2>Thêm slideshow</h2>
                 <span class="close-modal">&times;</span>
             </div>
 
@@ -675,7 +675,7 @@
     <div id="editCustomerModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Chỉnh sửa banner</h2>
+                <h2>Chỉnh sửa slideshow</h2>
                 <span class="close-edit-modal">&times;</span>
             </div>
 
