@@ -18,8 +18,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 
-  <!-- CKFinder static (đúng với cấu hình serveStaticResources: true) -->
-  <script src="${pageContext.request.contextPath}/ckfinder/static/ckfinder/ckfinder.js"></script>
 
   <title>Quản lý sản phẩm</title>
 
@@ -203,9 +201,15 @@
                         data-discount="${p.discountDefault}"
                         data-quantity="${p.quantityStock}"
                         data-brand="${p.brand}"
-                        data-thumbnail="${thumbUrl}">
+                        data-thumbnail="${thumbUrl}"
+                        data-subimages="${subImagesCsvMap[p.id]}"
+                        data-size="${specMap[p.id].size}"
+                        data-standard="${specMap[p.id].standard}"
+                        data-madein="${specMap[p.id].madeIn}"
+                        data-warning="${specMap[p.id].warning}">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
+
 
                 <form action="${pageContext.request.contextPath}/admin/products" method="post" style="display:inline">
                   <input type="hidden" name="action" value="toggleActive">
@@ -250,6 +254,9 @@
 
         <input type="hidden" name="action" id="action" value="create">
         <input type="hidden" name="id" id="dbId" value="">
+        <input type="hidden" name="existingThumbnail" id="existingThumbnail" value="">
+        <input type="hidden" name="existingSubImages" id="existingSubImages" value="">
+
 
         <div class="form-row">
           <div class="form-left">
@@ -267,10 +274,9 @@
             <label>Ảnh chính</label>
             <div style="display:flex; gap:10px; align-items:center;">
               <input type="file" id="thumbnail-main" name="thumbnailMain" accept="image/*">
-              <button type="button" id="pickMainFromServer" class="btn-pick-server">Chọn từ server</button>
+
             </div>
-            <!-- URL ảnh chính chọn từ CKFinder -->
-            <input type="hidden" id="thumbnailMainUrl" name="thumbnailMainUrl" value="">
+
 
             <img id="previewImg-main" style="width:120px; display:none; margin-top:10px;">
             <button type="button" id="removeImgBtn-main" style="display:none; margin-top:6px;">Xóa ảnh</button>
@@ -278,11 +284,10 @@
             <label>Ảnh phụ</label>
             <div style="display:flex; gap:10px; align-items:center;">
               <input type="file" id="thumbnail-sub" name="thumbnailSubs" multiple accept="image/*">
-              <button type="button" id="pickSubsFromServer" class="btn-pick-server">Chọn ảnh phụ từ server</button>
+
             </div>
 
-            <!-- URL ảnh phụ chọn từ CKFinder (CSV) -->
-            <input type="hidden" id="thumbnailSubUrls" name="thumbnailSubUrls" value="">
+
 
             <div id="sub-image-preview" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;"></div>
 
@@ -337,7 +342,6 @@
 </script>
 
 <script>
-  // ====== MODAL + PREVIEW ======
   const modal = document.getElementById("modal-add");
   const form = document.getElementById("productForm");
   const btnAdd = document.getElementById("btnAddProduct");
@@ -364,94 +368,50 @@
   const thumbnailSub = document.getElementById("thumbnail-sub");
   const subPreviewContainer = document.getElementById("sub-image-preview");
 
-  const mainUrlInput = document.getElementById("thumbnailMainUrl");
-  const subUrlsInput = document.getElementById("thumbnailSubUrls");
+  const existingThumbInput = document.getElementById("existingThumbnail");
+  const existingSubInput = document.getElementById("existingSubImages");
 
-  let subImagesLocal = [];   // preview từ input file
-  let subImagesServer = [];  // urls từ CKFinder
+  const ctx = "${pageContext.request.contextPath}";
 
-  function openModal() {
-    modal.style.display = "flex";
-    modal.style.gap = "20px";
-  }
+  let existingSubUrls = []; // ảnh phụ đang giữ (từ DB, có thể bị user xóa)
+  let subImagesLocal = [];  // ảnh phụ upload mới
 
-  function closeModal() {
-    modal.style.display = "none";
-  }
-
-  btnAdd.addEventListener("click", () => {
-    modalTitle.innerText = "Thêm sản phẩm";
-    actionInput.value = "create";
-    dbId.value = "";
-
-    form.reset();
-
-    // reset main
-    mainUrlInput.value = "";
-    previewImg.style.display = "none";
-    previewImg.src = "";
-    removeImgBtn.style.display = "none";
-
-    // reset sub
-    subUrlsInput.value = "";
-    subImagesLocal = [];
-    subImagesServer = [];
-    thumbnailSub.value = "";
-    subPreviewContainer.innerHTML = "";
-
-    openModal();
-  });
+  function openModal() { modal.style.display = "flex"; modal.style.gap = "20px"; }
+  function closeModal() { modal.style.display = "none"; }
 
   btnClose.addEventListener("click", closeModal);
   window.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
 
-  // MAIN PREVIEW (local file)
-  thumbnailInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-      previewImg.src = URL.createObjectURL(file);
-      previewImg.style.display = "block";
-      removeImgBtn.style.display = "inline-block";
-      // nếu chọn local thì bỏ URL server
-      mainUrlInput.value = "";
-    }
-  });
+  function normalizeUrl(u){
+    if(!u) return "";
+    u = u.trim();
+    if(u.startsWith("http")) return u;
+    if(u.startsWith(ctx)) return u;
+    return ctx + u; // u dạng /uploads/...
+  }
 
-  removeImgBtn.addEventListener("click", function () {
-    thumbnailInput.value = "";
-    mainUrlInput.value = "";
-    previewImg.src = "";
-    previewImg.style.display = "none";
-    removeImgBtn.style.display = "none";
-  });
-
-  // SUB PREVIEW (local file)
-  thumbnailSub.addEventListener("change", function () {
-    // nếu chọn local thì bỏ server list
-    subImagesServer = [];
-    subUrlsInput.value = "";
-
-    const files = Array.from(this.files);
-    files.forEach(file => subImagesLocal.push({ file, url: URL.createObjectURL(file) }));
-    renderSubImages();
-  });
+  function syncExistingSubHidden(){
+    const rels = existingSubUrls.map(u => (u.startsWith(ctx) ? u.substring(ctx.length) : u));
+    existingSubInput.value = rels.join(",");
+  }
 
   function renderSubImages() {
     subPreviewContainer.innerHTML = "";
 
-    // render server urls trước (nếu có)
-    subImagesServer.forEach((url, index) => {
+    // ảnh phụ cũ
+    existingSubUrls.forEach((url, index) => {
       const box = document.createElement("div");
       box.className = "sub-img-box";
+
       const img = document.createElement("img");
-      img.src = url;
+      img.src = normalizeUrl(url);
 
       const btn = document.createElement("button");
       btn.type = "button";
       btn.innerHTML = "×";
       btn.onclick = () => {
-        subImagesServer.splice(index, 1);
-        syncSubUrls();
+        existingSubUrls.splice(index, 1);
+        syncExistingSubHidden();
         renderSubImages();
       };
 
@@ -460,10 +420,11 @@
       subPreviewContainer.appendChild(box);
     });
 
-    // render local files
+    // ảnh phụ mới
     subImagesLocal.forEach((imgObj, index) => {
       const box = document.createElement("div");
       box.className = "sub-img-box";
+
       const img = document.createElement("img");
       img.src = imgObj.url;
 
@@ -481,112 +442,57 @@
     });
   }
 
-  function syncSubUrls() {
-    // lưu relative URL (không có contextPath) để DB dùng thống nhất
-    const ctx = "${pageContext.request.contextPath}";
-    const rels = subImagesServer.map(u => (u.startsWith(ctx) ? u.substring(ctx.length) : u));
-    subUrlsInput.value = rels.join(",");
-  }
-</script>
+  // ADD
+  btnAdd.addEventListener("click", () => {
+    modalTitle.innerText = "Thêm sản phẩm";
+    actionInput.value = "create";
+    dbId.value = "";
 
-<script>
-  // ====== CKFINDER PICK MAIN / SUBS ======
-  const ctx = "${pageContext.request.contextPath}";
-  const CKFINDER_BASE = ctx + "/ckfinder/static/ckfinder/";
+    form.reset();
 
-  const pickMainBtn = document.getElementById("pickMainFromServer");
-  const pickSubsBtn = document.getElementById("pickSubsFromServer");
+    // main
+    existingThumbInput.value = "";
+    thumbnailInput.value = "";
+    previewImg.style.display = "none";
+    previewImg.src = "";
+    removeImgBtn.style.display = "none";
 
-  function toRelative(url){
-    return (url && url.startsWith(ctx)) ? url.substring(ctx.length) : url;
-  }
+    // sub
+    existingSubUrls = [];
+    existingSubInput.value = "";
+    subImagesLocal = [];
+    thumbnailSub.value = "";
+    subPreviewContainer.innerHTML = "";
 
-  function ensureCKFinderLoaded() {
-    if (typeof CKFinder === "undefined") {
-      alert("CKFinder JS chưa load được. Kiểm tra URL: " + CKFINDER_BASE + "ckfinder.js");
-      return false;
+    openModal();
+  });
+
+  // MAIN preview
+  thumbnailInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      previewImg.src = URL.createObjectURL(file);
+      previewImg.style.display = "block";
+      removeImgBtn.style.display = "inline-block";
     }
-    return true;
-  }
+  });
 
-  if (pickMainBtn) {
-    pickMainBtn.addEventListener("click", () => {
-      if (!ensureCKFinderLoaded()) return;
+  removeImgBtn.addEventListener("click", function () {
+    thumbnailInput.value = "";
+    existingThumbInput.value = ""; // => servlet hiểu là xóa thumbnail
+    previewImg.src = "";
+    previewImg.style.display = "none";
+    removeImgBtn.style.display = "none";
+  });
 
-      CKFinder.popup({
-        basePath: CKFINDER_BASE,
-        resourceType: "Images",
-        chooseFiles: true,
-        onInit: function (finder) {
-          finder.on("files:choose", function (evt) {
-            const file = evt.data.files.first();
-            const url = file.getUrl(); // full url (có ctx)
-            // preview
-            const previewImg = document.getElementById("previewImg-main");
-            const removeImgBtn = document.getElementById("removeImgBtn-main");
-            previewImg.src = url;
-            previewImg.style.display = "block";
-            removeImgBtn.style.display = "inline-block";
+  // SUB preview
+  thumbnailSub.addEventListener("change", function () {
+    const files = Array.from(this.files || []);
+    subImagesLocal = files.map(file => ({ file, url: URL.createObjectURL(file) }));
+    renderSubImages();
+  });
 
-            // lưu relative url để server xử lý
-            document.getElementById("thumbnailMainUrl").value = toRelative(url);
-
-            // nếu đã chọn từ server thì bỏ upload local
-            document.getElementById("thumbnail-main").value = "";
-          });
-        }
-      });
-    });
-  }
-
-  if (pickSubsBtn) {
-    pickSubsBtn.addEventListener("click", () => {
-      if (!ensureCKFinderLoaded()) return;
-
-      CKFinder.popup({
-        basePath: CKFINDER_BASE,
-        resourceType: "Images",
-        chooseFiles: true,
-        onInit: function (finder) {
-          finder.on("files:choose", function (evt) {
-            // Khi chọn ảnh phụ từ server -> bỏ local file input
-            const thumbnailSub = document.getElementById("thumbnail-sub");
-            thumbnailSub.value = "";
-
-            // reset local preview list
-            subImagesLocal = [];
-
-            // collect urls
-            const urls = [];
-            const files = evt.data.files;
-
-            // CKFinder collection thường có forEach
-            if (files.forEach) {
-              files.forEach(function (f) { urls.push(f.getUrl()); });
-            } else if (files.models) {
-              files.models.forEach(function (f) { urls.push(f.getUrl()); });
-            } else {
-              // fallback: lấy first thôi
-              urls.push(files.first().getUrl());
-            }
-
-            // set server list (global var đã khai báo ở script trước)
-            subImagesServer = urls;
-
-            // lưu hidden urls dạng relative CSV
-            syncSubUrls();
-
-            // render preview
-            renderSubImages();
-          });
-        }
-      });
-    });
-  }
-</script>
-
-<script>
-  // ====== EDIT (giữ logic bạn đang có, mình chỉ làm gọn + reset hidden) ======
+  // EDIT
   document.querySelectorAll(".chinhsua-sanpham").forEach(btn => {
     btn.addEventListener("click", () => {
       modalTitle.innerText = "Cập nhật sản phẩm";
@@ -604,24 +510,29 @@
       madeInInput.value = btn.dataset.madein || "";
       warningInput.value = btn.dataset.warning || "";
 
-      // reset hidden urls
-      mainUrlInput.value = "";
-      subUrlsInput.value = "";
-      subImagesServer = [];
-      subImagesLocal = [];
-      subPreviewContainer.innerHTML = "";
+      // reset file inputs
+      thumbnailInput.value = "";
       thumbnailSub.value = "";
+      subImagesLocal = [];
 
-      // ảnh chính preview từ DB
+      // main từ DB
       const thumb = btn.dataset.thumbnail;
       if (thumb) {
         previewImg.src = thumb;
         previewImg.style.display = "block";
         removeImgBtn.style.display = "inline-block";
+        existingThumbInput.value = thumb.startsWith(ctx) ? thumb.substring(ctx.length) : thumb;
       } else {
         previewImg.style.display = "none";
         removeImgBtn.style.display = "none";
+        existingThumbInput.value = "";
       }
+
+      // sub từ DB
+      const rawSubs = (btn.dataset.subimages || "").trim();
+      existingSubUrls = rawSubs ? rawSubs.split(",").map(s => s.trim()).filter(Boolean) : [];
+      syncExistingSubHidden();
+      renderSubImages();
 
       openModal();
     });
