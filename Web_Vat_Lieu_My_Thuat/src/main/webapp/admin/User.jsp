@@ -558,15 +558,16 @@
 
             <div class="order-container">
                 <h1>Danh sách người dùng</h1>
-                <form class="search" method="get" action="${pageContext.request.contextPath}/admin/users">
-                    <%--            <div class="search">--%>
+                <form id="userSearchForm" class="search" method="get" action="${pageContext.request.contextPath}/admin/users">
                     <div class="search-input-icon">
-                        <input type="text" name="q" value="${q}" placeholder="Tìm kiếm người dùng...">
+                        <input id="userSearchInput" type="text" name="q" value="${q}" placeholder="Tìm kiếm người dùng..." autocomplete="off">
                         <button type="submit" class="icon"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <button type="button" class="btn-them-khach-hang">Thêm khách hàng</button>
-                    <%--            </div>--%>
                 </form>
+
+                <div id="searchStatus" style="margin:6px 0; font-size:13px; color:#666;"></div>
+
                 <table class="order-table">
                     <thead>
                     <tr>
@@ -581,7 +582,7 @@
                     </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id="userTbody">
                     <c:forEach var="u" items="${users}">
                         <tr>
                             <td class="col-id"><c:out value="${u.id}"/></td>
@@ -643,7 +644,7 @@
                     </tbody>
 
                 </table>
-                <div class="pagination">
+                <div id="pagination" class="pagination">
                     <c:if test="${currentPage > 1}">
                         <a class="page-link"
                            href="${pageContext.request.contextPath}/admin/users?page=${currentPage-1}&q=${q}">Trước</a>
@@ -679,8 +680,9 @@
 
         <form method="post" action="${pageContext.request.contextPath}/admin/users">
             <input type="hidden" name="action" value="create"/>
-            <input type="hidden" name="page" value="${currentPage}"/>
-            <input type="hidden" name="q" value="${q}"/>
+            <input type="hidden" name="page" value="${currentPage}" data-sync="page"/>
+            <input type="hidden" name="q" value="${q}" data-sync="q"/>
+
 
             <div class="modal-body">
                 <div class="form-group">
@@ -738,8 +740,9 @@
         <form method="post" action="${pageContext.request.contextPath}/admin/users">
             <input type="hidden" name="action" value="update"/>
             <input type="hidden" name="id" id="editId" />
-            <input type="hidden" name="page" value="${currentPage}"/>
-            <input type="hidden" name="q" value="${q}"/>
+            <input type="hidden" name="page" value="${currentPage}" data-sync="page"/>
+            <input type="hidden" name="q" value="${q}" data-sync="q"/>
+
 
 
             <div class="modal-body">
@@ -832,34 +835,31 @@
     const btnEditCancel = document.querySelector(".btn-edit-cancel");
 
     // Lấy danh sách nút sửa
-    const btnSuaList = document.querySelectorAll(".btn-Sua");
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".btn-Sua");
+        if (!btn) return;
 
-    btnSuaList.forEach(btn => {
-        btn.addEventListener("click", () => {
-            modalEdit.style.display = "flex";
+        modalEdit.style.display = "flex";
 
-            // LẤY TỪ DATASET (khuyên dùng)
-            const id = btn.dataset.id || "";
-            const ten = btn.dataset.fullname || "";
-            const sdt = btn.dataset.phone || "";
-            const diachi = btn.dataset.address || "";
-            const dob = btn.dataset.dob || "";
-            const vaitro = (btn.dataset.role || "USER").toUpperCase();
+        const id = btn.dataset.id || "";
+        const ten = btn.dataset.fullname || "";
+        const sdt = btn.dataset.phone || "";
+        const diachi = btn.dataset.address || "";
+        const dob = btn.dataset.dob || "";
+        const vaitro = (btn.dataset.role || "USER").toUpperCase();
 
-            // GÁN VÀO FORM EDIT
-            const editId = document.getElementById("editId");        // <input type="hidden" id="editId" name="id">
-            if (editId) editId.value = id;
+        const editId = document.getElementById("editId");
+        if (editId) editId.value = id;
 
-            document.getElementById("editTenKH").value = ten;
-            document.getElementById("editSdtKH").value = sdt;
-            document.getElementById("editDiaChiKH").value = diachi;
-            document.getElementById("editVaiTroKH").value = vaitro;
+        document.getElementById("editTenKH").value = ten;
+        document.getElementById("editSdtKH").value = sdt;
+        document.getElementById("editDiaChiKH").value = diachi;
+        document.getElementById("editVaiTroKH").value = vaitro;
 
-            // nếu bạn có field ngày sinh trong modal edit:
-            const editDob = document.getElementById("editDobKH");    // <input type="date" id="editDobKH" name="dob">
-            if (editDob) editDob.value = dob;
-        });
+        const editDob = document.getElementById("editDobKH");
+        if (editDob) editDob.value = dob;
     });
+
 
     btnCloseEdit?.addEventListener("click", () => {
         modalEdit.style.display = "none";
@@ -918,6 +918,12 @@
     });
 </script>
 
+<%--cho ajax--%>
+
+
+
+<script>window.__CTX = "${pageContext.request.contextPath}";</script>
+<script src="${pageContext.request.contextPath}/assets/js/admin-users-ajax.js"></script>
 
 </body>
 
