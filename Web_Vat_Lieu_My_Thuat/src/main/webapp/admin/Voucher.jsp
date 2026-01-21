@@ -16,21 +16,29 @@
 
 </head>
 <style>
-  #main {
-    display: flex;
-  }
+    html, body { height: 100%; }
 
-  #main .left {
-    background-color: #17479D;
-    height: auto;
-    width: 17%;
-  }
+    #main{
+        display: flex;
+        min-height: 100vh;
+        align-items: stretch;
+    }
+
+    #main .left{
+        background-color: #17479D;
+        width: 17%;
+        min-height: 100vh;
+        height: auto;
+    }
 
   #main .left .list-admin {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
+    #main .left .list-admin{
+       min-height: 100vh;
+   }
 
   #main .left .list-admin a {
     display: block;
@@ -80,10 +88,10 @@
   }
 
 
-  #main .right {
-    flex: 1;
-    background-color: #F9F9F9;
-  }
+    #main .right{
+        flex: 1;
+        background-color: #F9F9F9;
+    }
 
   #main .right .container .dashboard {
     display: flex;

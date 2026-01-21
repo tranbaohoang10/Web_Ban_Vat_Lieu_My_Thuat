@@ -6,7 +6,7 @@ public class Category implements Serializable {
     private int id;
     private String categoryName;
     private String thumbnail;
-    private int isActive; // ✅ thêm
+    private int isActive;
 
     public Category() {}
 
@@ -20,12 +20,12 @@ public class Category implements Serializable {
     public int getId() { return id; }
     public String getCategoryName() { return categoryName; }
     public String getThumbnail() { return thumbnail; }
-    public int getIsActive() { return isActive; } // ✅ thêm
+    public int getIsActive() { return isActive; }
 
     public void setId(int id) { this.id = id; }
     public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
     public void setThumbnail(String thumbnail) { this.thumbnail = thumbnail; }
-    public void setIsActive(int isActive) { this.isActive = isActive; } // ✅ thêm
+    public void setIsActive(int isActive) { this.isActive = isActive; }
 
     @Override
     public String toString() {

@@ -9,6 +9,8 @@ import vn.edu.nlu.fit.mythuatshop.Dao.ProductDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.SpecificationsDao;
 import vn.edu.nlu.fit.mythuatshop.Dao.SubImagesDao;
 import vn.edu.nlu.fit.mythuatshop.Model.Product;
+import vn.edu.nlu.fit.mythuatshop.Model.Specification;
+import vn.edu.nlu.fit.mythuatshop.Model.Subimages;
 import vn.edu.nlu.fit.mythuatshop.Service.CategoryService;
 import vn.edu.nlu.fit.mythuatshop.Service.ProductService;
 
@@ -16,8 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "AdminProductController", value = "/admin/products")
 @MultipartConfig(
@@ -49,8 +51,30 @@ public class AdminProductController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
-        req.setAttribute("products", productService.getAllProducts());
+        var products = productService.getAllProducts();
+        req.setAttribute("products", products);
         req.setAttribute("categories", categoryService.getAllcategories());
+
+        // ✅ MAP productId -> CSV subimages (để edit render ảnh phụ)
+        Map<Integer, String> subImagesCsvMap = new HashMap<>();
+        for (Product p : products) {
+            List<Subimages> subs = subImagesDao.findByProductId(p.getId());
+            String csv = subs.stream()
+                    .map(Subimages::getImage) // image đang lưu dạng "/uploads/..."
+                    .collect(Collectors.joining(","));
+            subImagesCsvMap.put(p.getId(), csv);
+        }
+        req.setAttribute("subImagesCsvMap", subImagesCsvMap);
+
+        // ✅ MAP productId -> Specification (để edit fill size/madeIn/warning/standard)
+        Map<Integer, Specification> specMap = new HashMap<>();
+        for (Product p : products) {
+            List<Specification> specs = specificationsDao.findByProductId(p.getId());
+            if (specs != null && !specs.isEmpty()) {
+                specMap.put(p.getId(), specs.get(0));
+            }
+        }
+        req.setAttribute("specMap", specMap);
 
         req.getRequestDispatcher("/admin/Product.jsp").forward(req, resp);
     }
@@ -92,14 +116,9 @@ public class AdminProductController extends HttpServlet {
         String standard = req.getParameter("standard");
         if (standard == null) standard = "";
 
-        // ===== MAIN THUMB: ưu tiên URL từ server (CKFinder), nếu không có thì mới upload file =====
-        String mainThumbUrl = trimToNull(req.getParameter("thumbnailMainUrl"));
-
+        // ✅ MAIN THUMB: chỉ upload local
         Part mainThumb = req.getPart("thumbnailMain");
-        if (mainThumbUrl == null) {
-            // upload theo cách cũ
-            mainThumbUrl = saveUploadAndReturnUrl(req, mainThumb, "uploads/products");
-        }
+        String mainThumbUrl = saveUploadAndReturnUrl(req, mainThumb, "uploads/products");
 
         Product p = new Product();
         p.setName(name);
@@ -116,20 +135,11 @@ public class AdminProductController extends HttpServlet {
 
         int newId = productDao.insertReturnId(p);
 
-        // ===== SUB IMAGES: (1) nếu có URLs từ server -> insert luôn; (2) nếu upload file -> insert file =====
-        String subUrls = trimToNull(req.getParameter("thumbnailSubUrls"));
-        if (subUrls != null) {
-            for (String url : subUrls.split(",")) {
-                url = trimToNull(url);
-                if (url != null) subImagesDao.insert(newId, url);
-            }
-        }
-
-        // upload sub files (nếu user chọn local)
+        // ✅ SUB IMAGES: upload local -> lưu vào uploads/subimages
         Collection<Part> parts = req.getParts();
         for (Part part : parts) {
             if ("thumbnailSubs".equals(part.getName()) && part.getSize() > 0) {
-                String subUrl = saveUploadAndReturnUrl(req, part, "uploads/products");
+                String subUrl = saveUploadAndReturnUrl(req, part, "uploads/subimages");
                 subImagesDao.insert(newId, subUrl);
             }
         }
@@ -158,17 +168,25 @@ public class AdminProductController extends HttpServlet {
         Product old = productService.getProductById(id);
         String oldThumb = (old != null) ? old.getThumbnail() : null;
 
-        // ===== MAIN THUMB =====
-        String mainThumbUrl = trimToNull(req.getParameter("thumbnailMainUrl"));
-
+        // ✅ MAIN THUMB:
+        // - nếu upload mới -> dùng mới
+        // - nếu không upload -> dùng existingThumbnail hidden (hoặc oldThumb)
+        // - nếu user bấm xóa ảnh -> existingThumbnail = "" => finalThumb = null
+        String existingThumb = trimToNull(req.getParameter("existingThumbnail"));
         Part mainThumb = req.getPart("thumbnailMain");
         String uploadedThumb = null;
         if (mainThumb != null && mainThumb.getSize() > 0) {
             uploadedThumb = saveUploadAndReturnUrl(req, mainThumb, "uploads/products");
         }
 
-        String finalThumb = (uploadedThumb != null) ? uploadedThumb
-                : (mainThumbUrl != null ? mainThumbUrl : oldThumb);
+        String finalThumb;
+        if (uploadedThumb != null) {
+            finalThumb = uploadedThumb;
+        } else if (existingThumb != null) {
+            finalThumb = existingThumb;
+        } else {
+            finalThumb = oldThumb; // fallback
+        }
 
         Product p = new Product();
         p.setId(id);
@@ -182,34 +200,32 @@ public class AdminProductController extends HttpServlet {
 
         productDao.update(p);
 
-        // ===== SUB IMAGES =====
-        boolean replacedSub = false;
-
-        // 1) nếu user chọn sub urls từ server -> replace all
-        String subUrls = trimToNull(req.getParameter("thumbnailSubUrls"));
-        if (subUrls != null) {
-            subImagesDao.deleteByProductId(id);
-            replacedSub = true;
-            for (String url : subUrls.split(",")) {
-                url = trimToNull(url);
-                if (url != null) subImagesDao.insert(id, url);
+        // ✅ SUB IMAGES:
+        // nhận existingSubImages từ hidden input (CSV sau khi user xóa trên UI)
+        String existingSubsCsv = trimToNull(req.getParameter("existingSubImages"));
+        List<String> keepSubs = new ArrayList<>();
+        if (existingSubsCsv != null) {
+            for (String s : existingSubsCsv.split(",")) {
+                String t = trimToNull(s);
+                if (t != null) keepSubs.add(t);
             }
         }
 
-        // 2) nếu user upload sub files -> replace all (như bạn đang làm)
+        List<String> newSubs = new ArrayList<>();
         Collection<Part> parts = req.getParts();
         for (Part part : parts) {
             if ("thumbnailSubs".equals(part.getName()) && part.getSize() > 0) {
-                if (!replacedSub) {
-                    subImagesDao.deleteByProductId(id);
-                    replacedSub = true;
-                }
-                String subUrl = saveUploadAndReturnUrl(req, part, "uploads/products");
-                subImagesDao.insert(id, subUrl);
+                String saved = saveUploadAndReturnUrl(req, part, "uploads/subimages");
+                if (saved != null) newSubs.add(saved);
             }
         }
 
-        // ===== SPEC =====
+
+        // replace DB theo danh sách cuối cùng: keep + new
+        subImagesDao.deleteByProductId(id);
+        for (String img : keepSubs) subImagesDao.insert(id, img);
+        for (String img : newSubs) subImagesDao.insert(id, img);
+
         specificationsDao.upsert(id, size, standard, madeIn, warning);
     }
 
@@ -231,7 +247,7 @@ public class AdminProductController extends HttpServlet {
         int dot = original.lastIndexOf('.');
         if (dot >= 0) ext = original.substring(dot);
 
-        String savedName = UUID.randomUUID() + ext;
+        String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
 
         String realPath = req.getServletContext().getRealPath("/");
         File uploadDir = new File(realPath, folder);
@@ -240,7 +256,7 @@ public class AdminProductController extends HttpServlet {
         File savedFile = new File(uploadDir, savedName);
         part.write(savedFile.getAbsolutePath());
 
-        return "/" + folder + "/" + savedName;
+        return "/" + folder + "/" + savedName; // lưu vào DB
     }
 
     private String trimToNull(String s) {
