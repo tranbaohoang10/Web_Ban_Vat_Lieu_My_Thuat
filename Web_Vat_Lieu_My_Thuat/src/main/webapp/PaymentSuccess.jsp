@@ -97,7 +97,7 @@
         </div>
 
         <div class="success-text">
-            <h2>Thanh toán thành công!</h2>
+            <h2>Đặt hàng thành công!</h2>
             <p>Cảm ơn bạn đã mua sản phẩm của chúng tôi</p>
             <a href="${pageContext.request.contextPath}/home" class="btn-home">
                 <i class="fa-solid fa-house"></i> Về trang chủ
