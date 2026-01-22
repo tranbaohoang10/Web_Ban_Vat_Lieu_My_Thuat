@@ -431,7 +431,7 @@
                                         data-title="${s.title}"
                                         data-status="${s.status}"
                                         data-order="${s.indexOrder}"
-                                        data-linkto="${s.linkTo}"
+
                                         data-thumb="${s.thumbnail}">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
@@ -503,10 +503,6 @@
                     <input type="text" name="title" placeholder="Nhập tiêu đề" required>
                 </div>
 
-                <div class="form-group">
-                    <label>LinkTo (tuỳ chọn)</label>
-                    <input type="text" name="linkTo" placeholder="VD: /products?categoryId=2">
-                </div>
 
                 <div class="form-group">
                     <label>Trạng thái</label>
@@ -553,10 +549,7 @@
                     <input type="text" name="title" id="editTitle" required>
                 </div>
 
-                <div class="form-group">
-                    <label>LinkTo (tuỳ chọn)</label>
-                    <input type="text" name="linkTo" id="editLinkTo" placeholder="VD: /products?categoryId=2">
-                </div>
+
 
                 <div class="form-group">
                     <label>Trạng thái</label>
@@ -604,7 +597,7 @@
 
     const editId = document.getElementById("editId");
     const editTitle = document.getElementById("editTitle");
-    const editLinkTo = document.getElementById("editLinkTo");
+
     const editOrder = document.getElementById("editOrder");
     const editStatus = document.getElementById("editStatus");
     const editPreview = document.getElementById("editPreview");
@@ -630,7 +623,7 @@
         editTitle.value = btn.dataset.title || "";
         editOrder.value = btn.dataset.order || "1";
         editStatus.value = btn.dataset.status || "1";
-        editLinkTo.value = btn.dataset.linkto || "";
+
         editPreview.src = btn.dataset.thumb || "";
 
         editModal.style.display = "flex";
@@ -718,7 +711,7 @@
             btnEdit.dataset.title = text(s.title);
             btnEdit.dataset.status = text(s.status);
             btnEdit.dataset.order = text(s.indexOrder);
-            btnEdit.dataset.linkto = text(s.linkTo);
+
             btnEdit.dataset.thumb = text(s.thumbnail);
             btnEdit.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
 
