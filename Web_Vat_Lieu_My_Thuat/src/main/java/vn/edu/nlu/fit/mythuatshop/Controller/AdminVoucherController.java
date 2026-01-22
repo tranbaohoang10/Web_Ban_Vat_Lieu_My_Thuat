@@ -15,6 +15,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
+
 @WebServlet(name = "AdminVoucherController", urlPatterns = {"/admin/vouchers"})
 public class AdminVoucherController extends HttpServlet {
 
@@ -22,6 +29,44 @@ public class AdminVoucherController extends HttpServlet {
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final VoucherDao voucherDao = new VoucherDao();
     private static final int PAGE_SIZE = 10;
+    private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+
+    static class VoucherRowDto {
+        int id;
+        String code;
+        String name;
+        String description;
+        String startDate; // yyyy-MM-dd
+        String endDate;   // yyyy-MM-dd
+        double voucherCash;
+        double minOrderValue;
+        int quantity;
+        int quantityUsed;
+        int isActive;
+
+        static VoucherRowDto from(Voucher v) {
+            VoucherRowDto d = new VoucherRowDto();
+            d.id = v.getId();
+            d.code = v.getCode();
+            d.name = v.getName();
+            d.description = v.getDescription();
+            d.voucherCash = v.getVoucherCash();
+            d.minOrderValue = v.getMinOrderValue();
+            d.quantity = v.getQuantity();
+            d.quantityUsed = v.getQuantityUsed();
+            d.isActive = v.getIsActive();
+            d.startDate = (v.getStartDate() == null) ? "" : v.getStartDate().toLocalDate().toString();
+            d.endDate   = (v.getEndDate() == null) ? "" : v.getEndDate().toLocalDate().toString();
+            return d;
+        }
+    }
+
+    static class AjaxResponse {
+        List<VoucherRowDto> vouchers = new ArrayList<>();
+        int currentPage;
+        int totalPages;
+        String keyword;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -73,6 +118,21 @@ public class AdminVoucherController extends HttpServlet {
                 int totalPages = (int) Math.ceil(totalRecords * 1.0 / PAGE_SIZE);
                 if (totalPages == 0) totalPages = 1;
                 if (page > totalPages) page = totalPages;
+                boolean isAjax =
+                        "1".equals(req.getParameter("ajax")) ||
+                                "XMLHttpRequest".equalsIgnoreCase(req.getHeader("X-Requested-With"));
+
+                if (isAjax) {
+                    AjaxResponse out = new AjaxResponse();
+                    for (Voucher v : vouchers) out.vouchers.add(VoucherRowDto.from(v));
+                    out.currentPage = page;
+                    out.totalPages = totalPages;
+                    out.keyword = keyword;
+
+                    resp.setContentType("application/json; charset=UTF-8");
+                    resp.getWriter().write(gson.toJson(out));
+                    return;
+                }
 
                 req.setAttribute("vouchers", vouchers);
                 req.setAttribute("currentPage", page);

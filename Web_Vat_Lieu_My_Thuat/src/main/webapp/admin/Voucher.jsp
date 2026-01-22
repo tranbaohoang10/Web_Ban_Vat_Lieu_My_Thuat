@@ -541,12 +541,14 @@
           <h1>Danh sách khuyến mãi</h1>
             <div class="search">
                 <div class="search-input-icon">
-                    <form action="${pageContext.request.contextPath}/admin/vouchers" method="get" style="display:flex;">
-                        <input type="text" name="keyword" placeholder="Tìm kiếm khuyến mãi..." value="${keyword}">
+                    <form id="voucherSearchForm" action="${pageContext.request.contextPath}/admin/vouchers" method="get" style="display:flex;">
+                        <input id="voucherSearchInput" type="text" name="keyword" placeholder="Tìm kiếm khuyến mãi..." value="${keyword}" autocomplete="off">
                         <button type="submit" class="icon">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
+                    <div id="voucherSearchStatus" style="margin:6px 0; font-size:13px; color:#666;"></div>
+
                 </div>
 
                 <button type="button" class="btn-them-km">Thêm khuyến mãi</button>
@@ -567,7 +569,7 @@
               </tr>
             </thead>
 
-              <tbody>
+              <tbody id="voucherTbody">
               <c:if test="${empty vouchers}">
                   <tr>
                       <td colspan="8">Không có khuyến mãi nào.</td>
@@ -575,7 +577,11 @@
               </c:if>
 
               <c:forEach var="v" items="${vouchers}" varStatus="st">
-                  <tr data-id="${v.id}">
+                  <tr data-id="${v.id}"
+                      data-min="${v.minOrderValue}"
+                      data-used="${v.quantityUsed}"
+                      data-active="${v.isActive}"
+                      data-qty="${v.quantity}">
                       <td>${(currentPage - 1) * 10 + st.index + 1}</td>
                       <td class="col-code">${v.code}</td>
                       <td class="col-name">${v.name}</td>
@@ -610,7 +616,7 @@
 
 
           </table>
-            <div class="pagination">
+            <div id="voucherPagination" class="pagination">
                 <!-- Nút Trước -->
                 <c:if test="${currentPage > 1}">
                     <a class="page-link"
@@ -804,23 +810,26 @@
       const modalEdit = document.getElementById("Dialog-sua-km");
       const btnCloseEdit = document.querySelector(".close-edit-modal");
       const btnEditCancel = document.querySelector(".btn-edit-cancel");
-      const btnSuaList = document.querySelectorAll(".btn-Sua");
 
-      btnSuaList.forEach(btn => {
-          btn.addEventListener("click", () => {
-              const row = btn.closest("tr");
+      document.addEventListener("click", (e) => {
+          // ===== SỬA =====
+          const editBtn = e.target.closest(".btn-Sua");
+          if (editBtn) {
+              const row = editBtn.closest("tr");
 
               const id = row.getAttribute("data-id");
               const code = row.querySelector(".col-code").innerText.trim();
               const name = row.querySelector(".col-name").innerText.trim();
               const desc = row.querySelector(".col-desc").innerText.trim();
+
               const start = row.querySelector(".col-start").getAttribute("data-value") || "";
               const end   = row.querySelector(".col-end").getAttribute("data-value") || "";
-              const cash = row.querySelector(".col-cash").getAttribute("data-value");
+              const cash  = row.querySelector(".col-cash").getAttribute("data-value") || "0";
 
-              const min = row.getAttribute("data-min") || "0";
-              const used = row.getAttribute("data-used") || "0";
-              const active = row.getAttribute("data-active") || "1";
+              const min = row.dataset.min || "0";
+              const used = row.dataset.used || "0";
+              const active = row.dataset.active || "1";
+              const qty = row.dataset.qty || "";
 
               document.getElementById("editId").value = id;
               document.getElementById("editCode").value = code;
@@ -829,43 +838,30 @@
               document.getElementById("editStartDate").value = start.substring(0, 10);
               document.getElementById("editEndDate").value   = end.substring(0, 10);
               document.getElementById("editCash").value = cash;
-              document.getElementById("editQuantity").value = row.querySelector(".col-qty")
-                  ? row.querySelector(".col-qty").innerText.trim()
-                  : "";
 
+              document.getElementById("editQuantity").value = qty;
               document.getElementById("editMinOrderValue").value = min;
               document.getElementById("editQuantityUsed").value = used;
               document.getElementById("editIsActive").value = active;
 
               modalEdit.style.display = "flex";
-          });
-      });
+              return;
+          }
 
-
-      if (btnCloseEdit) btnCloseEdit.onclick = () => modalEdit.style.display = "none";
-      if (btnEditCancel) btnEditCancel.onclick = () => modalEdit.style.display = "none";
-
-      window.addEventListener("click", e => {
-          if (e.target === modalEdit) {
-              modalEdit.style.display = "none";
+          // ===== XÓA =====
+          const delBtn = e.target.closest(".btn-Xoa");
+          if (delBtn) {
+              deleteForm = delBtn.closest("form");
+              deleteModal.style.display = "flex";
           }
       });
-      // ===== Modal XÓA khuyến mãi =====
+
+      // // ===== Modal XÓA khuyến mãi =====
       const deleteModal = document.getElementById("Dialog-xoa-km");
       const btnCloseDelete = document.querySelector(".close-delete-modal");
       const btnDeleteCancel = document.querySelector(".btn-delete-cancel");
       const btnDeleteConfirm = document.querySelector(".btn-delete-confirm");
-      const btnDeleteList = document.querySelectorAll(".btn-Xoa");
 
-      let deleteForm = null; // form sẽ được submit sau khi xác nhận
-
-      // Khi bấm nút thùng rác
-      btnDeleteList.forEach(btn => {
-          btn.addEventListener("click", () => {
-              deleteForm = btn.closest("form");   // lấy form chứa nút xóa
-              deleteModal.style.display = "flex"; // mở modal
-          });
-      });
 
       // Bấm "Xóa" trong modal => submit form
       if (btnDeleteConfirm) {
@@ -894,6 +890,199 @@
               deleteModal.style.display = "none";
               deleteForm = null;
           }
+      });
+  </script>
+  <script>
+      const ctxVoucher = "${pageContext.request.contextPath}";
+      const PAGE_SIZE = 10;
+
+      const vForm = document.getElementById("voucherSearchForm");
+      const vInput = document.getElementById("voucherSearchInput");
+      const vTbody = document.getElementById("voucherTbody");
+      const vPaging = document.getElementById("voucherPagination");
+      const vStatus = document.getElementById("voucherSearchStatus");
+
+      let vTimer = null;
+      let vAbort = null;
+
+      function text(s){ return (s == null) ? "" : String(s); }
+
+      function renderVoucherRows(list, currentPage) {
+          if (!vTbody) return;
+          vTbody.innerHTML = "";
+
+          if (!list || list.length === 0) {
+              const tr = document.createElement("tr");
+              const td = document.createElement("td");
+              td.colSpan = 8;
+              td.innerText = "Không có khuyến mãi nào.";
+              tr.appendChild(td);
+              vTbody.appendChild(tr);
+              return;
+          }
+
+          list.forEach((v, idx) => {
+              const tr = document.createElement("tr");
+              tr.setAttribute("data-id", v.id);
+              tr.dataset.min = v.minOrderValue ?? 0;
+              tr.dataset.used = v.quantityUsed ?? 0;
+              tr.dataset.active = v.isActive ?? 1;
+              tr.dataset.qty = v.quantity ?? 0;
+
+              // STT
+              const tdStt = document.createElement("td");
+              tdStt.innerText = (currentPage - 1) * PAGE_SIZE + idx + 1;
+
+              const tdCode = document.createElement("td");
+              tdCode.className = "col-code";
+              tdCode.innerText = text(v.code);
+
+              const tdName = document.createElement("td");
+              tdName.className = "col-name";
+              tdName.innerText = text(v.name);
+
+              const tdDesc = document.createElement("td");
+              tdDesc.className = "col-desc";
+              tdDesc.innerText = text(v.description);
+
+              const tdStart = document.createElement("td");
+              tdStart.className = "col-start";
+              tdStart.setAttribute("data-value", text(v.startDate));
+              tdStart.innerText = text(v.startDate);
+
+              const tdEnd = document.createElement("td");
+              tdEnd.className = "col-end";
+              tdEnd.setAttribute("data-value", text(v.endDate));
+              tdEnd.innerText = text(v.endDate);
+
+              const tdCash = document.createElement("td");
+              tdCash.className = "col-cash";
+              tdCash.setAttribute("data-value", text(v.voucherCash));
+              tdCash.innerText = text(v.voucherCash) + "đ";
+
+              const tdOpt = document.createElement("td");
+
+              const btnEdit = document.createElement("button");
+              btnEdit.type = "button";
+              btnEdit.className = "btn-Sua";
+              btnEdit.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+
+              const formDel = document.createElement("form");
+              formDel.action = ctxVoucher + "/admin/vouchers";
+              formDel.method = "post";
+              formDel.style.display = "inline";
+
+              const inAction = document.createElement("input");
+              inAction.type = "hidden";
+              inAction.name = "action";
+              inAction.value = "delete";
+
+              const inId = document.createElement("input");
+              inId.type = "hidden";
+              inId.name = "id";
+              inId.value = v.id;
+
+              const btnDel = document.createElement("button");
+              btnDel.type = "button";
+              btnDel.className = "btn-Xoa";
+              btnDel.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+              formDel.appendChild(inAction);
+              formDel.appendChild(inId);
+              formDel.appendChild(btnDel);
+
+              tdOpt.appendChild(btnEdit);
+              tdOpt.appendChild(formDel);
+
+              tr.appendChild(tdStt);
+              tr.appendChild(tdCode);
+              tr.appendChild(tdName);
+              tr.appendChild(tdDesc);
+              tr.appendChild(tdStart);
+              tr.appendChild(tdEnd);
+              tr.appendChild(tdCash);
+              tr.appendChild(tdOpt);
+
+              vTbody.appendChild(tr);
+          });
+      }
+
+      function renderVoucherPaging(totalPages, currentPage) {
+          if (!vPaging) return;
+          vPaging.innerHTML = "";
+
+          function addLink(label, page, active) {
+              const a = document.createElement("a");
+              a.href = "#";
+              a.className = "page-link" + (active ? " active" : "");
+              a.dataset.page = page;
+              a.innerText = label;
+              vPaging.appendChild(a);
+          }
+
+          if (currentPage > 1) addLink("Trước", currentPage - 1, false);
+
+          for (let p = 1; p <= totalPages; p++) {
+              addLink(String(p), p, p === currentPage);
+          }
+
+          if (currentPage < totalPages) addLink("Sau", currentPage + 1, false);
+      }
+
+      async function fetchVouchers(keyword, page) {
+          if (vAbort) vAbort.abort();
+          vAbort = new AbortController();
+
+          if (vStatus) vStatus.innerText = "Đang tìm...";
+
+          const url = new URL(ctxVoucher + "/admin/vouchers", window.location.origin);
+          url.searchParams.set("ajax", "1");
+          url.searchParams.set("keyword", keyword || "");
+          url.searchParams.set("page", String(page || 1));
+
+          const res = await fetch(url.toString(), {
+              signal: vAbort.signal,
+              headers: { "X-Requested-With": "XMLHttpRequest" }
+          });
+
+          const ct = res.headers.get("content-type") || "";
+          if (!ct.includes("application/json")) {
+              window.location.href = ctxVoucher + "/login";
+              return;
+          }
+
+          const data = await res.json();
+
+          renderVoucherRows(data.vouchers, data.currentPage);
+          renderVoucherPaging(data.totalPages, data.currentPage);
+
+          if (vStatus) vStatus.innerText = "";
+
+          // update URL không reload
+          const newUrl = new URL(window.location.href);
+          newUrl.searchParams.set("keyword", data.keyword || "");
+          newUrl.searchParams.set("page", String(data.currentPage || 1));
+          window.history.replaceState({}, "", newUrl);
+      }
+
+      // gõ tới đâu tìm tới đó
+      vInput && vInput.addEventListener("input", () => {
+          clearTimeout(vTimer);
+          vTimer = setTimeout(() => fetchVouchers(vInput.value || "", 1), 300);
+      });
+
+      // chặn submit
+      vForm && vForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          fetchVouchers(vInput.value || "", 1);
+      });
+
+      // phân trang ajax
+      vPaging && vPaging.addEventListener("click", (e) => {
+          const a = e.target.closest("a.page-link");
+          if (!a) return;
+          e.preventDefault();
+          fetchVouchers(vInput.value || "", parseInt(a.dataset.page || "1", 10));
       });
   </script>
 
