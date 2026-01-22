@@ -14,6 +14,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
+import java.util.List;
+
+
 @WebServlet("/admin/sliders")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024,
@@ -23,6 +29,36 @@ import java.util.UUID;
 public class AdminSliderShowController extends HttpServlet {
 
     private SliderShowService service;
+    private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+
+    static class SliderRowDto {
+        int id;
+        String title;
+        String thumbnail;
+        int indexOrder;
+        int status; // 1 hiển thị, 0 ẩn
+        String linkTo; // nếu muốn dùng sau
+
+        static SliderRowDto from(SliderShow s) {
+            SliderRowDto d = new SliderRowDto();
+            d.id = s.getId();
+            d.title = s.getTitle();
+            d.thumbnail = s.getThumbnail();
+            d.indexOrder = s.getIndexOrder();
+            d.status = s.getStatus();
+            d.linkTo = s.getLinkTo();
+            return d;
+        }
+    }
+
+
+    static class AjaxResponse {
+        List<SliderRowDto> sliders = new ArrayList<>();
+        int currentPage;
+        int totalPages;
+        String q;
+        int size;
+    }
 
     @Override
     public void init() {
@@ -44,9 +80,28 @@ public class AdminSliderShowController extends HttpServlet {
         if (totalPages == 0) totalPages = 1;
         if (page > totalPages) page = totalPages;
 
+        // ✅ LẤY LIST TRƯỚC
         List<SliderShow> sliders = service.findPageByKeyword(q, page, size);
 
-        // edit mode (đỡ phải JS modal)
+        boolean isAjax =
+                "1".equals(req.getParameter("ajax")) ||
+                        "XMLHttpRequest".equalsIgnoreCase(req.getHeader("X-Requested-With"));
+
+        if (isAjax) {
+            AjaxResponse out = new AjaxResponse();
+            for (SliderShow s : sliders) out.sliders.add(SliderRowDto.from(s));
+            out.currentPage = page;
+            out.totalPages = totalPages;
+            out.q = (q == null) ? "" : q;
+            out.size = size;
+
+            resp.setCharacterEncoding("UTF-8");
+            resp.setContentType("application/json; charset=UTF-8");
+            resp.getWriter().write(gson.toJson(out));
+            return;
+        }
+
+        // edit mode
         String editIdRaw = req.getParameter("editId");
         if (editIdRaw != null) {
             int editId = parseInt(editIdRaw, -1);
@@ -64,6 +119,7 @@ public class AdminSliderShowController extends HttpServlet {
 
         req.getRequestDispatcher("/admin/SliderShow.jsp").forward(req, resp);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

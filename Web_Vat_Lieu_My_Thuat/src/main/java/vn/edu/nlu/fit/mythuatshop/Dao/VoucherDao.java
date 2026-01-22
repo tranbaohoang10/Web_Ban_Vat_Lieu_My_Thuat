@@ -58,8 +58,8 @@ public class VoucherDao {
     // LẤY 1 VOUCHER THEO ID (để load form edit)
     public Voucher findById(int id) {
         String sql = """
-                SELECT ID, code, name, description, voucherCash,
-                       startDate, endDate, quantity
+                SELECT ID, code, name, description, voucherCash, minOrderValue,
+                       startDate, endDate, quantity, quantityUsed, isActive
                 FROM Vouchers
                 WHERE ID = :id
                 """;
@@ -77,8 +77,8 @@ public class VoucherDao {
     public int insert(Voucher v) {
         String sql = """
                 INSERT INTO Vouchers
-                (code, name, description, voucherCash, startDate, endDate, quantity)
-                VALUES (:code, :name, :description, :voucherCash, :startDate, :endDate, :quantity)
+                    (code, name, description, voucherCash, minOrderValue, startDate, endDate, quantity, quantityUsed, isActive)
+                    VALUES (:code, :name, :description, :voucherCash, :minOrderValue, :startDate, :endDate, :quantity, :quantityUsed, :isActive)
                 """;
 
         return jdbi.withHandle(h ->
@@ -92,14 +92,17 @@ public class VoucherDao {
     public int update(Voucher v) {
         String sql = """
                 UPDATE Vouchers SET
-                    code = :code,
-                    name = :name,
-                    description = :description,
-                    voucherCash = :voucherCash,
-                    startDate = :startDate,
-                    endDate = :endDate,
-                    quantity = :quantity
-                WHERE ID = :id
+                                code = :code,
+                                name = :name,
+                                description = :description,
+                                voucherCash = :voucherCash,
+                                minOrderValue = :minOrderValue,
+                                startDate = :startDate,
+                                endDate = :endDate,
+                                quantity = :quantity,
+                                quantityUsed = :quantityUsed,
+                                isActive = :isActive
+                              WHERE ID = :id
                 """;
 
         return jdbi.withHandle(h ->
@@ -127,8 +130,8 @@ public class VoucherDao {
     // LẤY DANH SÁCH THEO TRANG (offset, limit)
     public List<Voucher> findPage(int offset, int limit) {
         String sql = """
-                SELECT ID, code, name, description, voucherCash,
-                       startDate, endDate, quantity
+                SELECT ID, code, name, description, voucherCash, minOrderValue,
+                       startDate, endDate, quantity, quantityUsed, isActive
                 FROM Vouchers
                 ORDER BY ID DESC
                 LIMIT :limit OFFSET :offset
@@ -162,8 +165,8 @@ public class VoucherDao {
     // TÌM KIẾM THEO TỪ KHÓA + PHÂN TRANG
     public List<Voucher> searchPage(String keyword, int offset, int limit) {
         String sql = """
-                SELECT ID, code, name, description, voucherCash,
-                       startDate, endDate, quantity
+                SELECT ID, code, name, description, voucherCash, minOrderValue,
+                       startDate, endDate, quantity, quantityUsed, isActive
                 FROM Vouchers
                 WHERE code LIKE :kw OR name LIKE :kw
                 ORDER BY ID DESC
