@@ -61,7 +61,7 @@ public class PlaceOrderController extends HttpServlet {
         if ("VNPAY".equalsIgnoreCase(paymentName)) {
             String paymentUrl = vnpayService.buildPaymentUrl(req, order);
             resp.sendRedirect(paymentUrl);
-            return;
+            return; 
         }
         session.removeAttribute("cart");
         session.setAttribute("cartCount", 0);

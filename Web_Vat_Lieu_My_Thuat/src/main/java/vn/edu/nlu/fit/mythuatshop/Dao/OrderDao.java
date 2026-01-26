@@ -17,7 +17,6 @@ public class OrderDao implements DaoInterface<Order> {
     }
 
     public int insert(Order order, boolean updateInventory) {
-        // inTransaction sẽ mở transaction, chạy lambda, rồi commit/rollback
         return jdbi.inTransaction(handle -> {
             // 1. Insert vào Orders, lấy ID sinh ra
             String sql = "INSERT INTO Orders (userID, fullName, email, phoneNumber, address, " +
@@ -58,12 +57,10 @@ public class OrderDao implements DaoInterface<Order> {
                 for (OrderDetail d : order.getItems()) {
                     int affected = productDao.updateStockAndSold(handle, d.getProductId(), d.getQuantity());
                     if (affected == 0) {
-                        // Không đủ hàng ->  rollback toàn bộ
                         throw new IllegalStateException("Không đủ tồn kho cho sản phẩm : " + d.getProductId());
                     }
                 }
             }
-            // 4. Trả về orderId để hàm insert() nhận được
             return orderId;
         });
     }
@@ -76,7 +73,7 @@ public class OrderDao implements DaoInterface<Order> {
                         FROM Orders
                         WHERE ID = :id
                     """;
-            // 1) Lấy order (để check tồn tại + lấy email gửi mail sau)
+
             Order order = handle.createQuery(sql)
                     .bind("id", orderId)
                     .map((rs, ctx) -> {
@@ -101,7 +98,6 @@ public class OrderDao implements DaoInterface<Order> {
 
             if (order == null) return null;
 
-            // 2) Check tiền: vnp_Amount/100 phải match totalPrice (làm tròn 0 lẻ)
             long dbAmountVnd = java.math.BigDecimal.valueOf(order.getTotalPrice())
                     .setScale(0, java.math.RoundingMode.HALF_UP)
                     .longValue();
@@ -126,7 +122,7 @@ public class OrderDao implements DaoInterface<Order> {
                     })
                     .list();
 
-            // 4) Trừ kho + tăng sold (rollback nếu thiếu hàng)
+            // 4) Trừ kho + tăng sold
             for (OrderDetail d : details) {
                 int affected = productDao.updateStockAndSold(handle, d.getProductId(), d.getQuantity());
                 if (affected == 0) {
@@ -134,8 +130,7 @@ public class OrderDao implements DaoInterface<Order> {
                 }
             }
 
-            // 5) Update status -> "Đang xử lý"
-            // (lấy id status bằng subquery theo tên)
+
             handle.createUpdate("""
                                 UPDATE Orders
                                 SET orderStatusID = (
@@ -147,7 +142,7 @@ public class OrderDao implements DaoInterface<Order> {
                     .bind("id", orderId)
                     .execute();
 
-            // trả order (gắn items để controller forward)
+
             order.setItems(details);
             return order;
         });

@@ -384,7 +384,6 @@ public class ProductDao {
         );
     }
 
-    // Không khuyến nghị dùng nữa, nhưng giữ lại nếu bạn cần
     public int deleteById(int id) {
         String sql = "DELETE FROM Products WHERE id = :id";
         return jdbi.withHandle(h -> h.createUpdate(sql).bind("id", id).execute());

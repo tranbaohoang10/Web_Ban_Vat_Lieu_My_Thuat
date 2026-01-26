@@ -65,7 +65,6 @@ public class OrderService {
         order.setItems(details);
 
         try {
-            // COD: trừ kho ngay | VNPAY: chưa trừ kho
             int newId = orderDao.insert(order, !isVnpay);
             if (newId <= 0)
                 return null;

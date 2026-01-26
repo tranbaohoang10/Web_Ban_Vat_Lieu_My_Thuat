@@ -52,7 +52,6 @@ public class VoucherController extends HttpServlet {
                 if (vid != null) {
                     session.setAttribute("appliedVoucherId", vid);
                 }
-                // trả về số tiền để UI update
                 double fee = cart.getFee();
                 double totalToPay = cart.getTotalPriceToPay();
 

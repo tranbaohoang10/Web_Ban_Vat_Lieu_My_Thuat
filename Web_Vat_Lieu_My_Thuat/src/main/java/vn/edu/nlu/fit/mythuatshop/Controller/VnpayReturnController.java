@@ -30,7 +30,7 @@ public class VnpayReturnController extends HttpServlet {
         String responseCode = req.getParameter("vnp_ResponseCode"); // "00" là OK
         String tranStatus = req.getParameter("vnp_TransactionStatus"); // "00" là OK
         String txnRef = req.getParameter("vnp_TxnRef"); // orderId
-        String amountStr = req.getParameter("vnp_Amount"); // *100
+        String amountStr = req.getParameter("vnp_Amount");
 
         int orderId = Integer.parseInt(txnRef);
         long amountVnd = Long.parseLong(amountStr) / 100;
@@ -59,7 +59,6 @@ public class VnpayReturnController extends HttpServlet {
         }
 
         // 4) xóa cart sau khi thanh toán thành công
-        System.out.println("[5] Đang xóa cart và chuẩn bị redirect...");
         HttpSession session = req.getSession();
         session.removeAttribute("cart");
         session.setAttribute("cartCount", 0);
