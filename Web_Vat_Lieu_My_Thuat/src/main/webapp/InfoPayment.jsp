@@ -791,7 +791,6 @@
         const wardSelect = $("wardSelect");
         const shippingFeeText = $("shippingFeeText");
 
-        // Nếu thiếu element nào => tránh crash
         if (!provinceSelect || !districtSelect || !wardSelect) {
             console.warn("Missing select elements for GHN");
             return;

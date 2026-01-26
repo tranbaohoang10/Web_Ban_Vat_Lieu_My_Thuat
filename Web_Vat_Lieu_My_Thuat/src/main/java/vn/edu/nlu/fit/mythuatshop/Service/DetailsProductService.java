@@ -40,7 +40,7 @@ public class DetailsProductService {
     // mới: lấy danh sách sản phẩm cùng loại
     public List<ProductCard> getRelatedProductCards(Product p){
         if (p == null) return List.of();
-        return cardService.topByCategory(p.getCategoryId(), 6).stream()
+        return cardService.topByCategory(p.getCategoryId(), 5).stream()
                 .filter(x -> x.getId() != p.getId())
                 .toList();
     }
